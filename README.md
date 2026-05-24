@@ -10,6 +10,12 @@ Read the public research board:
 research/RESEARCH_STATUS.md
 ```
 
+Read the public for-hire and civic engagement page:
+
+```text
+hire/FOR_HIRE_LATIN.md
+```
+
 Build the full public package:
 
 ```bash
@@ -42,6 +48,8 @@ cv/
 research/
   RESEARCH_STATUS.md
   research_status.tex
+hire/
+  FOR_HIRE_LATIN.md
 documents/
   Paul_A_Skeffington_Academic_CV_Public.pdf
   Paul_A_Skeffington_One_Page_Profile_Public.pdf
