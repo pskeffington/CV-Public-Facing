@@ -4,14 +4,17 @@ CV_DIR = cv
 RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 
-.PHONY: all sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
+
+preflight:
+	bash scripts/preflight_public_package.sh
 
 sanitize:
 	bash scripts/check_public_sanitization.sh
 
-public-package: sanitize academic-cv one-page-profile public-upload-cv research-status
+public-package: preflight academic-cv one-page-profile public-upload-cv research-status
 
 academic-cv:
 	mkdir -p $(DOCUMENTS_DIR)
