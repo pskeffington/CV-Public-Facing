@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Recursive consistency gate for the public-facing CV package.
-# This guards against stale hand-written sections, missing shared includes,
+# This guards against stale hand-written content sections, missing shared includes,
 # incomplete current-project population, and missing publication-status sorting.
 
 status=0
@@ -29,13 +29,23 @@ require_contains() {
   fi
 }
 
-require_absent() {
+require_absent_in_sources() {
   local pattern="$1"
-  if grep -RIn --exclude-dir=.git --exclude-dir=documents --exclude='*.pdf' -- "${pattern}" . >/tmp/public_preflight_match.txt; then
-    echo "Stale/disallowed pattern found: ${pattern}" >&2
-    cat /tmp/public_preflight_match.txt >&2
+  local match_file
+  match_file="$(mktemp)"
+  if grep -RIn \
+    --include='*.tex' \
+    --include='*.md' \
+    --exclude-dir=.git \
+    --exclude-dir=documents \
+    -- "${pattern}" cv research >"${match_file}"; then
+    echo "Stale/disallowed source pattern found: ${pattern}" >&2
+    cat "${match_file}" >&2
+    rm -f "${match_file}"
     status=1
+    return
   fi
+  rm -f "${match_file}"
 }
 
 require_file "cv/academic_cv_public.tex"
@@ -85,8 +95,8 @@ for bucket in \
   require_contains "research/RESEARCH_STATUS.md" "${bucket}"
 done
 
-# Stale four-item manual section should not return.
-require_absent "Research Interests and Current Projects"
+# Old hand-written four-project block must not return in document sources.
+require_absent_in_sources "Research Interests and Current Projects"
 
 # Existing sanitizers remain part of preflight.
 bash scripts/check_public_sanitization.sh
