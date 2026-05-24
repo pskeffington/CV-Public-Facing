@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # Public-facing repository guardrail. These terms should not appear in public source,
-# docs, or generated text artifacts because they expose private location/site context.
+# docs, or generated text artifacts because they expose private location/site context
+# or private biographical material that should remain outside public exports.
 BLOCKLIST=(
   "Plymouth"
   "Micajah"
@@ -10,6 +11,9 @@ BLOCKLIST=(
   "Bourne"
   "Pelham"
   "Hunters Brook"
+  "Family Caregiver"
+  "caregiver"
+  "caregiving"
 )
 
 status=0
