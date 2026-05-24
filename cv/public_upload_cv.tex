@@ -1,0 +1,98 @@
+\documentclass[10.5pt,letterpaper]{article}
+
+\usepackage[margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\definecolor{sectiongray}{gray}{0.20}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist[itemize]{leftmargin=1.25em, topsep=2pt, itemsep=1pt, parsep=0pt}
+\titleformat{\section}{\large\bfseries\color{sectiongray}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+
+\newcommand{\cvdate}[1]{\hfill {\small #1}}
+\newcommand{\cvrole}[2]{\textbf{#1}\cvdate{#2}\\}
+\newcommand{\cvplace}[1]{{\itshape #1}\\}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{P. A. S.}}\\
+    \vspace{2pt}
+    Public Health | Applied Economics | Health Data Science | Environmental Health | Reproducible Research\\
+    \textit{Contact information intentionally omitted for public indexing control.}
+\end{center}
+\vspace{4pt}
+
+\section*{Profile}
+Public-health and health-data-science researcher with training in mathematics, information technology, applied economics, global public health, and health sciences. Current work uses administrative, geospatial, environmental, and longitudinal data for infrastructure, family, and community-health questions. Professional background includes Air Force intelligence service, correctional operations, emergency-response coordination, systems administration, and technical consulting.
+
+\section*{Education}
+\cvrole{Master of Science in Health Data Science}{Entering Fall 2026 class}
+\cvplace{Geisel School of Medicine, Dartmouth College}
+Capstone-based graduate program with training in programming, biostatistics, machine learning, epidemiology, data visualization, data wrangling, professional development, and applied health-data-science project work.
+
+\cvrole{Master of Public Health, Global Health Concentration}{Anticipated October 2026}
+\cvplace{Southern New Hampshire University}
+Graduate training in epidemiology, biostatistics, environmental health, global health policy, health informatics, program planning, evaluation, and applied public-health practice.
+
+\cvrole{Master of Science, Applied Economics}{December 2025}
+\cvplace{Southern New Hampshire University}
+Graduate training in applied econometrics, economic theory, financial analysis, investment analysis, financial modeling, game theory, industrial organization, and applied economics capstone work.
+
+\cvrole{Bachelor of Arts, Mathematics}{June 2019}
+\cvplace{Southern New Hampshire University}
+Training in calculus, applied statistics, regression analysis, cryptology, applied linear algebra, differential equations, mathematical modeling, discrete mathematics, proof, real analysis, formal logic, and abstract algebra.
+
+\cvrole{Bachelor of Science, Information Technology}{January 2018}
+\cvplace{Southern New Hampshire University}
+Training in data analytics, SQL, Unix/Linux systems, database design and management, network management, cybersecurity, web design, and information-systems implementation.
+
+\section*{Research Program}
+\subsection*{Life-Course Data, Family Economics, and Fertility}
+Uses longitudinal public-use cohort data to study how financial preparedness, reproductive education, marital stability, fertility, and timing of first birth interact across the life course. Current work combines fixed-effects modeling, count models, survival analysis, model-specific sample audits, and reproducible manuscript workflows.
+
+\subsection*{Rural Water, Wastewater, and Infrastructure-Linked Health Risk}
+Builds decision-support tools for rural public-health infrastructure problems where terrain, access, aging systems, and fragmented records complicate prioritization. Current work integrates source inventories, official-source validation tracking, GIS processing, terrain/access scoring, and stream-aware exposure/access prototype indices.
+
+\subsection*{Humanitarian WASH and Health-System Disruption}
+Develops rapid secondary-data frameworks for public-health planning in disrupted environments, organizing WASH, health-facility, displacement, environmental-health, and geospatial source classes into transparent decision-support domains.
+
+\subsection*{Reproducible Computational Diagnostics}
+Develops computational diagnostics at the intersection of applied cryptography, topology, and reproducible methods, including persistent-homology features as auxiliary diagnostics for structured or biased controls.
+
+\section*{Selected Evidence Products and Reproducible Outputs}
+\begin{itemize}
+    \item \textbf{Longitudinal family-economics analysis:} produced model-specific analytic samples and manuscript tables for analyses of emergency savings, marital stability, reproductive education, completed fertility, and timing of first birth.
+    \item \textbf{Rural water decision-support prototype:} produced stream-aware prototype index outputs for rural infrastructure and public-health planning; measured concentration claims remain held pending official-source confirmation.
+    \item \textbf{Humanitarian WASH assessment:} built a public-facing WASH assessment framework for presentation and future methods-note conversion.
+    \item \textbf{Public CV and research-status workflow:} maintains rebuildable, source-controlled, public-safe printable artifacts.
+\end{itemize}
+
+\section*{Professional Experience}
+\cvrole{Regional Disaster Dispatcher}{2020--2022}
+\cvplace{Boston Regional Operations}
+Coordinated regional disaster-response dispatch by triaging calls, assessing incident severity, activating response teams, tracking personnel and resources, and supporting escalation workflows.
+
+\cvrole{Correction Officer I}{2013--2019}
+\cvplace{Massachusetts}
+Supported safety, accountability, documentation, confidentiality, and emergency response during institutional operations.
+
+\cvrole{United States Air Force --- Fusion Analyst}{2007--2013}
+\cvplace{Joint Base Cape Cod}
+Produced intelligence assessments and reporting support through structured, multi-source information fusion for operational decision-making.
+
+\section*{Selected Methods and Infrastructure}
+\begin{itemize}
+    \item R, Python, LaTeX, GitHub Actions, Makefile workflows, CSV/LaTeX table exports, and repository-based manuscript control.
+    \item Fixed-effects modeling, count models, Cox survival models, sensitivity diagnostics, model-specific sample audits, and longitudinal-data design.
+    \item GIS screening, terrain/access indexing, evidence-confidence scoring, source-holder tracking, and dashboard interpretation.
+\end{itemize}
+
+\end{document}
