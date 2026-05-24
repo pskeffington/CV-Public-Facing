@@ -24,6 +24,7 @@ one-page-profile:
 	cp $(CV_DIR)/one_page_profile_public.pdf $(DOCUMENTS_DIR)/Paul_A_Skeffington_One_Page_Profile_Public.pdf
 
 public-upload-cv:
+	bash scripts/check_index_safe_upload.sh $(CV_DIR)/public_upload_cv.tex
 	mkdir -p $(DOCUMENTS_DIR)
 	cd $(CV_DIR) && $(LATEXMK) $(LATEXFLAGS) public_upload_cv.tex
 	cp $(CV_DIR)/public_upload_cv.pdf $(DOCUMENTS_DIR)/Index_Safe_Public_Upload_CV.pdf
