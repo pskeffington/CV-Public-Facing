@@ -1,0 +1,64 @@
+\documentclass[10.5pt,letterpaper]{article}
+
+\usepackage[margin=0.70in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+
+\definecolor{sectiongray}{gray}{0.20}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist[itemize]{leftmargin=1.20em, topsep=2pt, itemsep=1pt, parsep=0pt}
+\titleformat{\section}{\large\bfseries\color{sectiongray}}{}{0em}{}[\titlerule]
+
+\begin{document}
+
+{\LARGE \textbf{Paul A. Skeffington --- Research Status}}\\[-1pt]
+{\small Public-facing research storyboard, project status, and major needs register.}\\[6pt]
+
+\section*{Research Storyboard}
+This portfolio uses reproducible evidence workflows to connect public health, infrastructure, family economics, environmental risk, technical diagnostics, and archive documentation. The common operating model is controlled movement from raw records and secondary sources into validated claims, decision-support tools, manuscripts, and public-facing research artifacts.
+
+\section*{Status Board}
+\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{0.22\textwidth} p{0.15\textwidth} X X}
+Stream & Status & Current public output & Major needs \\
+\hline
+Life-course data, family economics, and fertility & Out for review / cleanup & NLSY79 manuscript workspace with fixed-effects, count-model, survival-analysis, LaTeX, and table workflow. & Citation verification; table-to-model audit; journal polish; reviewer-response plan. \\
+Rural water, wastewater, and infrastructure health risk & Active / pending validation & McDowell County GIS and decision-support workflow for terrain/access scoring, stream-aware wastewater indices, and stakeholder planning. & Official water-quality confirmation; utility/source-holder records; final variable-confidence ledger. \\
+Humanitarian WASH and disruption & Completed presentation / expandable article & Gaza WASH rapid assessment framework using public humanitarian, WASH, displacement, environmental-health, and geospatial sources. & Convert to methods note; add dated source manifest; separate indexed inputs from interpretive claims. \\
+Computational diagnostics & Active scaffold & Cipher-topology lab using persistent-homology features as auxiliary diagnostics for structured or biased cipher-output controls. & Freeze corpus; document null/control design; add notebooks; define contribution boundary. \\
+Medical-signal noise reduction & Early-stage topic selection & ECG denoising / signal-quality direction aligned with open medical data. & Select dataset; define noise classes; benchmark methods; create results table. \\
+Cancer end-of-life typologies & Early-stage topic selection & Open-data scaffold aligned to place-of-death, cancer care, and end-of-life quality variation. & Identify dataset; define typology outcome; map variables; avoid unsupported causal framing. \\
+Catholic archive and public-history indexing & Active archive build & St. Bonaventure reliquary section mapping, visible-label transcription, entity modeling, crop tooling, and provenance controls. & Complete section index; distinguish devotional tradition from verified history; add uncertainty flags. \\
+\end{tabularx}
+
+\section*{Completed / Print-Ready Objects}
+\begin{itemize}
+    \item Public CV export repository, manifest, sanitizer boundary, and public build workflow.
+    \item Gaza WASH presentation object suitable for conversion into a reproducible methods note.
+    \item McDowell GIS and stakeholder scaffolds, pending official-source validation.
+\end{itemize}
+
+\section*{Pending Validation}
+\begin{itemize}
+    \item Water-quality and wastewater indicators remain secondary-extracted until confirmed through official or certified sources.
+    \item NLSY79 manuscript claims require final citation, model-table, and sample-audit parity.
+    \item Early-stage repositories remain scaffold/status objects until datasets, methods, and claim boundaries are frozen.
+\end{itemize}
+
+\section*{Immediate Major Needs}
+\begin{itemize}
+    \item Configure the private publishing token so current CV PDFs can flow into this public repository.
+    \item Prioritize one research article for full execution rather than advancing every scaffold equally.
+    \item For McDowell, obtain official water-system and wastewater confirmation before using measured-risk language.
+    \item For new medical/noise projects, select public datasets before expanding claims.
+\end{itemize}
+
+\end{document}
