@@ -1,9 +1,10 @@
-name: Build Public Research Status
+name: Build Public CV Package
 
 on:
   workflow_dispatch:
   push:
     paths:
+      - 'cv/**'
       - 'research/**'
       - 'Makefile'
       - '.github/workflows/build-public-research-status.yml'
@@ -12,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  build-research-status:
+  build-public-package:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,14 +25,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended lmodern
 
-      - name: Build public research status PDF
+      - name: Build public CV package
         run: |
           set -euo pipefail
-          make research-status
+          make public-package
 
-      - name: Upload public research status artifact
+      - name: Upload public CV package artifact
         uses: actions/upload-artifact@v4
         with:
-          name: public-research-status
-          path: documents/Paul_A_Skeffington_Research_Status_Public.pdf
+          name: public-cv-package
+          path: documents/*.pdf
           if-no-files-found: error
