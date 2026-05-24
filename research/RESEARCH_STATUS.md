@@ -6,17 +6,47 @@ Public-facing storyboard of current research work, project maturity, pending val
 
 This portfolio is organized around careful, reproducible use of public-health, infrastructure, environmental, administrative, and longitudinal data. The current emphasis is on building transparent workflows, documenting evidence boundaries, and moving selected projects from exploratory scaffolds toward validated manuscripts, methods notes, or decision-support artifacts.
 
-## Status board
+## Current project board
 
-| Stream | Status | Current public output | Major needs |
-|---|---|---|---|
-| Life-course data, family economics, and fertility | Manuscript cleanup | NLSY79 manuscript workspace with fixed-effects, count-model, survival-analysis, LaTeX, and table workflow. | Citation verification; table-to-model audit; journal-format polish; reviewer-response planning. |
-| Rural water, wastewater, and infrastructure-linked health risk | Active / pending validation | McDowell County decision-support and GIS workflow covering terrain/access scoring, stream-aware wastewater exposure/access indices, and stakeholder planning artifacts. | Official water-quality confirmation from WV OEHS, CCR, SDWIS/ECHO, utility records, or certified lab sources; source-holder contacts; final variable-confidence ledger. |
-| Humanitarian WASH and health-system disruption | Presentation complete / methods-note candidate | Gaza WASH rapid assessment framework using public humanitarian, WASH, displacement, environmental-health, and geospatial source classes. | Dated source manifest; limitations section; separation of indexed inputs from interpretive claims. |
-| Reproducible computational diagnostics | Active scaffold | Cipher-topology lab using persistent-homology features as auxiliary diagnostics for structured or biased cipher-output controls. | Freeze test corpus; document null/control design; add reproducible notebooks; define contribution boundary. |
-| Medical-signal noise reduction | Early-stage topic selection | ECG denoising / signal-quality direction aligned with open medical data. | Select dataset; define benchmark noise classes; choose reproducible baseline methods; create results table template. |
-| Cancer end-of-life typologies | Early-stage topic selection | Open-data scaffold aligned to place-of-death, cancer care, and end-of-life quality variation questions. | Identify defensible public dataset; define typology outcome; map variables; avoid unsupported causal framing. |
-| Catholic archive and public-history indexing | Active archive build | St. Bonaventure reliquary section mapping, visible-label transcription, entity modeling, crop-generation tooling, and provenance controls. | Complete section index; separate devotional tradition from verified historical claims; add image-crop manifest and uncertainty flags. |
+### Life-course data, family economics, and fertility — Manuscript cleanup
+
+**Current output:** NLSY79 manuscript workspace with fixed-effects, count-model, survival-analysis, LaTeX, and table workflow.  
+**Near-term needs:** Citation verification; table-to-model audit; journal-format polish; reviewer-response planning.
+
+### Rural water, wastewater, and infrastructure health risk — Active / pending validation
+
+**Current output:** McDowell County GIS and decision-support workflow for terrain/access scoring, stream-aware wastewater indices, stakeholder planning, and source-validation tracking.  
+**Near-term needs:** Official water-quality confirmation; utility/source-holder records; final variable-confidence ledger.
+
+### Humanitarian WASH and health-system disruption — Presentation complete / methods-note candidate
+
+**Current output:** Gaza WASH rapid assessment framework using public humanitarian, WASH, displacement, environmental-health, and geospatial sources.  
+**Near-term needs:** Dated source manifest; limitations section; separation of indexed inputs from interpretive claims.
+
+### Computational diagnostics and cipher topology — Active scaffold
+
+**Current output:** Cipher-topology lab using persistent-homology features as auxiliary diagnostics for structured or biased cipher-output controls.  
+**Near-term needs:** Freeze corpus; document null/control design; add notebooks; define contribution boundary.
+
+### Medical-signal noise reduction — Early-stage topic selection
+
+**Current output:** ECG denoising / signal-quality direction aligned with open medical data and reproducible benchmark design.  
+**Near-term needs:** Select dataset; define noise classes; benchmark methods; create results table.
+
+### PET noise and radiomics robustness — Early-stage scaffold
+
+**Current output:** Biomedical imaging scaffold focused on simulated PET noise, lesion segmentation, and radiomics feature stability.  
+**Near-term needs:** Select public PET/CT dataset; define perturbation protocol; separate exploratory claims from validated results.
+
+### Cancer end-of-life typologies — Early-stage topic selection
+
+**Current output:** Open-data scaffold aligned to place-of-death, cancer care, and end-of-life quality variation.  
+**Near-term needs:** Identify dataset; define typology outcome; map variables; avoid unsupported causal framing.
+
+### Catholic archive and public-history indexing — Active archive build
+
+**Current output:** St. Bonaventure reliquary section mapping, visible-label transcription, entity modeling, crop tooling, and provenance controls.  
+**Near-term needs:** Complete section index; distinguish devotional tradition from verified history; add uncertainty flags.
 
 ## Completed / print-ready objects
 
@@ -40,4 +70,4 @@ This portfolio is organized around careful, reproducible use of public-health, i
 - Select one manuscript or methods note as the next primary execution target.
 - For McDowell, obtain official water-system and wastewater confirmation before using measured-risk language.
 - For NLSY79, lock manuscript tables and preserve a direct audit trail from model output to LaTeX tables.
-- For new medical/noise projects, select public datasets before expanding prose or claims.
+- For medical/noise projects, select public datasets before expanding prose or claims.
