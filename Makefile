@@ -4,11 +4,14 @@ CV_DIR = cv
 RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 
-.PHONY: all public-package academic-cv one-page-profile research-status clean
+.PHONY: all sanitize public-package academic-cv one-page-profile research-status clean
 
 all: public-package
 
-public-package: academic-cv one-page-profile research-status
+sanitize:
+	bash scripts/check_public_sanitization.sh
+
+public-package: sanitize academic-cv one-page-profile research-status
 
 academic-cv:
 	mkdir -p $(DOCUMENTS_DIR)
