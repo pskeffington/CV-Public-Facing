@@ -28,9 +28,15 @@ Praeferuntur opera in re publica, administratione municipali, valetudine publica
 
 Opera privata accipi possunt, si finis socialis, scientificus, humanitarius, publicus, vel infrastructuralis clare definitur.
 
+## Gradus muneris
+
+Opera aptissima sunt ea quae iudicium senioris gradus requirunt: consilium programmaticum, analysim datorum, relationes publicas, aestimationem infrastructurae, coordinationem inter institutiones, interpretationem indiciorum, et traditionem operis quod a ducibus publicis, academicis, aut civicis defendi potest.
+
+Munera levia, incerta, aut sine auctoritate decernendi minus apta sunt. Munera maioris ponderis, retinacula diuturna, consilia publica, et opera cum effectu communitario praeferuntur.
+
 ## Limites laboris
 
-Compensatio et forma operis secundum pondus muneris, amplitudinem responsabilitatis, gradum itineris, locum laboris, dies extra domum actos, necessitatem praesentiae corporis, expensas directas, et valorem publicum definienda sunt.
+Compensatio et forma operis secundum pondus muneris, amplitudinem responsabilitatis, gradum itineris, locum laboris, dies extra domum actos, necessitatem praesentiae corporis, expensas directas, auctoritatem professionalem, et valorem publicum definienda sunt.
 
 Opera remota aut hybrida praeferuntur, ubi fieri potest. Praesentia corporis peti potest pro conventibus publicis, inspectionibus situs, disciplina locali, consultatione infrastructurae, collectione datorum, aut opere urgente; talis praesentia singulis diebus extra domum separatim aestimanda est.
 
@@ -46,13 +52,14 @@ Pretium augetur ubi opus requirit:
 - instrumenta propria, sensoria, computatoria, vel communicationis;
 - responsabilitatem publicam, scientificam, aut administrativam;
 - celerem traditionem sub termino brevi;
-- scripturam publicam, testimonium, relationem formalem, aut documentum ad institutionem gubernamentalem.
+- scripturam publicam, testimonium, relationem formalem, aut documentum ad institutionem gubernamentalem;
+- repraesentationem coram ducibus, consiliis, fundatoribus, aut communitate publica.
 
 ## Forma compensationis praeferenda
 
 Praefero structuram sobrietate, claritate, et firmitate definitam: stipendium stabile, pactum scriptum, fines operis clari, tempora traditionis mensurabilia, expensae itineris separatae, et spatium ad investigationem, publicationem, atque iudicium technicum honestum.
 
-Munera diuturna, retinacula civica, pacta per mensem, et opera cum effectu publico mensurabili praeferuntur operibus brevibus sine continuitate.
+Munera diuturna, retinacula civica, pacta per mensem, et opera cum effectu publico mensurabili praeferuntur operibus brevibus sine continuitate. Pacta quae scientiam, responsabilitatem, praesentiam publicam, et auctoritatem professionalem requirunt debent gradum compensationis congruentem continere.
 
 ## Sententia finalis
 
