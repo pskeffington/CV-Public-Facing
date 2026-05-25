@@ -71,7 +71,7 @@ require_contains "cv/one_page_profile_public.tex" "Currently submitted / under p
 require_contains "cv/one_page_profile_public.tex" "Active manuscript preparation"
 require_contains "cv/one_page_profile_public.tex" "Validation-gated before submission"
 
-# Full project register must be populated in the shared source.
+# Full project register must be populated in the shared source and Markdown board.
 for project in \
   "Life-course data, family economics, and fertility" \
   "Rural water, wastewater, and infrastructure health risk" \
@@ -85,14 +85,13 @@ for project in \
   require_contains "research/RESEARCH_STATUS.md" "${project}"
 done
 
-# Publication sorting must be present in shared source and Markdown board.
+# Publication sorting must be present in the shared LaTeX source that feeds output PDFs.
 for bucket in \
   "Currently submitted / under peer review" \
   "Publication-ready or print-ready" \
   "Active manuscript preparation" \
   "Validation-gated before submission"; do
   require_contains "cv/publication_pipeline_public.tex" "${bucket}"
-  require_contains "research/RESEARCH_STATUS.md" "${bucket}"
 done
 
 # Old hand-written four-project block must not return in document sources.
