@@ -4,14 +4,14 @@ Public-facing overview of current research, project maturity, validation boundar
 
 ## Portfolio thesis
 
-This portfolio is organized around reproducible use of public-health, infrastructure, environmental, administrative, geospatial, and longitudinal data. The work emphasizes transparent methods, careful evidence boundaries, and practical outputs that can support manuscripts, methods notes, public-history archives, and decision-support tools.
+This portfolio is organized around reproducible use of public-health, infrastructure, environmental, administrative, geospatial, biomedical, and longitudinal data. The work emphasizes transparent methods, careful evidence boundaries, and practical outputs that can support manuscripts, methods notes, public-history archives, and decision-support tools.
 
 ## Current project board
 
-### Life-course data, family economics, and fertility — Manuscript development
+### Life-course data, family economics, and fertility — Submitted / journal peer review
 
 **Current output:** NLSY79 manuscript workspace with fixed-effects, count-model, survival-analysis, LaTeX, and table-audit workflows.  
-**Near-term needs:** Citation verification; table-to-model audit; journal-format polish; reviewer-response planning.
+**Near-term needs:** Track journal correspondence; preserve reviewer-response planning; maintain model-table and citation-audit parity.
 
 ### Rural water, wastewater, and infrastructure health risk — Active / pending validation
 
@@ -23,10 +23,20 @@ This portfolio is organized around reproducible use of public-health, infrastruc
 **Current output:** Gaza WASH rapid assessment framework using public humanitarian, WASH, displacement, environmental-health, and geospatial sources.  
 **Near-term needs:** Dated source manifest; limitations section; separation of indexed inputs from interpretive claims.
 
+### Haiti Nippes public-health and infrastructure assessment — Intake-stage public repository
+
+**Current output:** Public repository for regional public-health, infrastructure, and humanitarian assessment work.  
+**Near-term needs:** Complete source manifest, project boundary, claim controls, and intended public output.
+
 ### Computational diagnostics and cipher topology — Active methods scaffold
 
 **Current output:** Cipher-topology lab using persistent-homology features as auxiliary diagnostics for structured or biased cipher-output controls.  
 **Near-term needs:** Freeze corpus; document null/control design; add notebooks; define contribution boundary.
+
+### Identity-abuse and misuse-risk evaluation — Intake-stage public repository
+
+**Current output:** Public repository for misuse-risk and safety-evaluation methods.  
+**Near-term needs:** Define public-safe threat model, evidence boundary, and executable validation target.
 
 ### Medical-signal noise reduction — Early-stage methods development
 
@@ -43,6 +53,11 @@ This portfolio is organized around reproducible use of public-health, infrastruc
 **Current output:** Open-data concept aligned to place-of-death, cancer care, and end-of-life quality variation.  
 **Near-term needs:** Identify dataset; define typology outcome; map variables; avoid unsupported causal framing.
 
+### Public-health emergency preparedness and practicum reporting — Public report artifacts / intake needed
+
+**Current output:** Public-facing report and preparedness repositories for emergency-response, practicum, and public-health evidence packaging.  
+**Near-term needs:** Add source manifests, project boundaries, and public-safe deliverable targets.
+
 ### Catholic archive and public-history indexing — Active archive build
 
 **Current output:** St. Bonaventure reliquary section mapping, visible-label transcription, entity modeling, crop tooling, and provenance controls.  
@@ -50,24 +65,24 @@ This portfolio is organized around reproducible use of public-health, infrastruc
 
 ## Completed / print-ready objects
 
-- Public CV package with academic CV, one-page profile, and research-status outputs.
+- Public CV package with academic CV, one-page profile, index-safe CV, and research-status outputs.
 - Gaza WASH presentation object suitable for conversion into a reproducible methods note.
 - McDowell GIS and stakeholder materials, pending official-source validation.
 
 ## Pending validation
 
 - Water-quality and wastewater indicators remain secondary-extracted until confirmed through official or certified sources.
-- NLSY79 manuscript claims require final citation, model-table, and sample-audit parity before final journal submission language.
+- NLSY79 manuscript claims require continued citation, model-table, and sample-audit parity through peer review.
 - Early-stage repositories remain development objects until datasets, methods, and claim boundaries are frozen.
 
 ## Submission-oriented work
 
-- NLSY79 family economics and fertility manuscript: active journal-facing manuscript requiring final reproducibility and formatting checks.
+- NLSY79 family economics and fertility manuscript: submitted / journal peer review.
 - Gaza WASH assessment: presentation-complete object that can be converted into a methods note after source-manifest cleanup.
 
 ## Immediate major needs
 
 - Select one manuscript or methods note as the next primary execution target.
 - For McDowell, obtain official water-system and wastewater confirmation before using measured-risk language.
-- For NLSY79, lock manuscript tables and preserve a direct audit trail from model output to LaTeX tables.
+- For NLSY79, preserve a direct audit trail from model output to LaTeX tables and future reviewer-response material.
 - For medical/noise projects, select public datasets before expanding prose or claims.
