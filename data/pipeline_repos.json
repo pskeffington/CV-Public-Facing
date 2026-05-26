@@ -1,0 +1,115 @@
+{
+  "generated_on_note": "Generated CV objects are rebuilt from the public README/status surfaces listed here.",
+  "repos": [
+    {
+      "key": "nlsy79-family-economics",
+      "repo": "pskeffington/Family_and_Economic_issues",
+      "title": "Life-course data, family economics, and fertility",
+      "status": "Submitted / journal peer review",
+      "summary": "NLSY79 manuscript workspace with fixed-effects, count-model, survival-analysis, LaTeX, and table-audit workflows.",
+      "needs": "Track journal correspondence; preserve reviewer-response planning; maintain model-table and citation-audit parity.",
+      "cv_section": "current",
+      "source_files": ["README.md", "PROJECT_STATUS.md", "REPRODUCIBILITY.md"]
+    },
+    {
+      "key": "mcdowell-water-infrastructure",
+      "repo": "pskeffington/McDowell-County-Commission-on-Aging-Inc.",
+      "title": "Rural water, wastewater, and infrastructure health risk",
+      "status": "Active / pending validation",
+      "summary": "McDowell County GIS and decision-support workflow for terrain/access scoring, stream-aware wastewater indices, stakeholder planning, and source-validation tracking.",
+      "needs": "Official water-quality confirmation; utility/source-holder records; final variable-confidence ledger.",
+      "cv_section": "current",
+      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
+    },
+    {
+      "key": "gaza-wash",
+      "repo": "pskeffington/Gaza-WASH",
+      "title": "Humanitarian WASH and health-system disruption",
+      "status": "Presentation complete / methods-note candidate",
+      "summary": "Gaza WASH rapid assessment framework using public humanitarian, WASH, displacement, environmental-health, and geospatial sources.",
+      "needs": "Dated source manifest; limitations section; separation of indexed inputs from interpretive claims.",
+      "cv_section": "current",
+      "source_files": ["README.md", "CHANGELOG.md", "docs/data_inventory.md"]
+    },
+    {
+      "key": "haiti-nippes",
+      "repo": "pskeffington/Haiti-nippes",
+      "title": "Haiti Nippes public-health and infrastructure assessment",
+      "status": "Intake-stage public repository",
+      "summary": "Public repository for regional public-health, infrastructure, and humanitarian assessment work.",
+      "needs": "Complete source manifest, project boundary, claim controls, and intended public output.",
+      "cv_section": "intake",
+      "source_files": ["README.md", "PROJECT_STATUS.md"]
+    },
+    {
+      "key": "cipher-topology",
+      "repo": "pskeffington/cipher-topology-lab",
+      "title": "Computational diagnostics and cipher topology",
+      "status": "Active scaffold",
+      "summary": "Cipher-topology lab using persistent-homology features as auxiliary diagnostics for structured or biased cipher-output controls.",
+      "needs": "Freeze corpus; document null/control design; add notebooks; define contribution boundary.",
+      "cv_section": "current",
+      "source_files": ["README.md", "PROJECT_STATUS.md"]
+    },
+    {
+      "key": "identity-abuse-lab",
+      "repo": "pskeffington/identity-abuse-lab-",
+      "title": "Identity-abuse and misuse-risk evaluation",
+      "status": "Intake-stage public repository",
+      "summary": "Public repository for identity-abuse, misuse-risk, or safety-evaluation methods.",
+      "needs": "Define public-safe threat model, evidence boundary, and executable validation target.",
+      "cv_section": "intake",
+      "source_files": ["README.md", "PROJECT_STATUS.md"]
+    },
+    {
+      "key": "ecg-denoising",
+      "repo": "pskeffington/ECG-denoising",
+      "title": "Medical-signal noise reduction",
+      "status": "Early-stage topic selection",
+      "summary": "ECG denoising and signal-quality direction aligned with open medical data and reproducible benchmark design.",
+      "needs": "Select dataset; define noise classes; benchmark methods; create results table.",
+      "cv_section": "methods",
+      "source_files": ["README.md", "PROJECT_STATUS.md"]
+    },
+    {
+      "key": "pet-radiomics",
+      "repo": "pskeffington/pet-noise-radiomics-robustness",
+      "title": "PET noise and radiomics robustness",
+      "status": "Early-stage scaffold",
+      "summary": "Biomedical imaging scaffold focused on simulated PET noise, lesion segmentation, and radiomics feature stability.",
+      "needs": "Select public PET/CT dataset; define perturbation protocol; separate exploratory claims from validated results.",
+      "cv_section": "methods",
+      "source_files": ["README.md", "docs/analysis_plan.md", "docs/data_sources.md"]
+    },
+    {
+      "key": "cancer-eol",
+      "repo": "pskeffington/cancer-eol-death-place-typologies",
+      "title": "Cancer end-of-life typologies",
+      "status": "Early-stage topic selection",
+      "summary": "Open-data scaffold aligned to place-of-death, cancer care, and end-of-life quality variation.",
+      "needs": "Identify dataset; define typology outcome; map variables; avoid unsupported causal framing.",
+      "cv_section": "methods",
+      "source_files": ["README.md", "PROJECT_STATUS.md"]
+    },
+    {
+      "key": "phep-practicum",
+      "repo": "pskeffington/Public-Health-Emergency-Preparedness---Dartmouth-Health",
+      "title": "Public-health emergency preparedness and practicum reporting",
+      "status": "Public report artifacts / intake needed",
+      "summary": "Public-facing report and preparedness repositories for emergency-response, practicum, and public-health evidence packaging.",
+      "needs": "Add source manifests, project boundaries, and public-safe deliverable targets.",
+      "cv_section": "intake",
+      "source_files": ["README.md", "docs/source_catalog.md"]
+    },
+    {
+      "key": "st-bonaventure-archive",
+      "repo": "pskeffington/St.-Bonaventure",
+      "title": "Catholic archive and public-history indexing",
+      "status": "Active archive build",
+      "summary": "St. Bonaventure reliquary section mapping, visible-label transcription, entity modeling, crop tooling, and provenance controls.",
+      "needs": "Complete section index; distinguish devotional tradition from verified history; add uncertainty flags.",
+      "cv_section": "archive",
+      "source_files": ["README.md", "PROJECT_STATUS.md"]
+    }
+  ]
+}
