@@ -35,6 +35,7 @@ class PublishingSignalSummary:
     author_ambiguity_warning: str | None = None
     author_match_confidence: str = "none"
     source_provenance: list[str] = field(default_factory=list)
+    policy_blocked_reference_count: int = 0
 
 
 @dataclass(frozen=True)
@@ -54,9 +55,17 @@ class CompositePaperScore:
 class StemPaperEvaluator:
     """Evaluate paper text using STEM presence and citation/publishing signals."""
 
-    def __init__(self, live: bool = False, max_author_candidates: int = DEFAULT_AUTHOR_CANDIDATES) -> None:
+    def __init__(
+        self,
+        live: bool = False,
+        max_author_candidates: int = DEFAULT_AUTHOR_CANDIDATES,
+        allowed_url_hosts: list[str] | None = None,
+        blocked_url_hosts: list[str] | None = None,
+    ) -> None:
         self.live = live
         self.max_author_candidates = max_author_candidates
+        self.allowed_url_hosts = allowed_url_hosts or []
+        self.blocked_url_hosts = blocked_url_hosts or []
         self.presence_scorer = StemPresenceScorer()
 
     def evaluate(self, text: str, author: str | None = None, orcid: str | None = None) -> dict[str, object]:
@@ -67,6 +76,8 @@ class StemPaperEvaluator:
             author=author,
             orcid=orcid,
             max_author_candidates=self.max_author_candidates,
+            allowed_url_hosts=self.allowed_url_hosts,
+            blocked_url_hosts=self.blocked_url_hosts,
         )
         publishing_summary = self._summarize_publishing(citation_payload)
         composite = self._score_composite(stem_presence.score, stem_presence.drift_score, publishing_summary)
@@ -84,6 +95,7 @@ class StemPaperEvaluator:
             references = []
         scores: list[int] = []
         source_provenance: list[str] = []
+        policy_blocked_count = 0
         for item in references:
             if isinstance(item, dict):
                 try:
@@ -93,6 +105,9 @@ class StemPaperEvaluator:
                 source = str(item.get("source", "reference_source_unknown"))
                 mode = str(item.get("verification_mode", "mode_unknown"))
                 source_provenance.append(f"reference:{source}:{mode}")
+                signals = item.get("signals", [])
+                if mode == "live_policy_blocked" or (isinstance(signals, list) and "url_policy_blocked" in signals):
+                    policy_blocked_count += 1
         average_reference_score = round(sum(scores) / len(scores), 1) if scores else 0.0
         author_profile = payload.get("author_citation_profile")
         if not isinstance(author_profile, dict):
@@ -114,6 +129,7 @@ class StemPaperEvaluator:
             author_ambiguity_warning=str(author_profile.get("ambiguity_warning")) if author_profile.get("ambiguity_warning") else None,
             author_match_confidence=str(author_profile.get("author_match_confidence", "none")),
             source_provenance=sorted(set(source_provenance)),
+            policy_blocked_reference_count=policy_blocked_count,
         )
 
     def _score_composite(
@@ -133,7 +149,8 @@ class StemPaperEvaluator:
             f"STEM drift {stem_drift_score}/100, {publishing.reference_count} extracted references, "
             f"{publishing.verified_reference_count} live-verified references, author signal "
             f"{publishing.author_signal_score}/100, {publishing.author_candidate_count} author candidates, "
-            f"and author match confidence {publishing.author_match_confidence}."
+            f"author match confidence {publishing.author_match_confidence}, and "
+            f"{publishing.policy_blocked_reference_count} policy-blocked references."
         )
         if publishing.author_ambiguity_warning:
             rationale += " Author identity requires review."
@@ -157,6 +174,8 @@ class StemPaperEvaluator:
             flags.append("no_references_extracted")
         if publishing.reference_count > 0 and publishing.verified_reference_count == 0:
             flags.append("references_not_live_verified")
+        if publishing.policy_blocked_reference_count > 0:
+            flags.append("reference_url_policy_blocked")
         if publishing.author_ambiguity_warning or publishing.author_match_confidence == "name_multiple_candidates":
             flags.append("author_identity_ambiguous")
         if publishing.author_signal_score == 0:
@@ -203,9 +222,16 @@ def main() -> int:
     parser.add_argument("--author", help="Submitter/author name for author citation lookup.")
     parser.add_argument("--orcid", help="Submitter ORCID for author citation lookup.")
     parser.add_argument("--max-author-candidates", type=int, default=DEFAULT_AUTHOR_CANDIDATES, help="Maximum OpenAlex author candidates to return in live mode.")
+    parser.add_argument("--allow-url-host", action="append", default=[], help="Allow raw URL live pings only for this host or parent domain. Repeatable.")
+    parser.add_argument("--block-url-host", action="append", default=[], help="Block raw URL live pings for this host or parent domain. Repeatable.")
     parser.add_argument("--pretty", action="store_true", help="Pretty-print JSON output.")
     args = parser.parse_args()
-    payload = StemPaperEvaluator(live=args.live, max_author_candidates=args.max_author_candidates).evaluate(read_text(args.paths), author=args.author, orcid=args.orcid)
+    payload = StemPaperEvaluator(
+        live=args.live,
+        max_author_candidates=args.max_author_candidates,
+        allowed_url_hosts=args.allow_url_host,
+        blocked_url_hosts=args.block_url_host,
+    ).evaluate(read_text(args.paths), author=args.author, orcid=args.orcid)
     print(json.dumps(payload, indent=2 if args.pretty else None))
     return 0
 
