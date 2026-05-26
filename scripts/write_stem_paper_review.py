@@ -21,11 +21,18 @@ def clean(value: object) -> str:
     return str(value).replace("|", "/").replace("\n", " ").strip()
 
 
+def clean_list(values: object) -> str:
+    if isinstance(values, list):
+        return ", ".join(clean(value) for value in values) or "none"
+    return clean(values or "none")
+
+
 def render_review(payload: dict[str, Any], title: str = "Submitted paper") -> str:
+    config = payload.get("review_configuration", {}) if isinstance(payload.get("review_configuration"), dict) else {}
     stem = payload.get("stem_presence", {}) if isinstance(payload.get("stem_presence"), dict) else {}
     publishing = payload.get("publishing_signal_summary", {}) if isinstance(payload.get("publishing_signal_summary"), dict) else {}
     composite = payload.get("composite_paper_score", {}) if isinstance(payload.get("composite_paper_score"), dict) else {}
-    citation = payload.get("citation_verification", {}) if isinstance(citation_payload := payload.get("citation_verification"), dict) else {}
+    citation = payload.get("citation_verification", {}) if isinstance(payload.get("citation_verification"), dict) else {}
     refs = citation.get("references", []) if isinstance(citation.get("references"), list) else []
     flags = composite.get("review_flags", []) if isinstance(composite.get("review_flags"), list) else []
     provenance = publishing.get("source_provenance", []) if isinstance(publishing.get("source_provenance"), list) else []
@@ -34,6 +41,14 @@ def render_review(payload: dict[str, Any], title: str = "Submitted paper") -> st
         "# STEM Paper Review",
         "",
         f"Paper: {clean(title)}",
+        "",
+        "## Review configuration",
+        "",
+        f"- Live mode: {config.get('live', 'n/a')}",
+        f"- Max author candidates: {config.get('max_author_candidates', 'n/a')}",
+        f"- Allowed URL hosts: {clean_list(config.get('allowed_url_hosts', []))}",
+        f"- Blocked URL hosts: {clean_list(config.get('blocked_url_hosts', []))}",
+        f"- External services enabled: {clean_list(config.get('external_services_enabled', []))}",
         "",
         "## Composite score",
         "",
