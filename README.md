@@ -4,6 +4,14 @@ STEM CV Curator is a cloneable, GitHub-driven CV package for machine-learning, p
 
 This repository also contains Paul A. Skeffington's public CV configuration, but the package is designed so another researcher can clone it and run it against their own GitHub account.
 
+**Maintainer:** Paul Skeffington, MS, MPH  
+**Repository status:** active public-safe CV/status generation package.  
+**Last documentation refresh:** 2026-05-26
+
+## Current update — 2026-05-26
+
+The package remains the public-facing CV and research-status renderer for the active repository set. The immediate documentation priority is to keep README/status surfaces across source repositories structured enough for the object engine to classify projects, preserve public-safety boundaries, and regenerate current-project outputs without hand-written drift.
+
 ## Clone and run for your own GitHub
 
 ```bash
