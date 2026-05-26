@@ -41,6 +41,7 @@ Offline mode returns extracted references and conservative publishing-signal sco
 python3 scripts/stem_citation_verifier.py --pretty --live paper.md
 python3 scripts/stem_citation_verifier.py --pretty --live --author "Jane Researcher" paper.md
 python3 scripts/stem_citation_verifier.py --pretty --live --orcid "0000-0000-0000-0000" paper.md
+python3 scripts/stem_citation_verifier.py --pretty --live --author "Jane Researcher" --max-author-candidates 5 paper.md
 ```
 
 Live mode can query:
@@ -50,6 +51,21 @@ Live mode can query:
 | DOI metadata and cited-by count | Crossref |
 | URL/arXiv/PubMed endpoint reachability | public endpoint ping |
 | Submitter author profile | OpenAlex |
+
+## Per-reference provenance
+
+Every extracted reference now carries audit provenance:
+
+```json
+{
+  "source": "identifier_extractor",
+  "endpoint": null,
+  "checked_at": "2026-05-26T00:00:00Z",
+  "verification_mode": "offline"
+}
+```
+
+Live DOI checks use `source: crossref` and store the Crossref endpoint. Live PMID, arXiv, and URL checks store the public endpoint that was pinged. Offline checks still record `checked_at`, but keep `endpoint` as `null` and `verification_mode` as `offline`.
 
 ## Author citation profile
 
@@ -65,7 +81,10 @@ When `--author` or `--orcid` is supplied, live mode attempts to return:
   "works_count": 12,
   "h_index": 8,
   "i10_index": 6,
-  "author_signal_score": 70
+  "author_signal_score": 70,
+  "candidate_count": 1,
+  "candidates": [],
+  "ambiguity_warning": null
 }
 ```
 
@@ -86,7 +105,7 @@ This author-level score is a publishing-signal indicator. It should not be treat
 make citation-check
 ```
 
-The check is offline-safe. It verifies that DOI, arXiv, PMID, and URL extraction work, and that offline author-profile output remains explicitly unverified.
+The check is offline-safe. It verifies that DOI, arXiv, PMID, and URL extraction work, that every reference carries provenance fields, and that offline author-profile output remains explicitly unverified.
 
 ## Integration with STEM drift
 
