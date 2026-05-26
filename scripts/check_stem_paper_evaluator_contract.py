@@ -77,6 +77,7 @@ class StemPaperEvaluatorContractChecker:
         "i10_index",
         "author_candidate_count",
         "author_ambiguity_warning",
+        "author_match_confidence",
         "source_provenance",
     }
 
@@ -129,6 +130,8 @@ class StemPaperEvaluatorContractChecker:
             errors.append(f"Invalid composite band: {composite.get('band')}")
         if not isinstance(composite.get("review_flags"), list):
             errors.append("composite_paper_score.review_flags must be a list")
+        if "author_match_unconfirmed" not in composite.get("review_flags", []):
+            errors.append("Offline composite review_flags should include author_match_unconfirmed")
         if citation.get("live") is not False:
             errors.append("Contract fixture must run in offline mode with live=false")
         if int(citation.get("verified_reference_count", -1)) != 0:
@@ -143,6 +146,8 @@ class StemPaperEvaluatorContractChecker:
             errors.append("Offline author_candidate_count should be zero")
         if publishing.get("author_ambiguity_warning") is not None:
             errors.append("Offline author_ambiguity_warning should be null")
+        if publishing.get("author_match_confidence") != "offline_unverified":
+            errors.append("Offline author_match_confidence should be offline_unverified")
 
         return EvaluatorContractResult(
             passed=not errors,
