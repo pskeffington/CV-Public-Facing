@@ -1,6 +1,6 @@
 # STEM CV Curator
 
-STEM CV Curator is a cloneable, GitHub-driven CV package for machine-learning, public-health, biomedical-data, and broader STEM researchers. It scans a researcher's active GitHub repositories, reads public README/status surfaces, creates a structured CV object layer, scores STEM presence/drift, checks citation and publishing signals, and renders public-safe CV, profile, and research-status outputs.
+STEM CV Curator is a cloneable, GitHub-driven CV package for machine-learning, public-health, biomedical-data, and broader STEM researchers. It scans a researcher's active GitHub repositories, reads public README/status surfaces, creates a structured CV object layer, scores STEM presence/drift, checks citation and publishing signals, evaluates submitted paper packages, and renders public-safe CV, profile, and research-status outputs.
 
 This repository also contains Paul A. Skeffington's public CV configuration, but the package is designed so another researcher can clone it and run it against their own GitHub account.
 
@@ -10,7 +10,7 @@ This repository also contains Paul A. Skeffington's public CV configuration, but
 
 ## Current update — 2026-05-26
 
-The package remains the public-facing CV and research-status renderer for the active repository set. The immediate documentation priority is to keep README/status surfaces across source repositories structured enough for the object engine to classify projects, preserve public-safety boundaries, score drift from core STEM progress, check citation/publishing signals, and regenerate current-project outputs without hand-written drift.
+The package remains the public-facing CV and research-status renderer for the active repository set. The immediate documentation priority is to keep README/status surfaces across source repositories structured enough for the object engine to classify projects, preserve public-safety boundaries, score drift from core STEM progress, check citation/publishing signals, evaluate submitted paper packages, and regenerate current-project outputs without hand-written drift.
 
 ## Clone and run for your own GitHub
 
@@ -56,6 +56,12 @@ Read the citation verification guide:
 
 ```text
 docs/STEM_CITATION_VERIFICATION.md
+```
+
+Read the composite paper evaluator guide:
+
+```text
+docs/STEM_PAPER_EVALUATOR.md
 ```
 
 Read the Actions guide:
@@ -154,6 +160,28 @@ Run the offline-safe citation verifier contract with:
 make citation-check
 ```
 
+## Composite paper-package evaluation
+
+The one-command evaluator for submitted paper packages is:
+
+```text
+scripts/stem_paper_evaluator.py
+```
+
+It combines STEM presence, STEM drift, citation extraction/verification, and submitter publishing signals into one JSON review object:
+
+```bash
+python3 scripts/stem_paper_evaluator.py --pretty paper.md
+python3 scripts/stem_paper_evaluator.py --pretty --live --author "Jane Researcher" paper.md
+python3 scripts/stem_paper_evaluator.py --pretty --live --orcid "0000-0000-0000-0000" paper.md
+```
+
+Run its offline-safe contract with:
+
+```bash
+make paper-evaluator-check
+```
+
 ## Main outputs
 
 ```text
@@ -172,7 +200,7 @@ research/stem_presence_report.md
 make public-package
 ```
 
-The full build runs the STEM object engine, STEM presence report generation, metric contract checks, citation verifier checks, preflight checks, sanitization checks, LaTeX compilation, and PDF export.
+The full build runs the STEM object engine, STEM presence report generation, metric contract checks, citation verifier checks, composite paper evaluator checks, preflight checks, sanitization checks, LaTeX compilation, and PDF export.
 
 ## Configuration
 
@@ -224,7 +252,7 @@ The generated-source artifact includes the living CV sources, living scan ledger
 
 ## Public safety checks
 
-The public build runs preflight checks before compiling PDFs. These checks verify that shared project and publication-status sources are wired into the CV outputs, that old hand-written project blocks have not returned, that every generated project carries a valid STEM presence object, that the STEM presence dashboard matches the object JSON, that citation extraction and offline author-profile contracts pass, and that public and index-safe sanitization rules pass before PDF generation.
+The public build runs preflight checks before compiling PDFs. These checks verify that shared project and publication-status sources are wired into the CV outputs, that old hand-written project blocks have not returned, that every generated project carries a valid STEM presence object, that the STEM presence dashboard matches the object JSON, that citation extraction and offline author-profile contracts pass, that the composite paper evaluator returns a credible package score for a manuscript-like fixture, and that public and index-safe sanitization rules pass before PDF generation.
 
 ## Repository structure
 
@@ -243,6 +271,7 @@ docs/
   STEM_CV_OBJECT_SCHEMA.md
   STEM_PRESENCE_SCORE.md
   STEM_CITATION_VERIFICATION.md
+  STEM_PAPER_EVALUATOR.md
   LIVING_CV_ACTIONS.md
 research/
   RESEARCH_STATUS.md
@@ -255,9 +284,11 @@ scripts/
   stem_cv_curator.py
   stem_presence.py
   stem_citation_verifier.py
+  stem_paper_evaluator.py
   write_stem_presence_report.py
   check_stem_presence.py
   check_stem_citation_verifier.py
+  check_stem_paper_evaluator.py
   check_stem_object_contract.py
   check_stem_presence_report.py
   update_living_cv.py
@@ -272,4 +303,4 @@ README.md
 
 ## Boundary
 
-The package generates public-safe CV/status source files, public-safe Markdown, repository metadata, object JSON, metric reports, citation-verification outputs, and compiled public artifacts. Users should keep private claim ledgers, raw data, sensitive sources, addresses, phone numbers, and operational details outside public outputs unless they explicitly configure a private-only workflow.
+The package generates public-safe CV/status source files, public-safe Markdown, repository metadata, object JSON, metric reports, citation-verification outputs, paper-evaluation outputs, and compiled public artifacts. Users should keep private claim ledgers, raw data, sensitive sources, addresses, phone numbers, and operational details outside public outputs unless they explicitly configure a private-only workflow.
