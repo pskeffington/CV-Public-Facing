@@ -2,6 +2,8 @@
 
 Public-facing overview of current research, project maturity, validation boundaries, and near-term development needs.
 
+This file is generated from `data/pipeline_repos.json` and the living CV generator. Edit the manifest or upstream project README/status files rather than hand-editing this board.
+
 ## Portfolio thesis
 
 This portfolio is organized around reproducible use of public-health, infrastructure, environmental, administrative, geospatial, biomedical, and longitudinal data. The work emphasizes transparent methods, careful evidence boundaries, and practical outputs that can support manuscripts, methods notes, public-history archives, and decision-support tools.
@@ -15,7 +17,7 @@ This portfolio is organized around reproducible use of public-health, infrastruc
 
 ### Rural water, wastewater, and infrastructure health risk — Active / pending validation
 
-**Current output:** McDowell County GIS and planning workflow for terrain/access scoring, stream-aware wastewater indices, stakeholder analysis, and source-validation tracking.  
+**Current output:** McDowell County GIS and decision-support workflow for terrain/access scoring, stream-aware wastewater indices, stakeholder planning, and source-validation tracking.  
 **Near-term needs:** Official water-quality confirmation; utility/source-holder records; final variable-confidence ledger.
 
 ### Humanitarian WASH and health-system disruption — Presentation complete / methods-note candidate
@@ -28,29 +30,29 @@ This portfolio is organized around reproducible use of public-health, infrastruc
 **Current output:** Public repository for regional public-health, infrastructure, and humanitarian assessment work.  
 **Near-term needs:** Complete source manifest, project boundary, claim controls, and intended public output.
 
-### Computational diagnostics and cipher topology — Active methods scaffold
+### Computational diagnostics and cipher topology — Active scaffold
 
 **Current output:** Cipher-topology lab using persistent-homology features as auxiliary diagnostics for structured or biased cipher-output controls.  
 **Near-term needs:** Freeze corpus; document null/control design; add notebooks; define contribution boundary.
 
 ### Identity-abuse and misuse-risk evaluation — Intake-stage public repository
 
-**Current output:** Public repository for misuse-risk and safety-evaluation methods.  
+**Current output:** Public repository for identity-abuse, misuse-risk, or safety-evaluation methods.  
 **Near-term needs:** Define public-safe threat model, evidence boundary, and executable validation target.
 
-### Medical-signal noise reduction — Early-stage methods development
+### Medical-signal noise reduction — Early-stage topic selection
 
 **Current output:** ECG denoising and signal-quality direction aligned with open medical data and reproducible benchmark design.  
 **Near-term needs:** Select dataset; define noise classes; benchmark methods; create results table.
 
-### PET noise and radiomics robustness — Early-stage methods development
+### PET noise and radiomics robustness — Early-stage scaffold
 
-**Current output:** Biomedical imaging workflow focused on simulated PET noise, lesion segmentation, and radiomics feature stability.  
+**Current output:** Biomedical imaging scaffold focused on simulated PET noise, lesion segmentation, and radiomics feature stability.  
 **Near-term needs:** Select public PET/CT dataset; define perturbation protocol; separate exploratory claims from validated results.
 
 ### Cancer end-of-life typologies — Early-stage topic selection
 
-**Current output:** Open-data concept aligned to place-of-death, cancer care, and end-of-life quality variation.  
+**Current output:** Open-data scaffold aligned to place-of-death, cancer care, and end-of-life quality variation.  
 **Near-term needs:** Identify dataset; define typology outcome; map variables; avoid unsupported causal framing.
 
 ### Public-health emergency preparedness and practicum reporting — Public report artifacts / intake needed
@@ -82,7 +84,8 @@ This portfolio is organized around reproducible use of public-health, infrastruc
 
 ## Immediate major needs
 
-- Select one manuscript or methods note as the next primary execution target.
+- Keep public repository intake output wired into the export path so new public repositories are picked up before PDF builds.
+- Complete project-intake records for newly discovered public repositories before adding strong CV claims.
 - For McDowell, obtain official water-system and wastewater confirmation before using measured-risk language.
 - For NLSY79, preserve a direct audit trail from model output to LaTeX tables and future reviewer-response material.
-- For medical/noise projects, select public datasets before expanding prose or claims.
+- For medical/noise projects, select public datasets before expanding claims.
