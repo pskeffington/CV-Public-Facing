@@ -18,11 +18,11 @@ stem-presence-report: stem-cv
 living-cv: stem-presence-report
 
 stem-presence-check:
-	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py
+	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py
 	$(PYTHON) scripts/check_stem_presence.py
 
 citation-check:
-	printf 'Example DOI 10.1038/nature12373 and PMID: 23803847. Example author citation lookup disabled by default.' | $(PYTHON) scripts/stem_citation_verifier.py --pretty
+	$(PYTHON) scripts/check_stem_citation_verifier.py
 
 stem-object-contract: living-cv stem-presence-check citation-check
 	$(PYTHON) scripts/check_stem_object_contract.py
