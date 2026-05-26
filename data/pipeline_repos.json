@@ -12,6 +12,16 @@
       "source_files": ["README.md", "PROJECT_STATUS.md", "REPRODUCIBILITY.md"]
     },
     {
+      "key": "machine-learning-best-practices",
+      "repo": "pskeffington/Best-Practices-Git",
+      "title": "Machine-learning publication best practices",
+      "status": "Active best-practices scaffold",
+      "summary": "Reusable machine-learning manuscript workflow for responsible, reproducible, and transparent query-to-publication research practice.",
+      "needs": "Expand modular review gates, source-registry templates, citation-verification templates, and lightweight structure tests.",
+      "cv_section": "methods",
+      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md", "docs/LIVING_CV_ACTIONS.md"]
+    },
+    {
       "key": "mcdowell-water-infrastructure",
       "repo": "pskeffington/McDowell-County-Commission-on-Aging-Inc.",
       "title": "Rural water, wastewater, and infrastructure health risk",
