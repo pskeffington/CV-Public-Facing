@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-USER_AGENT = "stem-cv-curator-citation-verifier/0.7"
+USER_AGENT = "stem-cv-curator-citation-verifier/0.8"
 OPENALEX_AUTHOR_URL = "https://api.openalex.org/authors"
 CROSSREF_WORK_URL = "https://api.crossref.org/works/"
 PUBMED_ESUMMARY_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
@@ -24,6 +24,10 @@ DEFAULT_AUTHOR_CANDIDATES = 5
 
 def checked_at_utc() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+
+
+def normalize_host(host: str | None) -> str:
+    return (host or "").strip().lower().lstrip(".")
 
 
 @dataclass(frozen=True)
@@ -140,9 +144,17 @@ class CitationExtractor:
 
 
 class CitationVerifier:
-    def __init__(self, live: bool = False, timeout: int = 12) -> None:
+    def __init__(
+        self,
+        live: bool = False,
+        timeout: int = 12,
+        allowed_url_hosts: list[str] | None = None,
+        blocked_url_hosts: list[str] | None = None,
+    ) -> None:
         self.live = live
         self.timeout = timeout
+        self.allowed_url_hosts = {normalize_host(host) for host in (allowed_url_hosts or []) if normalize_host(host)}
+        self.blocked_url_hosts = {normalize_host(host) for host in (blocked_url_hosts or []) if normalize_host(host)}
 
     def verify(self, reference: CitationReference) -> CitationVerification:
         if not self.live:
@@ -256,6 +268,24 @@ class CitationVerifier:
     def _verify_url_like(self, reference: CitationReference) -> CitationVerification:
         endpoint = reference.canonical_url
         checked_at = checked_at_utc()
+        allowed, reason = self._raw_url_allowed(endpoint)
+        if not allowed:
+            score = self._score_reference(reference.reference_type, False, None)
+            return CitationVerification(
+                reference=reference,
+                verified=False,
+                status_code=None,
+                publishing_score=score,
+                publishing_band=self._band(score),
+                citation_count=None,
+                signals=[reference.reference_type + "_extracted", "url_policy_blocked"],
+                note=reason,
+                source=self._source_for_reference(reference.reference_type),
+                endpoint=endpoint,
+                checked_at=checked_at,
+                verification_mode="live_policy_blocked",
+                metadata=None,
+            )
         ok, status = self._ping(endpoint)
         score = self._score_reference(reference.reference_type, ok, None)
         signals = [reference.reference_type + "_extracted"]
@@ -275,6 +305,22 @@ class CitationVerifier:
             verification_mode="live",
             metadata=None,
         )
+
+    def _raw_url_allowed(self, url: str) -> tuple[bool, str | None]:
+        if not self.allowed_url_hosts and not self.blocked_url_hosts:
+            return True, None
+        host = normalize_host(urllib.parse.urlparse(url).hostname)
+        if not host:
+            return False, "URL host could not be parsed; live URL ping skipped."
+        if self._host_matches(host, self.blocked_url_hosts):
+            return False, f"URL host {host} is blocked by live URL policy."
+        if self.allowed_url_hosts and not self._host_matches(host, self.allowed_url_hosts):
+            return False, f"URL host {host} is not in the live URL allowlist."
+        return True, None
+
+    @staticmethod
+    def _host_matches(host: str, patterns: set[str]) -> bool:
+        return any(host == pattern or host.endswith("." + pattern) for pattern in patterns)
 
     def _request_json(self, url: str) -> tuple[bool, int | None, Any]:
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
@@ -592,9 +638,17 @@ class AuthorCitationLookup:
         return max(0, min(100, score))
 
 
-def verify_text(text: str, live: bool = False, author: str | None = None, orcid: str | None = None, max_author_candidates: int = DEFAULT_AUTHOR_CANDIDATES) -> dict[str, object]:
+def verify_text(
+    text: str,
+    live: bool = False,
+    author: str | None = None,
+    orcid: str | None = None,
+    max_author_candidates: int = DEFAULT_AUTHOR_CANDIDATES,
+    allowed_url_hosts: list[str] | None = None,
+    blocked_url_hosts: list[str] | None = None,
+) -> dict[str, object]:
     refs = CitationExtractor().extract(text)
-    verifier = CitationVerifier(live=live)
+    verifier = CitationVerifier(live=live, allowed_url_hosts=allowed_url_hosts, blocked_url_hosts=blocked_url_hosts)
     verified = [verifier.verify(ref).to_dict() for ref in refs]
     author_profile = AuthorCitationLookup(live=live, max_candidates=max_author_candidates).lookup(author, orcid)
     return {
@@ -613,6 +667,8 @@ def main() -> int:
     parser.add_argument("--author", help="Submitter/author name for OpenAlex author citation lookup.")
     parser.add_argument("--orcid", help="Submitter ORCID for OpenAlex author citation lookup.")
     parser.add_argument("--max-author-candidates", type=int, default=DEFAULT_AUTHOR_CANDIDATES, help="Maximum OpenAlex author candidates to return in live mode.")
+    parser.add_argument("--allow-url-host", action="append", default=[], help="Allow raw URL live pings only for this host or parent domain. Repeatable.")
+    parser.add_argument("--block-url-host", action="append", default=[], help="Block raw URL live pings for this host or parent domain. Repeatable.")
     parser.add_argument("--pretty", action="store_true", help="Pretty-print JSON output.")
     args = parser.parse_args()
     if args.paths:
@@ -620,7 +676,15 @@ def main() -> int:
     else:
         import sys
         text = sys.stdin.read()
-    payload = verify_text(text, live=args.live, author=args.author, orcid=args.orcid, max_author_candidates=args.max_author_candidates)
+    payload = verify_text(
+        text,
+        live=args.live,
+        author=args.author,
+        orcid=args.orcid,
+        max_author_candidates=args.max_author_candidates,
+        allowed_url_hosts=args.allow_url_host,
+        blocked_url_hosts=args.block_url_host,
+    )
     print(json.dumps(payload, indent=2 if args.pretty else None))
     return 0
 
