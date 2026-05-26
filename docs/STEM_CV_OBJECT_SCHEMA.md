@@ -22,6 +22,8 @@ data/stem_cv_objects.json
 }
 ```
 
+The standalone STEM presence scorer in `scripts/stem_presence.py` can be used to add or audit a `stem_presence` metric for papers, README files, status files, and other extracted public surfaces.
+
 ## Run object
 
 ```json
@@ -95,6 +97,24 @@ Purpose: represent a README/status/roadmap/reproducibility surface checked durin
 
 Purpose: convert repository evidence into a CV-ready project object.
 
+## StemPresenceScore
+
+```json
+{
+  "score": 76,
+  "drift_score": 24,
+  "band": "core_stem",
+  "rationale": "core_stem score 76/100 based on domain terms=8, method terms=6, reproducibility terms=4, progress terms=3.",
+  "matched_domain_terms": ["machine learning", "dataset"],
+  "matched_method_terms": ["validation", "benchmark"],
+  "matched_reproducibility_terms": ["code", "workflow"],
+  "matched_progress_terms": ["manuscript", "results"],
+  "matched_drift_terms": []
+}
+```
+
+Purpose: provide a transparent metric for STEM presence and drift from core STEM progress. `score` runs from 0 to 100. `drift_score` is `100 - score`. The current implementation is available as a reusable object and CLI in `scripts/stem_presence.py`.
+
 ## ClaimObject
 
 ```json
@@ -165,6 +185,15 @@ Purpose: declare which sections are allowed in each output.
 | `early_stage` | Early method/topic development |
 | `validation_gated` | Requires verification before strong claims |
 | `intake` | Discovered repo needing curation |
+
+## STEM presence bands
+
+| Band | Score range | Use |
+|---|---:|---|
+| `core_stem` | 75-100 | Strongly aligned with STEM evidence, methods, reproducibility, and progress |
+| `stem_adjacent` | 55-74 | Clear STEM connection but not fully documented as a core STEM output |
+| `mixed_or_transitional` | 35-54 | Partial STEM evidence or immature intake-stage documentation |
+| `low_stem_presence` | 0-34 | Weak STEM evidence or high drift from core STEM progress |
 
 ## CV sections
 
