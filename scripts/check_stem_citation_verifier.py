@@ -64,6 +64,12 @@ class CitationVerifierCheck:
                 errors.append("Offline author profile should be unverified")
             if profile.get("author_signal_score") != 0:
                 errors.append("Offline author signal score should be zero")
+            if profile.get("candidate_count") != 0:
+                errors.append("Offline author candidate_count should be zero")
+            if profile.get("candidates") != []:
+                errors.append("Offline author candidates should be an empty list")
+            if profile.get("ambiguity_warning") is not None:
+                errors.append("Offline author ambiguity_warning should be null")
 
         return CitationVerifierCheckResult(not errors, errors, len(references), isinstance(profile, dict))
 
