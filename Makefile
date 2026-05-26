@@ -5,7 +5,7 @@ CV_DIR = cv
 RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 
-.PHONY: all stem-cv living-cv stem-presence-check preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all stem-cv living-cv stem-presence-check stem-object-contract preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
@@ -15,10 +15,13 @@ stem-cv:
 living-cv: stem-cv
 
 stem-presence-check:
-	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py
+	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py
 	$(PYTHON) scripts/check_stem_presence.py
 
-preflight: living-cv stem-presence-check
+stem-object-contract: living-cv stem-presence-check
+	$(PYTHON) scripts/check_stem_object_contract.py
+
+preflight: stem-object-contract
 	bash scripts/preflight_public_package.sh
 
 sanitize:
