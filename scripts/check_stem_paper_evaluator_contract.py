@@ -48,10 +48,19 @@ class StemPaperEvaluatorContractChecker:
 
     TOP_LEVEL_KEYS = {
         "live",
+        "review_configuration",
         "stem_presence",
         "publishing_signal_summary",
         "composite_paper_score",
         "citation_verification",
+    }
+
+    CONFIG_KEYS = {
+        "live",
+        "max_author_candidates",
+        "allowed_url_hosts",
+        "blocked_url_hosts",
+        "external_services_enabled",
     }
 
     STEM_KEYS = {
@@ -113,15 +122,29 @@ class StemPaperEvaluatorContractChecker:
         payload = StemPaperEvaluator(live=False).evaluate(self.FIXTURE, author="Example Submitter")
         self._check_keys("top-level", payload, self.TOP_LEVEL_KEYS, errors)
 
+        config = self._object(payload, "review_configuration", errors)
         stem = self._object(payload, "stem_presence", errors)
         publishing = self._object(payload, "publishing_signal_summary", errors)
         composite = self._object(payload, "composite_paper_score", errors)
         citation = self._object(payload, "citation_verification", errors)
 
+        self._check_keys("review_configuration", config, self.CONFIG_KEYS, errors)
         self._check_keys("stem_presence", stem, self.STEM_KEYS, errors)
         self._check_keys("publishing_signal_summary", publishing, self.PUBLISHING_KEYS, errors)
         self._check_keys("composite_paper_score", composite, self.COMPOSITE_KEYS, errors)
         self._check_keys("citation_verification", citation, self.CITATION_KEYS, errors)
+
+        if config.get("live") is not False:
+            errors.append("Offline review_configuration.live should be false")
+        if self._safe_int(config.get("max_author_candidates"), -1) <= 0:
+            errors.append("review_configuration.max_author_candidates should be positive")
+        if config.get("allowed_url_hosts") != []:
+            errors.append("Offline default allowed_url_hosts should be empty")
+        if config.get("blocked_url_hosts") != []:
+            errors.append("Offline default blocked_url_hosts should be empty")
+        services = config.get("external_services_enabled")
+        if not isinstance(services, list) or "local_stem_presence" not in services or "identifier_extractor" not in services:
+            errors.append("review_configuration.external_services_enabled should include local_stem_presence and identifier_extractor")
 
         self._check_score_pair("stem_presence", stem, "score", "drift_score", errors)
         self._check_score_pair("composite_paper_score", composite, "composite_score", "composite_drift_score", errors)
