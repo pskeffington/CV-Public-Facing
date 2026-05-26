@@ -5,12 +5,14 @@ CV_DIR = cv
 RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 
-.PHONY: all living-cv preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all stem-cv living-cv preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
-living-cv:
-	$(PYTHON) scripts/update_living_cv.py
+stem-cv:
+	$(PYTHON) scripts/stem_cv_curator.py
+
+living-cv: stem-cv
 
 preflight: living-cv
 	bash scripts/preflight_public_package.sh
