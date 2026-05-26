@@ -40,6 +40,48 @@ make public-package
 ls documents/
 ```
 
+## Living CV model
+
+This repository is now manifest-driven. The file below lists the project repositories that feed the public CV pipeline:
+
+```text
+data/pipeline_repos.json
+```
+
+When `make public-package` runs, it first runs:
+
+```bash
+python3 scripts/update_living_cv.py
+```
+
+That generator pulls the current public README/status surfaces from each listed project repository, refreshes the shared CV project objects, writes a source-observation ledger, then builds the PDFs.
+
+Generated living objects:
+
+```text
+cv/current_projects_public.tex
+research/RESEARCH_STATUS.md
+research/generated_project_board.tex
+research/living_source_ledger.md
+```
+
+## Push-to-living-CV dispatch
+
+Pipeline repositories use `.github/workflows/notify-living-cv.yml` to notify this repository when README, status, roadmap, changelog, or docs files change. The source workflow sends a `repository_dispatch` event named:
+
+```text
+living-cv-source-updated
+```
+
+This public repository receives that event, regenerates the living CV objects, builds the public PDF package, and uploads two artifacts:
+
+```text
+public-cv-package
+generated-living-cv-sources
+```
+
+To activate cross-repository dispatch, add an Actions secret named `LIVING_CV_DISPATCH_TOKEN` to each source project repository. The token needs permission to dispatch workflows/events against `pskeffington/CV-Public-Facing`. If the secret is absent, the source workflow exits safely with a skip notice.
+
 ## Public repository structure
 
 ```text
@@ -49,9 +91,12 @@ cv/
   public_upload_cv.tex
   current_projects_public.tex
   publication_pipeline_public.tex
+data/
+  pipeline_repos.json
 research/
   RESEARCH_STATUS.md
   generated_project_board.tex
+  living_source_ledger.md
   research_status.tex
 hire/
   FOR_HIRE_LATIN.md
@@ -61,6 +106,7 @@ documents/
   Index_Safe_Public_Upload_CV.pdf
   Paul_A_Skeffington_Research_Status_Public.pdf
 scripts/
+  update_living_cv.py
   preflight_public_package.sh
   check_public_sanitization.sh
   check_index_safe_upload.sh
@@ -85,7 +131,7 @@ That workflow compiles the public-safe Academic CV, One-Page Profile, Index-Safe
 public-cv-package
 ```
 
-The workflow is read-only for repository contents. It builds and uploads artifacts; it does not commit generated files back to the repository. A concurrency guard cancels duplicate in-progress builds, and the job skips ordinary `github-actions[bot]` push events so export or artifact activity does not create a recursive public-build loop. Manual workflow runs remain available.
+The workflow is read-only for repository contents. It builds and uploads artifacts; it does not commit generated files back to the repository. A concurrency guard cancels duplicate in-progress builds, and the job skips ordinary `github-actions[bot]` push events so export or artifact activity does not create a recursive public-build loop. Manual workflow runs and repository-dispatch runs remain available.
 
 ## Public safety checks
 
@@ -95,4 +141,4 @@ The public build runs preflight checks before compiling PDFs. These checks verif
 
 This repository contains public-safe CV/status source files, public-safe Markdown, repository metadata, and compiled public artifacts. The private `CV` repository remains the source-of-truth for master CV files, evidence ledgers, claim controls, private source extracts, and internal editing history.
 
-Manual edits to generated PDF artifacts may be overwritten by the private export workflow. Public source files in `cv/` and `research/` are intended to remain visible, reviewable, and directly rebuildable.
+Manual edits to generated PDF artifacts may be overwritten by the private export workflow. Public source files in `cv/` and `research/` are generated from the living pipeline manifest and upstream public project surfaces.
