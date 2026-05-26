@@ -58,6 +58,10 @@ class StemPaperEvaluatorContractChecker:
     CONFIG_KEYS = {
         "live",
         "max_author_candidates",
+        "composite_stem_weight",
+        "composite_publishing_weight",
+        "reference_signal_weight",
+        "author_signal_weight",
         "allowed_url_hosts",
         "blocked_url_hosts",
         "external_services_enabled",
@@ -138,6 +142,8 @@ class StemPaperEvaluatorContractChecker:
             errors.append("Offline review_configuration.live should be false")
         if self._safe_int(config.get("max_author_candidates"), -1) <= 0:
             errors.append("review_configuration.max_author_candidates should be positive")
+        self._check_weight_pair(config, "composite_stem_weight", "composite_publishing_weight", errors)
+        self._check_weight_pair(config, "reference_signal_weight", "author_signal_weight", errors)
         if config.get("allowed_url_hosts") != []:
             errors.append("Offline default allowed_url_hosts should be empty")
         if config.get("blocked_url_hosts") != []:
@@ -197,6 +203,17 @@ class StemPaperEvaluatorContractChecker:
             errors.append(f"{name} missing keys: {', '.join(missing)}")
 
     @classmethod
+    def _check_weight_pair(cls, payload: dict[str, Any], left_key: str, right_key: str, errors: list[str]) -> None:
+        left = cls._safe_float(payload.get(left_key), -1.0)
+        right = cls._safe_float(payload.get(right_key), -1.0)
+        if not 0 <= left <= 1:
+            errors.append(f"review_configuration.{left_key} outside 0-1: {left}")
+        if not 0 <= right <= 1:
+            errors.append(f"review_configuration.{right_key} outside 0-1: {right}")
+        if abs((left + right) - 1.0) > 0.001:
+            errors.append(f"review_configuration.{left_key}+{right_key} should sum to 1")
+
+    @classmethod
     def _check_score_pair(cls, name: str, payload: dict[str, Any], score_key: str, drift_key: str, errors: list[str]) -> None:
         score = cls._safe_int(payload.get(score_key), -1)
         drift = cls._safe_int(payload.get(drift_key), -1)
@@ -212,6 +229,13 @@ class StemPaperEvaluatorContractChecker:
         value = cls._safe_int(payload.get(key), -1)
         if not 0 <= value <= 100:
             errors.append(f"{name}.{key} outside 0-100: {value}")
+
+    @staticmethod
+    def _safe_float(value: object, default: float = 0.0) -> float:
+        try:
+            return float(value) if value is not None else default
+        except (TypeError, ValueError):
+            return default
 
     @staticmethod
     def _safe_int(value: object, default: int = 0) -> int:
