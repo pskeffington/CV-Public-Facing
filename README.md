@@ -64,6 +64,12 @@ Read the composite paper evaluator guide:
 docs/STEM_PAPER_EVALUATOR.md
 ```
 
+Read the evaluator literature/tooling matrix:
+
+```text
+docs/STEM_EVALUATOR_LIT_REVIEW_MATRIX.md
+```
+
 Read the Actions guide:
 
 ```text
@@ -182,6 +188,16 @@ Run its offline-safe contract with:
 make paper-evaluator-check
 ```
 
+## Similar systems and roadmap
+
+The package includes a short literature/tooling matrix for comparable scholarly metadata, citation, author-impact, and paper-screening functions:
+
+```text
+docs/STEM_EVALUATOR_LIT_REVIEW_MATRIX.md
+```
+
+The matrix compares the local evaluator with Crossref, OpenAlex, Semantic Scholar, PubMed / NCBI E-utilities, OpenCitations, scite-style citation-context systems, and retraction/integrity-signal systems. It also lists near-term polish targets such as provenance fields, author-ambiguity warnings, multi-source citation reconciliation, and an evaluator-output schema contract.
+
 ## Main outputs
 
 ```text
@@ -272,6 +288,7 @@ docs/
   STEM_PRESENCE_SCORE.md
   STEM_CITATION_VERIFICATION.md
   STEM_PAPER_EVALUATOR.md
+  STEM_EVALUATOR_LIT_REVIEW_MATRIX.md
   LIVING_CV_ACTIONS.md
 research/
   RESEARCH_STATUS.md
