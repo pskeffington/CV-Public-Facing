@@ -33,6 +33,7 @@ class PublishingSignalSummary:
     i10_index: int | None
     author_candidate_count: int = 0
     author_ambiguity_warning: str | None = None
+    author_match_confidence: str = "none"
     source_provenance: list[str] = field(default_factory=list)
 
 
@@ -89,17 +90,17 @@ class StemPaperEvaluator:
                     scores.append(int(item.get("publishing_score", 0)))
                 except (TypeError, ValueError):
                     scores.append(0)
-                reference = item.get("reference", {})
-                if isinstance(reference, dict):
-                    ref_type = str(reference.get("reference_type", "unknown"))
-                    source_provenance.append(self._reference_source(ref_type, bool(item.get("verified"))))
+                source = str(item.get("source", "reference_source_unknown"))
+                mode = str(item.get("verification_mode", "mode_unknown"))
+                source_provenance.append(f"reference:{source}:{mode}")
         average_reference_score = round(sum(scores) / len(scores), 1) if scores else 0.0
         author_profile = payload.get("author_citation_profile")
         if not isinstance(author_profile, dict):
             author_profile = {}
         if author_profile:
             source = str(author_profile.get("source", "author_source_unknown"))
-            source_provenance.append(f"author_profile:{source}:{'verified' if author_profile.get('verified') else 'unverified'}")
+            confidence = str(author_profile.get("author_match_confidence", "none"))
+            source_provenance.append(f"author_profile:{source}:{confidence}")
         return PublishingSignalSummary(
             reference_count=int(payload.get("reference_count", 0) or 0),
             verified_reference_count=int(payload.get("verified_reference_count", 0) or 0),
@@ -111,6 +112,7 @@ class StemPaperEvaluator:
             i10_index=self._safe_optional_int(author_profile.get("i10_index")),
             author_candidate_count=self._safe_int(author_profile.get("candidate_count"), 0),
             author_ambiguity_warning=str(author_profile.get("ambiguity_warning")) if author_profile.get("ambiguity_warning") else None,
+            author_match_confidence=str(author_profile.get("author_match_confidence", "none")),
             source_provenance=sorted(set(source_provenance)),
         )
 
@@ -130,7 +132,8 @@ class StemPaperEvaluator:
             f"{band} composite score {composite_score}/100 from STEM presence {stem_score}/100, "
             f"STEM drift {stem_drift_score}/100, {publishing.reference_count} extracted references, "
             f"{publishing.verified_reference_count} live-verified references, author signal "
-            f"{publishing.author_signal_score}/100, and {publishing.author_candidate_count} author candidates."
+            f"{publishing.author_signal_score}/100, {publishing.author_candidate_count} author candidates, "
+            f"and author match confidence {publishing.author_match_confidence}."
         )
         if publishing.author_ambiguity_warning:
             rationale += " Author identity requires review."
@@ -146,18 +149,6 @@ class StemPaperEvaluator:
         )
 
     @staticmethod
-    def _reference_source(reference_type: str, verified: bool) -> str:
-        if reference_type == "doi":
-            return "reference:crossref" if verified else "reference:doi_extracted_offline"
-        if reference_type == "pmid":
-            return "reference:pubmed_endpoint" if verified else "reference:pmid_extracted_offline"
-        if reference_type == "arxiv":
-            return "reference:arxiv_endpoint" if verified else "reference:arxiv_extracted_offline"
-        if reference_type == "url":
-            return "reference:url_ping" if verified else "reference:url_extracted_offline"
-        return f"reference:{reference_type}:unknown"
-
-    @staticmethod
     def _review_flags(stem_drift_score: int, publishing: PublishingSignalSummary) -> list[str]:
         flags: list[str] = []
         if stem_drift_score >= 45:
@@ -166,10 +157,12 @@ class StemPaperEvaluator:
             flags.append("no_references_extracted")
         if publishing.reference_count > 0 and publishing.verified_reference_count == 0:
             flags.append("references_not_live_verified")
-        if publishing.author_ambiguity_warning:
+        if publishing.author_ambiguity_warning or publishing.author_match_confidence == "name_multiple_candidates":
             flags.append("author_identity_ambiguous")
         if publishing.author_signal_score == 0:
             flags.append("no_verified_author_signal")
+        if publishing.author_match_confidence in {"offline_unverified", "lookup_error", "no_match", "none"}:
+            flags.append("author_match_unconfirmed")
         return flags
 
     @staticmethod
