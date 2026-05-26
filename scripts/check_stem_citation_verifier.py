@@ -65,13 +65,15 @@ class CitationVerifierCheck:
             if not isinstance(item, dict):
                 errors.append(f"Reference {index} is not an object")
                 continue
-            for key in ["source", "endpoint", "checked_at", "verification_mode"]:
+            for key in ["source", "endpoint", "checked_at", "verification_mode", "metadata"]:
                 if key not in item:
                     errors.append(f"Reference {index} missing provenance field: {key}")
             if item.get("source") != "identifier_extractor":
                 errors.append(f"Offline reference {index} source should be identifier_extractor")
             if item.get("endpoint") is not None:
                 errors.append(f"Offline reference {index} endpoint should be null")
+            if item.get("metadata") is not None:
+                errors.append(f"Offline reference {index} metadata should be null")
             if not isinstance(item.get("checked_at"), str) or not item.get("checked_at", "").endswith("Z"):
                 errors.append(f"Offline reference {index} checked_at should be UTC ISO string")
             if item.get("verification_mode") != "offline":
