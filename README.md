@@ -16,6 +16,12 @@ Read the public for-hire and civic engagement page:
 hire/FOR_HIRE_LATIN.md
 ```
 
+Read the living-CV Actions guide:
+
+```text
+docs/LIVING_CV_ACTIONS.md
+```
+
 Build the full public package:
 
 ```bash
@@ -93,6 +99,8 @@ cv/
   publication_pipeline_public.tex
 data/
   pipeline_repos.json
+docs/
+  LIVING_CV_ACTIONS.md
 research/
   RESEARCH_STATUS.md
   generated_project_board.tex
