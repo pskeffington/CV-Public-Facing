@@ -75,6 +75,9 @@ class StemPaperEvaluatorContractChecker:
         "works_count",
         "h_index",
         "i10_index",
+        "author_candidate_count",
+        "author_ambiguity_warning",
+        "source_provenance",
     }
 
     COMPOSITE_KEYS = {
@@ -85,6 +88,7 @@ class StemPaperEvaluatorContractChecker:
         "composite_drift_score",
         "band",
         "rationale",
+        "review_flags",
     }
 
     CITATION_KEYS = {
@@ -123,6 +127,8 @@ class StemPaperEvaluatorContractChecker:
 
         if composite.get("band") not in self.VALID_COMPOSITE_BANDS:
             errors.append(f"Invalid composite band: {composite.get('band')}")
+        if not isinstance(composite.get("review_flags"), list):
+            errors.append("composite_paper_score.review_flags must be a list")
         if citation.get("live") is not False:
             errors.append("Contract fixture must run in offline mode with live=false")
         if int(citation.get("verified_reference_count", -1)) != 0:
@@ -131,6 +137,12 @@ class StemPaperEvaluatorContractChecker:
             errors.append("Expected at least four extracted references in contract fixture")
         if int(publishing.get("reference_count", 0)) != int(citation.get("reference_count", -1)):
             errors.append("Publishing summary reference_count does not match citation_verification reference_count")
+        if not isinstance(publishing.get("source_provenance"), list) or not publishing.get("source_provenance"):
+            errors.append("publishing_signal_summary.source_provenance must be a non-empty list")
+        if self._safe_int(publishing.get("author_candidate_count"), -1) != 0:
+            errors.append("Offline author_candidate_count should be zero")
+        if publishing.get("author_ambiguity_warning") is not None:
+            errors.append("Offline author_ambiguity_warning should be null")
 
         return EvaluatorContractResult(
             passed=not errors,
