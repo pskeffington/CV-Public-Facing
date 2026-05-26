@@ -1,6 +1,6 @@
 # STEM CV Curator
 
-STEM CV Curator is a cloneable, GitHub-driven CV package for machine-learning, public-health, biomedical-data, and broader STEM researchers. It scans a researcher's active GitHub repositories, reads public README/status surfaces, creates a structured CV object layer, and renders public-safe CV, profile, and research-status outputs.
+STEM CV Curator is a cloneable, GitHub-driven CV package for machine-learning, public-health, biomedical-data, and broader STEM researchers. It scans a researcher's active GitHub repositories, reads public README/status surfaces, creates a structured CV object layer, scores STEM presence/drift, and renders public-safe CV, profile, and research-status outputs.
 
 This repository also contains Paul A. Skeffington's public CV configuration, but the package is designed so another researcher can clone it and run it against their own GitHub account.
 
@@ -10,7 +10,7 @@ This repository also contains Paul A. Skeffington's public CV configuration, but
 
 ## Current update — 2026-05-26
 
-The package remains the public-facing CV and research-status renderer for the active repository set. The immediate documentation priority is to keep README/status surfaces across source repositories structured enough for the object engine to classify projects, preserve public-safety boundaries, and regenerate current-project outputs without hand-written drift.
+The package remains the public-facing CV and research-status renderer for the active repository set. The immediate documentation priority is to keep README/status surfaces across source repositories structured enough for the object engine to classify projects, preserve public-safety boundaries, score drift from core STEM progress, and regenerate current-project outputs without hand-written drift.
 
 ## Clone and run for your own GitHub
 
@@ -44,6 +44,12 @@ Read the object schema:
 
 ```text
 docs/STEM_CV_OBJECT_SCHEMA.md
+```
+
+Read the STEM presence/drift scoring guide:
+
+```text
+docs/STEM_PRESENCE_SCORE.md
 ```
 
 Read the Actions guide:
@@ -80,6 +86,17 @@ The curator:
 4. Classifies repositories into STEM CV sections.
 5. Creates `RepositoryObject`, `RepoSurfaceObject`, `ProjectObject`, and `ClaimObject` records.
 6. Writes the object JSON and LaTeX/Markdown render inputs.
+
+## STEM presence/drift scoring
+
+The repository includes a standalone, auditable scorer for estimating how closely a paper, README, status file, or extracted public surface remains aligned with core STEM progress:
+
+```bash
+python3 scripts/stem_presence.py --pretty paper.md
+cat paper.txt | python3 scripts/stem_presence.py --pretty
+```
+
+The scorer returns a 0-100 `score`, a `drift_score` equal to `100 - score`, a band, a rationale, and matched evidence terms. It is intended as a triage metric for public-facing CV quality, not as a substitute for peer review, scientific validity, or impact assessment.
 
 ## Main outputs
 
@@ -165,6 +182,7 @@ data/
 docs/
   STEM_CV_CURATOR.md
   STEM_CV_OBJECT_SCHEMA.md
+  STEM_PRESENCE_SCORE.md
   LIVING_CV_ACTIONS.md
 research/
   RESEARCH_STATUS.md
@@ -174,6 +192,7 @@ research/
   research_status.tex
 scripts/
   stem_cv_curator.py
+  stem_presence.py
   update_living_cv.py
   preflight_public_package.sh
   check_public_sanitization.sh
