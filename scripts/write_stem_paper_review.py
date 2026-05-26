@@ -14,7 +14,7 @@ SCRIPT_DIR = ROOT / "scripts"
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-from stem_paper_evaluator import StemPaperEvaluator, read_text  # noqa: E402
+from stem_paper_evaluator import DEFAULT_PUBLISHING_WEIGHT, DEFAULT_STEM_WEIGHT, StemPaperEvaluator, read_text  # noqa: E402
 
 
 def clean(value: object) -> str:
@@ -46,6 +46,10 @@ def render_review(payload: dict[str, Any], title: str = "Submitted paper") -> st
         "",
         f"- Live mode: {config.get('live', 'n/a')}",
         f"- Max author candidates: {config.get('max_author_candidates', 'n/a')}",
+        f"- Composite STEM weight: {config.get('composite_stem_weight', 'n/a')}",
+        f"- Composite publishing weight: {config.get('composite_publishing_weight', 'n/a')}",
+        f"- Reference signal weight: {config.get('reference_signal_weight', 'n/a')}",
+        f"- Author signal weight: {config.get('author_signal_weight', 'n/a')}",
         f"- Allowed URL hosts: {clean_list(config.get('allowed_url_hosts', []))}",
         f"- Blocked URL hosts: {clean_list(config.get('blocked_url_hosts', []))}",
         f"- External services enabled: {clean_list(config.get('external_services_enabled', []))}",
@@ -125,6 +129,8 @@ def main() -> int:
     parser.add_argument("--max-author-candidates", type=int, default=5, help="Maximum OpenAlex author candidates to return in live mode.")
     parser.add_argument("--allow-url-host", action="append", default=[], help="Allow raw URL live pings only for this host or parent domain. Repeatable.")
     parser.add_argument("--block-url-host", action="append", default=[], help="Block raw URL live pings for this host or parent domain. Repeatable.")
+    parser.add_argument("--stem-weight", type=float, default=DEFAULT_STEM_WEIGHT, help="Composite weight for STEM presence before normalization.")
+    parser.add_argument("--publishing-weight", type=float, default=DEFAULT_PUBLISHING_WEIGHT, help="Composite weight for publishing signal before normalization.")
     parser.add_argument("--title", default="Submitted paper", help="Title label for the Markdown report.")
     parser.add_argument("--out", help="Output Markdown path. Prints to stdout when omitted.")
     args = parser.parse_args()
@@ -133,6 +139,8 @@ def main() -> int:
         max_author_candidates=args.max_author_candidates,
         allowed_url_hosts=args.allow_url_host,
         blocked_url_hosts=args.block_url_host,
+        composite_stem_weight=args.stem_weight,
+        composite_publishing_weight=args.publishing_weight,
     ).evaluate(read_text(args.paths), author=args.author, orcid=args.orcid)
     rendered = render_review(payload, title=args.title)
     if args.out:
