@@ -61,6 +61,31 @@ python3 scripts/stem_presence.py --pretty paper.md
 cat paper.txt | python3 scripts/stem_presence.py --pretty
 ```
 
+The living CV pipeline integrates the scorer through:
+
+```text
+scripts/stem_cv_curator.py
+scripts/write_stem_presence_report.py
+```
+
+The generated dashboard is:
+
+```text
+research/stem_presence_report.md
+```
+
+## Local checks
+
+Use these Make targets from the repository root:
+
+```bash
+make stem-presence-check
+make stem-object-contract
+make stem-report-contract
+```
+
+The contract checks confirm that generated project objects contain valid `stem_presence` metrics and that the Markdown dashboard matches the generated object JSON.
+
 ## Interpretation
 
 Use the score as a triage signal. A low score usually means that the public README/status surface needs more methods, data, validation, or reproducibility detail. A high score means the public-facing project description is more likely to support credible STEM CV claims.
