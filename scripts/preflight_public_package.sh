@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Recursive consistency gate for the public-facing CV package.
-# This guards against stale hand-written content sections, missing shared includes,
-# incomplete current-project population, and missing publication-status sorting.
+# Public package consistency gate.
+# This protects the public-facing CV package from stale hand-written sections,
+# missing shared includes, incomplete project registers, and unsorted publication
+# status buckets. It is intentionally read-only and must not create commits,
+# dispatch workflows, or mutate tracked source files.
 
 status=0
 
