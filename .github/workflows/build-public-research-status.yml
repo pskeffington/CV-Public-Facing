@@ -2,12 +2,16 @@ name: Build Public CV Package
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - living-cv-source-updated
   push:
     branches:
       - main
     paths:
       - 'cv/**'
       - 'research/**'
+      - 'data/**'
       - 'scripts/**'
       - 'Makefile'
       - 'README.md'
@@ -23,7 +27,7 @@ concurrency:
 
 jobs:
   build-public-package:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch' || github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -35,7 +39,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended lmodern
 
-      - name: Build public CV package
+      - name: Build public CV package from living repo surfaces
         run: |
           set -euo pipefail
           make public-package
@@ -45,4 +49,15 @@ jobs:
         with:
           name: public-cv-package
           path: documents/*.pdf
+          if-no-files-found: error
+
+      - name: Upload generated living CV sources
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-living-cv-sources
+          path: |
+            cv/current_projects_public.tex
+            research/RESEARCH_STATUS.md
+            research/generated_project_board.tex
+            research/living_source_ledger.md
           if-no-files-found: error
