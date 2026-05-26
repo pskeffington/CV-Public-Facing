@@ -28,6 +28,7 @@ Offline mode is deterministic and safe for CI. It extracts citation identifiers,
 ```bash
 python3 scripts/stem_paper_evaluator.py --pretty --live --author "Jane Researcher" paper.md
 python3 scripts/stem_paper_evaluator.py --pretty --live --orcid "0000-0000-0000-0000" paper.md
+python3 scripts/stem_paper_evaluator.py --pretty --live --author "Jane Researcher" --max-author-candidates 5 paper.md
 ```
 
 Live mode can ping public citation endpoints and query author-level publishing signals. Author matching should be reviewed before being treated as identity-confirmed.
@@ -54,7 +55,11 @@ Live mode can ping public citation endpoints and query author-level publishing s
   "composite_score": 68,
   "composite_drift_score": 32,
   "band": "credible_stem_paper_package",
-  "rationale": "..."
+  "rationale": "...",
+  "review_flags": [
+    "references_not_live_verified",
+    "no_verified_author_signal"
+  ]
 }
 ```
 
@@ -82,11 +87,33 @@ The evaluator includes:
   "cited_by_count": null,
   "works_count": null,
   "h_index": null,
-  "i10_index": null
+  "i10_index": null,
+  "author_candidate_count": 0,
+  "author_ambiguity_warning": null,
+  "source_provenance": [
+    "reference:doi_extracted_offline",
+    "reference:pmid_extracted_offline"
+  ]
 }
 ```
 
 Offline mode should usually have `verified_reference_count` equal to zero because it does not ping external services.
+
+## Review flags
+
+| Flag | Meaning |
+|---|---|
+| `high_stem_drift` | The STEM drift score is high enough to require closer review. |
+| `no_references_extracted` | No DOI, arXiv, PMID, or URL references were extracted. |
+| `references_not_live_verified` | References were extracted but not live-verified. This is expected in offline CI. |
+| `author_identity_ambiguous` | A live author-name lookup returned multiple candidates or an ambiguity warning. |
+| `no_verified_author_signal` | No live author citation signal is available or the author signal score is zero. |
+
+## Provenance and ambiguity fields
+
+`source_provenance` records where the evaluator's publishing signal came from. Offline entries use explicit suffixes such as `_extracted_offline`. Live DOI checks may identify Crossref-derived evidence, while live PMID, arXiv, and URL checks record endpoint reachability.
+
+`author_candidate_count` and `author_ambiguity_warning` summarize OpenAlex author disambiguation. Name-based lookup can return several plausible candidates. ORCID-based lookup is preferred when available.
 
 ## Related systems matrix
 
@@ -104,7 +131,7 @@ That matrix documents adjacent capabilities from Crossref, OpenAlex, Semantic Sc
 make paper-evaluator-check
 ```
 
-This check is offline-safe and verifies that a manuscript-like fixture produces a credible composite paper-package score with extracted citations.
+This check is offline-safe and verifies that a manuscript-like fixture produces a credible composite paper-package score with extracted citations and a valid evaluator output contract.
 
 ## Interpretation
 
