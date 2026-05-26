@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-USER_AGENT = "stem-cv-curator-citation-verifier/0.4"
+USER_AGENT = "stem-cv-curator-citation-verifier/0.5"
 OPENALEX_AUTHOR_URL = "https://api.openalex.org/authors"
 CROSSREF_WORK_URL = "https://api.crossref.org/works/"
 DEFAULT_AUTHOR_CANDIDATES = 5
@@ -101,10 +101,11 @@ class AuthorCitationProfile:
 
 
 class CitationExtractor:
-    DOI_RE = re.compile(r"(?i)\b10\.\d{4,9}/[-._;()/:A-Z0-9]+")
+    DOI_RE = re.compile(r"(?i)(?:https?://(?:dx\.)?doi\.org/|doi:\s*)?(10\.\d{4,9}/[-._;()/:A-Z0-9]+)")
     ARXIV_RE = re.compile(r"(?i)\barXiv[:\s]+(\d{4}\.\d{4,5}(?:v\d+)?|[a-z\-]+/\d{7}(?:v\d+)?)")
     PMID_RE = re.compile(r"(?i)\bPMID[:\s]*(\d{6,9})\b")
     URL_RE = re.compile(r"https?://[^\s)\]>}]+")
+    DOI_TRAILING_CHARS = " .,!?:;)]}>\"'"
 
     def extract(self, text: str) -> list[CitationReference]:
         refs: list[CitationReference] = []
@@ -123,12 +124,15 @@ class CitationExtractor:
                     refs.append(CitationReference(reference_type, value))
         return refs
 
-    @staticmethod
-    def _normalize(reference_type: str, raw: str) -> str:
-        value = raw.strip().rstrip(".,;:")
+    @classmethod
+    def _normalize(cls, reference_type: str, raw: str) -> str:
+        value = raw.strip()
         if reference_type == "doi":
-            value = value.lower()
-        return value
+            value = re.sub(r"(?i)^https?://(?:dx\.)?doi\.org/", "", value)
+            value = re.sub(r"(?i)^doi:\s*", "", value)
+            value = value.rstrip(cls.DOI_TRAILING_CHARS)
+            return value.lower()
+        return value.rstrip(".,;:")
 
 
 class CitationVerifier:
