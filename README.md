@@ -64,6 +64,12 @@ Read the generated public research board:
 research/RESEARCH_STATUS.md
 ```
 
+Read the generated STEM presence dashboard:
+
+```text
+research/stem_presence_report.md
+```
+
 ## Object engine
 
 The main package entry point is:
@@ -85,7 +91,8 @@ The curator:
 3. Merges curated overrides from `data/pipeline_repos.json`.
 4. Classifies repositories into STEM CV sections.
 5. Creates `RepositoryObject`, `RepoSurfaceObject`, `ProjectObject`, and `ClaimObject` records.
-6. Writes the object JSON and LaTeX/Markdown render inputs.
+6. Scores every project with `StemPresenceScorer`.
+7. Writes the object JSON and LaTeX/Markdown render inputs.
 
 ## STEM presence/drift scoring
 
@@ -98,6 +105,20 @@ cat paper.txt | python3 scripts/stem_presence.py --pretty
 
 The scorer returns a 0-100 `score`, a `drift_score` equal to `100 - score`, a band, a rationale, and matched evidence terms. It is intended as a triage metric for public-facing CV quality, not as a substitute for peer review, scientific validity, or impact assessment.
 
+Portfolio-level scoring is generated with:
+
+```bash
+make stem-presence-report
+```
+
+Metric and report contracts can be checked with:
+
+```bash
+make stem-presence-check
+make stem-object-contract
+make stem-report-contract
+```
+
 ## Main outputs
 
 ```text
@@ -107,6 +128,7 @@ research/RESEARCH_STATUS.md
 research/generated_project_board.tex
 research/living_source_ledger.md
 research/living_repo_scan.md
+research/stem_presence_report.md
 ```
 
 ## Full public package build
@@ -115,7 +137,7 @@ research/living_repo_scan.md
 make public-package
 ```
 
-The full build runs the STEM object engine, preflight checks, sanitization checks, LaTeX compilation, and PDF export.
+The full build runs the STEM object engine, STEM presence report generation, metric contract checks, preflight checks, sanitization checks, LaTeX compilation, and PDF export.
 
 ## Configuration
 
@@ -163,9 +185,11 @@ public-cv-package
 generated-living-cv-sources
 ```
 
+The generated-source artifact includes the living CV sources, living scan ledger, and STEM presence report.
+
 ## Public safety checks
 
-The public build runs preflight checks before compiling PDFs. These checks verify that shared project and publication-status sources are wired into the CV outputs, that old hand-written project blocks have not returned, and that public and index-safe sanitization rules pass before PDF generation.
+The public build runs preflight checks before compiling PDFs. These checks verify that shared project and publication-status sources are wired into the CV outputs, that old hand-written project blocks have not returned, that every generated project carries a valid STEM presence object, that the STEM presence dashboard matches the object JSON, and that public and index-safe sanitization rules pass before PDF generation.
 
 ## Repository structure
 
@@ -189,10 +213,15 @@ research/
   generated_project_board.tex
   living_source_ledger.md
   living_repo_scan.md
+  stem_presence_report.md
   research_status.tex
 scripts/
   stem_cv_curator.py
   stem_presence.py
+  write_stem_presence_report.py
+  check_stem_presence.py
+  check_stem_object_contract.py
+  check_stem_presence_report.py
   update_living_cv.py
   preflight_public_package.sh
   check_public_sanitization.sh
@@ -205,4 +234,4 @@ README.md
 
 ## Boundary
 
-The package generates public-safe CV/status source files, public-safe Markdown, repository metadata, object JSON, and compiled public artifacts. Users should keep private claim ledgers, raw data, sensitive sources, addresses, phone numbers, and operational details outside public outputs unless they explicitly configure a private-only workflow.
+The package generates public-safe CV/status source files, public-safe Markdown, repository metadata, object JSON, metric reports, and compiled public artifacts. Users should keep private claim ledgers, raw data, sensitive sources, addresses, phone numbers, and operational details outside public outputs unless they explicitly configure a private-only workflow.
