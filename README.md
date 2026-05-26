@@ -1,31 +1,16 @@
-# Paul A. Skeffington — Public CV and Research Status
+# STEM CV Curator
 
-This repository is the public-facing CV and research-status surface for Paul A. Skeffington. It is designed for visitors who want a public-safe CV package plus a concise snapshot of current research work, what is complete, what is pending validation, what is out for review, and what each project still needs.
+STEM CV Curator is a cloneable, GitHub-driven CV package for machine-learning, public-health, biomedical-data, and broader STEM researchers. It scans a researcher's active GitHub repositories, reads public README/status surfaces, creates a structured CV object layer, and renders public-safe CV, profile, and research-status outputs.
 
-## Start here
+This repository also contains Paul A. Skeffington's public CV configuration, but the package is designed so another researcher can clone it and run it against their own GitHub account.
 
-Read the public research board:
-
-```text
-research/RESEARCH_STATUS.md
-```
-
-Read the public for-hire and civic engagement page:
-
-```text
-hire/FOR_HIRE_LATIN.md
-```
-
-Read the living-CV Actions guide:
-
-```text
-docs/LIVING_CV_ACTIONS.md
-```
-
-Build the full public package:
+## Clone and run for your own GitHub
 
 ```bash
-make public-package
+git clone https://github.com/pskeffington/CV-Public-Facing.git stem-cv-curator
+cd stem-cv-curator
+STEM_CV_OWNER=<your-github-user> make public-package
+ls documents/
 ```
 
 Generated PDF paths:
@@ -37,58 +22,127 @@ documents/Index_Safe_Public_Upload_CV.pdf
 documents/Paul_A_Skeffington_Research_Status_Public.pdf
 ```
 
-## Public pull path
+The filenames are currently template defaults and can be renamed in the Makefile for a new user.
 
-```bash
-git clone https://github.com/pskeffington/CV-Public-Facing.git
-cd CV-Public-Facing
-make public-package
-ls documents/
+## Start here
+
+Read the STEM package guide:
+
+```text
+docs/STEM_CV_CURATOR.md
 ```
 
-## Living CV model
+Read the object schema:
 
-This repository is now manifest-driven. The file below lists the project repositories that feed the public CV pipeline:
+```text
+docs/STEM_CV_OBJECT_SCHEMA.md
+```
+
+Read the Actions guide:
+
+```text
+docs/LIVING_CV_ACTIONS.md
+```
+
+Read the generated public research board:
+
+```text
+research/RESEARCH_STATUS.md
+```
+
+## Object engine
+
+The main package entry point is:
+
+```bash
+make stem-cv
+```
+
+That runs:
+
+```bash
+python3 scripts/stem_cv_curator.py
+```
+
+The curator:
+
+1. Scans the configured GitHub owner's active public repositories.
+2. Reads public README/status surfaces.
+3. Merges curated overrides from `data/pipeline_repos.json`.
+4. Classifies repositories into STEM CV sections.
+5. Creates `RepositoryObject`, `RepoSurfaceObject`, `ProjectObject`, and `ClaimObject` records.
+6. Writes the object JSON and LaTeX/Markdown render inputs.
+
+## Main outputs
+
+```text
+data/stem_cv_objects.json
+cv/current_projects_public.tex
+research/RESEARCH_STATUS.md
+research/generated_project_board.tex
+research/living_source_ledger.md
+research/living_repo_scan.md
+```
+
+## Full public package build
+
+```bash
+make public-package
+```
+
+The full build runs the STEM object engine, preflight checks, sanitization checks, LaTeX compilation, and PDF export.
+
+## Configuration
+
+The default owner and curated project overrides live in:
 
 ```text
 data/pipeline_repos.json
 ```
 
-When `make public-package` runs, it first runs:
+Override the owner at runtime:
 
 ```bash
-python3 scripts/update_living_cv.py
+STEM_CV_OWNER=<your-github-user> make public-package
 ```
 
-That generator pulls the current public README/status surfaces from each listed project repository, refreshes the shared CV project objects, writes a source-observation ledger, then builds the PDFs.
+Private repository scanning is off by default. To include private repos, provide a token and opt in explicitly:
 
-Generated living objects:
+```bash
+STEM_CV_OWNER=<your-github-user> \
+STEM_CV_INCLUDE_PRIVATE=true \
+GH_TOKEN=<token> \
+make stem-cv
+```
+
+## GitHub Actions
+
+The public workflow is:
 
 ```text
-cv/current_projects_public.tex
-research/RESEARCH_STATUS.md
-research/generated_project_board.tex
-research/living_source_ledger.md
+.github/workflows/build-public-research-status.yml
 ```
 
-## Push-to-living-CV dispatch
+It accepts:
 
-Pipeline repositories use `.github/workflows/notify-living-cv.yml` to notify this repository when README, status, roadmap, changelog, or docs files change. The source workflow sends a `repository_dispatch` event named:
+- manual `workflow_dispatch`
+- `repository_dispatch` event type `living-cv-source-updated`
+- direct source edits inside this repository
 
-```text
-living-cv-source-updated
-```
+Pipeline repositories can use `.github/workflows/notify-living-cv.yml` to notify this package when README, status, roadmap, changelog, or docs files change.
 
-This public repository receives that event, regenerates the living CV objects, builds the public PDF package, and uploads two artifacts:
+Artifacts:
 
 ```text
 public-cv-package
 generated-living-cv-sources
 ```
 
-To activate cross-repository dispatch, add an Actions secret named `LIVING_CV_DISPATCH_TOKEN` to each source project repository. The token needs permission to dispatch workflows/events against `pskeffington/CV-Public-Facing`. If the secret is absent, the source workflow exits safely with a skip notice.
+## Public safety checks
 
-## Public repository structure
+The public build runs preflight checks before compiling PDFs. These checks verify that shared project and publication-status sources are wired into the CV outputs, that old hand-written project blocks have not returned, and that public and index-safe sanitization rules pass before PDF generation.
+
+## Repository structure
 
 ```text
 cv/
@@ -99,54 +153,29 @@ cv/
   publication_pipeline_public.tex
 data/
   pipeline_repos.json
+  stem_cv_objects.json
 docs/
+  STEM_CV_CURATOR.md
+  STEM_CV_OBJECT_SCHEMA.md
   LIVING_CV_ACTIONS.md
 research/
   RESEARCH_STATUS.md
   generated_project_board.tex
   living_source_ledger.md
+  living_repo_scan.md
   research_status.tex
-hire/
-  FOR_HIRE_LATIN.md
-documents/
-  Paul_A_Skeffington_Academic_CV_Public.pdf
-  Paul_A_Skeffington_One_Page_Profile_Public.pdf
-  Index_Safe_Public_Upload_CV.pdf
-  Paul_A_Skeffington_Research_Status_Public.pdf
 scripts/
+  stem_cv_curator.py
   update_living_cv.py
   preflight_public_package.sh
   check_public_sanitization.sh
   check_index_safe_upload.sh
 .github/workflows/
   build-public-research-status.yml
-PUBLIC_MANIFEST.md
 Makefile
 README.md
 ```
 
-## Public workflow
-
-The public repository has its own GitHub Actions workflow:
-
-```text
-Build Public CV Package
-```
-
-That workflow compiles the public-safe Academic CV, One-Page Profile, Index-Safe Upload CV, and Research Status LaTeX sources, then uploads the printable PDFs as a workflow artifact named:
-
-```text
-public-cv-package
-```
-
-The workflow is read-only for repository contents. It builds and uploads artifacts; it does not commit generated files back to the repository. A concurrency guard cancels duplicate in-progress builds, and the job skips ordinary `github-actions[bot]` push events so export or artifact activity does not create a recursive public-build loop. Manual workflow runs and repository-dispatch runs remain available.
-
-## Public safety checks
-
-The public build runs preflight checks before compiling PDFs. These checks verify that shared project and publication-status sources are wired into the CV outputs, that old hand-written project blocks have not returned, and that public and index-safe sanitization rules pass before PDF generation.
-
 ## Boundary
 
-This repository contains public-safe CV/status source files, public-safe Markdown, repository metadata, and compiled public artifacts. The private `CV` repository remains the source-of-truth for master CV files, evidence ledgers, claim controls, private source extracts, and internal editing history.
-
-Manual edits to generated PDF artifacts may be overwritten by the private export workflow. Public source files in `cv/` and `research/` are generated from the living pipeline manifest and upstream public project surfaces.
+The package generates public-safe CV/status source files, public-safe Markdown, repository metadata, object JSON, and compiled public artifacts. Users should keep private claim ledgers, raw data, sensitive sources, addresses, phone numbers, and operational details outside public outputs unless they explicitly configure a private-only workflow.
