@@ -56,6 +56,27 @@ class CitationVerifierCheck:
             errors.append(f"Expected four references, found {payload.get('reference_count')}")
         if payload.get("verified_reference_count") != 0:
             errors.append("Offline verifier should not mark references as live-verified")
+
+        verified_refs = payload.get("references")
+        if not isinstance(verified_refs, list):
+            errors.append("Payload references must be a list")
+            verified_refs = []
+        for index, item in enumerate(verified_refs):
+            if not isinstance(item, dict):
+                errors.append(f"Reference {index} is not an object")
+                continue
+            for key in ["source", "endpoint", "checked_at", "verification_mode"]:
+                if key not in item:
+                    errors.append(f"Reference {index} missing provenance field: {key}")
+            if item.get("source") != "identifier_extractor":
+                errors.append(f"Offline reference {index} source should be identifier_extractor")
+            if item.get("endpoint") is not None:
+                errors.append(f"Offline reference {index} endpoint should be null")
+            if not isinstance(item.get("checked_at"), str) or not item.get("checked_at", "").endswith("Z"):
+                errors.append(f"Offline reference {index} checked_at should be UTC ISO string")
+            if item.get("verification_mode") != "offline":
+                errors.append(f"Offline reference {index} verification_mode should be offline")
+
         profile = payload.get("author_citation_profile")
         if not isinstance(profile, dict):
             errors.append("Missing offline author citation profile")
