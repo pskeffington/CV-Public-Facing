@@ -49,7 +49,8 @@ Live mode can query:
 | Signal | Source |
 |---|---|
 | DOI metadata and cited-by count | Crossref |
-| URL/arXiv/PubMed endpoint reachability | public endpoint ping |
+| PMID metadata | NCBI PubMed ESummary |
+| URL/arXiv endpoint reachability | public endpoint ping |
 | Submitter author profile | OpenAlex |
 
 ## Per-reference provenance
@@ -61,11 +62,32 @@ Every extracted reference now carries audit provenance:
   "source": "identifier_extractor",
   "endpoint": null,
   "checked_at": "2026-05-26T00:00:00Z",
-  "verification_mode": "offline"
+  "verification_mode": "offline",
+  "metadata": null
 }
 ```
 
-Live DOI checks use `source: crossref` and store the Crossref endpoint. Live PMID, arXiv, and URL checks store the public endpoint that was pinged. Offline checks still record `checked_at`, but keep `endpoint` as `null` and `verification_mode` as `offline`.
+Live DOI checks use `source: crossref` and store the Crossref endpoint. Live PMID checks use `source: ncbi_pubmed_esummary`, store the NCBI ESummary endpoint, and populate the `metadata` object when PubMed returns a record. Offline checks still record `checked_at`, but keep `endpoint` and `metadata` as `null` and `verification_mode` as `offline`.
+
+## PubMed metadata
+
+Live PMID checks can add:
+
+```json
+{
+  "pmid": "23803847",
+  "title": "...",
+  "journal": "...",
+  "publication_date": "2013 Jul",
+  "publication_year": 2013,
+  "authors": ["Author A", "Author B"],
+  "doi": "10.xxxx/example",
+  "pmcid": "PMC...",
+  "publication_types": ["Journal Article"]
+}
+```
+
+This enrichment is live-only and depends on NCBI ESummary responses.
 
 ## Author citation profile
 
@@ -84,7 +106,8 @@ When `--author` or `--orcid` is supplied, live mode attempts to return:
   "author_signal_score": 70,
   "candidate_count": 1,
   "candidates": [],
-  "ambiguity_warning": null
+  "ambiguity_warning": null,
+  "author_match_confidence": "name_single_candidate"
 }
 ```
 
@@ -105,7 +128,7 @@ This author-level score is a publishing-signal indicator. It should not be treat
 make citation-check
 ```
 
-The check is offline-safe. It verifies that DOI, arXiv, PMID, and URL extraction work, that every reference carries provenance fields, and that offline author-profile output remains explicitly unverified.
+The check is offline-safe. It verifies that DOI, arXiv, PMID, and URL extraction work, that every reference carries provenance and metadata fields, and that offline author-profile output remains explicitly unverified.
 
 ## Integration with STEM drift
 
