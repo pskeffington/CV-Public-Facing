@@ -1,5 +1,16 @@
 {
-  "generated_on_note": "Generated CV objects are rebuilt from the public README/status surfaces listed here.",
+  "generated_on_note": "Generated CV objects are rebuilt from a recursive public-repository scan plus curated overrides below.",
+  "scan": {
+    "owner": "pskeffington",
+    "include_public_repos": true,
+    "include_private_repos": false,
+    "exclude_repos": [
+      "CV-Public-Facing",
+      "CV"
+    ],
+    "default_status": "Discovered active repository / intake needed",
+    "default_section": "intake"
+  },
   "repos": [
     {
       "key": "nlsy79-family-economics",
@@ -19,7 +30,17 @@
       "summary": "Reusable machine-learning manuscript workflow for responsible, reproducible, and transparent query-to-publication research practice.",
       "needs": "Expand modular review gates, source-registry templates, citation-verification templates, and lightweight structure tests.",
       "cv_section": "methods",
-      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md", "docs/LIVING_CV_ACTIONS.md"]
+      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
+    },
+    {
+      "key": "machine-learning-lab",
+      "repo": "pskeffington/ml-lab",
+      "title": "Machine-learning lab",
+      "status": "Active machine-learning methods repository",
+      "summary": "Public machine-learning methods workspace for experimental modeling, reproducible workflows, and applied ML project development.",
+      "needs": "Add source manifest, model-card template, benchmark target, validation checks, and public-safe results boundary.",
+      "cv_section": "methods",
+      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
     },
     {
       "key": "mcdowell-water-infrastructure",
@@ -110,6 +131,16 @@
       "needs": "Add source manifests, project boundaries, and public-safe deliverable targets.",
       "cv_section": "intake",
       "source_files": ["README.md", "docs/source_catalog.md"]
+    },
+    {
+      "key": "practicum-report",
+      "repo": "pskeffington/Practicum-Report",
+      "title": "Public-health practicum report",
+      "status": "Public report artifact",
+      "summary": "Public practicum-report repository supporting applied public-health writing, evidence packaging, and report-oriented deliverables.",
+      "needs": "Confirm public-safe source boundaries, update report status, and link outputs into the CV research board.",
+      "cv_section": "intake",
+      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
     },
     {
       "key": "st-bonaventure-archive",
