@@ -12,9 +12,10 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
 
-USER_AGENT = "stem-cv-curator-citation-verifier/0.1"
+USER_AGENT = "stem-cv-curator-citation-verifier/0.2"
 OPENALEX_AUTHOR_URL = "https://api.openalex.org/authors"
 CROSSREF_WORK_URL = "https://api.crossref.org/works/"
+DEFAULT_AUTHOR_CANDIDATES = 5
 
 
 @dataclass(frozen=True)
@@ -52,6 +53,20 @@ class CitationVerification:
 
 
 @dataclass(frozen=True)
+class AuthorCandidate:
+    matched_name: str | None
+    author_id: str | None
+    cited_by_count: int | None = None
+    works_count: int | None = None
+    h_index: int | None = None
+    i10_index: int | None = None
+    author_signal_score: int = 0
+
+    def to_dict(self) -> dict[str, object]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
 class AuthorCitationProfile:
     query_name: str | None
     query_orcid: str | None
@@ -64,10 +79,15 @@ class AuthorCitationProfile:
     h_index: int | None = None
     i10_index: int | None = None
     author_signal_score: int = 0
+    candidate_count: int = 0
+    candidates: list[AuthorCandidate] = field(default_factory=list)
+    ambiguity_warning: str | None = None
     note: str | None = None
 
     def to_dict(self) -> dict[str, object]:
-        return asdict(self)
+        payload = asdict(self)
+        payload["candidates"] = [candidate.to_dict() if hasattr(candidate, "to_dict") else candidate for candidate in self.candidates]
+        return payload
 
 
 class CitationExtractor:
@@ -201,16 +221,54 @@ class CitationVerifier:
 
 
 class AuthorCitationLookup:
-    def __init__(self, live: bool = False, timeout: int = 12) -> None:
+    def __init__(self, live: bool = False, timeout: int = 12, max_candidates: int = DEFAULT_AUTHOR_CANDIDATES) -> None:
         self.live = live
         self.timeout = timeout
+        self.max_candidates = max(1, max_candidates)
 
     def lookup(self, name: str | None = None, orcid: str | None = None) -> AuthorCitationProfile | None:
         if not name and not orcid:
             return None
         if not self.live:
-            return AuthorCitationProfile(name, orcid, None, None, "openalex", False, note="Run with --live for author citation counts.")
-        params: dict[str, str] = {"per-page": "1"}
+            return AuthorCitationProfile(
+                name,
+                orcid,
+                None,
+                None,
+                "openalex",
+                False,
+                candidate_count=0,
+                candidates=[],
+                note="Run with --live for author citation counts and candidate disambiguation.",
+            )
+        payload = self._query_openalex(name, orcid)
+        if isinstance(payload, str):
+            return AuthorCitationProfile(name, orcid, None, None, "openalex", False, note=payload)
+        results = payload.get("results", []) if isinstance(payload, dict) else []
+        if not results:
+            return AuthorCitationProfile(name, orcid, None, None, "openalex", False, note="No OpenAlex author match found.")
+        candidates = [self._candidate_from_author(author) for author in results if isinstance(author, dict)]
+        top = candidates[0]
+        ambiguity_warning = self._ambiguity_warning(name, orcid, candidates)
+        return AuthorCitationProfile(
+            name,
+            orcid,
+            top.matched_name,
+            top.author_id,
+            "openalex",
+            True,
+            top.cited_by_count,
+            top.works_count,
+            top.h_index,
+            top.i10_index,
+            top.author_signal_score,
+            candidate_count=len(candidates),
+            candidates=candidates,
+            ambiguity_warning=ambiguity_warning,
+        )
+
+    def _query_openalex(self, name: str | None, orcid: str | None) -> dict[str, Any] | str:
+        params: dict[str, str] = {"per-page": str(self.max_candidates)}
         if orcid:
             params["filter"] = "orcid:" + orcid
         elif name:
@@ -221,30 +279,33 @@ class AuthorCitationLookup:
             with urllib.request.urlopen(req, timeout=self.timeout) as res:
                 payload = json.loads(res.read().decode("utf-8", errors="replace"))
         except Exception as exc:
-            return AuthorCitationProfile(name, orcid, None, None, "openalex", False, note=str(exc))
-        results = payload.get("results", []) if isinstance(payload, dict) else []
-        if not results:
-            return AuthorCitationProfile(name, orcid, None, None, "openalex", False, note="No OpenAlex author match found.")
-        author = results[0]
+            return str(exc)
+        return payload if isinstance(payload, dict) else "OpenAlex returned a non-object payload."
+
+    def _candidate_from_author(self, author: dict[str, Any]) -> AuthorCandidate:
         stats = author.get("summary_stats", {}) if isinstance(author.get("summary_stats"), dict) else {}
         cited_by_count = self._safe_int(author.get("cited_by_count"))
         works_count = self._safe_int(author.get("works_count"))
         h_index = self._safe_int(stats.get("h_index"))
         i10_index = self._safe_int(stats.get("i10_index"))
-        score = self._score_author(cited_by_count, works_count, h_index)
-        return AuthorCitationProfile(
-            name,
-            orcid,
-            str(author.get("display_name", "")) or None,
-            str(author.get("id", "")) or None,
-            "openalex",
-            True,
-            cited_by_count,
-            works_count,
-            h_index,
-            i10_index,
-            score,
+        return AuthorCandidate(
+            matched_name=str(author.get("display_name", "")) or None,
+            author_id=str(author.get("id", "")) or None,
+            cited_by_count=cited_by_count,
+            works_count=works_count,
+            h_index=h_index,
+            i10_index=i10_index,
+            author_signal_score=self._score_author(cited_by_count, works_count, h_index),
         )
+
+    @staticmethod
+    def _ambiguity_warning(name: str | None, orcid: str | None, candidates: list[AuthorCandidate]) -> str | None:
+        if orcid:
+            return None
+        if len(candidates) <= 1:
+            return None
+        top_names = ", ".join(candidate.matched_name or "unknown" for candidate in candidates[:3])
+        return f"OpenAlex returned {len(candidates)} author candidates for {name or 'query'}; review identity match before using author metrics. Top candidates: {top_names}."
 
     @staticmethod
     def _safe_int(value: object) -> int | None:
@@ -274,11 +335,11 @@ class AuthorCitationLookup:
         return max(0, min(100, score))
 
 
-def verify_text(text: str, live: bool = False, author: str | None = None, orcid: str | None = None) -> dict[str, object]:
+def verify_text(text: str, live: bool = False, author: str | None = None, orcid: str | None = None, max_author_candidates: int = DEFAULT_AUTHOR_CANDIDATES) -> dict[str, object]:
     refs = CitationExtractor().extract(text)
     verifier = CitationVerifier(live=live)
     verified = [verifier.verify(ref).to_dict() for ref in refs]
-    author_profile = AuthorCitationLookup(live=live).lookup(author, orcid)
+    author_profile = AuthorCitationLookup(live=live, max_candidates=max_author_candidates).lookup(author, orcid)
     return {
         "live": live,
         "reference_count": len(refs),
@@ -294,6 +355,7 @@ def main() -> int:
     parser.add_argument("--live", action="store_true", help="Ping DOI/arXiv/PubMed/URL endpoints and query OpenAlex author counts.")
     parser.add_argument("--author", help="Submitter/author name for OpenAlex author citation lookup.")
     parser.add_argument("--orcid", help="Submitter ORCID for OpenAlex author citation lookup.")
+    parser.add_argument("--max-author-candidates", type=int, default=DEFAULT_AUTHOR_CANDIDATES, help="Maximum OpenAlex author candidates to return in live mode.")
     parser.add_argument("--pretty", action="store_true", help="Pretty-print JSON output.")
     args = parser.parse_args()
     if args.paths:
@@ -301,7 +363,7 @@ def main() -> int:
     else:
         import sys
         text = sys.stdin.read()
-    payload = verify_text(text, live=args.live, author=args.author, orcid=args.orcid)
+    payload = verify_text(text, live=args.live, author=args.author, orcid=args.orcid, max_author_candidates=args.max_author_candidates)
     print(json.dumps(payload, indent=2 if args.pretty else None))
     return 0
 
