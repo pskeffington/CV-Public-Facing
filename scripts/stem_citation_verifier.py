@@ -8,15 +8,17 @@ import json
 import re
 import urllib.parse
 import urllib.request
+import xml.etree.ElementTree as ET
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-USER_AGENT = "stem-cv-curator-citation-verifier/0.6"
+USER_AGENT = "stem-cv-curator-citation-verifier/0.7"
 OPENALEX_AUTHOR_URL = "https://api.openalex.org/authors"
 CROSSREF_WORK_URL = "https://api.crossref.org/works/"
 PUBMED_ESUMMARY_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
+ARXIV_API_URL = "https://export.arxiv.org/api/query"
 DEFAULT_AUTHOR_CANDIDATES = 5
 
 
@@ -149,6 +151,8 @@ class CitationVerifier:
             return self._verify_doi(reference)
         if reference.reference_type == "pmid":
             return self._verify_pmid(reference)
+        if reference.reference_type == "arxiv":
+            return self._verify_arxiv(reference)
         return self._verify_url_like(reference)
 
     def _offline(self, reference: CitationReference) -> CitationVerification:
@@ -223,6 +227,32 @@ class CitationVerifier:
             metadata=metadata,
         )
 
+    def _verify_arxiv(self, reference: CitationReference) -> CitationVerification:
+        arxiv_id = self._arxiv_id_without_version(reference.value)
+        endpoint = ARXIV_API_URL + "?" + urllib.parse.urlencode({"id_list": arxiv_id})
+        checked_at = checked_at_utc()
+        ok, status, xml_text = self._request_text(endpoint)
+        metadata = self._arxiv_metadata(reference.value, xml_text) if ok else None
+        verified = bool(metadata)
+        signals = ["arxiv_extracted"]
+        if verified:
+            signals.append("arxiv_metadata_found")
+        score = self._score_reference(reference.reference_type, verified, None)
+        return CitationVerification(
+            reference=reference,
+            verified=verified,
+            status_code=status,
+            publishing_score=score,
+            publishing_band=self._band(score),
+            citation_count=None,
+            signals=signals,
+            source="arxiv_api",
+            endpoint=endpoint,
+            checked_at=checked_at,
+            verification_mode="live",
+            metadata=metadata,
+        )
+
     def _verify_url_like(self, reference: CitationReference) -> CitationVerification:
         endpoint = reference.canonical_url
         checked_at = checked_at_utc()
@@ -251,6 +281,15 @@ class CitationVerifier:
         try:
             with urllib.request.urlopen(req, timeout=self.timeout) as res:
                 return True, int(res.status), json.loads(res.read().decode("utf-8", errors="replace"))
+        except Exception as exc:
+            status = getattr(exc, "code", None)
+            return False, status if isinstance(status, int) else None, None
+
+    def _request_text(self, url: str) -> tuple[bool, int | None, str | None]:
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/atom+xml,text/xml,*/*"})
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout) as res:
+                return True, int(res.status), res.read().decode("utf-8", errors="replace")
         except Exception as exc:
             status = getattr(exc, "code", None)
             return False, status if isinstance(status, int) else None, None
@@ -297,6 +336,55 @@ class CitationVerifier:
             "pmcid": article_ids.get("pmc"),
             "publication_types": item.get("pubtype", []),
         }
+
+    @staticmethod
+    def _arxiv_metadata(arxiv_id: str, xml_text: str | None) -> dict[str, object] | None:
+        if not xml_text:
+            return None
+        try:
+            root = ET.fromstring(xml_text)
+        except ET.ParseError:
+            return None
+        ns = {"atom": "http://www.w3.org/2005/Atom", "arxiv": "http://arxiv.org/schemas/atom"}
+        entry = root.find("atom:entry", ns)
+        if entry is None:
+            return None
+        authors = []
+        for author in entry.findall("atom:author", ns)[:10]:
+            name = author.findtext("atom:name", default="", namespaces=ns).strip()
+            if name:
+                authors.append(name)
+        categories = []
+        for category in entry.findall("atom:category", ns):
+            term = category.attrib.get("term")
+            if term:
+                categories.append(term)
+        doi = entry.findtext("arxiv:doi", default="", namespaces=ns).strip() or None
+        journal_ref = entry.findtext("arxiv:journal_ref", default="", namespaces=ns).strip() or None
+        return {
+            "arxiv_id": arxiv_id,
+            "canonical_arxiv_id": CitationVerifier._arxiv_id_without_version(arxiv_id),
+            "title": CitationVerifier._collapse_ws(entry.findtext("atom:title", default="", namespaces=ns)),
+            "abstract": CitationVerifier._collapse_ws(entry.findtext("atom:summary", default="", namespaces=ns)),
+            "authors": authors,
+            "categories": categories,
+            "primary_category": categories[0] if categories else None,
+            "published": entry.findtext("atom:published", default="", namespaces=ns) or None,
+            "updated": entry.findtext("atom:updated", default="", namespaces=ns) or None,
+            "doi": doi,
+            "journal_ref": journal_ref,
+        }
+
+    @staticmethod
+    def _arxiv_id_without_version(arxiv_id: str) -> str:
+        return re.sub(r"v\d+$", "", arxiv_id.strip())
+
+    @staticmethod
+    def _collapse_ws(value: object) -> str | None:
+        if not isinstance(value, str):
+            return None
+        collapsed = re.sub(r"\s+", " ", value).strip()
+        return collapsed or None
 
     @staticmethod
     def _publication_year(pubdate: object) -> int | None:
