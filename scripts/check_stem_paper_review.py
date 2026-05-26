@@ -61,6 +61,10 @@ class PaperReviewCheck:
         for token in [
             "Live mode:",
             "Max author candidates:",
+            "Composite STEM weight:",
+            "Composite publishing weight:",
+            "Reference signal weight:",
+            "Author signal weight:",
             "Allowed URL hosts:",
             "Blocked URL hosts:",
             "External services enabled:",
@@ -77,6 +81,8 @@ class PaperReviewCheck:
             errors.append("Expected DOI reference not rendered")
         if "offline" not in report or "identifier_extractor" not in report:
             errors.append("Expected offline provenance not rendered")
+        if "0.75" not in report or "0.25" not in report:
+            errors.append("Expected default composite weights not rendered")
         return PaperReviewCheckResult(not errors, errors, len(report))
 
 
