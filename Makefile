@@ -5,7 +5,7 @@ CV_DIR = cv
 RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 
-.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check stem-object-contract stem-report-contract preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check citation-check stem-object-contract stem-report-contract preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
@@ -18,10 +18,13 @@ stem-presence-report: stem-cv
 living-cv: stem-presence-report
 
 stem-presence-check:
-	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py
+	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py
 	$(PYTHON) scripts/check_stem_presence.py
 
-stem-object-contract: living-cv stem-presence-check
+citation-check:
+	printf 'Example DOI 10.1038/nature12373 and PMID: 23803847. Example author citation lookup disabled by default.' | $(PYTHON) scripts/stem_citation_verifier.py --pretty
+
+stem-object-contract: living-cv stem-presence-check citation-check
 	$(PYTHON) scripts/check_stem_object_contract.py
 
 stem-report-contract: stem-object-contract
