@@ -20,6 +20,17 @@ from stem_presence import StemPresenceScorer  # noqa: E402
 
 
 @dataclass(frozen=True)
+class ReviewConfiguration:
+    """Configuration that produced a STEM paper review."""
+
+    live: bool
+    max_author_candidates: int
+    allowed_url_hosts: list[str] = field(default_factory=list)
+    blocked_url_hosts: list[str] = field(default_factory=list)
+    external_services_enabled: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
 class PublishingSignalSummary:
     """Compact publishing-signal summary for a submitted paper package."""
 
@@ -83,11 +94,25 @@ class StemPaperEvaluator:
         composite = self._score_composite(stem_presence.score, stem_presence.drift_score, publishing_summary)
         return {
             "live": self.live,
+            "review_configuration": asdict(self._review_configuration()),
             "stem_presence": stem_presence.to_dict(),
             "publishing_signal_summary": asdict(publishing_summary),
             "composite_paper_score": asdict(composite),
             "citation_verification": citation_payload,
         }
+
+    def _review_configuration(self) -> ReviewConfiguration:
+        services = ["local_stem_presence", "identifier_extractor"]
+        if self.live:
+            services.extend(["crossref", "ncbi_pubmed_esummary", "arxiv_api", "openalex"])
+            services.append("raw_url_ping")
+        return ReviewConfiguration(
+            live=self.live,
+            max_author_candidates=self.max_author_candidates,
+            allowed_url_hosts=sorted(set(self.allowed_url_hosts)),
+            blocked_url_hosts=sorted(set(self.blocked_url_hosts)),
+            external_services_enabled=services,
+        )
 
     def _summarize_publishing(self, payload: dict[str, object]) -> PublishingSignalSummary:
         references = payload.get("references", [])
