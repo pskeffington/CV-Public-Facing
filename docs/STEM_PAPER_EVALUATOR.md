@@ -88,6 +88,16 @@ The evaluator includes:
 
 Offline mode should usually have `verified_reference_count` equal to zero because it does not ping external services.
 
+## Related systems matrix
+
+The evaluator is benchmarked conceptually against related scholarly metadata and citation systems in:
+
+```text
+docs/STEM_EVALUATOR_LIT_REVIEW_MATRIX.md
+```
+
+That matrix documents adjacent capabilities from Crossref, OpenAlex, Semantic Scholar, PubMed / NCBI E-utilities, OpenCitations, scite-style citation-context systems, and retraction/integrity-signal systems. It also lists package gaps and next polish targets.
+
 ## Local check
 
 ```bash
