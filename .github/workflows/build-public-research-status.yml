@@ -3,17 +3,27 @@ name: Build Public CV Package
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
     paths:
       - 'cv/**'
       - 'research/**'
+      - 'scripts/**'
       - 'Makefile'
+      - 'README.md'
+      - 'PUBLIC_MANIFEST.md'
       - '.github/workflows/build-public-research-status.yml'
 
 permissions:
   contents: read
 
+concurrency:
+  group: public-cv-package-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-public-package:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
 
     steps:
