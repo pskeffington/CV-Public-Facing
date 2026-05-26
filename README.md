@@ -12,6 +12,29 @@ This repository also contains Paul A. Skeffington's public CV configuration, but
 
 The package remains the public-facing CV and research-status renderer for the active repository set. The immediate documentation priority is to keep README/status surfaces across source repositories structured enough for the object engine to classify projects, preserve public-safety boundaries, score drift from core STEM progress, check citation/publishing signals, evaluate submitted paper packages, and regenerate current-project outputs without hand-written drift.
 
+## Auth Eco alignment
+
+`CV-Public-Facing` is the public-safe renderer in the broader Auth Eco ecosystem.
+
+```text
+private CV claim controls
+  -> public-safe CV/status rendering
+  -> portfolio proof packets
+  -> role-matching and audit-chain artifacts
+```
+
+Start here:
+
+```text
+docs/AUTH_ECO_INTEGRATION.md
+```
+
+The controlling ecosystem contract lives in:
+
+```text
+Portfolio/docs/ECOSYSTEM_ALIGNMENT.md
+```
+
 ## Clone and run for your own GitHub
 
 ```bash
@@ -44,6 +67,12 @@ Read the object schema:
 
 ```text
 docs/STEM_CV_OBJECT_SCHEMA.md
+```
+
+Read the Auth Eco integration note:
+
+```text
+docs/AUTH_ECO_INTEGRATION.md
 ```
 
 Read the STEM presence/drift scoring guide:
@@ -283,6 +312,7 @@ data/
   pipeline_repos.json
   stem_cv_objects.json
 docs/
+  AUTH_ECO_INTEGRATION.md
   STEM_CV_CURATOR.md
   STEM_CV_OBJECT_SCHEMA.md
   STEM_PRESENCE_SCORE.md
