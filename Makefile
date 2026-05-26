@@ -5,17 +5,20 @@ CV_DIR = cv
 RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 
-.PHONY: all stem-cv living-cv stem-presence-check stem-object-contract preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check stem-object-contract preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
 stem-cv:
 	$(PYTHON) scripts/stem_cv_curator.py
 
-living-cv: stem-cv
+stem-presence-report: stem-cv
+	$(PYTHON) scripts/write_stem_presence_report.py
+
+living-cv: stem-presence-report
 
 stem-presence-check:
-	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py
+	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py
 	$(PYTHON) scripts/check_stem_presence.py
 
 stem-object-contract: living-cv stem-presence-check
@@ -53,6 +56,7 @@ research-status:
 clean:
 	cd $(CV_DIR) && $(LATEXMK) -C academic_cv_public.tex one_page_profile_public.tex public_upload_cv.tex
 	cd $(RESEARCH_DIR) && $(LATEXMK) -C research_status.tex
+	rm -f $(RESEARCH_DIR)/stem_presence_report.md
 	rm -f $(DOCUMENTS_DIR)/Paul_A_Skeffington_Academic_CV_Public.pdf
 	rm -f $(DOCUMENTS_DIR)/Paul_A_Skeffington_One_Page_Profile_Public.pdf
 	rm -f $(DOCUMENTS_DIR)/Index_Safe_Public_Upload_CV.pdf
