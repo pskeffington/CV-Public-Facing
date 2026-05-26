@@ -57,11 +57,20 @@ class PaperReviewCheck:
         for section in self.REQUIRED_SECTIONS:
             if section not in report:
                 errors.append(f"Missing report section: {section}")
-        for token in ["Composite score:", "STEM score:", "Reference count:", "| Type | Value | Verified | Score | Band |"]:
+        for token in [
+            "Composite score:",
+            "STEM score:",
+            "Reference count:",
+            "Policy-blocked references:",
+            "Author match confidence:",
+            "| Type | Value | Verified | Mode | Source | Score | Band |",
+        ]:
             if token not in report:
                 errors.append(f"Missing report token: {token}")
         if "10.1038/nature12373" not in report:
             errors.append("Expected DOI reference not rendered")
+        if "offline" not in report or "identifier_extractor" not in report:
+            errors.append("Expected offline provenance not rendered")
         return PaperReviewCheckResult(not errors, errors, len(report))
 
 
