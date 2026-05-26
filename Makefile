@@ -5,7 +5,7 @@ CV_DIR = cv
 RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 
-.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check citation-check stem-object-contract stem-report-contract preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check citation-check paper-evaluator-check stem-object-contract stem-report-contract preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
@@ -18,13 +18,16 @@ stem-presence-report: stem-cv
 living-cv: stem-presence-report
 
 stem-presence-check:
-	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py
+	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py scripts/stem_paper_evaluator.py scripts/check_stem_paper_evaluator.py
 	$(PYTHON) scripts/check_stem_presence.py
 
 citation-check:
 	$(PYTHON) scripts/check_stem_citation_verifier.py
 
-stem-object-contract: living-cv stem-presence-check citation-check
+paper-evaluator-check:
+	$(PYTHON) scripts/check_stem_paper_evaluator.py
+
+stem-object-contract: living-cv stem-presence-check citation-check paper-evaluator-check
 	$(PYTHON) scripts/check_stem_object_contract.py
 
 stem-report-contract: stem-object-contract
