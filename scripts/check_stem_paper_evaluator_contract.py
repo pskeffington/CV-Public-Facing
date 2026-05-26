@@ -79,6 +79,7 @@ class StemPaperEvaluatorContractChecker:
         "author_ambiguity_warning",
         "author_match_confidence",
         "source_provenance",
+        "policy_blocked_reference_count",
     }
 
     COMPOSITE_KEYS = {
@@ -142,6 +143,8 @@ class StemPaperEvaluatorContractChecker:
             errors.append("Publishing summary reference_count does not match citation_verification reference_count")
         if not isinstance(publishing.get("source_provenance"), list) or not publishing.get("source_provenance"):
             errors.append("publishing_signal_summary.source_provenance must be a non-empty list")
+        if self._safe_int(publishing.get("policy_blocked_reference_count"), -1) != 0:
+            errors.append("Offline policy_blocked_reference_count should be zero")
         if self._safe_int(publishing.get("author_candidate_count"), -1) != 0:
             errors.append("Offline author_candidate_count should be zero")
         if publishing.get("author_ambiguity_warning") is not None:
