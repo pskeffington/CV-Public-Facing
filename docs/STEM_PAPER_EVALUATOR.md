@@ -31,6 +31,7 @@ python3 scripts/stem_paper_evaluator.py --pretty --live --orcid "0000-0000-0000-
 python3 scripts/stem_paper_evaluator.py --pretty --live --author "Jane Researcher" --max-author-candidates 5 paper.md
 python3 scripts/stem_paper_evaluator.py --pretty --live --allow-url-host example.org paper.md
 python3 scripts/stem_paper_evaluator.py --pretty --live --block-url-host private.example paper.md
+python3 scripts/stem_paper_evaluator.py --pretty --stem-weight 0.85 --publishing-weight 0.15 paper.md
 ```
 
 Live mode can ping public citation endpoints and query author-level publishing signals. Author matching should be reviewed before being treated as identity-confirmed.
@@ -69,6 +70,10 @@ Every evaluator output records the settings that produced the review:
 {
   "live": false,
   "max_author_candidates": 5,
+  "composite_stem_weight": 0.75,
+  "composite_publishing_weight": 0.25,
+  "reference_signal_weight": 0.65,
+  "author_signal_weight": 0.35,
   "allowed_url_hosts": [],
   "blocked_url_hosts": [],
   "external_services_enabled": [
@@ -79,6 +84,24 @@ Every evaluator output records the settings that produced the review:
 ```
 
 In live mode, `external_services_enabled` can also include `crossref`, `ncbi_pubmed_esummary`, `arxiv_api`, `openalex`, and `raw_url_ping`. This block is intended to make JSON and Markdown reviews reproducible and auditable.
+
+## Scoring weights
+
+The default composite score uses a STEM-heavy weighting:
+
+```text
+composite_score = STEM presence * 0.75 + publishing_signal * 0.25
+publishing_signal = average_reference_score * 0.65 + author_signal_score * 0.35
+```
+
+The top-level composite weights can be adjusted for sensitivity review:
+
+```bash
+python3 scripts/stem_paper_evaluator.py --pretty --stem-weight 0.85 --publishing-weight 0.15 paper.md
+python3 scripts/write_stem_paper_review.py --stem-weight 0.85 --publishing-weight 0.15 --out review.md paper.md
+```
+
+Input weights are normalized before scoring, and the normalized values are recorded in `review_configuration`. Reference-vs-author publishing weights are currently fixed at 0.65 and 0.35.
 
 ## Composite score fields
 
@@ -98,7 +121,7 @@ In live mode, `external_services_enabled` can also include `crossref`, `ncbi_pub
 }
 ```
 
-The composite score weights STEM presence more heavily than citation context. Current weighting is 75% STEM presence and 25% publishing signal.
+The composite score weights STEM presence more heavily than citation context. Current default weighting is 75% STEM presence and 25% publishing signal.
 
 ## Bands
 
@@ -155,6 +178,7 @@ The Markdown writer uses the same evaluator and can render the configuration, sc
 ```bash
 python3 scripts/write_stem_paper_review.py --title "Submitted manuscript" --out review.md paper.md
 python3 scripts/write_stem_paper_review.py --live --allow-url-host example.org --out review.md paper.md
+python3 scripts/write_stem_paper_review.py --stem-weight 0.85 --publishing-weight 0.15 --out review.md paper.md
 ```
 
 ## Provenance and ambiguity fields
@@ -180,7 +204,7 @@ make paper-evaluator-check
 make paper-review-check
 ```
 
-These checks are offline-safe and verify that a manuscript-like fixture produces a credible composite paper-package score, a valid evaluator output contract, and a Markdown review containing the configuration and provenance sections.
+These checks are offline-safe and verify that a manuscript-like fixture produces a credible composite paper-package score, a valid evaluator output contract, and a Markdown review containing the configuration, weights, and provenance sections.
 
 ## Interpretation
 
