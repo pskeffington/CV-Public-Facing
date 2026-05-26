@@ -1,6 +1,6 @@
 # STEM CV Curator
 
-STEM CV Curator is a cloneable, GitHub-driven CV package for machine-learning, public-health, biomedical-data, and broader STEM researchers. It scans a researcher's active GitHub repositories, reads public README/status surfaces, creates a structured CV object layer, scores STEM presence/drift, and renders public-safe CV, profile, and research-status outputs.
+STEM CV Curator is a cloneable, GitHub-driven CV package for machine-learning, public-health, biomedical-data, and broader STEM researchers. It scans a researcher's active GitHub repositories, reads public README/status surfaces, creates a structured CV object layer, scores STEM presence/drift, checks citation and publishing signals, and renders public-safe CV, profile, and research-status outputs.
 
 This repository also contains Paul A. Skeffington's public CV configuration, but the package is designed so another researcher can clone it and run it against their own GitHub account.
 
@@ -10,7 +10,7 @@ This repository also contains Paul A. Skeffington's public CV configuration, but
 
 ## Current update — 2026-05-26
 
-The package remains the public-facing CV and research-status renderer for the active repository set. The immediate documentation priority is to keep README/status surfaces across source repositories structured enough for the object engine to classify projects, preserve public-safety boundaries, score drift from core STEM progress, and regenerate current-project outputs without hand-written drift.
+The package remains the public-facing CV and research-status renderer for the active repository set. The immediate documentation priority is to keep README/status surfaces across source repositories structured enough for the object engine to classify projects, preserve public-safety boundaries, score drift from core STEM progress, check citation/publishing signals, and regenerate current-project outputs without hand-written drift.
 
 ## Clone and run for your own GitHub
 
@@ -50,6 +50,12 @@ Read the STEM presence/drift scoring guide:
 
 ```text
 docs/STEM_PRESENCE_SCORE.md
+```
+
+Read the citation verification guide:
+
+```text
+docs/STEM_CITATION_VERIFICATION.md
 ```
 
 Read the Actions guide:
@@ -119,6 +125,35 @@ make stem-object-contract
 make stem-report-contract
 ```
 
+## Citation and publishing-signal checks
+
+Citation and submitter publishing signals are handled by:
+
+```text
+scripts/stem_citation_verifier.py
+```
+
+Offline mode extracts DOI, arXiv, PMID, and URL references without network access:
+
+```bash
+python3 scripts/stem_citation_verifier.py --pretty paper.md
+```
+
+Live mode can ping public scholarly endpoints and query author-level citation signals:
+
+```bash
+python3 scripts/stem_citation_verifier.py --pretty --live --author "Jane Researcher" paper.md
+python3 scripts/stem_citation_verifier.py --pretty --live --orcid "0000-0000-0000-0000" paper.md
+```
+
+The author profile can include cited-by count, works count, h-index, i10-index, and an `author_signal_score`. This is a review aid for STEM drift and publishing context, not a claim that the submitted paper is valid or that an author identity match is final.
+
+Run the offline-safe citation verifier contract with:
+
+```bash
+make citation-check
+```
+
 ## Main outputs
 
 ```text
@@ -137,7 +172,7 @@ research/stem_presence_report.md
 make public-package
 ```
 
-The full build runs the STEM object engine, STEM presence report generation, metric contract checks, preflight checks, sanitization checks, LaTeX compilation, and PDF export.
+The full build runs the STEM object engine, STEM presence report generation, metric contract checks, citation verifier checks, preflight checks, sanitization checks, LaTeX compilation, and PDF export.
 
 ## Configuration
 
@@ -189,7 +224,7 @@ The generated-source artifact includes the living CV sources, living scan ledger
 
 ## Public safety checks
 
-The public build runs preflight checks before compiling PDFs. These checks verify that shared project and publication-status sources are wired into the CV outputs, that old hand-written project blocks have not returned, that every generated project carries a valid STEM presence object, that the STEM presence dashboard matches the object JSON, and that public and index-safe sanitization rules pass before PDF generation.
+The public build runs preflight checks before compiling PDFs. These checks verify that shared project and publication-status sources are wired into the CV outputs, that old hand-written project blocks have not returned, that every generated project carries a valid STEM presence object, that the STEM presence dashboard matches the object JSON, that citation extraction and offline author-profile contracts pass, and that public and index-safe sanitization rules pass before PDF generation.
 
 ## Repository structure
 
@@ -207,6 +242,7 @@ docs/
   STEM_CV_CURATOR.md
   STEM_CV_OBJECT_SCHEMA.md
   STEM_PRESENCE_SCORE.md
+  STEM_CITATION_VERIFICATION.md
   LIVING_CV_ACTIONS.md
 research/
   RESEARCH_STATUS.md
@@ -218,8 +254,10 @@ research/
 scripts/
   stem_cv_curator.py
   stem_presence.py
+  stem_citation_verifier.py
   write_stem_presence_report.py
   check_stem_presence.py
+  check_stem_citation_verifier.py
   check_stem_object_contract.py
   check_stem_presence_report.py
   update_living_cv.py
@@ -234,4 +272,4 @@ README.md
 
 ## Boundary
 
-The package generates public-safe CV/status source files, public-safe Markdown, repository metadata, object JSON, metric reports, and compiled public artifacts. Users should keep private claim ledgers, raw data, sensitive sources, addresses, phone numbers, and operational details outside public outputs unless they explicitly configure a private-only workflow.
+The package generates public-safe CV/status source files, public-safe Markdown, repository metadata, object JSON, metric reports, citation-verification outputs, and compiled public artifacts. Users should keep private claim ledgers, raw data, sensitive sources, addresses, phone numbers, and operational details outside public outputs unless they explicitly configure a private-only workflow.
