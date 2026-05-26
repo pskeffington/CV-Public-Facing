@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-USER_AGENT = "stem-cv-curator-citation-verifier/0.3"
+USER_AGENT = "stem-cv-curator-citation-verifier/0.4"
 OPENALEX_AUTHOR_URL = "https://api.openalex.org/authors"
 CROSSREF_WORK_URL = "https://api.crossref.org/works/"
 DEFAULT_AUTHOR_CANDIDATES = 5
@@ -91,6 +91,7 @@ class AuthorCitationProfile:
     candidate_count: int = 0
     candidates: list[AuthorCandidate] = field(default_factory=list)
     ambiguity_warning: str | None = None
+    author_match_confidence: str = "none"
     note: str | None = None
 
     def to_dict(self) -> dict[str, object]:
@@ -287,17 +288,48 @@ class AuthorCitationLookup:
                 False,
                 candidate_count=0,
                 candidates=[],
+                author_match_confidence="offline_unverified",
                 note="Run with --live for author citation counts and candidate disambiguation.",
             )
         payload = self._query_openalex(name, orcid)
         if isinstance(payload, str):
-            return AuthorCitationProfile(name, orcid, None, None, "openalex", False, note=payload)
+            return AuthorCitationProfile(
+                name,
+                orcid,
+                None,
+                None,
+                "openalex",
+                False,
+                author_match_confidence="lookup_error",
+                note=payload,
+            )
         results = payload.get("results", []) if isinstance(payload, dict) else []
         if not results:
-            return AuthorCitationProfile(name, orcid, None, None, "openalex", False, note="No OpenAlex author match found.")
+            return AuthorCitationProfile(
+                name,
+                orcid,
+                None,
+                None,
+                "openalex",
+                False,
+                author_match_confidence="no_match",
+                note="No OpenAlex author match found.",
+            )
         candidates = [self._candidate_from_author(author) for author in results if isinstance(author, dict)]
+        if not candidates:
+            return AuthorCitationProfile(
+                name,
+                orcid,
+                None,
+                None,
+                "openalex",
+                False,
+                author_match_confidence="no_match",
+                note="OpenAlex returned no usable author candidates.",
+            )
         top = candidates[0]
         ambiguity_warning = self._ambiguity_warning(name, orcid, candidates)
+        confidence = self._match_confidence(orcid, candidates)
         return AuthorCitationProfile(
             name,
             orcid,
@@ -313,6 +345,7 @@ class AuthorCitationLookup:
             candidate_count=len(candidates),
             candidates=candidates,
             ambiguity_warning=ambiguity_warning,
+            author_match_confidence=confidence,
         )
 
     def _query_openalex(self, name: str | None, orcid: str | None) -> dict[str, Any] | str:
@@ -354,6 +387,16 @@ class AuthorCitationLookup:
             return None
         top_names = ", ".join(candidate.matched_name or "unknown" for candidate in candidates[:3])
         return f"OpenAlex returned {len(candidates)} author candidates for {name or 'query'}; review identity match before using author metrics. Top candidates: {top_names}."
+
+    @staticmethod
+    def _match_confidence(orcid: str | None, candidates: list[AuthorCandidate]) -> str:
+        if orcid and candidates:
+            return "orcid_exact"
+        if len(candidates) == 1:
+            return "name_single_candidate"
+        if len(candidates) > 1:
+            return "name_multiple_candidates"
+        return "no_match"
 
     @staticmethod
     def _safe_int(value: object) -> int | None:
