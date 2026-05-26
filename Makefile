@@ -1,14 +1,18 @@
 LATEXMK = latexmk
 LATEXFLAGS = -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+PYTHON = python3
 CV_DIR = cv
 RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 
-.PHONY: all preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all living-cv preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
-preflight:
+living-cv:
+	$(PYTHON) scripts/update_living_cv.py
+
+preflight: living-cv
 	bash scripts/preflight_public_package.sh
 
 sanitize:
