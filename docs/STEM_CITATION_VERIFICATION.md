@@ -42,6 +42,8 @@ python3 scripts/stem_citation_verifier.py --pretty --live paper.md
 python3 scripts/stem_citation_verifier.py --pretty --live --author "Jane Researcher" paper.md
 python3 scripts/stem_citation_verifier.py --pretty --live --orcid "0000-0000-0000-0000" paper.md
 python3 scripts/stem_citation_verifier.py --pretty --live --author "Jane Researcher" --max-author-candidates 5 paper.md
+python3 scripts/stem_citation_verifier.py --pretty --live --allow-url-host example.org paper.md
+python3 scripts/stem_citation_verifier.py --pretty --live --block-url-host private.example paper.md
 ```
 
 Live mode can query:
@@ -51,8 +53,19 @@ Live mode can query:
 | DOI metadata and cited-by count | Crossref |
 | PMID metadata | NCBI PubMed ESummary |
 | arXiv metadata | arXiv API Atom feed |
-| URL endpoint reachability | public endpoint ping |
+| URL endpoint reachability | public endpoint ping, optionally controlled by URL policy |
 | Submitter author profile | OpenAlex |
+
+## Raw URL policy controls
+
+Raw URL pings can be constrained without disabling DOI, PMID, arXiv, or OpenAlex checks:
+
+```bash
+python3 scripts/stem_citation_verifier.py --live --allow-url-host example.org paper.md
+python3 scripts/stem_citation_verifier.py --live --block-url-host private.example paper.md
+```
+
+`--allow-url-host` restricts raw URL live pings to the listed host or its subdomains. `--block-url-host` prevents pings to the listed host or its subdomains. Both flags are repeatable. If both are supplied, the blocklist takes precedence. Policy-blocked raw URL references remain in the output but have `verified: false`, `verification_mode: live_policy_blocked`, and a `url_policy_blocked` signal.
 
 ## Per-reference provenance
 
@@ -151,7 +164,7 @@ This author-level score is a publishing-signal indicator. It should not be treat
 make citation-check
 ```
 
-The check is offline-safe. It verifies that DOI, arXiv, PMID, and URL extraction work, that every reference carries provenance and metadata fields, and that offline author-profile output remains explicitly unverified.
+The check is offline-safe. It verifies that DOI, arXiv, PMID, and URL extraction work, that every reference carries provenance and metadata fields, that raw URL policy controls behave as expected, and that offline author-profile output remains explicitly unverified.
 
 ## Integration with STEM drift
 
