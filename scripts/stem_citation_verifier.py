@@ -13,9 +13,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-USER_AGENT = "stem-cv-curator-citation-verifier/0.5"
+USER_AGENT = "stem-cv-curator-citation-verifier/0.6"
 OPENALEX_AUTHOR_URL = "https://api.openalex.org/authors"
 CROSSREF_WORK_URL = "https://api.crossref.org/works/"
+PUBMED_ESUMMARY_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
 DEFAULT_AUTHOR_CANDIDATES = 5
 
 
@@ -54,6 +55,7 @@ class CitationVerification:
     endpoint: str | None = None
     checked_at: str | None = None
     verification_mode: str = "offline"
+    metadata: dict[str, object] | None = None
 
     def to_dict(self) -> dict[str, object]:
         payload = asdict(self)
@@ -145,6 +147,8 @@ class CitationVerifier:
             return self._offline(reference)
         if reference.reference_type == "doi":
             return self._verify_doi(reference)
+        if reference.reference_type == "pmid":
+            return self._verify_pmid(reference)
         return self._verify_url_like(reference)
 
     def _offline(self, reference: CitationReference) -> CitationVerification:
@@ -161,6 +165,7 @@ class CitationVerifier:
             endpoint=None,
             checked_at=checked_at_utc(),
             verification_mode="offline",
+            metadata=None,
         )
 
     def _verify_doi(self, reference: CitationReference) -> CitationVerification:
@@ -189,6 +194,33 @@ class CitationVerifier:
             endpoint=endpoint,
             checked_at=checked_at,
             verification_mode="live",
+            metadata=None,
+        )
+
+    def _verify_pmid(self, reference: CitationReference) -> CitationVerification:
+        params = {"db": "pubmed", "id": reference.value, "retmode": "json"}
+        endpoint = PUBMED_ESUMMARY_URL + "?" + urllib.parse.urlencode(params)
+        checked_at = checked_at_utc()
+        ok, status, payload = self._request_json(endpoint)
+        metadata = self._pubmed_metadata(reference.value, payload) if ok else None
+        verified = bool(metadata)
+        signals = ["pmid_extracted"]
+        if verified:
+            signals.append("pubmed_esummary_metadata_found")
+        score = self._score_reference(reference.reference_type, verified, None)
+        return CitationVerification(
+            reference=reference,
+            verified=verified,
+            status_code=status,
+            publishing_score=score,
+            publishing_band=self._band(score),
+            citation_count=None,
+            signals=signals,
+            source="ncbi_pubmed_esummary",
+            endpoint=endpoint,
+            checked_at=checked_at,
+            verification_mode="live",
+            metadata=metadata,
         )
 
     def _verify_url_like(self, reference: CitationReference) -> CitationVerification:
@@ -211,6 +243,7 @@ class CitationVerifier:
             endpoint=endpoint,
             checked_at=checked_at,
             verification_mode="live",
+            metadata=None,
         )
 
     def _request_json(self, url: str) -> tuple[bool, int | None, Any]:
@@ -230,6 +263,47 @@ class CitationVerifier:
         except Exception as exc:
             status = getattr(exc, "code", None)
             return False, status if isinstance(status, int) else None
+
+    @staticmethod
+    def _pubmed_metadata(pmid: str, payload: Any) -> dict[str, object] | None:
+        if not isinstance(payload, dict):
+            return None
+        result = payload.get("result")
+        if not isinstance(result, dict):
+            return None
+        item = result.get(pmid)
+        if not isinstance(item, dict):
+            return None
+        authors = []
+        raw_authors = item.get("authors", [])
+        if isinstance(raw_authors, list):
+            for author in raw_authors[:10]:
+                if isinstance(author, dict) and author.get("name"):
+                    authors.append(str(author.get("name")))
+        article_ids = {}
+        raw_ids = item.get("articleids", [])
+        if isinstance(raw_ids, list):
+            for article_id in raw_ids:
+                if isinstance(article_id, dict) and article_id.get("idtype") and article_id.get("value"):
+                    article_ids[str(article_id.get("idtype"))] = str(article_id.get("value"))
+        return {
+            "pmid": pmid,
+            "title": item.get("title"),
+            "journal": item.get("fulljournalname") or item.get("source"),
+            "publication_date": item.get("pubdate"),
+            "publication_year": CitationVerifier._publication_year(item.get("pubdate")),
+            "authors": authors,
+            "doi": article_ids.get("doi"),
+            "pmcid": article_ids.get("pmc"),
+            "publication_types": item.get("pubtype", []),
+        }
+
+    @staticmethod
+    def _publication_year(pubdate: object) -> int | None:
+        if not isinstance(pubdate, str):
+            return None
+        match = re.search(r"\b(19|20)\d{2}\b", pubdate)
+        return int(match.group(0)) if match else None
 
     @staticmethod
     def _source_for_reference(reference_type: str) -> str:
