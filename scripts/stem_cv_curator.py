@@ -7,8 +7,8 @@ own active public repositories.
 
 The script is conservative by design. It scans active public repositories,
 merges optional curated overrides from data/pipeline_repos.json, reads public
-README/status surfaces, creates STEM CV objects, and renders the existing LaTeX
-input files used by the public CV package.
+README/status surfaces, creates STEM CV objects, scores STEM presence/drift,
+and renders the existing LaTeX input files used by the public CV package.
 """
 
 from __future__ import annotations
@@ -24,6 +24,8 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+from stem_presence import StemPresenceScore, StemPresenceScorer
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / "data" / "pipeline_repos.json"
@@ -99,6 +101,7 @@ class ProjectObject:
     near_term_needs: str
     source_surfaces: list[RepoSurfaceObject] = field(default_factory=list)
     keywords: list[str] = field(default_factory=list)
+    stem_presence: StemPresenceScore | None = None
     include_in_cv: bool = True
     include_in_resume: bool = False
     display_priority: int = 100
@@ -246,6 +249,19 @@ def summary_text(text: str) -> str | None:
     return None
 
 
+def surface_evidence_text(surfaces: list[RepoSurfaceObject]) -> str:
+    parts: list[str] = []
+    for surface in surfaces:
+        parts.extend([
+            surface.source_path,
+            surface.source_type,
+            surface.heading or "",
+            surface.status_line or "",
+            surface.summary_text or "",
+        ])
+    return " ".join(part for part in parts if part)
+
+
 def scan_repositories(manifest: dict[str, Any]) -> list[dict[str, Any]]:
     scan = manifest.get("scan", {})
     owner = OWNER_OVERRIDE or scan.get("owner") or "pskeffington"
@@ -318,8 +334,32 @@ def repository_object(repo: dict[str, Any], domains: list[str]) -> RepositoryObj
     )
 
 
+def build_stem_presence(
+    scorer: StemPresenceScorer,
+    repo: dict[str, Any],
+    title: str,
+    status: str,
+    section: str,
+    summary: str,
+    needs: str,
+    surfaces: list[RepoSurfaceObject],
+) -> StemPresenceScore:
+    topics = " ".join(repo.get("topics", [])) if isinstance(repo.get("topics"), list) else ""
+    return scorer.score_text(
+        str(repo.get("name", "")),
+        title,
+        topics,
+        status,
+        section,
+        summary,
+        needs,
+        surface_evidence_text(surfaces),
+    )
+
+
 def build_projects(manifest: dict[str, Any]) -> list[ProjectObject]:
     overrides = curated_map(manifest)
+    scorer = StemPresenceScorer()
     default_status = manifest.get("scan", {}).get("default_status", "Discovered active repository / intake needed")
     projects: list[ProjectObject] = []
     for repo in scan_repositories(manifest):
@@ -328,7 +368,7 @@ def build_projects(manifest: dict[str, Any]) -> list[ProjectObject]:
         override = overrides.get(full.lower())
         paths = override.get("source_files", ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]) if override else ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
         surfaces = fetch_surfaces(full, paths)
-        surface_blob = " ".join(filter(None, [s.heading or "" for s in surfaces] + [s.summary_text or "" for s in surfaces]))
+        surface_blob = surface_evidence_text(surfaces)
         domains = detect_domains(name, surface_blob)
         repo_obj = repository_object(repo, domains)
         curated = override is not None
@@ -339,6 +379,7 @@ def build_projects(manifest: dict[str, Any]) -> list[ProjectObject]:
         section = aliases.get(section, section)
         summary = override.get("summary") if override else (next((s.summary_text for s in surfaces if s.summary_text), None) or f"Public repository discovered by the STEM CV Curator for {title}; status and claim boundaries remain intake-stage until curated.")
         needs = override.get("needs") if override else "Add or refresh README/status documentation, source manifest, claim boundary, and public deliverable target."
+        stem_presence = build_stem_presence(scorer, repo, title, status, section, summary, needs, surfaces)
         projects.append(ProjectObject(
             project_id=override.get("key") if override else slugify(name),
             title=title,
@@ -349,6 +390,7 @@ def build_projects(manifest: dict[str, Any]) -> list[ProjectObject]:
             near_term_needs=needs,
             source_surfaces=surfaces,
             keywords=domains,
+            stem_presence=stem_presence,
             include_in_cv=True,
             include_in_resume=section in {"machine_learning", "biomedical_data", "methods", "public_health"},
             display_priority=int(override.get("priority", 50 if curated else 150)) if override else 150,
@@ -382,6 +424,12 @@ def tex_escape(text: str) -> str:
     return "".join(repl.get(c, c) for c in text)
 
 
+def score_label(project: ProjectObject) -> str:
+    if not project.stem_presence:
+        return "not scored"
+    return f"{project.stem_presence.score}/100 {project.stem_presence.band.replace('_', ' ')}"
+
+
 def sectioned(projects: list[ProjectObject]) -> dict[str, list[ProjectObject]]:
     grouped = {section: [] for section in SECTION_ORDER}
     for p in projects:
@@ -397,7 +445,8 @@ def write_current_projects(projects: list[ProjectObject]) -> None:
         lines += [f"\\subsection*{{{tex_escape(SECTION_LABELS[section])}}}", "\\begin{itemize}"]
         for p in entries:
             prefix = "Discovered intake: " if not p.curated else ""
-            lines.append(f"    \\item \\textbf{{{tex_escape(p.title)}:}} {tex_escape(prefix + p.public_summary)}")
+            score = f" STEM presence: {score_label(p)}."
+            lines.append(f"    \\item \\textbf{{{tex_escape(p.title)}:}} {tex_escape(prefix + p.public_summary + score)}")
         lines += ["\\end{itemize}", ""]
     lines += ["\\section*{Selected Project Outputs}", "\\begin{itemize}", "    \\item \\textbf{Machine-learning workflow:} ML lab and best-practices repositories are first-class STEM CV objects with source-aware claim gates.", "    \\item \\textbf{Recursive repository scan:} active public repositories are scanned and carried forward as curated or intake-stage objects.", "\\end{itemize}", ""]
     CV_PROJECTS_PATH.write_text("\n".join(lines), encoding="utf-8")
@@ -410,7 +459,8 @@ def write_research_board(projects: list[ProjectObject]) -> None:
             continue
         lines.append(f"\\subsection*{{{tex_escape(SECTION_LABELS[section])}}}")
         for p in entries:
-            lines.append(f"\\project{{{tex_escape(p.title)}}}{{{tex_escape(p.maturity.replace('_', ' '))}}}{{{tex_escape(p.public_summary)}}}{{{tex_escape(p.near_term_needs)}}}")
+            needs = f"{p.near_term_needs} STEM presence: {score_label(p)}."
+            lines.append(f"\\project{{{tex_escape(p.title)}}}{{{tex_escape(p.maturity.replace('_', ' '))}}}{{{tex_escape(p.public_summary)}}}{{{tex_escape(needs)}}}")
             lines.append("")
     RESEARCH_BOARD_TEX_PATH.write_text("\n".join(lines), encoding="utf-8")
 
@@ -423,8 +473,15 @@ def write_research_status(projects: list[ProjectObject]) -> None:
         lines += [f"### {SECTION_LABELS[section]}", ""]
         for p in entries:
             marker = " _(recursive-scan intake)_" if not p.curated else ""
-            lines += [f"#### {p.title} — {p.maturity.replace('_', ' ')}{marker}", "", f"**Current output:** {p.public_summary}  ", f"**Near-term needs:** {p.near_term_needs}", ""]
-    lines += ["## Immediate major needs", "", "- Keep recursive public repository scanning active inside the public CV workflow.", "- Promote discovered intake repositories into curated manifest entries as README/status surfaces mature.", "- Keep ML project claims tied to source manifests, model cards, benchmark targets, and validation gates.", ""]
+            lines += [
+                f"#### {p.title} - {p.maturity.replace('_', ' ')}{marker}",
+                "",
+                f"**Current output:** {p.public_summary}  ",
+                f"**Near-term needs:** {p.near_term_needs}  ",
+                f"**STEM presence:** {score_label(p)}",
+                "",
+            ]
+    lines += ["## Immediate major needs", "", "- Keep recursive public repository scanning active inside the public CV workflow.", "- Promote discovered intake repositories into curated manifest entries as README/status surfaces mature.", "- Keep ML project claims tied to source manifests, model cards, benchmark targets, validation gates, and STEM presence scoring.", ""]
     RESEARCH_STATUS_MD_PATH.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -437,15 +494,15 @@ def write_ledgers(projects: list[ProjectObject]) -> None:
             source_lines.append(f"| {p.title.replace('|', '/')} | `{p.repository.repo_full_name}` | `{s.source_path}` | {'yes' if s.available else 'no'} | {observed.replace('|', '/')} | {note.replace('|', '/')} |")
     SOURCE_LEDGER_PATH.write_text("\n".join(source_lines) + "\n", encoding="utf-8")
 
-    scan_lines = ["# Living CV Repository Scan", "", f"Last generated: {now_utc()}", "", f"Total active project objects: {len(projects)}", f"Curated objects: {sum(1 for p in projects if p.curated)}", f"Recursive-scan intake objects: {sum(1 for p in projects if not p.curated)}", "", "| Project | Repository | Section | Maturity | Curated |", "|---|---|---|---|---|"]
+    scan_lines = ["# Living CV Repository Scan", "", f"Last generated: {now_utc()}", "", f"Total active project objects: {len(projects)}", f"Curated objects: {sum(1 for p in projects if p.curated)}", f"Recursive-scan intake objects: {sum(1 for p in projects if not p.curated)}", "", "| Project | Repository | Section | Maturity | STEM presence | Curated |", "|---|---|---|---|---|---|"]
     for p in projects:
-        scan_lines.append(f"| {p.title.replace('|', '/')} | `{p.repository.repo_full_name}` | {p.cv_section} | {p.maturity} | {'yes' if p.curated else 'no'} |")
+        scan_lines.append(f"| {p.title.replace('|', '/')} | `{p.repository.repo_full_name}` | {p.cv_section} | {p.maturity} | {score_label(p)} | {'yes' if p.curated else 'no'} |")
     REPO_SCAN_PATH.write_text("\n".join(scan_lines) + "\n", encoding="utf-8")
 
 
 def write_objects(projects: list[ProjectObject], claims: list[ClaimObject]) -> None:
     payload = {
-        "schema": "stem-cv-curator/v0.1",
+        "schema": "stem-cv-curator/v0.2",
         "run": {"run_time": now_utc(), "trigger": TRIGGER, "scanned_repositories": len(projects), "active_project_objects": len(projects)},
         "repositories": [asdict(p.repository) for p in projects],
         "projects": [asdict(p) for p in projects],
