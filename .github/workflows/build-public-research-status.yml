@@ -13,6 +13,7 @@ on:
       - 'research/**'
       - 'data/**'
       - 'scripts/**'
+      - 'docs/**'
       - 'Makefile'
       - 'README.md'
       - 'PUBLIC_MANIFEST.md'
@@ -33,6 +34,16 @@ jobs:
     steps:
       - name: Check out public repository
         uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Check STEM presence scoring metric
+        run: |
+          set -euo pipefail
+          make stem-presence-check
 
       - name: Install LaTeX toolchain
         run: |
@@ -60,4 +71,5 @@ jobs:
             research/RESEARCH_STATUS.md
             research/generated_project_board.tex
             research/living_source_ledger.md
+            research/living_repo_scan.md
           if-no-files-found: error
