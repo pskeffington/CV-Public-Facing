@@ -53,12 +53,32 @@ Policy-blocked raw URL references remain in the raw citation payload, receive `v
 ```json
 {
   "live": false,
+  "review_configuration": {},
   "stem_presence": {},
   "publishing_signal_summary": {},
   "composite_paper_score": {},
   "citation_verification": {}
 }
 ```
+
+## Review configuration
+
+Every evaluator output records the settings that produced the review:
+
+```json
+{
+  "live": false,
+  "max_author_candidates": 5,
+  "allowed_url_hosts": [],
+  "blocked_url_hosts": [],
+  "external_services_enabled": [
+    "local_stem_presence",
+    "identifier_extractor"
+  ]
+}
+```
+
+In live mode, `external_services_enabled` can also include `crossref`, `ncbi_pubmed_esummary`, `arxiv_api`, `openalex`, and `raw_url_ping`. This block is intended to make JSON and Markdown reviews reproducible and auditable.
 
 ## Composite score fields
 
@@ -128,6 +148,15 @@ Offline mode should usually have `verified_reference_count` equal to zero becaus
 | `no_verified_author_signal` | No live author citation signal is available or the author signal score is zero. |
 | `author_match_unconfirmed` | Author identity remains unconfirmed because the match is offline, missing, errored, or unavailable. |
 
+## Markdown review output
+
+The Markdown writer uses the same evaluator and can render the configuration, scores, flags, provenance, and extracted-reference table:
+
+```bash
+python3 scripts/write_stem_paper_review.py --title "Submitted manuscript" --out review.md paper.md
+python3 scripts/write_stem_paper_review.py --live --allow-url-host example.org --out review.md paper.md
+```
+
 ## Provenance and ambiguity fields
 
 `source_provenance` records where the evaluator's publishing signal came from. Offline entries use `reference:identifier_extractor:offline`. Live DOI checks may identify Crossref-derived evidence, live PMID checks can identify NCBI PubMed ESummary, live arXiv checks can identify the arXiv API, and policy-blocked raw URL references use `live_policy_blocked`.
@@ -148,9 +177,10 @@ That matrix documents adjacent capabilities from Crossref, OpenAlex, Semantic Sc
 
 ```bash
 make paper-evaluator-check
+make paper-review-check
 ```
 
-This check is offline-safe and verifies that a manuscript-like fixture produces a credible composite paper-package score with extracted citations and a valid evaluator output contract.
+These checks are offline-safe and verify that a manuscript-like fixture produces a credible composite paper-package score, a valid evaluator output contract, and a Markdown review containing the configuration and provenance sections.
 
 ## Interpretation
 
