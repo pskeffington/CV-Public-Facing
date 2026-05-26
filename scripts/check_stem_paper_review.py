@@ -42,6 +42,7 @@ class PaperReviewCheck:
 
     REQUIRED_SECTIONS = [
         "# STEM Paper Review",
+        "## Review configuration",
         "## Composite score",
         "## STEM presence",
         "## Publishing signal",
@@ -58,6 +59,11 @@ class PaperReviewCheck:
             if section not in report:
                 errors.append(f"Missing report section: {section}")
         for token in [
+            "Live mode:",
+            "Max author candidates:",
+            "Allowed URL hosts:",
+            "Blocked URL hosts:",
+            "External services enabled:",
             "Composite score:",
             "STEM score:",
             "Reference count:",
