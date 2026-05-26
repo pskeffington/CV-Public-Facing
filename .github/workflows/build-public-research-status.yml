@@ -72,4 +72,5 @@ jobs:
             research/generated_project_board.tex
             research/living_source_ledger.md
             research/living_repo_scan.md
+            research/stem_presence_report.md
           if-no-files-found: error
