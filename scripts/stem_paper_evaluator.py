@@ -18,6 +18,11 @@ if str(SCRIPT_DIR) not in sys.path:
 from stem_citation_verifier import DEFAULT_AUTHOR_CANDIDATES, verify_text  # noqa: E402
 from stem_presence import StemPresenceScorer  # noqa: E402
 
+DEFAULT_STEM_WEIGHT = 0.75
+DEFAULT_PUBLISHING_WEIGHT = 0.25
+REFERENCE_SIGNAL_WEIGHT = 0.65
+AUTHOR_SIGNAL_WEIGHT = 0.35
+
 
 @dataclass(frozen=True)
 class ReviewConfiguration:
@@ -25,6 +30,10 @@ class ReviewConfiguration:
 
     live: bool
     max_author_candidates: int
+    composite_stem_weight: float
+    composite_publishing_weight: float
+    reference_signal_weight: float = REFERENCE_SIGNAL_WEIGHT
+    author_signal_weight: float = AUTHOR_SIGNAL_WEIGHT
     allowed_url_hosts: list[str] = field(default_factory=list)
     blocked_url_hosts: list[str] = field(default_factory=list)
     external_services_enabled: list[str] = field(default_factory=list)
@@ -72,11 +81,17 @@ class StemPaperEvaluator:
         max_author_candidates: int = DEFAULT_AUTHOR_CANDIDATES,
         allowed_url_hosts: list[str] | None = None,
         blocked_url_hosts: list[str] | None = None,
+        composite_stem_weight: float = DEFAULT_STEM_WEIGHT,
+        composite_publishing_weight: float = DEFAULT_PUBLISHING_WEIGHT,
     ) -> None:
         self.live = live
         self.max_author_candidates = max_author_candidates
         self.allowed_url_hosts = allowed_url_hosts or []
         self.blocked_url_hosts = blocked_url_hosts or []
+        self.composite_stem_weight, self.composite_publishing_weight = self._normalize_weights(
+            composite_stem_weight,
+            composite_publishing_weight,
+        )
         self.presence_scorer = StemPresenceScorer()
 
     def evaluate(self, text: str, author: str | None = None, orcid: str | None = None) -> dict[str, object]:
@@ -109,6 +124,8 @@ class StemPaperEvaluator:
         return ReviewConfiguration(
             live=self.live,
             max_author_candidates=self.max_author_candidates,
+            composite_stem_weight=self.composite_stem_weight,
+            composite_publishing_weight=self.composite_publishing_weight,
             allowed_url_hosts=sorted(set(self.allowed_url_hosts)),
             blocked_url_hosts=sorted(set(self.blocked_url_hosts)),
             external_services_enabled=services,
@@ -163,8 +180,8 @@ class StemPaperEvaluator:
         stem_drift_score: int,
         publishing: PublishingSignalSummary,
     ) -> CompositePaperScore:
-        citation_bonus = min(100, int(round(publishing.average_reference_score * 0.65 + publishing.author_signal_score * 0.35)))
-        composite_score = int(round(stem_score * 0.75 + citation_bonus * 0.25))
+        citation_bonus = min(100, int(round(publishing.average_reference_score * REFERENCE_SIGNAL_WEIGHT + publishing.author_signal_score * AUTHOR_SIGNAL_WEIGHT)))
+        composite_score = int(round(stem_score * self.composite_stem_weight + citation_bonus * self.composite_publishing_weight))
         composite_score = max(0, min(100, composite_score))
         composite_drift_score = 100 - composite_score
         band = self._band(composite_score)
@@ -174,7 +191,8 @@ class StemPaperEvaluator:
             f"STEM drift {stem_drift_score}/100, {publishing.reference_count} extracted references, "
             f"{publishing.verified_reference_count} live-verified references, author signal "
             f"{publishing.author_signal_score}/100, {publishing.author_candidate_count} author candidates, "
-            f"author match confidence {publishing.author_match_confidence}, and "
+            f"author match confidence {publishing.author_match_confidence}, "
+            f"weights STEM={self.composite_stem_weight:.2f}/publishing={self.composite_publishing_weight:.2f}, and "
             f"{publishing.policy_blocked_reference_count} policy-blocked references."
         )
         if publishing.author_ambiguity_warning:
@@ -208,6 +226,15 @@ class StemPaperEvaluator:
         if publishing.author_match_confidence in {"offline_unverified", "lookup_error", "no_match", "none"}:
             flags.append("author_match_unconfirmed")
         return flags
+
+    @staticmethod
+    def _normalize_weights(stem_weight: float, publishing_weight: float) -> tuple[float, float]:
+        stem = max(0.0, float(stem_weight))
+        publishing = max(0.0, float(publishing_weight))
+        total = stem + publishing
+        if total <= 0:
+            return DEFAULT_STEM_WEIGHT, DEFAULT_PUBLISHING_WEIGHT
+        return round(stem / total, 4), round(publishing / total, 4)
 
     @staticmethod
     def _safe_int(value: object, default: int) -> int:
@@ -249,6 +276,8 @@ def main() -> int:
     parser.add_argument("--max-author-candidates", type=int, default=DEFAULT_AUTHOR_CANDIDATES, help="Maximum OpenAlex author candidates to return in live mode.")
     parser.add_argument("--allow-url-host", action="append", default=[], help="Allow raw URL live pings only for this host or parent domain. Repeatable.")
     parser.add_argument("--block-url-host", action="append", default=[], help="Block raw URL live pings for this host or parent domain. Repeatable.")
+    parser.add_argument("--stem-weight", type=float, default=DEFAULT_STEM_WEIGHT, help="Composite weight for STEM presence before normalization.")
+    parser.add_argument("--publishing-weight", type=float, default=DEFAULT_PUBLISHING_WEIGHT, help="Composite weight for publishing signal before normalization.")
     parser.add_argument("--pretty", action="store_true", help="Pretty-print JSON output.")
     args = parser.parse_args()
     payload = StemPaperEvaluator(
@@ -256,6 +285,8 @@ def main() -> int:
         max_author_candidates=args.max_author_candidates,
         allowed_url_hosts=args.allow_url_host,
         blocked_url_hosts=args.block_url_host,
+        composite_stem_weight=args.stem_weight,
+        composite_publishing_weight=args.publishing_weight,
     ).evaluate(read_text(args.paths), author=args.author, orcid=args.orcid)
     print(json.dumps(payload, indent=2 if args.pretty else None))
     return 0
