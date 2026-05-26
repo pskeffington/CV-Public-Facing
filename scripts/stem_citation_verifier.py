@@ -9,13 +9,18 @@ import re
 import urllib.parse
 import urllib.request
 from dataclasses import asdict, dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-USER_AGENT = "stem-cv-curator-citation-verifier/0.2"
+USER_AGENT = "stem-cv-curator-citation-verifier/0.3"
 OPENALEX_AUTHOR_URL = "https://api.openalex.org/authors"
 CROSSREF_WORK_URL = "https://api.crossref.org/works/"
 DEFAULT_AUTHOR_CANDIDATES = 5
+
+
+def checked_at_utc() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
 @dataclass(frozen=True)
@@ -45,6 +50,10 @@ class CitationVerification:
     citation_count: int | None = None
     signals: list[str] = field(default_factory=list)
     note: str | None = None
+    source: str = "identifier_extractor"
+    endpoint: str | None = None
+    checked_at: str | None = None
+    verification_mode: str = "offline"
 
     def to_dict(self) -> dict[str, object]:
         payload = asdict(self)
@@ -143,10 +152,15 @@ class CitationVerifier:
             publishing_band=self._band(score),
             signals=["identifier_extracted", "live_verification_not_requested"],
             note="Run with --live to ping citation endpoints.",
+            source="identifier_extractor",
+            endpoint=None,
+            checked_at=checked_at_utc(),
+            verification_mode="offline",
         )
 
     def _verify_doi(self, reference: CitationReference) -> CitationVerification:
         endpoint = CROSSREF_WORK_URL + urllib.parse.quote(reference.value, safe="")
+        checked_at = checked_at_utc()
         ok, status, payload = self._request_json(endpoint)
         citation_count = None
         signals = ["doi_extracted"]
@@ -158,15 +172,41 @@ class CitationVerifier:
                 if citation_count is not None:
                     signals.append("crossref_cited_by_count_found")
         score = self._score_reference(reference.reference_type, ok, citation_count)
-        return CitationVerification(reference, ok, status, score, self._band(score), citation_count, signals)
+        return CitationVerification(
+            reference=reference,
+            verified=ok,
+            status_code=status,
+            publishing_score=score,
+            publishing_band=self._band(score),
+            citation_count=citation_count,
+            signals=signals,
+            source="crossref",
+            endpoint=endpoint,
+            checked_at=checked_at,
+            verification_mode="live",
+        )
 
     def _verify_url_like(self, reference: CitationReference) -> CitationVerification:
-        ok, status = self._ping(reference.canonical_url)
+        endpoint = reference.canonical_url
+        checked_at = checked_at_utc()
+        ok, status = self._ping(endpoint)
         score = self._score_reference(reference.reference_type, ok, None)
         signals = [reference.reference_type + "_extracted"]
         if ok:
             signals.append("endpoint_reachable")
-        return CitationVerification(reference, ok, status, score, self._band(score), None, signals)
+        return CitationVerification(
+            reference=reference,
+            verified=ok,
+            status_code=status,
+            publishing_score=score,
+            publishing_band=self._band(score),
+            citation_count=None,
+            signals=signals,
+            source=self._source_for_reference(reference.reference_type),
+            endpoint=endpoint,
+            checked_at=checked_at,
+            verification_mode="live",
+        )
 
     def _request_json(self, url: str) -> tuple[bool, int | None, Any]:
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
@@ -185,6 +225,14 @@ class CitationVerifier:
         except Exception as exc:
             status = getattr(exc, "code", None)
             return False, status if isinstance(status, int) else None
+
+    @staticmethod
+    def _source_for_reference(reference_type: str) -> str:
+        return {
+            "pmid": "pubmed_endpoint",
+            "arxiv": "arxiv_endpoint",
+            "url": "url_endpoint",
+        }.get(reference_type, "reference_endpoint")
 
     @staticmethod
     def _safe_int(value: object) -> int | None:
