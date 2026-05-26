@@ -50,7 +50,8 @@ Live mode can query:
 |---|---|
 | DOI metadata and cited-by count | Crossref |
 | PMID metadata | NCBI PubMed ESummary |
-| URL/arXiv endpoint reachability | public endpoint ping |
+| arXiv metadata | arXiv API Atom feed |
+| URL endpoint reachability | public endpoint ping |
 | Submitter author profile | OpenAlex |
 
 ## Per-reference provenance
@@ -67,7 +68,7 @@ Every extracted reference now carries audit provenance:
 }
 ```
 
-Live DOI checks use `source: crossref` and store the Crossref endpoint. Live PMID checks use `source: ncbi_pubmed_esummary`, store the NCBI ESummary endpoint, and populate the `metadata` object when PubMed returns a record. Offline checks still record `checked_at`, but keep `endpoint` and `metadata` as `null` and `verification_mode` as `offline`.
+Live DOI checks use `source: crossref` and store the Crossref endpoint. Live PMID checks use `source: ncbi_pubmed_esummary`, store the NCBI ESummary endpoint, and populate the `metadata` object when PubMed returns a record. Live arXiv checks use `source: arxiv_api`, store the arXiv API endpoint, and populate the same `metadata` field when arXiv returns an entry. Offline checks still record `checked_at`, but keep `endpoint` and `metadata` as `null` and `verification_mode` as `offline`.
 
 ## PubMed metadata
 
@@ -88,6 +89,28 @@ Live PMID checks can add:
 ```
 
 This enrichment is live-only and depends on NCBI ESummary responses.
+
+## arXiv metadata
+
+Live arXiv checks can add:
+
+```json
+{
+  "arxiv_id": "2101.00001v1",
+  "canonical_arxiv_id": "2101.00001",
+  "title": "...",
+  "abstract": "...",
+  "authors": ["Author A", "Author B"],
+  "categories": ["cs.LG"],
+  "primary_category": "cs.LG",
+  "published": "2021-01-01T00:00:00Z",
+  "updated": "2021-01-02T00:00:00Z",
+  "doi": null,
+  "journal_ref": null
+}
+```
+
+This enrichment is live-only and depends on the arXiv API Atom feed.
 
 ## Author citation profile
 
