@@ -29,9 +29,24 @@ Offline mode is deterministic and safe for CI. It extracts citation identifiers,
 python3 scripts/stem_paper_evaluator.py --pretty --live --author "Jane Researcher" paper.md
 python3 scripts/stem_paper_evaluator.py --pretty --live --orcid "0000-0000-0000-0000" paper.md
 python3 scripts/stem_paper_evaluator.py --pretty --live --author "Jane Researcher" --max-author-candidates 5 paper.md
+python3 scripts/stem_paper_evaluator.py --pretty --live --allow-url-host example.org paper.md
+python3 scripts/stem_paper_evaluator.py --pretty --live --block-url-host private.example paper.md
 ```
 
 Live mode can ping public citation endpoints and query author-level publishing signals. Author matching should be reviewed before being treated as identity-confirmed.
+
+## Raw URL policy controls
+
+Raw URL pings can be constrained during one-command paper review without disabling DOI, PMID, arXiv, or OpenAlex checks:
+
+```bash
+python3 scripts/stem_paper_evaluator.py --pretty --live --allow-url-host example.org paper.md
+python3 scripts/write_stem_paper_review.py --live --allow-url-host example.org --out review.md paper.md
+```
+
+`--allow-url-host` restricts raw URL live pings to the listed host or its subdomains. `--block-url-host` prevents raw URL pings to the listed host or its subdomains. Both flags are repeatable. If both are supplied, the blocklist takes precedence.
+
+Policy-blocked raw URL references remain in the raw citation payload, receive `verification_mode: live_policy_blocked`, and increment `policy_blocked_reference_count` in the publishing summary.
 
 ## Output object
 
@@ -90,9 +105,11 @@ The evaluator includes:
   "i10_index": null,
   "author_candidate_count": 0,
   "author_ambiguity_warning": null,
+  "author_match_confidence": "offline_unverified",
+  "policy_blocked_reference_count": 0,
   "source_provenance": [
-    "reference:doi_extracted_offline",
-    "reference:pmid_extracted_offline"
+    "reference:identifier_extractor:offline",
+    "author_profile:openalex:offline_unverified"
   ]
 }
 ```
@@ -106,14 +123,16 @@ Offline mode should usually have `verified_reference_count` equal to zero becaus
 | `high_stem_drift` | The STEM drift score is high enough to require closer review. |
 | `no_references_extracted` | No DOI, arXiv, PMID, or URL references were extracted. |
 | `references_not_live_verified` | References were extracted but not live-verified. This is expected in offline CI. |
+| `reference_url_policy_blocked` | At least one raw URL reference was blocked by allowlist/blocklist policy. |
 | `author_identity_ambiguous` | A live author-name lookup returned multiple candidates or an ambiguity warning. |
 | `no_verified_author_signal` | No live author citation signal is available or the author signal score is zero. |
+| `author_match_unconfirmed` | Author identity remains unconfirmed because the match is offline, missing, errored, or unavailable. |
 
 ## Provenance and ambiguity fields
 
-`source_provenance` records where the evaluator's publishing signal came from. Offline entries use explicit suffixes such as `_extracted_offline`. Live DOI checks may identify Crossref-derived evidence, while live PMID, arXiv, and URL checks record endpoint reachability.
+`source_provenance` records where the evaluator's publishing signal came from. Offline entries use `reference:identifier_extractor:offline`. Live DOI checks may identify Crossref-derived evidence, live PMID checks can identify NCBI PubMed ESummary, live arXiv checks can identify the arXiv API, and policy-blocked raw URL references use `live_policy_blocked`.
 
-`author_candidate_count` and `author_ambiguity_warning` summarize OpenAlex author disambiguation. Name-based lookup can return several plausible candidates. ORCID-based lookup is preferred when available.
+`author_candidate_count`, `author_ambiguity_warning`, and `author_match_confidence` summarize OpenAlex author disambiguation. Name-based lookup can return several plausible candidates. ORCID-based lookup is preferred when available.
 
 ## Related systems matrix
 
