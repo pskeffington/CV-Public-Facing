@@ -1,12 +1,32 @@
 {
-  "generated_on_note": "Generated CV objects are rebuilt from a recursive public-repository scan plus curated overrides below.",
+  "generated_on_note": "Generated CV objects are rebuilt from a recursive public-repository scan plus curated overrides below. Public-release blocking is enforced before generated outputs are written.",
   "scan": {
     "owner": "pskeffington",
     "include_public_repos": true,
     "include_private_repos": false,
     "exclude_repos": [
       "CV-Public-Facing",
-      "CV"
+      "CV",
+      "Ai-Abuse-Intelligence-Lab",
+      "AI-Abuse-Intelligence-Lab",
+      "Authentication-Audit-Compiler",
+      "from_land",
+      "From-Land",
+      "Trans-Latin",
+      "trans",
+      "fides-supra",
+      "imperium"
+    ],
+    "blocked_repos": [
+      "Ai-Abuse-Intelligence-Lab",
+      "AI-Abuse-Intelligence-Lab",
+      "Authentication-Audit-Compiler",
+      "from_land",
+      "From-Land",
+      "Trans-Latin",
+      "trans",
+      "fides-supra",
+      "imperium"
     ],
     "default_status": "Discovered active repository / intake needed",
     "default_section": "intake"
@@ -20,6 +40,7 @@
       "summary": "NLSY79 manuscript workspace with fixed-effects, count-model, survival-analysis, LaTeX, and table-audit workflows.",
       "needs": "Track journal correspondence; preserve reviewer-response planning; maintain model-table and citation-audit parity.",
       "cv_section": "current",
+      "public_release": "public",
       "source_files": ["README.md", "PROJECT_STATUS.md", "REPRODUCIBILITY.md"]
     },
     {
@@ -30,6 +51,7 @@
       "summary": "Reusable machine-learning manuscript workflow for responsible, reproducible, and transparent query-to-publication research practice.",
       "needs": "Expand modular review gates, source-registry templates, citation-verification templates, and lightweight structure tests.",
       "cv_section": "methods",
+      "public_release": "public",
       "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
     },
     {
@@ -40,6 +62,7 @@
       "summary": "Public machine-learning methods workspace for experimental modeling, reproducible workflows, and applied ML project development.",
       "needs": "Add source manifest, model-card template, benchmark target, validation checks, and public-safe results boundary.",
       "cv_section": "methods",
+      "public_release": "public",
       "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
     },
     {
@@ -50,6 +73,7 @@
       "summary": "McDowell County GIS and decision-support workflow for terrain/access scoring, stream-aware wastewater indices, stakeholder planning, and source-validation tracking.",
       "needs": "Official water-quality confirmation; utility/source-holder records; final variable-confidence ledger.",
       "cv_section": "current",
+      "public_release": "public",
       "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
     },
     {
@@ -60,6 +84,7 @@
       "summary": "Gaza WASH rapid assessment framework using public humanitarian, WASH, displacement, environmental-health, and geospatial sources.",
       "needs": "Dated source manifest; limitations section; separation of indexed inputs from interpretive claims.",
       "cv_section": "current",
+      "public_release": "public",
       "source_files": ["README.md", "CHANGELOG.md", "docs/data_inventory.md"]
     },
     {
@@ -70,6 +95,7 @@
       "summary": "Public repository for regional public-health, infrastructure, and humanitarian assessment work.",
       "needs": "Complete source manifest, project boundary, claim controls, and intended public output.",
       "cv_section": "intake",
+      "public_release": "public",
       "source_files": ["README.md", "PROJECT_STATUS.md"]
     },
     {
@@ -77,9 +103,11 @@
       "repo": "pskeffington/cipher-topology-lab",
       "title": "Computational diagnostics and cipher topology",
       "status": "Active scaffold",
-      "summary": "Cipher-topology lab using persistent-homology features as auxiliary diagnostics for structured or biased cipher-output controls.",
-      "needs": "Freeze corpus; document null/control design; add notebooks; define contribution boundary.",
+      "summary": "Blocked from public CV reporting. Kept only as a manifest-level release-control record.",
+      "needs": "Keep out of public generated outputs unless separately cleared.",
       "cv_section": "current",
+      "public_release": "blocked",
+      "release_reason": "security_sensitive_methods",
       "source_files": ["README.md", "PROJECT_STATUS.md"]
     },
     {
@@ -87,9 +115,11 @@
       "repo": "pskeffington/identity-abuse-lab-",
       "title": "Identity-abuse and misuse-risk evaluation",
       "status": "Intake-stage public repository",
-      "summary": "Public repository for identity-abuse, misuse-risk, or safety-evaluation methods.",
-      "needs": "Define public-safe threat model, evidence boundary, and executable validation target.",
+      "summary": "Blocked from public CV reporting. Kept only as a manifest-level release-control record.",
+      "needs": "Keep out of public generated outputs unless separately cleared.",
       "cv_section": "intake",
+      "public_release": "blocked",
+      "release_reason": "abuse_or_misuse_risk_surface",
       "source_files": ["README.md", "PROJECT_STATUS.md"]
     },
     {
@@ -100,6 +130,7 @@
       "summary": "ECG denoising and signal-quality direction aligned with open medical data and reproducible benchmark design.",
       "needs": "Select dataset; define noise classes; benchmark methods; create results table.",
       "cv_section": "methods",
+      "public_release": "public",
       "source_files": ["README.md", "PROJECT_STATUS.md"]
     },
     {
@@ -110,6 +141,7 @@
       "summary": "Biomedical imaging scaffold focused on simulated PET noise, lesion segmentation, and radiomics feature stability.",
       "needs": "Select public PET/CT dataset; define perturbation protocol; separate exploratory claims from validated results.",
       "cv_section": "methods",
+      "public_release": "public",
       "source_files": ["README.md", "docs/analysis_plan.md", "docs/data_sources.md"]
     },
     {
@@ -120,6 +152,7 @@
       "summary": "Open-data scaffold aligned to place-of-death, cancer care, and end-of-life quality variation.",
       "needs": "Identify dataset; define typology outcome; map variables; avoid unsupported causal framing.",
       "cv_section": "methods",
+      "public_release": "public",
       "source_files": ["README.md", "PROJECT_STATUS.md"]
     },
     {
@@ -130,6 +163,7 @@
       "summary": "Public-facing report and preparedness repositories for emergency-response, practicum, and public-health evidence packaging.",
       "needs": "Add source manifests, project boundaries, and public-safe deliverable targets.",
       "cv_section": "intake",
+      "public_release": "public",
       "source_files": ["README.md", "docs/source_catalog.md"]
     },
     {
@@ -140,6 +174,7 @@
       "summary": "Public practicum-report repository supporting applied public-health writing, evidence packaging, and report-oriented deliverables.",
       "needs": "Confirm public-safe source boundaries, update report status, and link outputs into the CV research board.",
       "cv_section": "intake",
+      "public_release": "public",
       "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
     },
     {
@@ -150,6 +185,7 @@
       "summary": "St. Bonaventure reliquary section mapping, visible-label transcription, entity modeling, crop tooling, and provenance controls.",
       "needs": "Complete section index; distinguish devotional tradition from verified history; add uncertainty flags.",
       "cv_section": "archive",
+      "public_release": "public",
       "source_files": ["README.md", "PROJECT_STATUS.md"]
     }
   ]
