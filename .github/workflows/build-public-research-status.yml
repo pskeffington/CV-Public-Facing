@@ -2,6 +2,19 @@ name: Build Public CV Package
 
 on:
   workflow_dispatch:
+    inputs:
+      job_object:
+        description: 'Public-safe job object to package'
+        required: true
+        default: 'neutral'
+        type: choice
+        options:
+          - neutral
+          - harvard-chan-director-data-analytics
+          - indeed-data-scientist-iii
+          - rockland-trust-data-architect
+          - navsea-sstm-data-science
+          - valo-health-staff-data-scientist
   repository_dispatch:
     types:
       - living-cv-source-updated
@@ -23,7 +36,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: public-cv-package-${{ github.ref }}
+  group: public-cv-package-${{ github.ref }}-${{ inputs.job_object || 'neutral' }}
   cancel-in-progress: true
 
 jobs:
@@ -50,22 +63,31 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended lmodern
 
-      - name: Build public CV package from living repo surfaces
+      - name: Build public CV package from selected job object
+        env:
+          JOB_OBJECT: ${{ inputs.job_object || 'neutral' }}
         run: |
           set -euo pipefail
-          make public-package
+          make job-cv-package JOB_OBJECT="$JOB_OBJECT"
 
       - name: Upload public CV package artifact
         uses: actions/upload-artifact@v4
         with:
-          name: public-cv-package
+          name: public-cv-package-${{ inputs.job_object || 'neutral' }}
           path: documents/*.pdf
+          if-no-files-found: error
+
+      - name: Upload selected job CV package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: selected-job-cv-package-${{ inputs.job_object || 'neutral' }}
+          path: dist/job_cv_packages/**
           if-no-files-found: error
 
       - name: Upload generated living CV sources
         uses: actions/upload-artifact@v4
         with:
-          name: generated-living-cv-sources
+          name: generated-living-cv-sources-${{ inputs.job_object || 'neutral' }}
           path: |
             cv/current_projects_public.tex
             research/RESEARCH_STATUS.md
