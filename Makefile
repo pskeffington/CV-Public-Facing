@@ -6,24 +6,27 @@ RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 JOB_OBJECT ?= neutral
 
-.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check job-cv-object-check citation-check doi-normalization-check reference-metadata-parser-check url-policy-check paper-evaluator-check paper-review-check stem-object-contract stem-report-contract preflight sanitize public-package job-cv-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check job-cv-object-check safety-surface-check citation-check doi-normalization-check reference-metadata-parser-check url-policy-check paper-evaluator-check paper-review-check stem-object-contract stem-report-contract preflight sanitize public-package job-cv-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
-stem-cv:
+stem-cv: safety-surface-check
 	$(PYTHON) scripts/stem_cv_curator.py
 
-stem-presence-report: stem-cv
+stem-presence-report: stem-cv safety-surface-check
 	$(PYTHON) scripts/write_stem_presence_report.py
 
-living-cv: stem-presence-report
+living-cv: stem-presence-report safety-surface-check
 
 stem-presence-check:
-	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py scripts/check_doi_normalization.py scripts/check_reference_metadata_parsers.py scripts/check_url_policy.py scripts/stem_paper_evaluator.py scripts/check_stem_paper_evaluator.py scripts/check_stem_paper_evaluator_contract.py scripts/write_stem_paper_review.py scripts/check_stem_paper_review.py scripts/build_job_cv_package.py scripts/check_job_cv_objects.py
+	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py scripts/check_doi_normalization.py scripts/check_reference_metadata_parsers.py scripts/check_url_policy.py scripts/stem_paper_evaluator.py scripts/check_stem_paper_evaluator.py scripts/check_stem_paper_evaluator_contract.py scripts/write_stem_paper_review.py scripts/check_stem_paper_review.py scripts/build_job_cv_package.py scripts/check_job_cv_objects.py scripts/public_release_guard.py scripts/check_public_release_guard.py
 	$(PYTHON) scripts/check_stem_presence.py
 
 job-cv-object-check:
 	$(PYTHON) scripts/check_job_cv_objects.py
+
+safety-surface-check:
+	$(PYTHON) scripts/check_public_release_guard.py
 
 doi-normalization-check:
 	$(PYTHON) scripts/check_doi_normalization.py
@@ -44,22 +47,24 @@ paper-evaluator-check:
 paper-review-check:
 	$(PYTHON) scripts/check_stem_paper_review.py
 
-stem-object-contract: living-cv stem-presence-check job-cv-object-check citation-check paper-evaluator-check paper-review-check
+stem-object-contract: living-cv stem-presence-check job-cv-object-check safety-surface-check citation-check paper-evaluator-check paper-review-check
 	$(PYTHON) scripts/check_stem_object_contract.py
 
-stem-report-contract: stem-object-contract
+stem-report-contract: stem-object-contract safety-surface-check
 	$(PYTHON) scripts/check_stem_presence_report.py
 
-preflight: stem-report-contract
+preflight: stem-report-contract safety-surface-check
 	bash scripts/preflight_public_package.sh
 
-sanitize:
+sanitize: safety-surface-check
 	bash scripts/check_public_sanitization.sh
 
-public-package: preflight academic-cv one-page-profile public-upload-cv research-status
+public-package: safety-surface-check preflight academic-cv one-page-profile public-upload-cv research-status
+	$(PYTHON) scripts/check_public_release_guard.py
 
-job-cv-package: public-package job-cv-object-check
+job-cv-package: public-package job-cv-object-check safety-surface-check
 	$(PYTHON) scripts/build_job_cv_package.py $(JOB_OBJECT)
+	$(PYTHON) scripts/check_public_release_guard.py
 
 academic-cv:
 	mkdir -p $(DOCUMENTS_DIR)
