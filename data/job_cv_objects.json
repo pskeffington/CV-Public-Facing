@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "Public-safe job object registry for GitHub Actions CV package builds. These objects are safe rendering hints only; they do not import private job packets or private evidence.",
+  "default_job_object": "neutral",
+  "job_objects": {
+    "neutral": {
+      "label": "Neutral public CV package",
+      "output_slug": "neutral",
+      "role_family": "general public-facing CV",
+      "profile_emphasis": "Public-health, applied-economics, health-data-science, reproducible research, and public-service trajectory.",
+      "public_safe_focus": [
+        "academic CV",
+        "one-page profile",
+        "index-safe public upload CV",
+        "research status"
+      ],
+      "tailoring_notes": "Use the standard public package without role-specific reframing.",
+      "exclusions": [
+        "private source text",
+        "private job packet language",
+        "sensitive operational details",
+        "unverified claims"
+      ]
+    },
+    "harvard-chan-director-data-analytics": {
+      "label": "Harvard Chan - Director of Data and Analytics",
+      "output_slug": "harvard_chan_director_data_analytics",
+      "role_family": "public-health research data leadership",
+      "profile_emphasis": "Longitudinal analytics, public-health research data, reproducible documentation, manuscript support, and public-use data readiness.",
+      "public_safe_focus": [
+        "longitudinal data analysis",
+        "public health and applied economics",
+        "R and Python analytic workflows",
+        "source-ledger and claim-boundary discipline",
+        "manuscript and report development"
+      ],
+      "tailoring_notes": "Emphasize research-data judgment and public-health analytics. Keep AI and scanner language secondary and support-oriented.",
+      "exclusions": [
+        "direct HAALSI experience",
+        "direct NIH budget authority",
+        "IRB approval authority",
+        "SAS or Stata production ownership unless separately verified",
+        "skill-scan credentialing"
+      ]
+    },
+    "indeed-data-scientist-iii": {
+      "label": "Indeed - Data Scientist III",
+      "output_slug": "indeed_data_scientist_iii",
+      "role_family": "commercial data science and applied analytics",
+      "profile_emphasis": "Applied quantitative reasoning, reproducible analytics, evidence review, and careful translation of data into decision-ready outputs.",
+      "public_safe_focus": [
+        "R and Python analytics",
+        "applied economics",
+        "research-data workflows",
+        "model and table documentation",
+        "public-safe technical communication"
+      ],
+      "tailoring_notes": "Emphasize applied analytics and evidence discipline. Avoid implying direct ownership of large-scale commercial product experimentation unless separately verified.",
+      "exclusions": [
+        "unsupported product analytics ownership",
+        "enterprise platform ownership",
+        "unverified experimentation authority"
+      ]
+    },
+    "rockland-trust-data-architect": {
+      "label": "Rockland Trust - Data Architect",
+      "output_slug": "rockland_trust_data_architect",
+      "role_family": "data architecture and governance",
+      "profile_emphasis": "Structured documentation, data governance, source control, audit discipline, and careful systems thinking.",
+      "public_safe_focus": [
+        "data workflow organization",
+        "documentation and governance",
+        "source-ledger discipline",
+        "public-safe information handling",
+        "technical systems administration"
+      ],
+      "tailoring_notes": "Emphasize governance, documentation, and systems reasoning. Keep architecture claims bounded to evidenced workflow and data-system design.",
+      "exclusions": [
+        "enterprise architecture ownership without proof",
+        "regulated banking authority unless verified",
+        "unsupported security claims"
+      ]
+    },
+    "navsea-sstm-data-science": {
+      "label": "NAVSEA - SSTM Data Science",
+      "output_slug": "navsea_sstm_data_science",
+      "role_family": "defense-adjacent data science and analytical engineering",
+      "profile_emphasis": "Public service, mission-data discipline, analytical documentation, reproducible methods, and careful evidence handling.",
+      "public_safe_focus": [
+        "public-service trajectory",
+        "technical documentation",
+        "analytical engineering support",
+        "mission-data discipline",
+        "reproducible research workflows"
+      ],
+      "tailoring_notes": "Use conservative historical service language and avoid sensitive operational detail.",
+      "exclusions": [
+        "active clearance claims unless verified",
+        "sensitive mission specifics",
+        "operationally sensitive systems or locations",
+        "unsupported federal status"
+      ]
+    },
+    "valo-health-staff-data-scientist": {
+      "label": "Valo Health - Staff Data Scientist",
+      "output_slug": "valo_health_staff_data_scientist",
+      "role_family": "health data science and epidemiology-adjacent ML",
+      "profile_emphasis": "Health data science, public-health methods, reproducible analytics, model-evaluation literacy, and careful evidence translation.",
+      "public_safe_focus": [
+        "health data science",
+        "public-health research methods",
+        "machine-learning evaluation literacy",
+        "R and Python workflows",
+        "responsible evidence translation"
+      ],
+      "tailoring_notes": "Emphasize health-data and evaluation judgment. Keep ML ownership claims bounded where production deployment evidence is not public.",
+      "exclusions": [
+        "unsupported production ML platform ownership",
+        "clinical trial authority unless verified",
+        "private health data handling claims without source support"
+      ]
+    }
+  }
+}
