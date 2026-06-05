@@ -4,8 +4,9 @@ PYTHON = python3
 CV_DIR = cv
 RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
+JOB_OBJECT ?= neutral
 
-.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check citation-check doi-normalization-check reference-metadata-parser-check url-policy-check paper-evaluator-check paper-review-check stem-object-contract stem-report-contract preflight sanitize public-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check citation-check doi-normalization-check reference-metadata-parser-check url-policy-check paper-evaluator-check paper-review-check stem-object-contract stem-report-contract preflight sanitize public-package job-cv-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
@@ -18,7 +19,7 @@ stem-presence-report: stem-cv
 living-cv: stem-presence-report
 
 stem-presence-check:
-	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py scripts/check_doi_normalization.py scripts/check_reference_metadata_parsers.py scripts/check_url_policy.py scripts/stem_paper_evaluator.py scripts/check_stem_paper_evaluator.py scripts/check_stem_paper_evaluator_contract.py scripts/write_stem_paper_review.py scripts/check_stem_paper_review.py
+	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py scripts/check_doi_normalization.py scripts/check_reference_metadata_parsers.py scripts/check_url_policy.py scripts/stem_paper_evaluator.py scripts/check_stem_paper_evaluator.py scripts/check_stem_paper_evaluator_contract.py scripts/write_stem_paper_review.py scripts/check_stem_paper_review.py scripts/build_job_cv_package.py
 	$(PYTHON) scripts/check_stem_presence.py
 
 doi-normalization-check:
@@ -54,6 +55,9 @@ sanitize:
 
 public-package: preflight academic-cv one-page-profile public-upload-cv research-status
 
+job-cv-package: public-package
+	$(PYTHON) scripts/build_job_cv_package.py $(JOB_OBJECT)
+
 academic-cv:
 	mkdir -p $(DOCUMENTS_DIR)
 	cd $(CV_DIR) && $(LATEXMK) $(LATEXFLAGS) academic_cv_public.tex
@@ -83,3 +87,4 @@ clean:
 	rm -f $(DOCUMENTS_DIR)/Paul_A_Skeffington_One_Page_Profile_Public.pdf
 	rm -f $(DOCUMENTS_DIR)/Index_Safe_Public_Upload_CV.pdf
 	rm -f $(DOCUMENTS_DIR)/Paul_A_Skeffington_Research_Status_Public.pdf
+	rm -rf dist/job_cv_packages
