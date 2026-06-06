@@ -62,7 +62,7 @@ SECTION_LABELS = {
     "intake": "Discovered Repository Intake",
 }
 
-BLOCKED_PUBLIC_RELEASE_VALUES = {"blocked", "deny", "private", "restricted", "internal_only", "high_sec"}
+BLOCKED_PUBLIC_RELEASE_VALUES = {"blocked", "deny", "private", "restricted", "internal_only"}
 
 
 @dataclass
@@ -319,16 +319,7 @@ def is_repo_blocked(repo: dict[str, Any], manifest: dict[str, Any], override: di
 
 def basic_repo_from_manifest(repo_full_name: str) -> dict[str, Any]:
     owner, _, name = repo_full_name.partition("/")
-    return {
-        "name": name or repo_full_name,
-        "full_name": repo_full_name,
-        "owner": {"login": owner or "unknown"},
-        "html_url": f"https://github.com/{repo_full_name}",
-        "private": False,
-        "archived": False,
-        "default_branch": "main",
-        "topics": [],
-    }
+    return {"name": name or repo_full_name, "full_name": repo_full_name, "owner": {"login": owner or "unknown"}, "html_url": f"https://github.com/{repo_full_name}", "private": False, "archived": False, "default_branch": "main", "topics": []}
 
 
 def fetch_repo_metadata(repo_full_name: str) -> dict[str, Any]:
