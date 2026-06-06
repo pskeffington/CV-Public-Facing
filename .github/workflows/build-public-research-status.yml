@@ -53,7 +53,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Check STEM presence scoring metric
+      - name: Check internal scoring tools
         run: |
           set -euo pipefail
           make stem-presence-check
@@ -84,15 +84,14 @@ jobs:
           path: dist/job_cv_packages/**
           if-no-files-found: error
 
-      - name: Upload generated living CV sources
+      - name: Upload public render sources
         uses: actions/upload-artifact@v4
         with:
-          name: generated-living-cv-sources-${{ inputs.job_object || 'neutral' }}
+          name: public-render-sources-${{ inputs.job_object || 'neutral' }}
           path: |
             cv/current_projects_public.tex
+            cv/skill_scan_report_public.tex
             research/RESEARCH_STATUS.md
             research/generated_project_board.tex
             research/living_source_ledger.md
-            research/living_repo_scan.md
-            research/stem_presence_report.md
           if-no-files-found: error
