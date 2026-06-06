@@ -1,32 +1,35 @@
 {
-  "generated_on_note": "Generated CV objects are rebuilt from a recursive public-repository scan plus curated overrides below. Public-release blocking is enforced before generated outputs are written.",
+  "generated_on_note": "Generated CV objects are rebuilt from the public allowlist below plus optional recursive public-repository scanning only when explicitly enabled. Public-release filtering is enforced before generated outputs are written.",
   "scan": {
     "owner": "pskeffington",
     "include_public_repos": true,
     "include_private_repos": false,
+    "allow_recursive_intake": false,
     "exclude_repos": [
       "CV-Public-Facing",
-      "CV",
-      "Ai-Abuse-Intelligence-Lab",
-      "AI-Abuse-Intelligence-Lab",
-      "Authentication-Audit-Compiler",
-      "from_land",
-      "From-Land",
-      "Trans-Latin",
-      "trans",
-      "fides-supra",
-      "imperium"
+      "CV"
     ],
-    "blocked_repos": [
-      "Ai-Abuse-Intelligence-Lab",
-      "AI-Abuse-Intelligence-Lab",
-      "Authentication-Audit-Compiler",
-      "from_land",
-      "From-Land",
-      "Trans-Latin",
-      "trans",
-      "fides-supra",
-      "imperium"
+    "blocked_repo_hashes": [
+      "61bf1598863c4f9fadf23990885511f2cb02f503a8f53774a6aa2de41d7db608",
+      "76c4bfe8a912b35346d0674a3b328bbaadf2e152b8c487cee5ed32d0a32a1a0a",
+      "80911fe328695d69adba40d907635f8386d8b044aec754aff5dc46ccedb9e434",
+      "9d862c78a9f761a623f887b3cbc170acebf7bccd2fa966ea97e8517ba0ff5666",
+      "910fdc82cc0fcb56475d505bdf2e8e751e991aef9955415458a08d1f93b53fdb",
+      "9fdcac5b0492aa0018eae7ce12709436bcaaa91828834f4f443f0ea00c1f76a3",
+      "1d0fcb9f0f0e59f68ade03de93dcd6d42dc10a21b5c75785b171cce9f86f431f",
+      "4adfc73d2b6e8828e8f0d9f72a58b5973cafaac2f83ddafcd7702b85de36fcaa",
+      "f0cd78400824449e4c3f78d3151a5cbbf2436b90e7145a1ad6b99be44fd945f5",
+      "52b706aa89590b9e6dc5a922f04c4a13998599a142ee4bb54c0c94fd67f59b14",
+      "ed8459fdd9fe655ebca3bd4e225a0e35f7f337c298495115a836c44b5341a91f",
+      "cbd31fe312a05a4718b4d67151a8c4052c9aa091f4012fbf5a77ba5da8df41ef",
+      "04b1c5cc58cf9af78177f383d3476d70137163f923656857ab1d0921f0ae7722",
+      "cd25c925ef0d19bdccd26130a2f7585f10805ca062ae258c0400dd519945c9a2",
+      "636de81efb7bc85b86cd288bb0a6a27387c34cedfbe44f120a5362c67fd1b74b",
+      "5aabe6e0fc76d252fa6cf1ddbbe79298da4914af6b576d46d140c616abdcd878",
+      "fad3d8d96effaba53af7df7ef09e352a4f467d3665be67ad0d1b80949df336ac",
+      "9164bd6e6af49aa5660208d5a10cd1c680f940b64b9a27982c99c341a3d2fdff",
+      "e119b1fe347086ea64d5e112a5ab15b7a20351ade81f3e4dbc3157161cc083a8",
+      "8408456c750915fdac32c38ce9df7396a27dad2f7a9ae2dcc972b2f8a8a12526"
     ],
     "default_status": "Discovered active repository / intake needed",
     "default_section": "intake"
@@ -96,30 +99,6 @@
       "needs": "Complete source manifest, project boundary, claim controls, and intended public output.",
       "cv_section": "intake",
       "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md"]
-    },
-    {
-      "key": "cipher-topology",
-      "repo": "pskeffington/cipher-topology-lab",
-      "title": "Computational diagnostics and cipher topology",
-      "status": "Active scaffold",
-      "summary": "Blocked from public CV reporting. Kept only as a manifest-level release-control record.",
-      "needs": "Keep out of public generated outputs unless separately cleared.",
-      "cv_section": "current",
-      "public_release": "blocked",
-      "release_reason": "security_sensitive_methods",
-      "source_files": ["README.md", "PROJECT_STATUS.md"]
-    },
-    {
-      "key": "identity-abuse-lab",
-      "repo": "pskeffington/identity-abuse-lab-",
-      "title": "Identity-abuse and misuse-risk evaluation",
-      "status": "Intake-stage public repository",
-      "summary": "Blocked from public CV reporting. Kept only as a manifest-level release-control record.",
-      "needs": "Keep out of public generated outputs unless separately cleared.",
-      "cv_section": "intake",
-      "public_release": "blocked",
-      "release_reason": "abuse_or_misuse_risk_surface",
       "source_files": ["README.md", "PROJECT_STATUS.md"]
     },
     {
