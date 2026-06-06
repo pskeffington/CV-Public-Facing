@@ -19,7 +19,9 @@ private CV claim controls
   -> application/job package alignment
 ```
 
-The public project register is now an allowlist by default. The renderer reads `data/pipeline_repos.json`, applies public-release checks, generates LaTeX/Markdown source objects, and compiles PDFs. Recursive public repository intake is disabled unless explicitly reviewed and enabled.
+The public project register is an allowlist by default. The renderer reads `data/pipeline_repos.json`, applies public-release checks, generates LaTeX/Markdown source objects, and compiles PDFs. Recursive public repository intake is disabled unless explicitly reviewed and enabled.
+
+Internal scoring remains a build-review aid only. It does not belong in final public PDFs. The public research-status report ends with a skill-scan appendix that summarizes market-ready skill demonstrations and separates developing skills into a training-stage section.
 
 ## Build outputs
 
@@ -30,6 +32,18 @@ documents/Paul_A_Skeffington_Academic_CV_Public.pdf
 documents/Paul_A_Skeffington_One_Page_Profile_Public.pdf
 documents/Index_Safe_Public_Upload_CV.pdf
 documents/Paul_A_Skeffington_Research_Status_Public.pdf
+```
+
+The skill-scan appendix source is:
+
+```text
+cv/skill_scan_report_public.tex
+```
+
+It is included at the bottom of:
+
+```text
+research/research_status.tex
 ```
 
 Selected job-package outputs are written under:
@@ -90,7 +104,7 @@ Public outputs may include only projects that satisfy all of the following:
 - generated rendered sources pass the public-release guard;
 - generated object contracts confirm no non-public project entered the public project list.
 
-Internal scores and review metrics may remain in generated object JSON or internal ledgers, but they should not render into public PDFs.
+Internal scores and review metrics may remain in generated object JSON or internal ledgers, but they should not render into public PDFs. Public skill evidence should be presented only as a skill-scan appendix with mature skills listed as market-ready and developing skills listed as training-stage.
 
 ## Start here
 
