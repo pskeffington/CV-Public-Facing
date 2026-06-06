@@ -3,16 +3,16 @@
 
 A user can clone this repository, set STEM_CV_OWNER to their GitHub username,
 and run `make public-package` to generate a living CV object layer from their
-own active public repositories.
+own public-safe repository surfaces.
 
-The script is conservative by design. It scans active public repositories,
-merges optional curated overrides from data/pipeline_repos.json, reads public
-README/status surfaces, creates STEM CV objects, scores STEM presence/drift,
-and renders the existing LaTeX input files used by the public CV package.
+The script is conservative by design. It now treats data/pipeline_repos.json as
+the public allowlist unless recursive intake is explicitly enabled. Blocked or
+restricted entries are filtered before scoring, ledgers, and rendered outputs.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -57,7 +57,7 @@ SECTION_LABELS = {
     "machine_learning": "Machine Learning and Reproducible Research Tools",
     "public_health": "Public Health, Infrastructure, and Environmental Evidence",
     "biomedical_data": "Biomedical Data and Signal/Imaging Methods",
-    "methods": "Computational Methods and Safety Evaluation",
+    "methods": "Computational Methods and Validation",
     "archive_history": "Archive and Public-History Indexing",
     "intake": "Discovered Repository Intake",
 }
@@ -115,11 +115,10 @@ class ProjectObject:
 
 @dataclass
 class BlockedProjectRecord:
-    project_id: str
-    repo_full_name: str
+    record_id: str
     public_release: str
     release_reason: str
-    curated: bool
+    source: str
 
 
 @dataclass
@@ -179,12 +178,16 @@ def slugify(text: str) -> str:
     return re.sub(r"[^a-zA-Z0-9]+", "-", text.strip().lower()).strip("-") or "object"
 
 
-def repo_key(value: str) -> str:
+def normalize_repo(value: str) -> str:
     return value.strip().lower()
 
 
-def repo_name_key(value: str) -> str:
-    return repo_key(value.split("/")[-1])
+def repo_name(value: str) -> str:
+    return normalize_repo(value).split("/")[-1]
+
+
+def hash_value(value: str) -> str:
+    return hashlib.sha256(normalize_repo(value).encode("utf-8")).hexdigest()
 
 
 def title_from_repo(name: str) -> str:
@@ -193,14 +196,14 @@ def title_from_repo(name: str) -> str:
     return " ".join(acronyms.get(p.lower(), p.capitalize()) for p in parts) or name
 
 
-def detect_domains(repo_name: str, text: str) -> list[str]:
-    haystack = f"{repo_name} {text}".lower()
+def detect_domains(repo_name_text: str, text: str) -> list[str]:
+    haystack = f"{repo_name_text} {text}".lower()
     rules = [
         ("machine_learning", ["ml", "machine learning", "model-card", "benchmark", "best practices", "classifier", "regression", "neural"]),
         ("public_health", ["health", "wash", "water", "mcdowell", "haiti", "practicum", "emergency", "preparedness"]),
         ("biomedical_data", ["ecg", "pet", "radiomics", "cancer", "signal", "imaging", "clinical"]),
-        ("methods", ["cipher", "topology", "identity", "abuse", "safety", "risk", "evaluation"]),
-        ("archive_history", ["archive", "bonaventure", "hebrew", "reliquary", "trans"]),
+        ("methods", ["topology", "method", "risk", "evaluation", "validation"]),
+        ("archive_history", ["archive", "bonaventure", "hebrew", "reliquary"]),
         ("publications", ["family", "economic", "nlsy", "manuscript", "publication"]),
     ]
     domains = [domain for domain, tokens in rules if any(token in haystack for token in tokens)]
@@ -274,13 +277,7 @@ def summary_text(text: str) -> str | None:
 def surface_evidence_text(surfaces: list[RepoSurfaceObject]) -> str:
     parts: list[str] = []
     for surface in surfaces:
-        parts.extend([
-            surface.source_path,
-            surface.source_type,
-            surface.heading or "",
-            surface.status_line or "",
-            surface.summary_text or "",
-        ])
+        parts.extend([surface.source_path, surface.source_type, surface.heading or "", surface.status_line or "", surface.summary_text or ""])
     return " ".join(part for part in parts if part)
 
 
@@ -297,32 +294,67 @@ def release_reason_value(override: dict[str, Any] | None) -> str | None:
     return reason or None
 
 
-def blocked_repo_names(manifest: dict[str, Any]) -> set[str]:
+def blocked_hashes(manifest: dict[str, Any]) -> set[str]:
     scan = manifest.get("scan", {})
-    explicit = {repo_key(str(item)) for item in scan.get("blocked_repos", [])}
-    explicit |= {repo_name_key(str(item)) for item in scan.get("blocked_repos", [])}
+    hashes = {normalize_repo(str(item)) for item in scan.get("blocked_repo_hashes", [])}
     for item in manifest.get("repos", []):
         if str(item.get("public_release", "public")).strip().lower() in BLOCKED_PUBLIC_RELEASE_VALUES:
-            explicit.add(repo_key(str(item.get("repo", ""))))
-            explicit.add(repo_name_key(str(item.get("repo", ""))))
-    return {item for item in explicit if item}
+            repo = str(item.get("repo", ""))
+            hashes.add(hash_value(repo))
+            hashes.add(hash_value(repo_name(repo)))
+    return {item for item in hashes if item}
+
+
+def is_repo_hash_blocked(full_name: str, manifest: dict[str, Any]) -> bool:
+    blocked = blocked_hashes(manifest)
+    return hash_value(full_name) in blocked or hash_value(repo_name(full_name)) in blocked
 
 
 def is_repo_blocked(repo: dict[str, Any], manifest: dict[str, Any], override: dict[str, Any] | None) -> bool:
     if public_release_value(override) in BLOCKED_PUBLIC_RELEASE_VALUES:
         return True
-    blocked = blocked_repo_names(manifest)
-    full = repo_key(str(repo.get("full_name", "")))
-    name = repo_name_key(str(repo.get("name", "")))
-    return full in blocked or name in blocked
+    full = str(repo.get("full_name", repo.get("name", "")))
+    return is_repo_hash_blocked(full, manifest)
 
 
-def scan_repositories(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+def basic_repo_from_manifest(repo_full_name: str) -> dict[str, Any]:
+    owner, _, name = repo_full_name.partition("/")
+    return {
+        "name": name or repo_full_name,
+        "full_name": repo_full_name,
+        "owner": {"login": owner or "unknown"},
+        "html_url": f"https://github.com/{repo_full_name}",
+        "private": False,
+        "archived": False,
+        "default_branch": "main",
+        "topics": [],
+    }
+
+
+def fetch_repo_metadata(repo_full_name: str) -> dict[str, Any]:
+    ok, payload = request_json(f"https://api.github.com/repos/{urllib.parse.quote(repo_full_name, safe='/')}")
+    if ok and isinstance(payload, dict):
+        return payload
+    return basic_repo_from_manifest(repo_full_name)
+
+
+def scan_allowlist_repositories(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    repos: list[dict[str, Any]] = []
+    for item in manifest.get("repos", []):
+        if str(item.get("public_release", "public")).strip().lower() in BLOCKED_PUBLIC_RELEASE_VALUES:
+            continue
+        repo_full_name = str(item.get("repo", "")).strip()
+        if not repo_full_name or is_repo_hash_blocked(repo_full_name, manifest):
+            continue
+        repos.append(fetch_repo_metadata(repo_full_name))
+    return repos
+
+
+def scan_recursive_repositories(manifest: dict[str, Any]) -> list[dict[str, Any]]:
     scan = manifest.get("scan", {})
     owner = OWNER_OVERRIDE or scan.get("owner") or "pskeffington"
     include_private = INCLUDE_PRIVATE or bool(scan.get("include_private_repos", False))
-    excluded = {str(x).lower() for x in scan.get("exclude_repos", ["CV", "CV-Public-Facing"])}
-    excluded |= blocked_repo_names(manifest)
+    excluded = {normalize_repo(str(x)) for x in scan.get("exclude_repos", ["CV", "CV-Public-Facing"])}
     repos: list[dict[str, Any]] = []
     page = 1
     if include_private and TOKEN:
@@ -336,7 +368,9 @@ def scan_repositories(manifest: dict[str, Any]) -> list[dict[str, Any]]:
         for repo in payload:
             name = str(repo.get("name", ""))
             full = str(repo.get("full_name", name))
-            if not name or name.lower() in excluded or full.lower() in excluded:
+            if not name or normalize_repo(name) in excluded or normalize_repo(full) in excluded:
+                continue
+            if is_repo_hash_blocked(full, manifest):
                 continue
             if repo.get("archived"):
                 continue
@@ -349,8 +383,15 @@ def scan_repositories(manifest: dict[str, Any]) -> list[dict[str, Any]]:
     return repos
 
 
+def scan_repositories(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    scan = manifest.get("scan", {})
+    if not bool(scan.get("allow_recursive_intake", False)):
+        return scan_allowlist_repositories(manifest)
+    return scan_recursive_repositories(manifest)
+
+
 def curated_map(manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    return {str(item.get("repo", "")).lower(): item for item in manifest.get("repos", [])}
+    return {normalize_repo(str(item.get("repo", ""))): item for item in manifest.get("repos", [])}
 
 
 def fetch_surfaces(repo_full_name: str, paths: list[str]) -> list[RepoSurfaceObject]:
@@ -358,17 +399,7 @@ def fetch_surfaces(repo_full_name: str, paths: list[str]) -> list[RepoSurfaceObj
     for path in paths:
         url = f"https://api.github.com/repos/{repo_full_name}/contents/{urllib.parse.quote(path)}?ref=main"
         ok, text = request_raw(url)
-        out.append(RepoSurfaceObject(
-            repo_full_name=repo_full_name,
-            source_path=path,
-            source_type=source_type(path),
-            available=ok,
-            heading=first_heading(text) if ok else None,
-            status_line=status_line(text) if ok else None,
-            summary_text=summary_text(text) if ok else None,
-            retrieval_time=now_utc(),
-            note=None if ok else text,
-        ))
+        out.append(RepoSurfaceObject(repo_full_name=repo_full_name, source_path=path, source_type=source_type(path), available=ok, heading=first_heading(text) if ok else None, status_line=status_line(text) if ok else None, summary_text=summary_text(text) if ok else None, retrieval_time=now_utc(), note=None if ok else text))
     return out
 
 
@@ -376,57 +407,18 @@ def repository_object(repo: dict[str, Any], domains: list[str]) -> RepositoryObj
     name = str(repo.get("name", ""))
     full = str(repo.get("full_name", name))
     owner = str(repo.get("owner", {}).get("login", full.split("/")[0]))
-    return RepositoryObject(
-        repo_full_name=full,
-        repo_name=name,
-        owner=owner,
-        url=str(repo.get("html_url", f"https://github.com/{full}")),
-        visibility="private" if repo.get("private") else "public",
-        default_branch=str(repo.get("default_branch", "main")),
-        archived=bool(repo.get("archived", False)),
-        active_status="active",
-        last_observed_at=now_utc(),
-        topics=list(repo.get("topics", [])) if isinstance(repo.get("topics"), list) else [],
-        detected_domains=domains,
-    )
+    return RepositoryObject(repo_full_name=full, repo_name=name, owner=owner, url=str(repo.get("html_url", f"https://github.com/{full}")), visibility="private" if repo.get("private") else "public", default_branch=str(repo.get("default_branch", "main")), archived=bool(repo.get("archived", False)), active_status="active", last_observed_at=now_utc(), topics=list(repo.get("topics", [])) if isinstance(repo.get("topics"), list) else [], detected_domains=domains)
 
 
-def build_stem_presence(
-    scorer: StemPresenceScorer,
-    repo: dict[str, Any],
-    title: str,
-    status: str,
-    section: str,
-    summary: str,
-    needs: str,
-    surfaces: list[RepoSurfaceObject],
-) -> StemPresenceScore:
+def build_stem_presence(scorer: StemPresenceScorer, repo: dict[str, Any], title: str, status: str, section: str, summary: str, needs: str, surfaces: list[RepoSurfaceObject]) -> StemPresenceScore:
     topics = " ".join(repo.get("topics", [])) if isinstance(repo.get("topics"), list) else ""
-    return scorer.score_text(
-        str(repo.get("name", "")),
-        title,
-        topics,
-        status,
-        section,
-        summary,
-        needs,
-        surface_evidence_text(surfaces),
-    )
+    return scorer.score_text(str(repo.get("name", "")), title, topics, status, section, summary, needs, surface_evidence_text(surfaces))
 
 
 def build_blocked_records(manifest: dict[str, Any]) -> list[BlockedProjectRecord]:
     records: list[BlockedProjectRecord] = []
-    for item in manifest.get("repos", []):
-        release = str(item.get("public_release", "public")).strip().lower()
-        if release not in BLOCKED_PUBLIC_RELEASE_VALUES:
-            continue
-        records.append(BlockedProjectRecord(
-            project_id=str(item.get("key") or slugify(str(item.get("repo", "blocked-object")))),
-            repo_full_name=str(item.get("repo", "")),
-            public_release=release,
-            release_reason=str(item.get("release_reason", "blocked_from_public_outputs")),
-            curated=True,
-        ))
+    for digest in sorted(blocked_hashes(manifest)):
+        records.append(BlockedProjectRecord(record_id=digest[:12], public_release="blocked", release_reason="release_control", source="hash_registry"))
     return records
 
 
@@ -438,7 +430,7 @@ def build_projects(manifest: dict[str, Any]) -> list[ProjectObject]:
     for repo in scan_repositories(manifest):
         full = str(repo.get("full_name", ""))
         name = str(repo.get("name", ""))
-        override = overrides.get(full.lower())
+        override = overrides.get(normalize_repo(full))
         if is_repo_blocked(repo, manifest, override):
             continue
         paths = override.get("source_files", ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]) if override else ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
@@ -455,24 +447,7 @@ def build_projects(manifest: dict[str, Any]) -> list[ProjectObject]:
         summary = override.get("summary") if override else (next((s.summary_text for s in surfaces if s.summary_text), None) or f"Public repository discovered by the STEM CV Curator for {title}; status and claim boundaries remain intake-stage until curated.")
         needs = override.get("needs") if override else "Add or refresh README/status documentation, source manifest, claim boundary, and public deliverable target."
         stem_presence = build_stem_presence(scorer, repo, title, status, section, summary, needs, surfaces)
-        projects.append(ProjectObject(
-            project_id=override.get("key") if override else slugify(name),
-            title=title,
-            repository=repo_obj,
-            maturity=maturity_from_status(status, curated),
-            cv_section=section,
-            public_summary=summary,
-            near_term_needs=needs,
-            source_surfaces=surfaces,
-            keywords=domains,
-            stem_presence=stem_presence,
-            include_in_cv=True,
-            include_in_resume=section in {"machine_learning", "biomedical_data", "methods", "public_health"},
-            display_priority=int(override.get("priority", 50 if curated else 150)) if override else 150,
-            curated=curated,
-            public_release=public_release_value(override),
-            release_reason=release_reason_value(override),
-        ))
+        projects.append(ProjectObject(project_id=override.get("key") if override else slugify(name), title=title, repository=repo_obj, maturity=maturity_from_status(status, curated), cv_section=section, public_summary=summary, near_term_needs=needs, source_surfaces=surfaces, keywords=domains, stem_presence=stem_presence, include_in_cv=True, include_in_resume=section in {"machine_learning", "biomedical_data", "methods", "public_health"}, display_priority=int(override.get("priority", 50 if curated else 150)) if override else 150, curated=curated, public_release=public_release_value(override), release_reason=release_reason_value(override)))
     rank = {section: i for i, section in enumerate(SECTION_ORDER)}
     projects.sort(key=lambda p: (rank.get(p.cv_section, 99), p.display_priority, p.title.lower()))
     return projects
@@ -482,17 +457,7 @@ def build_claims(projects: list[ProjectObject]) -> list[ClaimObject]:
     claims: list[ClaimObject] = []
     for p in projects:
         evidence = [s.source_path for s in p.source_surfaces if s.available]
-        claims.append(ClaimObject(
-            claim_id=f"claim-{p.project_id}",
-            project_id=p.project_id,
-            claim_text=p.public_summary,
-            claim_strength="source_supported" if evidence else "repo_supported",
-            evidence_paths=evidence,
-            public_safe=True,
-            cv_allowed=True,
-            resume_allowed=p.include_in_resume,
-            needs_review=not p.curated,
-        ))
+        claims.append(ClaimObject(claim_id=f"claim-{p.project_id}", project_id=p.project_id, claim_text=p.public_summary, claim_strength="source_supported" if evidence else "repo_supported", evidence_paths=evidence, public_safe=True, cv_allowed=True, resume_allowed=p.include_in_resume, needs_review=not p.curated))
     return claims
 
 
@@ -525,7 +490,7 @@ def write_current_projects(projects: list[ProjectObject]) -> None:
             score = f" STEM presence: {score_label(p)}."
             lines.append(f"    \\item \\textbf{{{tex_escape(p.title)}:}} {tex_escape(prefix + p.public_summary + score)}")
         lines += ["\\end{itemize}", ""]
-    lines += ["\\section*{Selected Project Outputs}", "\\begin{itemize}", "    \\item \\textbf{Machine-learning workflow:} ML lab and best-practices repositories are first-class STEM CV objects with source-aware claim gates.", "    \\item \\textbf{Recursive repository scan:} active public repositories are scanned and carried forward as curated or intake-stage objects after public-release filtering.", "\\end{itemize}", ""]
+    lines += ["\\section*{Selected Project Outputs}", "\\begin{itemize}", "    \\item \\textbf{Machine-learning workflow:} ML lab and best-practices repositories are first-class STEM CV objects with source-aware claim gates.", "    \\item \\textbf{Public-release filtering:} project records are carried forward only after allowlist and release-control checks.", "\\end{itemize}", ""]
     CV_PROJECTS_PATH.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -550,15 +515,8 @@ def write_research_status(projects: list[ProjectObject]) -> None:
         lines += [f"### {SECTION_LABELS[section]}", ""]
         for p in entries:
             marker = " _(recursive-scan intake)_" if not p.curated else ""
-            lines += [
-                f"#### {p.title} - {p.maturity.replace('_', ' ')}{marker}",
-                "",
-                f"**Current output:** {p.public_summary}  ",
-                f"**Near-term needs:** {p.near_term_needs}  ",
-                f"**STEM presence:** {score_label(p)}",
-                "",
-            ]
-    lines += ["## Immediate major needs", "", "- Keep recursive public repository scanning active inside the public CV workflow.", "- Promote discovered intake repositories into curated manifest entries only after public-release review.", "- Keep ML project claims tied to source manifests, model cards, benchmark targets, validation gates, and STEM presence scoring.", "- Keep blocked or restricted project families out of all public CV, source-ledger, and research-status outputs.", ""]
+            lines += [f"#### {p.title} - {p.maturity.replace('_', ' ')}{marker}", "", f"**Current output:** {p.public_summary}  ", f"**Near-term needs:** {p.near_term_needs}  ", f"**STEM presence:** {score_label(p)}", ""]
+    lines += ["## Immediate major needs", "", "- Keep public repository intake disabled unless a public-release review approves recursive discovery.", "- Promote discovered intake repositories into curated manifest entries only after public-release review.", "- Keep ML project claims tied to source manifests, model cards, benchmark targets, validation gates, and STEM presence scoring.", "- Keep restricted project families out of all public CV, source-ledger, and research-status outputs.", ""]
     RESEARCH_STATUS_MD_PATH.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -576,33 +534,14 @@ def write_ledgers(projects: list[ProjectObject], blocked_records: list[BlockedPr
         scan_lines.append(f"| {p.title.replace('|', '/')} | `{p.repository.repo_full_name}` | {p.cv_section} | {p.maturity} | {score_label(p)} | {'yes' if p.curated else 'no'} |")
     REPO_SCAN_PATH.write_text("\n".join(scan_lines) + "\n", encoding="utf-8")
 
-    blocked_lines = ["# Blocked Release Ledger", "", f"Last generated: {now_utc()}", "", "This ledger records counts and non-sensitive identifiers for manifest entries excluded from public CV outputs.", "", "| Record | Release state | Reason | Curated |", "|---|---|---|---|"]
+    blocked_lines = ["# Blocked Release Ledger", "", f"Last generated: {now_utc()}", "", "This ledger records non-sensitive hash-prefix identifiers for records excluded from public CV outputs.", "", "| Record | Release state | Reason | Source |", "|---|---|---|---|"]
     for record in blocked_records:
-        blocked_lines.append(f"| `{record.project_id}` | {record.public_release} | {record.release_reason} | {'yes' if record.curated else 'no'} |")
+        blocked_lines.append(f"| `{record.record_id}` | {record.public_release} | {record.release_reason} | {record.source} |")
     BLOCKED_RELEASE_LEDGER_PATH.write_text("\n".join(blocked_lines) + "\n", encoding="utf-8")
 
 
 def write_objects(projects: list[ProjectObject], claims: list[ClaimObject], blocked_records: list[BlockedProjectRecord]) -> None:
-    payload = {
-        "schema": "stem-cv-curator/v0.3",
-        "run": {
-            "run_time": now_utc(),
-            "trigger": TRIGGER,
-            "scanned_repositories": len(projects),
-            "active_project_objects": len(projects),
-            "blocked_release_records": len(blocked_records),
-        },
-        "repositories": [asdict(p.repository) for p in projects],
-        "projects": [asdict(p) for p in projects],
-        "blocked_release_records": [asdict(record) for record in blocked_records],
-        "claims": [asdict(c) for c in claims],
-        "sections": [{"section_id": s, "title": SECTION_LABELS[s], "projects": [p.project_id for p in projects if p.cv_section == s]} for s in SECTION_ORDER if any(p.cv_section == s for p in projects)],
-        "render_targets": [
-            {"target_id": "academic_cv_public", "output_type": "academic_cv", "included_sections": SECTION_ORDER},
-            {"target_id": "one_page_profile_public", "output_type": "one_page_profile", "included_sections": ["machine_learning", "public_health", "biomedical_data", "methods"], "max_pages": 1},
-            {"target_id": "research_status_public", "output_type": "research_status", "included_sections": SECTION_ORDER},
-        ],
-    }
+    payload = {"schema": "stem-cv-curator/v0.3", "run": {"run_time": now_utc(), "trigger": TRIGGER, "scanned_repositories": len(projects), "active_project_objects": len(projects), "blocked_release_records": len(blocked_records)}, "repositories": [asdict(p.repository) for p in projects], "projects": [asdict(p) for p in projects], "blocked_release_records": [asdict(record) for record in blocked_records], "claims": [asdict(c) for c in claims], "sections": [{"section_id": s, "title": SECTION_LABELS[s], "projects": [p.project_id for p in projects if p.cv_section == s]} for s in SECTION_ORDER if any(p.cv_section == s for p in projects)], "render_targets": [{"target_id": "academic_cv_public", "output_type": "academic_cv", "included_sections": SECTION_ORDER}, {"target_id": "one_page_profile_public", "output_type": "one_page_profile", "included_sections": ["machine_learning", "public_health", "biomedical_data", "methods"], "max_pages": 1}, {"target_id": "research_status_public", "output_type": "research_status", "included_sections": SECTION_ORDER}]}
     OBJECTS_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 
