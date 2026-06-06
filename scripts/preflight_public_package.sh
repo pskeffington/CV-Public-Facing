@@ -59,6 +59,7 @@ require_file "research/research_status.tex"
 require_file "research/RESEARCH_STATUS.md"
 require_file "scripts/check_public_sanitization.sh"
 require_file "scripts/check_index_safe_upload.sh"
+require_file "scripts/check_public_release_guard.py"
 
 # Shared source must drive full CV outputs.
 require_contains "cv/academic_cv_public.tex" "\\input{current_projects_public}"
@@ -73,15 +74,17 @@ require_contains "cv/one_page_profile_public.tex" "Currently submitted / under p
 require_contains "cv/one_page_profile_public.tex" "Active manuscript preparation"
 require_contains "cv/one_page_profile_public.tex" "Validation-gated before submission"
 
-# Full project register must be populated in the shared source and Markdown board.
+# Full project register must be populated with public-allowlist entries only.
 for project in \
   "Life-course data, family economics, and fertility" \
   "Rural water, wastewater, and infrastructure health risk" \
   "Humanitarian WASH and health-system disruption" \
-  "Computational diagnostics and cipher topology" \
+  "Haiti Nippes public-health and infrastructure assessment" \
   "Medical-signal noise reduction" \
   "PET noise and radiomics robustness" \
   "Cancer end-of-life typologies" \
+  "Public-health emergency preparedness and practicum reporting" \
+  "Public-health practicum report" \
   "Catholic archive and public-history indexing"; do
   require_contains "cv/current_projects_public.tex" "${project}"
   require_contains "research/RESEARCH_STATUS.md" "${project}"
@@ -99,7 +102,8 @@ done
 # Old hand-written four-project block must not return in document sources.
 require_absent_in_sources "Research Interests and Current Projects"
 
-# Existing sanitizers remain part of preflight.
+# Existing sanitizers and release guard remain part of preflight.
+python3 scripts/check_public_release_guard.py
 bash scripts/check_public_sanitization.sh
 bash scripts/check_index_safe_upload.sh cv/public_upload_cv.tex
 
