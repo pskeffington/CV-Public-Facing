@@ -35,6 +35,7 @@ RESEARCH_BOARD_TEX_PATH = ROOT / "research" / "generated_project_board.tex"
 RESEARCH_STATUS_MD_PATH = ROOT / "research" / "RESEARCH_STATUS.md"
 SOURCE_LEDGER_PATH = ROOT / "research" / "living_source_ledger.md"
 REPO_SCAN_PATH = ROOT / "research" / "living_repo_scan.md"
+BLOCKED_RELEASE_LEDGER_PATH = ROOT / "research" / "blocked_release_ledger.md"
 
 TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
 OWNER_OVERRIDE = os.environ.get("STEM_CV_OWNER")
@@ -60,6 +61,8 @@ SECTION_LABELS = {
     "archive_history": "Archive and Public-History Indexing",
     "intake": "Discovered Repository Intake",
 }
+
+BLOCKED_PUBLIC_RELEASE_VALUES = {"blocked", "deny", "private", "restricted", "internal_only", "high_sec"}
 
 
 @dataclass
@@ -106,6 +109,17 @@ class ProjectObject:
     include_in_resume: bool = False
     display_priority: int = 100
     curated: bool = False
+    public_release: str = "public"
+    release_reason: str | None = None
+
+
+@dataclass
+class BlockedProjectRecord:
+    project_id: str
+    repo_full_name: str
+    public_release: str
+    release_reason: str
+    curated: bool
 
 
 @dataclass
@@ -165,8 +179,16 @@ def slugify(text: str) -> str:
     return re.sub(r"[^a-zA-Z0-9]+", "-", text.strip().lower()).strip("-") or "object"
 
 
+def repo_key(value: str) -> str:
+    return value.strip().lower()
+
+
+def repo_name_key(value: str) -> str:
+    return repo_key(value.split("/")[-1])
+
+
 def title_from_repo(name: str) -> str:
-    parts = [p for p in re.split(r"[-_.\s]+", name.strip("-_.")) if p]
+    parts = [p for p in re.split(r"[-_.\s]+", name.strip("-_ .")) if p]
     acronyms = {"cv": "CV", "ml": "ML", "ecg": "ECG", "pet": "PET", "wash": "WASH", "gis": "GIS", "nlsy": "NLSY"}
     return " ".join(acronyms.get(p.lower(), p.capitalize()) for p in parts) or name
 
@@ -262,11 +284,45 @@ def surface_evidence_text(surfaces: list[RepoSurfaceObject]) -> str:
     return " ".join(part for part in parts if part)
 
 
+def public_release_value(override: dict[str, Any] | None) -> str:
+    if not override:
+        return "public"
+    return str(override.get("public_release", "public")).strip().lower()
+
+
+def release_reason_value(override: dict[str, Any] | None) -> str | None:
+    if not override:
+        return None
+    reason = str(override.get("release_reason", "")).strip()
+    return reason or None
+
+
+def blocked_repo_names(manifest: dict[str, Any]) -> set[str]:
+    scan = manifest.get("scan", {})
+    explicit = {repo_key(str(item)) for item in scan.get("blocked_repos", [])}
+    explicit |= {repo_name_key(str(item)) for item in scan.get("blocked_repos", [])}
+    for item in manifest.get("repos", []):
+        if str(item.get("public_release", "public")).strip().lower() in BLOCKED_PUBLIC_RELEASE_VALUES:
+            explicit.add(repo_key(str(item.get("repo", ""))))
+            explicit.add(repo_name_key(str(item.get("repo", ""))))
+    return {item for item in explicit if item}
+
+
+def is_repo_blocked(repo: dict[str, Any], manifest: dict[str, Any], override: dict[str, Any] | None) -> bool:
+    if public_release_value(override) in BLOCKED_PUBLIC_RELEASE_VALUES:
+        return True
+    blocked = blocked_repo_names(manifest)
+    full = repo_key(str(repo.get("full_name", "")))
+    name = repo_name_key(str(repo.get("name", "")))
+    return full in blocked or name in blocked
+
+
 def scan_repositories(manifest: dict[str, Any]) -> list[dict[str, Any]]:
     scan = manifest.get("scan", {})
     owner = OWNER_OVERRIDE or scan.get("owner") or "pskeffington"
     include_private = INCLUDE_PRIVATE or bool(scan.get("include_private_repos", False))
     excluded = {str(x).lower() for x in scan.get("exclude_repos", ["CV", "CV-Public-Facing"])}
+    excluded |= blocked_repo_names(manifest)
     repos: list[dict[str, Any]] = []
     page = 1
     if include_private and TOKEN:
@@ -279,7 +335,8 @@ def scan_repositories(manifest: dict[str, Any]) -> list[dict[str, Any]]:
             break
         for repo in payload:
             name = str(repo.get("name", ""))
-            if not name or name.lower() in excluded:
+            full = str(repo.get("full_name", name))
+            if not name or name.lower() in excluded or full.lower() in excluded:
                 continue
             if repo.get("archived"):
                 continue
@@ -357,6 +414,22 @@ def build_stem_presence(
     )
 
 
+def build_blocked_records(manifest: dict[str, Any]) -> list[BlockedProjectRecord]:
+    records: list[BlockedProjectRecord] = []
+    for item in manifest.get("repos", []):
+        release = str(item.get("public_release", "public")).strip().lower()
+        if release not in BLOCKED_PUBLIC_RELEASE_VALUES:
+            continue
+        records.append(BlockedProjectRecord(
+            project_id=str(item.get("key") or slugify(str(item.get("repo", "blocked-object")))),
+            repo_full_name=str(item.get("repo", "")),
+            public_release=release,
+            release_reason=str(item.get("release_reason", "blocked_from_public_outputs")),
+            curated=True,
+        ))
+    return records
+
+
 def build_projects(manifest: dict[str, Any]) -> list[ProjectObject]:
     overrides = curated_map(manifest)
     scorer = StemPresenceScorer()
@@ -366,6 +439,8 @@ def build_projects(manifest: dict[str, Any]) -> list[ProjectObject]:
         full = str(repo.get("full_name", ""))
         name = str(repo.get("name", ""))
         override = overrides.get(full.lower())
+        if is_repo_blocked(repo, manifest, override):
+            continue
         paths = override.get("source_files", ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]) if override else ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
         surfaces = fetch_surfaces(full, paths)
         surface_blob = surface_evidence_text(surfaces)
@@ -395,6 +470,8 @@ def build_projects(manifest: dict[str, Any]) -> list[ProjectObject]:
             include_in_resume=section in {"machine_learning", "biomedical_data", "methods", "public_health"},
             display_priority=int(override.get("priority", 50 if curated else 150)) if override else 150,
             curated=curated,
+            public_release=public_release_value(override),
+            release_reason=release_reason_value(override),
         ))
     rank = {section: i for i, section in enumerate(SECTION_ORDER)}
     projects.sort(key=lambda p: (rank.get(p.cv_section, 99), p.display_priority, p.title.lower()))
@@ -448,12 +525,12 @@ def write_current_projects(projects: list[ProjectObject]) -> None:
             score = f" STEM presence: {score_label(p)}."
             lines.append(f"    \\item \\textbf{{{tex_escape(p.title)}:}} {tex_escape(prefix + p.public_summary + score)}")
         lines += ["\\end{itemize}", ""]
-    lines += ["\\section*{Selected Project Outputs}", "\\begin{itemize}", "    \\item \\textbf{Machine-learning workflow:} ML lab and best-practices repositories are first-class STEM CV objects with source-aware claim gates.", "    \\item \\textbf{Recursive repository scan:} active public repositories are scanned and carried forward as curated or intake-stage objects.", "\\end{itemize}", ""]
+    lines += ["\\section*{Selected Project Outputs}", "\\begin{itemize}", "    \\item \\textbf{Machine-learning workflow:} ML lab and best-practices repositories are first-class STEM CV objects with source-aware claim gates.", "    \\item \\textbf{Recursive repository scan:} active public repositories are scanned and carried forward as curated or intake-stage objects after public-release filtering.", "\\end{itemize}", ""]
     CV_PROJECTS_PATH.write_text("\n".join(lines), encoding="utf-8")
 
 
 def write_research_board(projects: list[ProjectObject]) -> None:
-    lines = ["% Auto-generated by scripts/stem_cv_curator.py.", "\\section*{Research Storyboard}", "This portfolio is organized around careful, reproducible use of public-health, infrastructure, environmental, administrative, longitudinal, biomedical, machine-learning, safety-evaluation, and public-history data.", "", "\\section*{Current Project Board}"]
+    lines = ["% Auto-generated by scripts/stem_cv_curator.py.", "\\section*{Research Storyboard}", "This portfolio is organized around careful, reproducible use of public-health, infrastructure, environmental, administrative, longitudinal, biomedical, machine-learning, and public-history data after public-release filtering.", "", "\\section*{Current Project Board}"]
     for section, entries in sectioned(projects).items():
         if not entries:
             continue
@@ -466,7 +543,7 @@ def write_research_board(projects: list[ProjectObject]) -> None:
 
 
 def write_research_status(projects: list[ProjectObject]) -> None:
-    lines = ["# Research Status", "", "Public-facing overview generated by the STEM CV Curator object engine.", "", "## Current project board", ""]
+    lines = ["# Research Status", "", "Public-facing overview generated by the STEM CV Curator object engine after public-release filtering.", "", "## Current project board", ""]
     for section, entries in sectioned(projects).items():
         if not entries:
             continue
@@ -481,11 +558,11 @@ def write_research_status(projects: list[ProjectObject]) -> None:
                 f"**STEM presence:** {score_label(p)}",
                 "",
             ]
-    lines += ["## Immediate major needs", "", "- Keep recursive public repository scanning active inside the public CV workflow.", "- Promote discovered intake repositories into curated manifest entries as README/status surfaces mature.", "- Keep ML project claims tied to source manifests, model cards, benchmark targets, validation gates, and STEM presence scoring.", ""]
+    lines += ["## Immediate major needs", "", "- Keep recursive public repository scanning active inside the public CV workflow.", "- Promote discovered intake repositories into curated manifest entries only after public-release review.", "- Keep ML project claims tied to source manifests, model cards, benchmark targets, validation gates, and STEM presence scoring.", "- Keep blocked or restricted project families out of all public CV, source-ledger, and research-status outputs.", ""]
     RESEARCH_STATUS_MD_PATH.write_text("\n".join(lines), encoding="utf-8")
 
 
-def write_ledgers(projects: list[ProjectObject]) -> None:
+def write_ledgers(projects: list[ProjectObject], blocked_records: list[BlockedProjectRecord]) -> None:
     source_lines = ["# Living CV Source Ledger", "", f"Last generated: {now_utc()}", "", "| Project | Repository | Source file | Available | Heading/status observed | Note |", "|---|---|---|---|---|---|"]
     for p in projects:
         for s in p.source_surfaces:
@@ -494,18 +571,30 @@ def write_ledgers(projects: list[ProjectObject]) -> None:
             source_lines.append(f"| {p.title.replace('|', '/')} | `{p.repository.repo_full_name}` | `{s.source_path}` | {'yes' if s.available else 'no'} | {observed.replace('|', '/')} | {note.replace('|', '/')} |")
     SOURCE_LEDGER_PATH.write_text("\n".join(source_lines) + "\n", encoding="utf-8")
 
-    scan_lines = ["# Living CV Repository Scan", "", f"Last generated: {now_utc()}", "", f"Total active project objects: {len(projects)}", f"Curated objects: {sum(1 for p in projects if p.curated)}", f"Recursive-scan intake objects: {sum(1 for p in projects if not p.curated)}", "", "| Project | Repository | Section | Maturity | STEM presence | Curated |", "|---|---|---|---|---|---|"]
+    scan_lines = ["# Living CV Repository Scan", "", f"Last generated: {now_utc()}", "", f"Total active public project objects: {len(projects)}", f"Blocked release-control records: {len(blocked_records)}", f"Curated objects: {sum(1 for p in projects if p.curated)}", f"Recursive-scan intake objects: {sum(1 for p in projects if not p.curated)}", "", "| Project | Repository | Section | Maturity | STEM presence | Curated |", "|---|---|---|---|---|---|"]
     for p in projects:
         scan_lines.append(f"| {p.title.replace('|', '/')} | `{p.repository.repo_full_name}` | {p.cv_section} | {p.maturity} | {score_label(p)} | {'yes' if p.curated else 'no'} |")
     REPO_SCAN_PATH.write_text("\n".join(scan_lines) + "\n", encoding="utf-8")
 
+    blocked_lines = ["# Blocked Release Ledger", "", f"Last generated: {now_utc()}", "", "This ledger records counts and non-sensitive identifiers for manifest entries excluded from public CV outputs.", "", "| Record | Release state | Reason | Curated |", "|---|---|---|---|"]
+    for record in blocked_records:
+        blocked_lines.append(f"| `{record.project_id}` | {record.public_release} | {record.release_reason} | {'yes' if record.curated else 'no'} |")
+    BLOCKED_RELEASE_LEDGER_PATH.write_text("\n".join(blocked_lines) + "\n", encoding="utf-8")
 
-def write_objects(projects: list[ProjectObject], claims: list[ClaimObject]) -> None:
+
+def write_objects(projects: list[ProjectObject], claims: list[ClaimObject], blocked_records: list[BlockedProjectRecord]) -> None:
     payload = {
-        "schema": "stem-cv-curator/v0.2",
-        "run": {"run_time": now_utc(), "trigger": TRIGGER, "scanned_repositories": len(projects), "active_project_objects": len(projects)},
+        "schema": "stem-cv-curator/v0.3",
+        "run": {
+            "run_time": now_utc(),
+            "trigger": TRIGGER,
+            "scanned_repositories": len(projects),
+            "active_project_objects": len(projects),
+            "blocked_release_records": len(blocked_records),
+        },
         "repositories": [asdict(p.repository) for p in projects],
         "projects": [asdict(p) for p in projects],
+        "blocked_release_records": [asdict(record) for record in blocked_records],
         "claims": [asdict(c) for c in claims],
         "sections": [{"section_id": s, "title": SECTION_LABELS[s], "projects": [p.project_id for p in projects if p.cv_section == s]} for s in SECTION_ORDER if any(p.cv_section == s for p in projects)],
         "render_targets": [
@@ -520,13 +609,14 @@ def write_objects(projects: list[ProjectObject], claims: list[ClaimObject]) -> N
 def main() -> int:
     manifest = load_manifest()
     projects = build_projects(manifest)
+    blocked_records = build_blocked_records(manifest)
     claims = build_claims(projects)
     write_current_projects(projects)
     write_research_board(projects)
     write_research_status(projects)
-    write_ledgers(projects)
-    write_objects(projects, claims)
-    print(f"STEM CV Curator generated {len(projects)} project objects for owner {OWNER_OVERRIDE or manifest.get('scan', {}).get('owner', 'pskeffington')}.")
+    write_ledgers(projects, blocked_records)
+    write_objects(projects, claims, blocked_records)
+    print(f"STEM CV Curator generated {len(projects)} project objects and {len(blocked_records)} blocked release records for owner {OWNER_OVERRIDE or manifest.get('scan', {}).get('owner', 'pskeffington')}.")
     return 0
 
 
