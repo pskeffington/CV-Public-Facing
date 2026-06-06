@@ -3,9 +3,10 @@ set -euo pipefail
 
 # Public package consistency gate.
 # This protects the public-facing CV package from stale hand-written sections,
-# missing shared includes, incomplete project registers, and unsorted publication
-# status buckets. It is intentionally read-only and must not create commits,
-# dispatch workflows, or mutate tracked source files.
+# missing shared includes, incomplete project registers, unsorted publication
+# status buckets, and internal scoring labels leaking into public outputs. It is
+# intentionally read-only and must not create commits, dispatch workflows, or
+# mutate tracked source files.
 
 status=0
 
@@ -99,8 +100,13 @@ for bucket in \
   require_contains "cv/publication_pipeline_public.tex" "${bucket}"
 done
 
-# Old hand-written four-project block must not return in document sources.
+# Internal scoring labels and old hand-written blocks must not appear in rendered public sources.
 require_absent_in_sources "Research Interests and Current Projects"
+require_absent_in_sources "STEM presence:"
+require_absent_in_sources "core stem"
+require_absent_in_sources "stem adjacent"
+require_absent_in_sources "mixed or transitional"
+require_absent_in_sources "low stem presence"
 
 # Existing sanitizers and release guard remain part of preflight.
 python3 scripts/check_public_release_guard.py
