@@ -21,6 +21,7 @@ class ObjectContractResult:
     errors: list[str]
     project_count: int
     schema: str
+    blocked_release_records: int
 
     def to_dict(self) -> dict[str, object]:
         return {
@@ -28,11 +29,12 @@ class ObjectContractResult:
             "errors": self.errors,
             "project_count": self.project_count,
             "schema": self.schema,
+            "blocked_release_records": self.blocked_release_records,
         }
 
 
 class StemObjectContractChecker:
-    """Validate that generated objects expose STEM presence metrics."""
+    """Validate generated objects, release controls, and STEM presence metrics."""
 
     REQUIRED_SCORE_KEYS = {
         "score",
@@ -53,21 +55,26 @@ class StemObjectContractChecker:
         "low_stem_presence",
     }
 
+    VALID_SCHEMAS = {
+        "stem-cv-curator/v0.2",
+        "stem-cv-curator/v0.3",
+    }
+
     def __init__(self, objects_path: Path = OBJECTS_PATH) -> None:
         self.objects_path = objects_path
 
     def run(self) -> ObjectContractResult:
         errors: list[str] = []
         if not self.objects_path.exists():
-            return ObjectContractResult(False, [f"Missing generated object file: {self.objects_path}"], 0, "")
+            return ObjectContractResult(False, [f"Missing generated object file: {self.objects_path}"], 0, "", 0)
 
         payload = self._load_payload(errors)
         if payload is None:
-            return ObjectContractResult(False, errors, 0, "")
+            return ObjectContractResult(False, errors, 0, "", 0)
 
         schema = str(payload.get("schema", ""))
-        if schema != "stem-cv-curator/v0.2":
-            errors.append(f"Expected schema stem-cv-curator/v0.2, found {schema or '<missing>'}")
+        if schema not in self.VALID_SCHEMAS:
+            errors.append(f"Expected schema in {sorted(self.VALID_SCHEMAS)}, found {schema or '<missing>'}")
 
         projects = payload.get("projects", [])
         if not isinstance(projects, list):
@@ -76,10 +83,16 @@ class StemObjectContractChecker:
         if not projects:
             errors.append("Generated object file contains no projects")
 
+        blocked_records = payload.get("blocked_release_records", [])
+        if schema == "stem-cv-curator/v0.3" and not isinstance(blocked_records, list):
+            errors.append("blocked_release_records field is not a list")
+            blocked_records = []
+
         for index, project in enumerate(projects):
             self._check_project(index, project, errors)
 
-        return ObjectContractResult(not errors, errors, len(projects), schema)
+        blocked_count = len(blocked_records) if isinstance(blocked_records, list) else 0
+        return ObjectContractResult(not errors, errors, len(projects), schema, blocked_count)
 
     def _load_payload(self, errors: list[str]) -> dict[str, Any] | None:
         try:
@@ -98,6 +111,10 @@ class StemObjectContractChecker:
             return
 
         project_id = str(project.get("project_id", f"index-{index}"))
+        release = str(project.get("public_release", "public")).lower()
+        if release != "public":
+            errors.append(f"Project {project_id} has non-public release state inside public projects: {release}")
+
         stem_presence = project.get("stem_presence")
         if not isinstance(stem_presence, dict):
             errors.append(f"Project {project_id} is missing stem_presence object")
