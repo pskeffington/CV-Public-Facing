@@ -53,15 +53,19 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Check internal scoring tools
-        run: |
-          set -euo pipefail
-          make stem-presence-check
-
       - name: Install LaTeX toolchain
         run: |
+          set -euo pipefail
           sudo apt-get update
           sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended lmodern
+
+      - name: Run public manifest and release checks
+        run: |
+          set -euo pipefail
+          make public-manifest-check
+          make safety-surface-check
+          make stem-presence-check
+          make job-cv-object-check
 
       - name: Build public CV package from selected job object
         env:
@@ -70,7 +74,23 @@ jobs:
           set -euo pipefail
           make job-cv-package JOB_OBJECT="$JOB_OBJECT"
 
-      - name: Upload public CV package artifact
+      - name: Re-run final public checks
+        run: |
+          set -euo pipefail
+          make public-manifest-check
+          make safety-surface-check
+          make stem-object-contract
+          make stem-report-contract
+          bash scripts/preflight_public_package.sh
+
+      - name: Upload LinkedIn-ready Academic CV
+        uses: actions/upload-artifact@v4
+        with:
+          name: linkedin-academic-cv-${{ inputs.job_object || 'neutral' }}
+          path: documents/Paul_A_Skeffington_Academic_CV_Public.pdf
+          if-no-files-found: error
+
+      - name: Upload full public CV package artifact
         uses: actions/upload-artifact@v4
         with:
           name: public-cv-package-${{ inputs.job_object || 'neutral' }}
