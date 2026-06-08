@@ -42,7 +42,7 @@ Skeffington, P. A. Family economics, financial literacy, and fertility outcomes 
 Skeffington, P. A. Humanitarian WASH, displacement, and health-system disruption.
 
 **In preparation**  
-Skeffington, P. A. Rural water, wastewater, and infrastructure health risk.
+Skeffington, P. A. Rural water, wastewater, and infrastructure health needs.
 
 ## Professional Experience
 
