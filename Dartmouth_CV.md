@@ -21,7 +21,7 @@ Bachelor of Arts, Mathematics, June 2019
 **Southern New Hampshire University**  
 Bachelor of Science, Information Technology, January 2018
 
-## Honors, Awards, and Recognition
+## Honors and Awards
 
 **Dartmouth Scholar, Geisel School of Medicine, Dartmouth College**  
 Selected from the entering class for dedication to improving health outcomes.
@@ -31,82 +31,30 @@ Selected for student leadership and chapel-support duties during technical train
 
 ## Research Interests
 
-Health policy; health services research; rural health systems; global health; maternal and child health; reproductive and life-course outcomes; cancer outcomes and end-of-life care; healthcare access, quality, and variation; environmental determinants of health; population-health decision support; reproducible health data science.
-
-## Research Statement
-
-My research examines how health systems, public-health infrastructure, environmental conditions, and social and economic context shape outcomes for rural, global, maternal-child, reproductive, and cancer populations. I am especially interested in health policy and health services research questions involving access, quality, variation, accountability, and the use of evidence to improve health and health care.
-
-My current work brings together applied economics, public health, longitudinal data analysis, epidemiologic reasoning, and reproducible health data science. Across projects, the common goal is to make complex data easier to evaluate for clinical, public-health, and policy use.
-
-## Research Experience
-
-**Health Policy, Health Services Research, and Delivery-System Variation**  
-Independent research agenda; ongoing
-
-Research focus on healthcare access, quality, variation, documentation, infrastructure constraints, and decision support.
-
-**Rural and Global Health Systems**  
-Independent applied public-health research; ongoing
-
-Applied work on WASH, water and wastewater infrastructure, health-system disruption, terrain and access constraints, environmental-health indicators, and community vulnerability.
-
-**Maternal, Child, Reproductive, and Life-Course Health**  
-Longitudinal data and applied economics research; ongoing
-
-Longitudinal research examining fertility, family economics, financial literacy, household context, and reproductive outcomes.
-
-**Cancer Outcomes, End-of-Life Care, and Biomedical Data Science**  
-Computational outcomes and benchmark-development research; ongoing
-
-Outcomes-oriented methods work focused on cancer end-of-life typologies, place-of-death patterns, care-quality variation, PET noise and radiomics robustness, and reproducible biomedical benchmark design.
+Health policy; health services research; rural health; global health; maternal and child health; reproductive and life-course health; cancer outcomes; applied economics; health data science.
 
 ## Publications and Manuscripts
 
-**Manuscript under peer review**  
-Skeffington, P. A. Family economics, financial literacy, and fertility outcomes: Evidence from the NLSY79. Manuscript under peer review.
+**Under peer review**  
+Skeffington, P. A. Family economics, financial literacy, and fertility outcomes using NLSY79 data.
 
-**Manuscripts in preparation**  
-Skeffington, P. A. Humanitarian WASH, displacement, and health-system disruption: A public-health methods note. Manuscript in preparation.
+**In preparation**  
+Skeffington, P. A. Humanitarian WASH, displacement, and health-system disruption.
 
-Skeffington, P. A. Rural water, wastewater, and infrastructure health risk: Evidence planning for McDowell County. Manuscript in preparation.
-
-## Applied Evidence Work
-
-**Humanitarian WASH and Health-System Disruption**  
-Developing a public humanitarian assessment framework connecting WASH, displacement, environmental-health, and health-system disruption sources for methods-note development.
-
-**Rural Water, Wastewater, and Infrastructure Health Risk**  
-Organizing terrain, access, wastewater, stakeholder, and environmental-health information for rural risk review and decision support.
-
-**Machine-Learning Publication Practice and Benchmark Planning**  
-Maintaining public-facing methods scaffolds for responsible machine-learning research practice and reproducible evaluation design.
+**In preparation**  
+Skeffington, P. A. Rural water, wastewater, and infrastructure health risk.
 
 ## Professional Experience
 
 **American Red Cross, Boston Regional Operations**  
 Regional Disaster Dispatcher, 2020-2022
 
-Coordinated regional disaster-response dispatch by triaging calls, assessing incident severity, activating response teams, tracking personnel and resources, and supporting escalation workflows across time-sensitive emergency-response contexts.
-
-**Massachusetts Department of Correction, Massachusetts Alcohol and Substance Abuse Center**  
+**Massachusetts Department of Correction**  
 Correction Officer I, 2013-2019
 
-Supported safety, accountability, documentation, confidentiality, and emergency response during post-detox and infirmary operations.
-
-**United States Air Force, Joint Base Cape Cod**  
+**United States Air Force**  
 Fusion Analyst, 2007-2013
 
-Supported structured analytic work and formal documentation in complex information environments.
+## Skills
 
-## Skills and Methods
-
-**Health policy and outcomes methods:** health services research design; outcomes modeling; longitudinal-data design; fixed-effects modeling; count models; Cox survival models; sensitivity diagnostics; epidemiologic study design.
-
-**Software and reproducible workflows:** R; Python; LaTeX; GitHub Actions; Makefile workflows; CSV and LaTeX table exports; repository-based manuscript control.
-
-**Public-health and clinical evidence systems:** GIS screening; terrain and access indexing; evidence-confidence scoring; dashboard interpretation; environmental-health documentation; clinical and population-health decision support.
-
-## Leadership and Service
-
-Emergency response dispatch, public-health documentation, community-oriented evidence review, and applied infrastructure-risk documentation through prior disaster-response, correctional, military, and research-adjacent service roles.
+Health services research; longitudinal analysis; outcomes modeling; applied economics; epidemiologic study design; R; Python; LaTeX; GIS screening; reproducible manuscript preparation.
