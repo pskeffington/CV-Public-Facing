@@ -79,35 +79,48 @@ require_contains "cv/public_upload_cv.tex" "\\input{current_projects_public}"
 require_contains "cv/public_upload_cv.tex" "\\input{publication_pipeline_public}"
 require_contains "research/research_status.tex" "\\input{../cv/publication_pipeline_public}"
 
-require_contains "cv/one_page_profile_public.tex" "Peer Review and Publication Pipeline"
-require_contains "cv/one_page_profile_public.tex" "Currently submitted / under peer review"
-require_contains "cv/one_page_profile_public.tex" "Active manuscript preparation"
-require_contains "cv/one_page_profile_public.tex" "Validation-gated before submission"
+for profile_pattern in \
+  "Publications and Manuscripts" \
+  "Under peer review" \
+  "In preparation" \
+  "Dartmouth Scholar"; do
+  require_contains "cv/one_page_profile_public.tex" "${profile_pattern}"
+done
 
 for project in \
-  "Life-course data, family economics, and fertility" \
-  "Rural water, wastewater, and infrastructure health risk" \
-  "Humanitarian WASH and health-system disruption" \
-  "Haiti Nippes public-health and infrastructure assessment" \
-  "Medical-signal noise reduction" \
-  "PET noise and radiomics robustness" \
-  "Cancer end-of-life typologies" \
-  "Public-health emergency preparedness and practicum reporting" \
-  "Public-health practicum report" \
-  "Catholic archive and public-history indexing"; do
+  "Family economics, financial literacy, and fertility" \
+  "Rural and global health systems" \
+  "Maternal, child, reproductive, and life-course health" \
+  "Cancer outcomes and end-of-life care" \
+  "Biomedical data science methods" \
+  "Public-history and archival indexing"; do
   require_contains "cv/current_projects_public.tex" "${project}"
-  require_contains "research/RESEARCH_STATUS.md" "${project}"
+done
+
+for research_project in \
+  "Family economics, financial literacy, and fertility" \
+  "Rural water, wastewater, and infrastructure health" \
+  "Humanitarian WASH and health-system disruption" \
+  "Maternal, child, reproductive, and life-course health" \
+  "Cancer outcomes and end-of-life care" \
+  "Biomedical data science methods" \
+  "Public-history and archival indexing"; do
+  require_contains "research/generated_project_board.tex" "${research_project}"
+  require_contains "research/RESEARCH_STATUS.md" "${research_project}"
 done
 
 for bucket in \
-  "Currently submitted / under peer review" \
-  "Publication-ready or print-ready" \
-  "Active manuscript preparation" \
-  "Validation-gated before submission"; do
+  "Publications and Manuscripts" \
+  "Under peer review" \
+  "In preparation" \
+  "Developing research projects"; do
   require_contains "cv/publication_pipeline_public.tex" "${bucket}"
 done
 
 require_absent_in_sources "Research Interests and Current Projects"
+require_absent_in_sources "Peer Review and Publication Pipeline"
+require_absent_in_sources "Publication-ready or print-ready"
+require_absent_in_sources "Validation-gated before submission"
 require_absent_in_rendered_public_sources "STEM presence:"
 require_absent_in_rendered_public_sources "core stem"
 require_absent_in_rendered_public_sources "stem adjacent"
