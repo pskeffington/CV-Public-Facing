@@ -26,8 +26,8 @@ Bachelor of Science, Information Technology, January 2018
 **Dartmouth Scholar, Geisel School of Medicine, Dartmouth College**  
 Selected from the entering class for dedication to improving health outcomes.
 
-**Student Squadron Commander, United States Air Force**  
-Selected for student leadership during technical training at Goodfellow Air Force Base.
+**Student Squadron Commander and Chapel Guide, United States Air Force**  
+Selected for student leadership and chapel-support duties during technical training at Goodfellow Air Force Base.
 
 ## Research Interests
 
@@ -37,7 +37,7 @@ Health policy; health services research; rural health systems; global health; ma
 
 My research examines how health systems, public-health infrastructure, environmental conditions, and social and economic context shape outcomes for rural, global, maternal-child, reproductive, and cancer populations. I am especially interested in health policy and health services research questions involving access, quality, variation, accountability, and the translation of evidence into decisions that improve health and health care.
 
-My current work brings together applied economics, public health, longitudinal data analysis, epidemiologic reasoning, and reproducible health data science. Across projects, the common thread is evidence movement: how complex data, source documents, field records, and multilingual materials can be organized into transparent, reviewable claims for clinical, public-health, and policy use.
+My current work brings together applied economics, public health, longitudinal data analysis, epidemiologic reasoning, and reproducible health data science. Across projects, the common thread is evidence translation: how complex data, source documents, field records, and multilingual materials can be organized into transparent, reviewable claims for clinical, public-health, and policy use.
 
 ## Research Experience
 
@@ -64,7 +64,7 @@ Outcomes-oriented methods work focused on cancer end-of-life typologies, place-o
 **Reproducible Evidence Systems for Policy and Practice**  
 Methods and infrastructure research; ongoing
 
-Methods work connecting source-to-claim documentation, audit-ready data workflows, multilingual scientific communication, and provenance-aware evidence review. Sky Station, FIDES-SUPRA, and the Translation and Ingestion System are supporting infrastructure for the broader scholarly problem of collecting, translating, validating, and using complex evidence responsibly in health policy, clinical practice, public health, and global-health settings.
+Methods work connecting source documentation, reproducible data workflows, multilingual scientific communication, and provenance-aware evidence review. Sky Station, FIDES-SUPRA, and the Translation and Ingestion System are supporting infrastructure for the broader scholarly problem of collecting, translating, validating, and using complex evidence responsibly in health policy, clinical practice, public health, and global-health settings.
 
 ## Publications and Manuscripts
 
@@ -88,7 +88,7 @@ Developing a public humanitarian assessment framework connecting WASH, displacem
 Organizing terrain, access, wastewater, stakeholder, and environmental-health evidence for rural risk review and decision support.
 
 **Machine-Learning Publication Practice and Benchmark Planning**  
-Maintaining public-facing methods scaffolds for responsible machine-learning research practice, source records, review gates, transparent reporting, and reproducible evaluation design.
+Maintaining public-facing methods scaffolds for responsible machine-learning research practice, source records, review gates, transparent publication practices, and reproducible evaluation design.
 
 ## Professional Experience
 
@@ -105,7 +105,7 @@ Supported safety, accountability, documentation, confidentiality, and emergency 
 **United States Air Force, Joint Base Cape Cod**  
 Fusion Analyst, 2007-2013
 
-Supported intelligence assessment and reporting through structured, multi-source information fusion. Role emphasized disciplined analysis, source integration, operational documentation, and careful handling of uncertainty in complex information environments.
+Supported structured analytic work and formal documentation through multi-source information review. Role emphasized disciplined analysis, source integration, operational documentation, and careful handling of uncertainty in complex information environments.
 
 ## Skills and Methods
 
