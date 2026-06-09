@@ -80,7 +80,7 @@ require_contains "cv/public_upload_cv.tex" "\\input{publication_pipeline_public}
 require_contains "research/research_status.tex" "\\input{../cv/publication_pipeline_public}"
 
 for profile_pattern in \
-  "Publications and Manuscripts" \
+  "Publications" \
   "Under peer review" \
   "In preparation" \
   "Dartmouth Scholar"; do
@@ -110,7 +110,7 @@ for project in \
 done
 
 for bucket in \
-  "Publications and Manuscripts" \
+  "Publications" \
   "Under peer review" \
   "In preparation" \
   "Developing research projects"; do
