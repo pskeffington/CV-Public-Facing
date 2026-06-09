@@ -15,11 +15,12 @@ stem-cv: public-manifest-check safety-surface-check
 
 stem-presence-report: stem-cv safety-surface-check
 	$(PYTHON) scripts/write_stem_presence_report.py
+	$(PYTHON) scripts/sync_public_portfolio_anchors.py
 
 living-cv: stem-presence-report safety-surface-check
 
 stem-presence-check:
-	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py scripts/check_doi_normalization.py scripts/check_reference_metadata_parsers.py scripts/check_url_policy.py scripts/stem_paper_evaluator.py scripts/check_stem_paper_evaluator.py scripts/check_stem_paper_evaluator_contract.py scripts/write_stem_paper_review.py scripts/check_stem_paper_review.py scripts/build_job_cv_package.py scripts/check_job_cv_objects.py scripts/public_release_guard.py scripts/check_public_release_guard.py scripts/check_public_manifest_contract.py
+	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py scripts/check_doi_normalization.py scripts/check_reference_metadata_parsers.py scripts/check_url_policy.py scripts/stem_paper_evaluator.py scripts/check_stem_paper_evaluator.py scripts/check_stem_paper_evaluator_contract.py scripts/write_stem_paper_review.py scripts/check_stem_paper_review.py scripts/build_job_cv_package.py scripts/check_job_cv_objects.py scripts/public_release_guard.py scripts/check_public_release_guard.py scripts/check_public_manifest_contract.py scripts/sync_public_portfolio_anchors.py
 	$(PYTHON) scripts/check_stem_presence.py
 
 public-manifest-check:
@@ -98,4 +99,3 @@ clean:
 	rm -f $(DOCUMENTS_DIR)/Paul_A_Skeffington_One_Page_Profile_Public.pdf
 	rm -f $(DOCUMENTS_DIR)/Index_Safe_Public_Upload_CV.pdf
 	rm -f $(DOCUMENTS_DIR)/Paul_A_Skeffington_Research_Status_Public.pdf
-	rm -rf dist/job_cv_packages
