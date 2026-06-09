@@ -16,6 +16,10 @@
 \titleformat{\section}{\large\bfseries\color{sectiongray}}{}{0em}{}[\titlerule]
 \titlespacing*{\section}{0pt}{5pt}{2pt}
 
+\newcommand{\cvdate}[1]{\hfill {\small #1}}
+\newcommand{\cvrole}[2]{\textbf{#1}\cvdate{#2}\\}
+\newcommand{\cvplace}[1]{{\itshape #1}\\}
+
 \begin{document}
 
 \begin{center}
@@ -27,35 +31,44 @@
 \vspace{3pt}
 
 \section*{Profile}
-Public-health and health-data-science researcher preparing for doctoral work in health policy and health services research. Current work examines how health systems, public-health infrastructure, environmental conditions, and social and economic context shape outcomes for rural, global, maternal-child, reproductive, and cancer populations.
+Public-health and health-data-science researcher preparing for doctoral work in health policy and health services research, with applied work spanning rural and global health systems, reproductive and life-course outcomes, cancer outcomes, and reproducible data science.
 
 \section*{Academic Trajectory}
+\cvrole{Master of Science in Health Data Science}{Incoming Fall 2026 class}
+\cvplace{Geisel School of Medicine, Dartmouth College}
 \begin{itemize}
-    \item Incoming Fall 2026 student in the Master of Science in Health Data Science program at Geisel School of Medicine, Dartmouth College.
-    \item Dartmouth Scholar, selected from the entering class for dedication to improving health outcomes.
-    \item Completing an M.P.H. in Global Health, with prior graduate training in applied economics and undergraduate preparation in mathematics and information technology.
+    \item Entering advanced health data science training to strengthen population-health, biomedical-data, and health-services research methods.
+\end{itemize}
+
+\cvrole{Dartmouth Scholar}{2026}
+\cvplace{Geisel School of Medicine, Dartmouth College}
+\begin{itemize}
+    \item Recognized for dedication to improving health outcomes within the incoming health data science cohort.
 \end{itemize}
 
 \section*{Research Direction}
 \begin{itemize}
-    \item Health policy and health services research focused on access, quality, variation, and use of evidence to improve health and health care.
-    \item Rural and global health work focused on WASH, water and wastewater infrastructure, health-system disruption, environmental-health indicators, and community vulnerability.
-    \item Maternal-child and life-course research connecting family economics, fertility, household context, and reproductive outcomes.
-    \item Cancer outcomes and biomedical data science work focused on end-of-life care, care-quality variation, ECG signal quality, PET imaging, and reproducible study design.
+    \item Investigate health policy and health services research questions around access, quality, variation, and evidence use to improve health and health care.
+    \item Organize rural and global health evidence on WASH, water and wastewater infrastructure, health-system disruption, and environmental-health indicators to support population-health risk assessment.
+    \item Connect family economics, fertility, household context, and reproductive outcomes to clarify maternal-child and life-course research questions.
+    \item Develop cancer outcomes and biomedical data science projects around end-of-life care, ECG signal quality, PET imaging, and reproducible study design.
 \end{itemize}
 
-\section*{Publications and Manuscripts}
-\begin{itemize}
-    \item \textbf{Under peer review:} Family economics, financial literacy, and fertility outcomes using NLSY79 data.
-    \item \textbf{In preparation:} Humanitarian WASH, displacement, and health-system disruption.
-    \item \textbf{In preparation:} Rural water, wastewater, and infrastructure health risk.
-\end{itemize}
+\section*{Publications}
+\cvrole{Family economics, financial literacy, and fertility outcomes using NLSY79 data}{Under peer review}
+\cvplace{Manuscript under journal review}
+
+\cvrole{Humanitarian WASH, displacement, and health-system disruption}{In preparation}
+\cvplace{Methods-note manuscript in development}
+
+\cvrole{Rural water, wastewater, and infrastructure health risk}{In preparation}
+\cvplace{Public-health manuscript in development}
 
 \section*{Selected Methods}
 \begin{itemize}
-    \item Health services research design, outcomes modeling, longitudinal-data design, fixed-effects modeling, count models, Cox survival models, sensitivity diagnostics, and epidemiologic study design.
-    \item R, Python, LaTeX, GitHub Actions, Makefile builds, CSV/LaTeX table exports, and reproducible manuscript preparation.
-    \item GIS screening, terrain and access indexing, environmental-health review, and population-health decision support.
+    \item Apply health services research design, outcomes modeling, longitudinal-data methods, fixed-effects models, count models, Cox survival models, and sensitivity diagnostics to evaluate population-health questions.
+    \item Build reproducible research workflows in R, Python, LaTeX, GitHub Actions, Makefile pipelines, CSV exports, and LaTeX table systems to maintain source-to-output control.
+    \item Integrate GIS screening, terrain and access indexing, environmental-health review, and population-health decision support to structure applied public-health evidence.
 \end{itemize}
 
 \end{document}
