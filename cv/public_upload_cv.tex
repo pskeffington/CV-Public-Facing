@@ -19,6 +19,7 @@
 \newcommand{\cvdate}[1]{\hfill {\small #1}}
 \newcommand{\cvrole}[2]{\textbf{#1}\cvdate{#2}\\}
 \newcommand{\cvplace}[1]{{\itshape #1}\\}
+\newcommand{\eduentry}[3]{\textbf{#1}\cvdate{#2}\\[-1pt]{\itshape #3}\\[-2pt]}
 
 \begin{document}
 
@@ -34,27 +35,18 @@
 Public-health and health-data-science researcher preparing for doctoral work in health policy and health services research. Current work examines how health systems, public-health infrastructure, environmental conditions, and social and economic context shape outcomes for rural, global, maternal-child, reproductive, and cancer populations.
 
 \section*{Education}
-\cvrole{Master of Science in Health Data Science}{Incoming Fall 2026 class}
-\cvplace{Geisel School of Medicine, Dartmouth College}
-
-\cvrole{Master of Public Health, Global Health Concentration}{Anticipated October 2026}
-\cvplace{Southern New Hampshire University}
-
-\cvrole{Master of Science, Applied Economics}{December 2025}
-\cvplace{Southern New Hampshire University}
-
-\cvrole{Bachelor of Arts, Mathematics}{June 2019}
-\cvplace{Southern New Hampshire University}
-
-\cvrole{Bachelor of Science, Information Technology}{January 2018}
-\cvplace{Southern New Hampshire University}
+\eduentry{Master of Science in Health Data Science}{Incoming Fall 2026 class}{Geisel School of Medicine, Dartmouth College}
+\eduentry{Master of Public Health, Global Health Concentration}{Anticipated October 2026}{Southern New Hampshire University}
+\eduentry{Master of Science, Applied Economics}{December 2025}{Southern New Hampshire University}
+\eduentry{Bachelor of Arts, Mathematics}{June 2019}{Southern New Hampshire University}
+\eduentry{Bachelor of Science, Information Technology}{January 2018}{Southern New Hampshire University}
 
 \section*{Honors, Awards, and Recognition}
 \cvrole{Dartmouth Scholar, Geisel School of Medicine, Dartmouth College}{}
-Selected from the entering class for dedication to improving health outcomes.
+Recognized by Geisel School of Medicine for dedication to improving health outcomes.
 
 \cvrole{Student Squadron Commander and Chapel Guide, United States Air Force}{}
-Selected for student leadership and chapel-support duties during technical training at Goodfellow Air Force Base.
+Selected for technical-training leadership and chapel-support duties at Goodfellow Air Force Base.
 
 \input{current_projects_public}
 \input{publication_pipeline_public}
@@ -62,21 +54,27 @@ Selected for student leadership and chapel-support duties during technical train
 \section*{Professional Experience}
 \cvrole{Regional Disaster Dispatcher}{2020--2022}
 \cvplace{Boston Regional Operations}
-Coordinated regional disaster-response dispatch by triaging calls, assessing incident severity, activating response teams, tracking personnel and resources, and supporting escalation workflows.
+\begin{itemize}
+    \item Coordinated regional disaster-response dispatch, incident triage, team activation, and escalation workflows to align resources with urgent community needs.
+\end{itemize}
 
 \cvrole{Correction Officer I}{2013--2019}
 \cvplace{Massachusetts}
-Supported safety, accountability, documentation, confidentiality, and emergency response during institutional operations.
+\begin{itemize}
+    \item Maintained safety, accountability, documentation, confidentiality, and emergency response during institutional operations to support secure care delivery.
+\end{itemize}
 
 \cvrole{United States Air Force --- Analyst}{2007--2013}
 \cvplace{Joint Base Cape Cod}
-Supported structured analytic work and formal documentation in complex information environments.
+\begin{itemize}
+    \item Produced structured analytic documentation in complex information environments to support formal review, mission continuity, and decision-ready reporting.
+\end{itemize}
 
 \section*{Skills and Methods}
 \begin{itemize}
-    \item Health services research design, outcomes modeling, longitudinal-data design, fixed-effects modeling, count models, Cox survival models, sensitivity diagnostics, and epidemiologic study design.
-    \item R, Python, LaTeX, automated builds, Makefile builds, CSV/LaTeX table exports, and reproducible manuscript preparation.
-    \item GIS screening, terrain and access indexing, environmental-health review, and population-health decision support.
+    \item Apply health services research design, outcomes modeling, longitudinal-data methods, fixed-effects models, count models, Cox survival models, and sensitivity diagnostics to evaluate population-health questions.
+    \item Build reproducible research workflows in R, Python, LaTeX, automated builds, Makefile pipelines, CSV exports, and LaTeX table systems to maintain source-to-output control.
+    \item Integrate GIS screening, terrain and access indexing, evidence-confidence scoring, and environmental-health documentation to support population-health decision work.
 \end{itemize}
 
 \end{document}
