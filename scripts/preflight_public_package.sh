@@ -87,26 +87,26 @@ for profile_pattern in \
   require_contains "cv/one_page_profile_public.tex" "${profile_pattern}"
 done
 
+# These pointers must match the repository-object titles emitted by
+# scripts/stem_cv_curator.py from data/pipeline_repos.json. Keeping the guard
+# aligned with the generated object layer prevents stale legacy taxonomy strings
+# from blocking otherwise valid public package builds.
 for project in \
-  "Family economics, financial literacy, and fertility" \
-  "Rural and global health systems" \
-  "Maternal, child, reproductive, and life-course health" \
-  "Cancer outcomes and end-of-life care" \
-  "Biomedical data science methods" \
-  "Public-history and archival indexing"; do
-  require_contains "cv/current_projects_public.tex" "${project}"
-done
-
-for research_project in \
-  "Family economics, financial literacy, and fertility" \
-  "Rural water, wastewater, and infrastructure health" \
+  "Life-course data, family economics, and fertility" \
+  "Machine-learning publication best practices" \
+  "Machine-learning lab" \
+  "Rural water, wastewater, and infrastructure health risk" \
   "Humanitarian WASH and health-system disruption" \
-  "Maternal, child, reproductive, and life-course health" \
-  "Cancer outcomes and end-of-life care" \
-  "Biomedical data science methods" \
-  "Public-history and archival indexing"; do
-  require_contains "research/generated_project_board.tex" "${research_project}"
-  require_contains "research/RESEARCH_STATUS.md" "${research_project}"
+  "Haiti Nippes public-health and infrastructure assessment" \
+  "Medical-signal noise reduction" \
+  "PET noise and radiomics robustness" \
+  "Cancer end-of-life typologies" \
+  "Public-health emergency preparedness and practicum reporting" \
+  "Public-health practicum report" \
+  "Catholic archive and public-history indexing"; do
+  require_contains "cv/current_projects_public.tex" "${project}"
+  require_contains "research/generated_project_board.tex" "${project}"
+  require_contains "research/RESEARCH_STATUS.md" "${project}"
 done
 
 for bucket in \
