@@ -1,35 +1,9 @@
 \documentclass[10.5pt,letterpaper]{article}
-
-\usepackage[margin=0.72in]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage[hidelinks]{hyperref}
-\usepackage{enumitem}
-\usepackage{titlesec}
-\usepackage{xcolor}
-
-\definecolor{sectiongray}{gray}{0.20}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{3pt}
-\setlist[itemize]{leftmargin=1.15em, topsep=2pt, itemsep=1pt, parsep=0pt}
-\titleformat{\section}{\large\bfseries\color{sectiongray}}{}{0em}{}[\titlerule]
-\titlespacing*{\section}{0pt}{5pt}{2pt}
-
-\newcommand{\cvdate}[1]{\hfill {\small #1}}
-\newcommand{\cvrole}[2]{\textbf{#1}\cvdate{#2}\\}
-\newcommand{\cvplace}[1]{{\itshape #1}\\}
-\newcommand{\eduentry}[3]{\textbf{#1}\cvdate{#2}\\[-1pt]{\itshape #3}\\[-2pt]}
+\input{public_cv_template_base}
 
 \begin{document}
 
-\begin{center}
-    {\LARGE \textbf{P. A. S.}}\\
-    \vspace{2pt}
-    Health Policy | Health Services Research | Health Data Science | Rural and Global Health | Applied Economics\\
-    \textit{Contact information intentionally omitted for public indexing control.}
-\end{center}
-\vspace{3pt}
+\cvheader{P. A. S.}{Health Policy | Health Services Research | Health Data Science | Rural and Global Health | Applied Economics}{\textit{Contact information intentionally omitted for public indexing control.}}{3pt}
 
 \section*{Profile}
 Public-health and health-data-science researcher preparing for doctoral work in health policy and health services research. Current work examines how health systems, public-health infrastructure, environmental conditions, and social and economic context shape outcomes for rural, global, maternal-child, reproductive, and cancer populations.
@@ -49,41 +23,41 @@ Health policy; health services research; rural health systems; global health; ma
 
 \section*{Honors, Awards, and Grants}
 \cvrole{Dartmouth Scholar, Geisel School of Medicine, Dartmouth College}{2026}
-\begin{itemize}
+\begin{cvbullets}
     \item Recognized for dedication to improving health outcomes within the incoming health data science cohort.
-\end{itemize}
+\end{cvbullets}
 
 \cvrole{Student Squadron Commander and Chapel Guide, United States Air Force}{2007}
-\begin{itemize}
+\begin{cvbullets}
     \item Led technical-training and chapel-support responsibilities at Goodfellow Air Force Base to support student formation and unit coordination.
-\end{itemize}
+\end{cvbullets}
 
 \section*{Additional Professional Experience}
 \cvrole{Regional Disaster Dispatcher}{2020--2022}
 \cvplace{Boston Regional Operations}
-\begin{itemize}
+\begin{cvbullets}
     \item Coordinated regional disaster-response dispatch, incident triage, team activation, and escalation workflows to align resources with urgent community needs.
-\end{itemize}
+\end{cvbullets}
 
 \cvrole{Correction Officer I}{2013--2019}
 \cvplace{Massachusetts}
-\begin{itemize}
+\begin{cvbullets}
     \item Maintained safety, accountability, documentation, confidentiality, and emergency response during institutional operations to support secure care delivery.
-\end{itemize}
+\end{cvbullets}
 
 \cvrole{United States Air Force --- Analyst}{2007--2013}
 \cvplace{Joint Base Cape Cod}
-\begin{itemize}
+\begin{cvbullets}
     \item Produced structured analytic documentation in complex information environments to support formal review, mission continuity, and decision-ready reporting.
-\end{itemize}
+\end{cvbullets}
 
-\section*{Skills and Certifications}
-\begin{itemize}
+\section*{Technical Skills and Methods}
+\begin{cvbullets}
     \item Apply health services research, epidemiologic reasoning, longitudinal-data design, econometric modeling, fixed-effects models, count models, survival analysis, and sensitivity diagnostics to evaluate population-health questions.
     \item Build reproducible research and CV-publication pipelines in R, Python, LaTeX, automated builds, Makefile workflows, JSON/CSV data objects, and automated PDF/package generation to maintain source-to-output control.
     \item Develop citation verification, source-to-claim review, public-release guardrails, metadata parsing, and manuscript-readiness checks to strengthen evidence quality and public-facing research governance.
     \item Integrate GIS screening, terrain/access indexing, WASH and infrastructure evidence, environmental-health documentation, and population-health decision support for rural and global health assessment.
     \item Operate technical data-collection and systems workflows across Linux/Raspberry Pi environments, SDR/GNSS/sensor inputs, network infrastructure, and repository-based documentation to support field-oriented data operations.
-\end{itemize}
+\end{cvbullets}
 
 \end{document}
