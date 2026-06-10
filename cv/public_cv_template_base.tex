@@ -1,0 +1,36 @@
+% Shared public CV template base.
+% Faculty-CV-inspired article layout: simple section rules, compact entries,
+% aligned dates, and controlled bullet indentation for public package outputs.
+
+\usepackage[margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+
+\definecolor{sectiongray}{gray}{0.20}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.5pt}
+\setlist[itemize]{leftmargin=1.75em, labelsep=0.45em, topsep=1pt, itemsep=0pt, parsep=0pt}
+\titleformat{\section}{\large\bfseries\color{sectiongray}}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\normalsize\bfseries\color{sectiongray}}{}{0em}{}
+\titlespacing*{\subsection}{0pt}{4pt}{1pt}
+
+\newcommand{\cvdate}[1]{\hfill {\small #1}}
+\newcommand{\cvrole}[2]{\Needspace{3\baselineskip}\textbf{#1}\cvdate{#2}\\[-1pt]}
+\newcommand{\cvplace}[1]{{\itshape #1}\\[-1pt]}
+\newcommand{\eduentry}[3]{\Needspace{2\baselineskip}\textbf{#1}\cvdate{#2}\\[-2pt]{\itshape #3}\\[-3pt]}
+\newcommand{\cvheader}[4]{%
+\begin{center}
+    {\LARGE \textbf{#1}}\\[-1pt]
+    #2\\[-1pt]
+    #3
+\end{center}
+\vspace{#4}
+}
+\newenvironment{cvbullets}{\begin{itemize}}{\end{itemize}}
