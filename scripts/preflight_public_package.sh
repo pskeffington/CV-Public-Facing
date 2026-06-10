@@ -64,6 +64,7 @@ require_absent_in_rendered_public_sources() {
 require_file "cv/academic_cv_public.tex"
 require_file "cv/one_page_profile_public.tex"
 require_file "cv/public_upload_cv.tex"
+require_file "cv/public_cv_template_base.tex"
 require_file "cv/current_projects_public.tex"
 require_file "cv/publication_pipeline_public.tex"
 require_file "research/research_status.tex"
@@ -73,11 +74,20 @@ require_file "scripts/check_public_sanitization.sh"
 require_file "scripts/check_index_safe_upload.sh"
 require_file "scripts/check_public_release_guard.py"
 
+require_contains "cv/academic_cv_public.tex" "\\input{public_cv_template_base}"
+require_contains "cv/public_upload_cv.tex" "\\input{public_cv_template_base}"
+require_contains "cv/one_page_profile_public.tex" "\\input{public_cv_template_base}"
+require_contains "cv/public_cv_template_base.tex" "microtype"
+require_contains "cv/public_cv_template_base.tex" "cvbullets"
+
 require_contains "cv/academic_cv_public.tex" "\\input{current_projects_public}"
 require_contains "cv/academic_cv_public.tex" "\\input{publication_pipeline_public}"
 require_contains "cv/public_upload_cv.tex" "\\input{current_projects_public}"
 require_contains "cv/public_upload_cv.tex" "\\input{publication_pipeline_public}"
 require_contains "research/research_status.tex" "\\input{../cv/publication_pipeline_public}"
+require_contains "cv/academic_cv_public.tex" "Technical Skills and Methods"
+require_contains "cv/public_upload_cv.tex" "Technical Skills and Methods"
+require_contains "cv/one_page_profile_public.tex" "Selected Methods and Technical Skills"
 
 for profile_pattern in \
   "Publications" \
