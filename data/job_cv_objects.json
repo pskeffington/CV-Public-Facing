@@ -119,6 +119,29 @@
         "clinical trial authority unless verified",
         "private health data handling claims without source support"
       ]
+    },
+    "unh-adjunct-homeland-security": {
+      "label": "UNH - Adjunct Faculty, Homeland Security",
+      "output_slug": "unh_adjunct_homeland_security",
+      "role_family": "homeland security, cybersecurity, and public/private risk instruction",
+      "profile_emphasis": "Public-safe teaching fit across cybersecurity, information assurance, enterprise risk, emergency management, public-health systems, technical infrastructure literacy, and evidence discipline.",
+      "public_safe_focus": [
+        "cybersecurity and information assurance foundations",
+        "public/private risk management",
+        "emergency management and continuity",
+        "technical infrastructure literacy",
+        "public-health and community resilience systems",
+        "source-ledger and claim-boundary discipline"
+      ],
+      "tailoring_notes": "Use public-safe language only. Emphasize teaching readiness, systems thinking, legal and ethical judgment, and public/private risk. Keep sharper private application wording in Applications-Jobs.",
+      "exclusions": [
+        "private job packet language",
+        "sensitive operational details",
+        "active clearance claims unless verified",
+        "current federal authority unless verified",
+        "specific sensitive systems, locations, or collection methods",
+        "unsupported classroom-of-record teaching claims"
+      ]
     }
   }
 }
