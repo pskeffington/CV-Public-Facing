@@ -6,7 +6,7 @@ The repository is intentionally public. It must contain only public-safe source 
 
 **Maintainer:** Paul Skeffington, MS, MPH  
 **Repository status:** active public-safe CV and research-status renderer.  
-**Last documentation refresh:** 2026-06-06
+**Last documentation refresh:** 2026-06-14
 
 ## Current operating model
 
@@ -65,6 +65,7 @@ Build a selected public-safe job package:
 ```bash
 make job-cv-package JOB_OBJECT="neutral"
 make job-cv-package JOB_OBJECT="harvard-chan-director-data-analytics"
+make job-cv-package JOB_OBJECT="cdc-foundation-data-modernization-senior-advisor"
 ```
 
 Run the main contract checks:
@@ -90,6 +91,18 @@ Current job objects are controlled by:
 
 ```text
 data/job_cv_objects.json
+```
+
+Current selectable objects include:
+
+```text
+neutral
+harvard-chan-director-data-analytics
+indeed-data-scientist-iii
+rockland-trust-data-architect
+navsea-sstm-data-science
+valo-health-staff-data-scientist
+cdc-foundation-data-modernization-senior-advisor
 ```
 
 ## Public-release boundaries
