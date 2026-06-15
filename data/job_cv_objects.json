@@ -142,6 +142,31 @@
         "specific sensitive systems, locations, or collection methods",
         "unsupported classroom-of-record teaching claims"
       ]
+    },
+    "cdc-foundation-data-modernization-senior-advisor": {
+      "label": "CDC Foundation - Data Modernization Senior Advisor",
+      "output_slug": "cdc_foundation_data_modernization_senior_advisor",
+      "role_family": "public health data modernization, informatics, and technical assistance",
+      "profile_emphasis": "Public-health data modernization, health informatics, reproducible analytics, workforce upskilling, data governance, and stakeholder-facing implementation support.",
+      "public_safe_focus": [
+        "public health informatics and data modernization",
+        "data lifecycle documentation and governance-aware workflows",
+        "technical assistance and workforce upskilling",
+        "interoperability and data-access framing",
+        "R and Python reproducible analytics",
+        "stakeholder-ready public health reporting"
+      ],
+      "tailoring_notes": "Emphasize public health informatics, data modernization, training-oriented documentation, technical assistance, governance-aware workflows, and partner-facing implementation support. Keep the object public-safe and do not import private application packet language.",
+      "exclusions": [
+        "direct CDC Foundation employment",
+        "direct MDHHS employment",
+        "direct local health department employment unless separately verified",
+        "formal statewide data governance authority",
+        "enterprise data platform procurement authority",
+        "data exchange agreement signature authority",
+        "private job packet language",
+        "skill-scan credentialing"
+      ]
     }
   }
 }

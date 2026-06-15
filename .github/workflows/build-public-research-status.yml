@@ -15,6 +15,7 @@ on:
           - rockland-trust-data-architect
           - navsea-sstm-data-science
           - valo-health-staff-data-scientist
+          - cdc-foundation-data-modernization-senior-advisor
   repository_dispatch:
     types:
       - living-cv-source-updated

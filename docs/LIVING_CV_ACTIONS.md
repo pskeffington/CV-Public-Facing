@@ -81,6 +81,7 @@ Selected public-safe job package:
 ```bash
 make job-cv-package JOB_OBJECT="neutral"
 make job-cv-package JOB_OBJECT="harvard-chan-director-data-analytics"
+make job-cv-package JOB_OBJECT="cdc-foundation-data-modernization-senior-advisor"
 ```
 
 Release-control and object-contract checks:
@@ -114,7 +115,10 @@ indeed-data-scientist-iii
 rockland-trust-data-architect
 navsea-sstm-data-science
 valo-health-staff-data-scientist
+cdc-foundation-data-modernization-senior-advisor
 ```
+
+The CDC Foundation object renders under the public-safe title `CDC Foundation - Data Modernization Senior Advisor`. It is intended for public health informatics, data modernization, workforce upskilling, data governance, technical assistance, and reproducible analytics framing, while excluding private packet language and unsupported employment or authority claims.
 
 Artifacts are named by selected object:
 
@@ -133,6 +137,8 @@ Use this test order:
 3. Confirm `selected-job-cv-package-neutral` contains `PUBLIC_SAFE_JOB_BRIEF.md` and `manifest.json`.
 4. Run again with `job_object=harvard-chan-director-data-analytics`.
 5. Confirm the selected package uses the Harvard Chan public-safe brief and does not expose private job packet content.
+6. Run again with `job_object=cdc-foundation-data-modernization-senior-advisor`.
+7. Confirm the selected package uses the CDC Foundation public-safe title and does not expose private application packet language.
 
 The detailed first-test note lives at:
 
@@ -185,6 +191,7 @@ python3 scripts/stem_cv_curator.py
 make public-package
 make job-cv-object-check
 make job-cv-package JOB_OBJECT="neutral"
+make job-cv-package JOB_OBJECT="cdc-foundation-data-modernization-senior-advisor"
 ```
 
 Inspect:
