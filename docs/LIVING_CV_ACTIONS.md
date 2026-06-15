@@ -118,6 +118,8 @@ valo-health-staff-data-scientist
 cdc-foundation-data-modernization-senior-advisor
 ```
 
+The CDC Foundation object renders under the public-safe title `CDC Foundation - Data Modernization Senior Advisor`. It is intended for public health informatics, data modernization, workforce upskilling, data governance, technical assistance, and reproducible analytics framing, while excluding private packet language and unsupported employment or authority claims.
+
 Artifacts are named by selected object:
 
 ```text
