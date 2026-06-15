@@ -85,7 +85,7 @@ The main workflow is:
 .github/workflows/build-public-research-status.yml
 ```
 
-It supports manual `workflow_dispatch` with a `job_object` dropdown. The dropdown builds the public CV package and then wraps it in a selected public-safe job package with a brief and manifest.
+It supports manual `workflow_dispatch` with a `job_object` dropdown. The dropdown builds the public CV package, then wraps the selected public-safe job object in a brief, manifest, and artifact bundle.
 
 Current job objects are controlled by:
 
@@ -104,6 +104,8 @@ navsea-sstm-data-science
 valo-health-staff-data-scientist
 cdc-foundation-data-modernization-senior-advisor
 ```
+
+The CDC Foundation object is titled `CDC Foundation - Data Modernization Senior Advisor` and is scoped to public-safe public health informatics, data modernization, technical assistance, workforce upskilling, data governance, and reproducible analytics framing.
 
 ## Public-release boundaries
 
