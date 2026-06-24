@@ -1,0 +1,110 @@
+# [Paul A. Skeffington, MS, MPH](https://www.linkedin.com/in/pskeffington/)
+
+**Health Data Science | Public Health Informatics | Applied Economics | Reproducible Research**  
+[paulskeffington@gmail.com](mailto:paulskeffington@gmail.com) | [GitHub: pskeffington](https://github.com/pskeffington) | [Public CV Renderer](https://github.com/pskeffington/CV-Public-Facing)
+
+_Last updated: June 23, 2026_
+
+---
+
+## Professional Summary
+
+Public-health and health-data-science professional with graduate training in applied economics, global public health, and health data science. Experienced in reproducible analytics, longitudinal research design, evidence governance, public-facing technical documentation, emergency-response coordination, correctional operations, and military analytical documentation. Current work focuses on health policy, health services research, rural and global health systems, maternal-child and life-course outcomes, cancer outcomes, WASH and infrastructure risk, and reproducible public-health data workflows.
+
+---
+
+## Core Strengths
+
+- Reproducible analytics in [R](https://www.r-project.org/), [Python](https://www.python.org/), LaTeX, GitHub Actions, Makefile workflows, JSON, and CSV data objects.
+- Health policy and health services research framing across access, quality, variation, environmental determinants, and population-health decision support.
+- Longitudinal and applied-economics research workflows, including source-to-claim documentation, model-table review, and citation verification.
+- Public-health evidence systems for WASH, rural infrastructure, terrain/access review, environmental health, and stakeholder-ready reporting.
+- Public-safe GitHub documentation and project packaging using the active [CV-Public-Facing](https://github.com/pskeffington/CV-Public-Facing) renderer.
+
+---
+
+## Education
+
+**Master of Science in Health Data Science**  
+Geisel School of Medicine, Dartmouth College | Incoming Fall 2026 class
+
+**Master of Public Health, Global Health Concentration**  
+Southern New Hampshire University | Anticipated October 2026
+
+**Master of Science, Applied Economics**  
+Southern New Hampshire University | December 2025 | [Parchment Credential](https://www.parchment.com/lp/award/0a0d3a47-57a8-4c6e-bec7-9b297c2850c3)
+
+**Bachelor of Arts, Mathematics**  
+Southern New Hampshire University | June 2019 | [Parchment Credential](https://www.parchment.com/lp/award/5b835ad2-6dc6-4eb2-b415-dc98ceded9a1?unclaimedAward=fd17d3f6-5dc0-11f1-904f-bbf79772758a)
+
+**Bachelor of Science, Information Technology**  
+Southern New Hampshire University | January 2018 | [Parchment Credential](https://www.parchment.com/lp/award/c0ac1722-1e19-4178-9615-f813ad826265)
+
+---
+
+## Selected Research and Technical Projects
+
+**Family economics, financial literacy, and fertility**  
+[Family and Economic Issues](https://github.com/pskeffington/Family_and_Economic_issues) | Under journal peer review  
+Developed reproducible longitudinal research workflows for family, fertility, financial literacy, and economic outcomes using NLSY79 data.
+
+**Rural water, wastewater, and infrastructure health risk**  
+[McDowell County Commission on Aging Inc.](https://github.com/pskeffington/McDowell-County-Commission-on-Aging-Inc.) | In preparation  
+Organized public-health infrastructure evidence, terrain/access context, and environmental-health documentation for rural risk assessment and public-health manuscript development.
+
+**Humanitarian WASH and health-system disruption**  
+[Gaza-WASH](https://github.com/pskeffington/Gaza-WASH) | Methods-note candidate  
+Built a public-safe assessment framework connecting WASH, displacement, environmental health, and health-system disruption sources.
+
+**Biomedical data science methods**  
+[ECG Denoising](https://github.com/pskeffington/ECG-denoising), [PET Noise Radiomics Robustness](https://github.com/pskeffington/pet-noise-radiomics-robustness), [Machine Learning Lab](https://github.com/pskeffington/ml-lab), and [Best Practices Git](https://github.com/pskeffington/Best-Practices-Git) | Developing  
+Built early-stage public-data scaffolds for ECG signal quality, PET imaging robustness, machine-learning evaluation, and responsible research practice.
+
+**Cancer outcomes and end-of-life care**  
+[Cancer EOL Death Place Typologies](https://github.com/pskeffington/cancer-eol-death-place-typologies) | Developing  
+Designed an open-data scaffold for examining place-of-death patterns, cancer care, and end-of-life quality variation.
+
+**Public-history and archive indexing**  
+[St. Bonaventure](https://github.com/pskeffington/St.-Bonaventure) | Active archive build  
+Applied transcription, entity modeling, provenance notes, and uncertainty flags to public-history and Catholic material-culture records.
+
+---
+
+## Professional Experience
+
+**American Red Cross — Regional Disaster Dispatcher**  
+Boston Regional Operations | 2020-2022  
+- Coordinated disaster-response dispatch, incident triage, team activation, and escalation workflows for urgent community-response needs.
+- Supported documentation discipline, time-sensitive communication, and response continuity across regional operations.
+
+**Massachusetts Department of Correction — Correction Officer I**  
+Massachusetts Alcohol and Substance Abuse Center | 2013-2019  
+- Maintained safety, accountability, confidentiality, documentation, and emergency response in post-detox and infirmary operations.
+- Supported secure institutional care through structured reporting, shift accountability, and de-escalation-oriented operational conduct.
+
+**United States Air Force — Fusion Analyst**  
+Joint Base Cape Cod | 2007-2013  
+- Produced structured analytical documentation in complex information environments to support formal review, mission continuity, and decision-ready reporting.
+- Built public-service experience in technical documentation, evidence handling, and mission-oriented communication.
+
+---
+
+## Honors and Recognition
+
+**Dartmouth Scholar, Geisel School of Medicine, Dartmouth College** | 2026  
+Recognized for dedication to improving health outcomes within the incoming health data science cohort.
+
+**Student Squadron Commander and Chapel Guide, United States Air Force** | 2007  
+Led technical-training and chapel-support responsibilities at Goodfellow Air Force Base.
+
+---
+
+## Technical Skills
+
+**Analytics and data:** R, Python, regression modeling, longitudinal data design, sensitivity diagnostics, source-to-claim review, table review, citation verification.
+
+**Reproducibility and documentation:** LaTeX, GitHub Actions, Makefile workflows, structured Markdown, JSON/CSV data objects, public-release guardrails, public package generation.
+
+**Public-health systems:** WASH evidence, rural infrastructure, environmental-health documentation, GIS screening, terrain/access indexing, population-health decision support.
+
+**Technical infrastructure:** Linux, Raspberry Pi, SDR/GNSS/sensor inputs, UniFi network infrastructure, repository documentation for field-oriented data operations.
