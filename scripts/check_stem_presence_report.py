@@ -36,10 +36,11 @@ class StemPresenceReportChecker:
         "# STEM Presence Report",
         "## Portfolio summary",
         "## Band counts",
+        "## Valuation bands",
         "## Project scores",
     ]
 
-    REQUIRED_TABLE_HEADER = "| Project | Repository | Section | Maturity | STEM score | Drift score | Band | Rationale |"
+    REQUIRED_TABLE_HEADER = "| Project | Repository | Section | Maturity | STEM score | Drift score | Valuation signal | Valuation band | Band | Valuation basis | Rationale |"
 
     def __init__(self, report_path: Path = REPORT_PATH, objects_path: Path = OBJECTS_PATH) -> None:
         self.report_path = report_path
@@ -52,6 +53,7 @@ class StemPresenceReportChecker:
         if text:
             self._check_sections(text, errors)
             self._check_summary(text, errors)
+            self._check_valuation_rows(text, errors)
         project_rows = self._count_project_rows(text)
         if expected_projects and project_rows != expected_projects:
             errors.append(f"Expected {expected_projects} project score rows, found {project_rows}")
@@ -85,11 +87,35 @@ class StemPresenceReportChecker:
             errors.append("Missing project score table header")
 
     def _check_summary(self, text: str, errors: list[str]) -> None:
-        for label in ["Project count", "Average STEM presence score", "Average drift score"]:
+        for label in [
+            "Project count",
+            "Average STEM presence score",
+            "Average drift score",
+            "Average valuation signal",
+        ]:
             if label not in text:
                 errors.append(f"Missing summary label: {label}")
         if not re.search(r"- `[^`]+`: \d+", text):
             errors.append("Missing band count entries")
+
+    def _check_valuation_rows(self, text: str, errors: list[str]) -> None:
+        valid_bands = {"market_ready", "near_market", "developing_asset", "training_stage"}
+        for line in text.splitlines():
+            if not line.startswith("| ") or line.startswith("| Project ") or line.startswith("|---"):
+                continue
+            cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+            if len(cells) != 11:
+                errors.append(f"Project row should have 11 columns: {line}")
+                continue
+            signal = cells[6]
+            band = cells[7]
+            basis = cells[9]
+            if not signal.isdigit() or not 0 <= int(signal) <= 100:
+                errors.append(f"Invalid valuation signal: {signal}")
+            if band not in valid_bands:
+                errors.append(f"Invalid valuation band: {band}")
+            if "skill/STEM score=" not in basis:
+                errors.append("Missing valuation basis score trace")
 
     @staticmethod
     def _count_project_rows(text: str) -> int:
