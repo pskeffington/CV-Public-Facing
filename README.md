@@ -6,9 +6,42 @@ The repository is intentionally public. It must contain only public-safe source 
 
 **Maintainer:** Paul Skeffington, MS, MPH  
 **Repository status:** active public-safe CV and research-status renderer.  
-**Last documentation refresh:** 2026-06-14
+**Last documentation refresh:** 2026-07-03
 
-## Current operating model
+## Public-Interest Research Boundary
+
+This repository is maintained for public-interest research, scholarly documentation, reproducible professional presentation, and public-safe portfolio evidence. It supports transparent CV generation, verified public project summaries, source-ledgered claims, and human-reviewed career or scholarship materials.
+
+It does not publish private job packets, private source records, restricted project-family names, secrets, credentials, private paths, sensitive implementation details, private review scores, or automated hiring decisions. Outputs are intended to support documentation, quality review, and public scholarly presentation.
+
+## Current Research Status
+
+This repository is part of a broader public-interest portfolio focused on civic technology, public health documentation, open-data methods, reproducible analytical workflows, and scholarly dissemination.
+
+Current work emphasizes public-safe rendering, source-bounded claims, transparent limitations, and human-reviewed outputs. The repository is not positioned as an automated decision system. Its present value rests on reusable rendering structure, release checks, public artifacts, and potential extension into validated scholarly or professional workflows.
+
+### Current Stage
+
+- Stage: Active public renderer / professional evidence surface
+- Evidence status: Internal repository evidence available; public outputs generated through build workflow
+- Data status: Public-safe source text, public project summaries, generated artifacts, and non-sensitive build metadata only
+- Primary limitation: Requires continued release review as portfolio projects mature
+
+### Recent Progress
+
+- README framing revised toward public-facing scholarly presentation
+- Public-release boundaries preserved and clarified
+- Research-status and job-package language kept source-bounded and review-gated
+- Internal scoring remains excluded from public PDFs
+
+### Next Actions
+
+- Keep public allowlist current
+- Confirm public PDFs render from source-bounded artifacts
+- Add release-review receipts where appropriate
+- Connect outputs to the portfolio evidence ledger
+
+## Current Operating Model
 
 `CV-Public-Facing` is the public renderer in the broader CV and application ecosystem.
 
@@ -23,7 +56,7 @@ The public project register is an allowlist by default. The renderer reads `data
 
 Internal scoring remains a build-review aid only. It does not belong in final public PDFs. The public research-status report ends with a skill-scan appendix that summarizes market-ready skill demonstrations and separates developing skills into a training-stage section.
 
-## Build outputs
+## Build Outputs
 
 Generated PDF paths:
 
@@ -52,7 +85,7 @@ Selected job-package outputs are written under:
 dist/job_cv_packages/<selected-job>/
 ```
 
-## Main commands
+## Main Commands
 
 Build the neutral public package:
 
@@ -107,9 +140,9 @@ cdc-foundation-data-modernization-senior-advisor
 
 The CDC Foundation object is titled `CDC Foundation - Data Modernization Senior Advisor` and is scoped to public-safe public health informatics, data modernization, technical assistance, workforce upskilling, data governance, and reproducible analytics framing.
 
-## Public-release boundaries
+## Public-Release Boundaries
 
-This repository should not contain private job packets, private source records, restricted project-family names, secrets, credentials, private paths, or sensitive operational details.
+This repository should not contain private job packets, private source records, restricted project-family names, secrets, credentials, private paths, or sensitive implementation details.
 
 Public outputs may include only projects that satisfy all of the following:
 
@@ -121,7 +154,7 @@ Public outputs may include only projects that satisfy all of the following:
 
 Internal scores and review metrics may remain in generated object JSON or internal ledgers, but they should not render into public PDFs. Public skill evidence should be presented only as a skill-scan appendix with mature skills listed as market-ready and developing skills listed as training-stage.
 
-## Start here
+## Start Here
 
 Read the public release roadmap:
 
@@ -147,7 +180,7 @@ Read the object schema:
 docs/STEM_CV_OBJECT_SCHEMA.md
 ```
 
-## Clone and run for another public profile
+## Clone and Run for Another Public Profile
 
 ```bash
 git clone https://github.com/pskeffington/CV-Public-Facing.git public-cv-renderer
@@ -158,7 +191,7 @@ ls documents/
 
 The filenames are configured for this profile by default and can be renamed in the Makefile for another user.
 
-## Object engine
+## Object Engine
 
 The main object-generation entry point is:
 
@@ -182,6 +215,6 @@ The curator:
 6. writes public LaTeX/Markdown render inputs without internal score labels;
 7. writes release-control ledgers using non-sensitive identifiers.
 
-## Development notes
+## Development Notes
 
 The repo has no Python package manager file at this time. Build and validation are Makefile-driven. Generated public PDFs are workflow artifacts and are not pushed back to `main` by the workflow.
