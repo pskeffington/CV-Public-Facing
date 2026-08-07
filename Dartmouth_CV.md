@@ -1,4 +1,4 @@
-# Paul A. Skeffington, MS
+# Paul A. Skeffington, MS, MPH
 
 Health Policy | Health Services Research | Health Data Science | Rural and Global Health | Applied Economics
 
@@ -10,7 +10,7 @@ paulskeffington@gmail.com | GitHub: pskeffington
 Master of Science in Health Data Science, incoming Fall 2026 class
 
 **Southern New Hampshire University**  
-Master of Public Health, Global Health Concentration — degree requirements completed; conferment pending
+Master of Public Health, Global Health Concentration — degree requirements completed; conferral pending
 
 **Southern New Hampshire University**  
 Master of Science, Applied Economics, December 2025
