@@ -6,7 +6,7 @@ The repository is intentionally public. It must contain only public-safe source 
 
 **Maintainer:** Paul Skeffington, MS, MPH  
 **Repository status:** active public-safe CV and research-status renderer.  
-**Last documentation refresh:** 2026-07-03
+**Last documentation refresh:** 2026-08-06
 
 ## Public-Interest Research Boundary
 
@@ -23,23 +23,26 @@ Current work emphasizes public-safe rendering, source-bounded claims, transparen
 ### Current Stage
 
 - Stage: Active public renderer / professional evidence surface
-- Evidence status: Internal repository evidence available; public outputs generated through build workflow
+- Evidence status: Public project summaries and source-bounded CV claims are maintained through the public allowlist and release controls
 - Data status: Public-safe source text, public project summaries, generated artifacts, and non-sensitive build metadata only
-- Primary limitation: Requires continued release review as portfolio projects mature
+- Primary limitation: Requires continued release review as portfolio projects mature and authenticated cross-repository validation is completed upstream
 
 ### Recent Progress
 
-- README framing revised toward public-facing scholarly presentation
-- Public-release boundaries preserved and clarified
-- Research-status and job-package language kept source-bounded and review-gated
-- Internal scoring remains excluded from public PDFs
+- Public research entries reconciled against the private CV claim ledger and current Portfolio evidence state
+- NLSY79 status retained as under peer review with reproducible model and sample-audit language
+- McDowell rural water/wastewater work promoted to active / pending validation with explicit source and validation limits
+- Humanitarian WASH work separated from rural infrastructure work to keep methods and application claims distinct
+- Evidence-governance language updated to reflect implemented manifest schemas, deterministic checks, repository-state reconciliation, exception handling, and public-release controls
+- Public-release boundaries preserved; internal valuation and scoring remain excluded from public CV outputs
 
 ### Next Actions
 
-- Keep public allowlist current
-- Confirm public PDFs render from source-bounded artifacts
+- Rebuild the neutral public package from the reconciled sources
+- Review rendered PDFs for claim, status, and layout consistency
+- Keep `data/pipeline_repos.json` synchronized with mature public project evidence
 - Add release-review receipts where appropriate
-- Connect outputs to the portfolio evidence ledger
+- Replace older Google Drive distribution copies with date-stamped exports from the reconciled build
 
 ## Current Operating Model
 
@@ -178,6 +181,12 @@ Read the object schema:
 
 ```text
 docs/STEM_CV_OBJECT_SCHEMA.md
+```
+
+Read the CV/Portfolio synchronization status:
+
+```text
+docs/CV_PORTFOLIO_SYNC_STATUS.md
 ```
 
 ## Clone and Run for Another Public Profile
