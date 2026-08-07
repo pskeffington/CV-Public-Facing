@@ -72,12 +72,12 @@
       "key": "mcdowell-water-infrastructure",
       "repo": "pskeffington/McDowell-County-Commission-on-Aging-Inc.",
       "title": "Rural water, wastewater, and infrastructure health risk",
-      "status": "Active / pending validation",
-      "summary": "Public-health infrastructure project organizing terrain, access, wastewater, and stakeholder evidence for rural risk review and decision support.",
-      "needs": "Official water-quality confirmation; utility/source-holder records; final variable-confidence ledger.",
+      "status": "Customer-facing project completed and accepted / final oral-media delivery pending",
+      "summary": "Completed applied public-health infrastructure project integrating terrain, access, wastewater, stakeholder, and implementation evidence for rural risk review and decision support. Customer-facing analytical and written deliverables have been accepted; the remaining required phase is oral/media presentation.",
+      "needs": "Complete final oral/media delivery. Treat manuscript refinement, additional GIS validation, and source-verification work as optional scholarly extensions rather than customer-completion blockers.",
       "cv_section": "current",
       "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
+      "source_files": ["README.md", "PROJECT_STATUS.md", "docs/PROJECT_COMPLETION_UPDATE_2026-08-06.md"]
     },
     {
       "key": "gaza-wash",
