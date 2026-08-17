@@ -5,10 +5,7 @@
     "include_public_repos": true,
     "include_private_repos": false,
     "allow_recursive_intake": false,
-    "exclude_repos": [
-      "CV-Public-Facing",
-      "CV"
-    ],
+    "exclude_repos": ["CV-Public-Facing", "CV"],
     "blocked_repo_hashes": [
       "61bf1598863c4f9fadf23990885511f2cb02f503a8f53774a6aa2de41d7db608",
       "76c4bfe8a912b35346d0674a3b328bbaadf2e152b8c487cee5ed32d0a32a1a0a",
@@ -35,6 +32,17 @@
     "default_section": "intake"
   },
   "repos": [
+    {
+      "key": "cart-trace",
+      "repo": "pskeffington/CART-TRACE",
+      "title": "Longitudinal CAR T-cell care-trajectory reconstruction",
+      "status": "Final public scholarly freeze / methodological readiness",
+      "summary": "Synthetic-first translational health data science framework for reproducibly reconstructing post-infusion hospital level-of-care trajectories, utilization measures, provenance, missingness, and uncertainty following CAR T-cell therapy.",
+      "needs": "Preserve the frozen public scholarly package; treat any institutional clinical-data extension as separately governed work requiring independent approvals and source mapping.",
+      "cv_section": "current",
+      "public_release": "public",
+      "source_files": ["README.md", "THESIS.md", "ROADMAP.md", "docs/scholarly/final_public_scholarly_freeze.md"]
+    },
     {
       "key": "nlsy79-family-economics",
       "repo": "pskeffington/Family_and_Economic_issues",
