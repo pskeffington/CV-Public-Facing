@@ -6,7 +6,7 @@ The repository is intentionally public. It must contain only public-safe source 
 
 **Maintainer:** Paul Skeffington, MS, MPH  
 **Repository status:** active public-safe CV and research-status renderer.  
-**Last documentation refresh:** 2026-08-06
+**Last documentation refresh:** 2026-08-17
 
 ## Public-Interest Research Boundary
 
@@ -16,40 +16,45 @@ It does not publish private job packets, private source records, restricted proj
 
 ## Current Research Status
 
-This repository is part of a broader public-interest portfolio focused on civic technology, public health documentation, open-data methods, reproducible analytical workflows, and scholarly dissemination.
+The current public portfolio is centered on translational health data science, longitudinal clinical data, biomedical signal and imaging methods, public-health systems research, reproducible analytics, and source-bounded evidence translation.
 
-Current work emphasizes public-safe rendering, source-bounded claims, transparent limitations, and human-reviewed outputs. The repository is not positioned as an automated decision system. Its present value rests on reusable rendering structure, release checks, public artifacts, and potential extension into validated scholarly or professional workflows.
+**CART-TRACE is the principal public translational-health data-science anchor.** Its public scholarly package has reached final freeze status after synthetic-first development of deterministic post-infusion hospital care-trajectory reconstruction, utilization metrics, provenance-preserving transformations, explicit missingness behavior, and reproducibility controls. The project is retrospective and descriptive and does not function as clinical decision support.
+
+Current work in this repository emphasizes public-safe rendering, source-bounded claims, transparent limitations, and human-reviewed outputs. The renderer does not promote a public CV claim unless the corresponding project is explicitly allowlisted and passes public-release controls.
 
 ### Current Stage
 
 - Stage: Active public renderer / professional evidence surface
 - Evidence status: Public project summaries and source-bounded CV claims are maintained through the public allowlist and release controls
+- Primary translational-health evidence source: `pskeffington/CART-TRACE`
 - Data status: Public-safe source text, public project summaries, generated artifacts, and non-sensitive build metadata only
 - Primary limitation: Requires continued release review as portfolio projects mature and authenticated cross-repository validation is completed upstream
 
 ### Recent Progress
 
-- Public research entries reconciled against the private CV claim ledger and current Portfolio evidence state
-- NLSY79 status retained as under peer review with reproducible model and sample-audit language
-- McDowell rural water/wastewater work promoted to active / pending validation with explicit source and validation limits
-- Humanitarian WASH work separated from rural infrastructure work to keep methods and application claims distinct
-- Evidence-governance language updated to reflect implemented manifest schemas, deterministic checks, repository-state reconciliation, exception handling, and public-release controls
-- Public-release boundaries preserved; internal valuation and scoring remain excluded from public CV outputs
+- Added CART-TRACE to the public project allowlist at final public scholarly-freeze status
+- Reframed the public portfolio around longitudinal clinical data, translational health data science, reproducible evidence, biomedical methods, and public-health systems analysis
+- Removed the legacy NAVSEA public job object and its GitHub Actions selector to keep the public renderer research- and civilian-facing
+- Public research entries remain source-ledgered and bounded by upstream evidence state
+- NLSY79 status remains under peer review with reproducible model and sample-audit language
+- McDowell rural water/wastewater work remains a completed applied public-health project with final oral/media delivery tracked separately
+- Humanitarian WASH work remains separated from rural infrastructure work so methods and application claims do not collapse into one evidence object
+- Public-release boundaries remain enforced; internal valuation and scoring do not render into public CV outputs
 
 ### Next Actions
 
-- Rebuild the neutral public package from the reconciled sources
-- Review rendered PDFs for claim, status, and layout consistency
+- Rebuild the neutral public package from the reconciled CART-TRACE-aware sources
+- Review rendered PDFs for translational-health positioning, claim status, and layout consistency
 - Keep `data/pipeline_repos.json` synchronized with mature public project evidence
 - Add release-review receipts where appropriate
-- Replace older Google Drive distribution copies with date-stamped exports from the reconciled build
+- Replace older distribution copies with date-stamped exports from the reconciled build
 
 ## Current Operating Model
 
 `CV-Public-Facing` is the public renderer in the broader CV and application ecosystem.
 
 ```text
-private CV claim controls
+validated public research evidence
   -> public-safe CV/status rendering
   -> public portfolio surfaces
   -> application/job package alignment
@@ -136,8 +141,8 @@ neutral
 harvard-chan-director-data-analytics
 indeed-data-scientist-iii
 rockland-trust-data-architect
-navsea-sstm-data-science
 valo-health-staff-data-scientist
+unh-adjunct-homeland-security
 cdc-foundation-data-modernization-senior-advisor
 ```
 
