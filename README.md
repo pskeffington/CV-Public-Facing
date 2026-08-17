@@ -6,7 +6,7 @@ The repository is intentionally public. It must contain only public-safe source 
 
 **Maintainer:** Paul Skeffington, MS, MPH  
 **Repository status:** active public-safe CV and research-status renderer.  
-**Last documentation refresh:** 2026-08-06
+**Last documentation refresh:** 2026-08-17
 
 ## Public-Interest Research Boundary
 
@@ -35,6 +35,7 @@ Current work emphasizes public-safe rendering, source-bounded claims, transparen
 - Humanitarian WASH work separated from rural infrastructure work to keep methods and application claims distinct
 - Evidence-governance language updated to reflect implemented manifest schemas, deterministic checks, repository-state reconciliation, exception handling, and public-release controls
 - Public-release boundaries preserved; internal valuation and scoring remain excluded from public CV outputs
+- Public README examples narrowed to civic, health, research, and general professional applications
 
 ### Next Actions
 
@@ -129,14 +130,13 @@ Current job objects are controlled by:
 data/job_cv_objects.json
 ```
 
-Current selectable objects include:
+Public README examples include:
 
 ```text
 neutral
 harvard-chan-director-data-analytics
 indeed-data-scientist-iii
 rockland-trust-data-architect
-navsea-sstm-data-science
 valo-health-staff-data-scientist
 cdc-foundation-data-modernization-senior-advisor
 ```
