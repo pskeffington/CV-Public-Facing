@@ -113,13 +113,14 @@
     {
       "key": "ecg-denoising",
       "repo": "pskeffington/ECG-denoising",
-      "title": "Medical-signal noise reduction",
-      "status": "Early-stage topic selection",
-      "summary": "Early biomedical methods project focused on ECG signal quality, open-data selection, and reproducible benchmark design.",
-      "needs": "Select dataset; define noise classes; benchmark methods; create results table.",
-      "cv_section": "methods",
+      "title": "ECG signal-quality and morphology-preservation benchmarking",
+      "status": "Active executable biomedical benchmark scaffold / real-data path implemented",
+      "summary": "Reproducible biomedical signal-processing benchmark framework with synthetic validation and an executable PhysioNet NSTDB/WFDB real-data pathway for evaluating signal-quality improvement and morphology preservation under explicit non-clinical boundaries.",
+      "needs": "Execute and review a bounded NSTDB baseline table; freeze a public-safe benchmark-result evidence packet with dataset/version, method parameters, sample bounds, metric definitions, and morphology-preservation validation.",
+      "cv_section": "biomedical_data",
+      "priority": 20,
       "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md"]
+      "source_files": ["README.md", "PROJECT_STATUS.md", "scripts/run_nstdb_real_benchmark.py"]
     },
     {
       "key": "pet-radiomics",
