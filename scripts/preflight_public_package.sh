@@ -100,8 +100,10 @@ done
 # These pointers must match the repository-object titles emitted by
 # scripts/stem_cv_curator.py from data/pipeline_repos.json. Keeping the guard
 # aligned with the generated object layer prevents stale legacy taxonomy strings
-# from blocking otherwise valid public package builds.
+# from blocking otherwise valid public package builds and ensures the principal
+# translational-health anchor cannot silently disappear from generated outputs.
 for project in \
+  "Longitudinal CAR T-cell care-trajectory reconstruction" \
   "Life-course data, family economics, and fertility" \
   "Machine-learning publication best practices" \
   "Machine-learning lab" \
