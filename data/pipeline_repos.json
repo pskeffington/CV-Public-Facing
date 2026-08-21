@@ -36,9 +36,9 @@
       "key": "cart-trace",
       "repo": "pskeffington/CART-TRACE",
       "title": "Longitudinal CAR T-cell care-trajectory reconstruction",
-      "status": "Publication ready / final public scholarly freeze / methodological readiness",
-      "summary": "Synthetic-first translational health data science framework for reproducibly reconstructing post-infusion hospital level-of-care trajectories, utilization measures, provenance, missingness, and uncertainty following CAR T-cell therapy.",
-      "needs": "Preserve the frozen public scholarly package; treat any institutional clinical-data extension as separately governed work requiring independent approvals and source mapping.",
+      "status": "Publication ready / final public scholarly freeze / synthetic methodological validation",
+      "summary": "Synthetic-first translational health data science framework for reproducibly reconstructing 30-day post-infusion hospital level-of-care trajectories, utilization measures, provenance, missingness, and uncertainty following CAR T-cell therapy.",
+      "needs": "Preserve the frozen public capstone package. Keep the administrative access-gating extension separately labeled as developing synthetic methods research and do not promote it as clinical eligibility, payer authorization, or treatment-readiness capability.",
       "cv_section": "biomedical_data",
       "priority": 0,
       "public_release": "public",
@@ -48,87 +48,65 @@
       "key": "nlsy79-family-economics",
       "repo": "pskeffington/Family_and_Economic_issues",
       "title": "Life-course data, family economics, and fertility",
-      "status": "Submitted / journal peer review",
-      "summary": "Longitudinal manuscript project examining family, fertility, and economic outcomes with reproducible modeling, table review, and source-to-claim documentation.",
-      "needs": "Track journal correspondence; preserve reviewer-response planning; maintain model-table and citation-audit parity.",
+      "status": "Pre-submission manuscript cleanup / blinded-package review",
+      "summary": "Longitudinal manuscript project examining family formation, financial preparedness, birth-control education, and completed fertility with reproducible NLSY79 modeling, table review, and source-to-claim documentation.",
+      "needs": "Complete citation verification, model-table parity checks, blinded-package review, and journal submission controls.",
       "cv_section": "current",
       "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md", "REPRODUCIBILITY.md"]
+      "source_files": ["README.md", "REPRODUCIBILITY.md"]
     },
     {
       "key": "machine-learning-best-practices",
       "repo": "pskeffington/Best-Practices-Git",
       "title": "Machine-learning publication best practices",
       "status": "Active best-practices scaffold",
-      "summary": "Public methods guide for responsible machine-learning research practice, with emphasis on source records, review gates, and transparent reporting.",
+      "summary": "Public methods guide for responsible machine-learning research practice, with emphasis on source records, review gates, reproducibility, and transparent reporting.",
       "needs": "Expand review-gate templates, source-registry examples, citation-verification notes, and lightweight structure checks.",
       "cv_section": "methods",
       "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
-    },
-    {
-      "key": "machine-learning-lab",
-      "repo": "pskeffington/ml-lab",
-      "title": "Machine-learning lab",
-      "status": "Active machine-learning methods repository",
-      "summary": "Public workspace for applied machine-learning experiments, reproducible project structure, benchmark planning, and evaluation documentation.",
-      "needs": "Add source manifest, model-card template, benchmark target, validation checks, and public-safe results boundary.",
-      "cv_section": "methods",
-      "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
-    },
-    {
-      "key": "mcdowell-water-infrastructure",
-      "repo": "pskeffington/McDowell-County-Commission-on-Aging-Inc.",
-      "title": "Rural water, wastewater, and infrastructure health risk",
-      "status": "Customer-facing project completed and accepted / final oral-media delivery pending",
-      "summary": "Completed applied public-health infrastructure project integrating terrain, access, wastewater, stakeholder, and implementation evidence for rural risk review and decision support. Customer-facing analytical and written deliverables have been accepted; the remaining required phase is oral/media presentation.",
-      "needs": "Complete final oral/media delivery. Treat manuscript refinement, additional GIS validation, and source-verification work as optional scholarly extensions rather than customer-completion blockers.",
-      "cv_section": "current",
-      "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md", "docs/PROJECT_COMPLETION_UPDATE_2026-08-06.md"]
+      "source_files": ["README.md"]
     },
     {
       "key": "gaza-wash",
       "repo": "pskeffington/Gaza-WASH",
       "title": "Humanitarian WASH and health-system disruption",
-      "status": "Presentation complete / methods-note candidate",
-      "summary": "Public humanitarian assessment framework connecting WASH, displacement, environmental-health, and health-system disruption sources for methods-note development.",
-      "needs": "Dated source manifest; limitations section; separation of indexed inputs from interpretive claims.",
+      "status": "Source-bounded secondary-data research / methods-note candidate",
+      "summary": "Humanitarian public-health research framework connecting WASH, displacement, environmental-health, and health-system disruption sources using descriptive, source-bounded secondary-data methods.",
+      "needs": "Maintain dated source manifests, explicit limitations, and separation of indexed inputs from interpretive claims.",
       "cv_section": "current",
       "public_release": "public",
-      "source_files": ["README.md", "CHANGELOG.md", "docs/data_inventory.md"]
+      "source_files": ["README.md", "docs/data_inventory.md"]
     },
     {
       "key": "haiti-nippes",
       "repo": "pskeffington/Haiti-nippes",
-      "title": "Haiti Nippes public-health and infrastructure assessment",
-      "status": "Intake-stage public repository",
-      "summary": "Public intake workspace for regional public-health, infrastructure, and humanitarian assessment planning.",
-      "needs": "Complete source manifest, project boundary, claim controls, and intended public output.",
-      "cv_section": "intake",
+      "title": "Haiti Nippes public-health systems research",
+      "status": "Active source-bounded regional public-health research",
+      "summary": "Regional public-health systems research examining recovery, WASH resilience, health access, food security, infrastructure fragility, and rural service delivery through public and secondary sources.",
+      "needs": "Continue source verification, uncertainty documentation, and public-safe methods development without operational field claims.",
+      "cv_section": "current",
       "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md"]
+      "source_files": ["README.md"]
     },
     {
       "key": "ecg-denoising",
       "repo": "pskeffington/ECG-denoising",
       "title": "ECG signal-quality and morphology-preservation benchmarking",
-      "status": "Active executable biomedical benchmark scaffold / real-data path implemented",
-      "summary": "Reproducible biomedical signal-processing benchmark framework with synthetic validation and an executable PhysioNet NSTDB/WFDB real-data pathway for evaluating signal-quality improvement and morphology preservation under explicit non-clinical boundaries.",
-      "needs": "Execute and review a bounded NSTDB baseline table; freeze a public-safe benchmark-result evidence packet with dataset/version, method parameters, sample bounds, metric definitions, and morphology-preservation validation.",
+      "status": "Executable Phase 1 benchmark pathway / comparative freeze pending",
+      "summary": "Reproducible non-clinical biomedical signal-processing benchmark framework with synthetic validation, an executable PhysioNet NSTDB/WFDB path, and explicit evidence-freeze controls.",
+      "needs": "Complete and review the bounded Phase 1 benchmark freeze, row-count reconciliation, result hashing, rerun agreement, and morphology-preservation gate before comparative claims.",
       "cv_section": "biomedical_data",
       "priority": 20,
       "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md", "scripts/run_nstdb_real_benchmark.py"]
+      "source_files": ["README.md", "docs/BENCHMARK_FREEZE_PROTOCOL.md", "scripts/run_nstdb_real_benchmark.py"]
     },
     {
       "key": "pet-radiomics",
       "repo": "pskeffington/pet-noise-radiomics-robustness",
       "title": "PET noise and radiomics robustness",
-      "status": "Early-stage scaffold",
-      "summary": "Biomedical imaging scaffold for studying PET noise, lesion segmentation, and radiomics feature stability using public-data methods.",
-      "needs": "Select public PET/CT dataset; define perturbation protocol; separate exploratory claims from validated results.",
+      "status": "Pre-analysis research scaffold / manuscript preparation",
+      "summary": "Biomedical imaging research scaffold for studying PET/CT lesion radiomics stability under simulated image-noise perturbations using public-data methods.",
+      "needs": "Finalize public dataset selection and perturbation protocol; keep robustness-performance and clinical claims gated on validated analysis.",
       "cv_section": "methods",
       "public_release": "public",
       "source_files": ["README.md", "docs/analysis_plan.md", "docs/data_sources.md"]
@@ -136,46 +114,35 @@
     {
       "key": "cancer-eol",
       "repo": "pskeffington/cancer-eol-death-place-typologies",
-      "title": "Cancer end-of-life typologies",
-      "status": "Early-stage topic selection",
-      "summary": "Open-data research scaffold for examining place-of-death patterns, cancer care, and end-of-life quality variation.",
-      "needs": "Identify dataset; define typology outcome; map variables; avoid unsupported causal framing.",
+      "title": "Cancer end-of-life death-place typologies",
+      "status": "Open-data manuscript scaffold / source validation",
+      "summary": "Health-services research scaffold for classifying U.S. county-level cancer end-of-life death-place typologies and examining associations with hospice access, healthcare supply, rurality, socioeconomic context, and regional care intensity.",
+      "needs": "Create auditable source manifests, county-year construction protocol, place-of-death variable map, suppression review, and reproducibility checks before manuscript-weight findings.",
       "cv_section": "methods",
       "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md"]
+      "source_files": ["README.md"]
     },
     {
-      "key": "phep-practicum",
-      "repo": "pskeffington/Public-Health-Emergency-Preparedness---Dartmouth-Health",
-      "title": "Public-health emergency preparedness and practicum reporting",
-      "status": "Public report artifacts / intake needed",
-      "summary": "Public-facing preparedness and practicum reporting workspace for emergency-response documentation and applied public-health evidence packaging.",
-      "needs": "Add source manifests, project boundaries, and public-safe deliverable targets.",
-      "cv_section": "intake",
+      "key": "wash-systems",
+      "repo": "pskeffington/WASH",
+      "title": "WASH systems, watershed stress, and spatial equity",
+      "status": "Active environmental-health and spatial-equity research",
+      "summary": "Public research workspace for WASH systems, watershed stress, service reliability, governance, environmental health, GIS, and spatial equity using source-bounded public data and research observation methods.",
+      "needs": "Continue source verification, reproducible indicator development, and clear separation between research observations and operational infrastructure decisions.",
+      "cv_section": "current",
       "public_release": "public",
-      "source_files": ["README.md", "docs/source_catalog.md"]
-    },
-    {
-      "key": "practicum-report",
-      "repo": "pskeffington/Practicum-Report",
-      "title": "Public-health practicum report",
-      "status": "Public report artifact",
-      "summary": "Applied public-health report repository supporting evidence organization, practicum writing, and public-facing deliverable development.",
-      "needs": "Confirm public-safe source boundaries, update report status, and link outputs into the CV research board.",
-      "cv_section": "intake",
-      "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md", "ROADMAP.md"]
+      "source_files": ["README.md"]
     },
     {
       "key": "st-bonaventure-archive",
       "repo": "pskeffington/St.-Bonaventure",
-      "title": "Catholic archive and public-history indexing",
-      "status": "Active archive build",
-      "summary": "Public-history archive project using visible-label transcription, entity modeling, provenance notes, and uncertainty flags for Catholic material culture records.",
-      "needs": "Complete section index; distinguish devotional tradition from verified history; add uncertainty flags.",
+      "title": "Catholic reliquary archival and public-history research",
+      "status": "Active archival, provenance, and public-history research",
+      "summary": "Public-history research project using visible-label transcription, structured cataloging, image provenance, entity modeling, source verification, and uncertainty controls for Catholic material culture records.",
+      "needs": "Continue documentary provenance review and keep visible-label transcription distinct from relic identity, authenticity, or ecclesiastical determination.",
       "cv_section": "archive",
       "public_release": "public",
-      "source_files": ["README.md", "PROJECT_STATUS.md"]
+      "source_files": ["README.md"]
     }
   ]
 }
