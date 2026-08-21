@@ -6,7 +6,7 @@ The repository is intentionally public. It must contain only public-safe source 
 
 **Maintainer:** Paul Skeffington, MS, MPH  
 **Repository status:** active public-safe CV and research-status renderer.  
-**Last documentation refresh:** 2026-08-17
+**Last documentation refresh:** 2026-08-21
 
 ## Public-Interest Research Boundary
 
@@ -18,7 +18,9 @@ It does not publish private job packets, private source records, restricted proj
 
 The current public portfolio is centered on translational health data science, longitudinal clinical data, biomedical signal and imaging methods, public-health systems research, reproducible analytics, and source-bounded evidence translation.
 
-**CART-TRACE is the principal public translational-health data-science anchor.** Its public scholarly package has reached final freeze status after synthetic-first development of deterministic post-infusion hospital care-trajectory reconstruction, utilization metrics, provenance-preserving transformations, explicit missingness behavior, and reproducibility controls. The project is retrospective and descriptive and does not function as clinical decision support.
+**CART-TRACE is the principal public translational-health data-science anchor.** Its public capstone package has reached final scholarly freeze after synthetic-first development of deterministic 30-day post-infusion hospital care-trajectory reconstruction, utilization metrics, provenance-preserving transformations, explicit missingness behavior, reproducibility controls, and computational validation against controlled synthetic truth. The project remains retrospective and descriptive and does not function as clinical decision support.
+
+CART-TRACE also contains a separate synthetic administrative access-gating research extension. That extension is tracked as a developing methods object and is not promoted here as evidence of clinical eligibility determination, payer authorization, financial clearance, treatment readiness, or institutional workflow validation.
 
 Current work in this repository emphasizes public-safe rendering, source-bounded claims, transparent limitations, and human-reviewed outputs. The renderer does not promote a public CV claim unless the corresponding project is explicitly allowlisted and passes public-release controls.
 
@@ -27,12 +29,14 @@ Current work in this repository emphasizes public-safe rendering, source-bounded
 - Stage: Active public renderer / professional evidence surface
 - Evidence status: Public project summaries and source-bounded CV claims are maintained through the public allowlist and release controls
 - Primary translational-health evidence source: `pskeffington/CART-TRACE`
+- CART-TRACE evidence state: frozen synthetic capstone package approved for public portfolio use; access-gating extension remains a candidate research-method object
 - Data status: Public-safe source text, public project summaries, generated artifacts, and non-sensitive build metadata only
 - Primary limitation: Requires continued release review as portfolio projects mature and authenticated cross-repository validation is completed upstream
 
 ### Recent Progress
 
-- Added CART-TRACE to the public project allowlist at final public scholarly-freeze status
+- Reconciled CART-TRACE from thesis-scaffold language to its final frozen synthetic capstone evidence state
+- Preserved separation between the frozen capstone and the newer synthetic administrative access-gating extension
 - Reframed the public portfolio around longitudinal clinical data, translational health data science, reproducible evidence, biomedical methods, and public-health systems analysis
 - Removed the legacy NAVSEA public job object and its GitHub Actions selector to keep the public renderer research- and civilian-facing
 - Public research entries remain source-ledgered and bounded by upstream evidence state
@@ -43,7 +47,7 @@ Current work in this repository emphasizes public-safe rendering, source-bounded
 
 ### Next Actions
 
-- Rebuild the neutral public package from the reconciled CART-TRACE-aware sources
+- Rebuild the neutral public package from the reconciled CART-TRACE evidence sources
 - Review rendered PDFs for translational-health positioning, claim status, and layout consistency
 - Keep `data/pipeline_repos.json` synchronized with mature public project evidence
 - Add release-review receipts where appropriate
