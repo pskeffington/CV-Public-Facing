@@ -32,7 +32,7 @@ Health policy; health services research; rural health; global health; maternal a
 
 ## Publications and Manuscripts
 
-**Under peer review**  
+**Pre-submission review**  
 Skeffington, P. A. Family economics, financial literacy, and fertility outcomes using NLSY79 data.
 
 **In preparation**  
@@ -40,6 +40,11 @@ Skeffington, P. A. Humanitarian WASH, displacement, and health-system disruption
 
 **Completed applied public-health work; scholarly extension optional**  
 Skeffington, P. A. Rural water, wastewater, and infrastructure health needs.
+
+## Selected Research
+
+**CART-TRACE — final public synthetic scholarly freeze**  
+Synthetic-first longitudinal CAR T-cell care-trajectory reconstruction using treatment-relative episodes, deterministic care-state intervals, provenance-preserving transformations, explicit missingness behavior, and reproducibility controls. A separate administrative access-gating extension remains developing methods research and is not a clinical eligibility or payer-authorization system.
 
 ## Professional Experience
 
