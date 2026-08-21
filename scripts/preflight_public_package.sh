@@ -75,6 +75,7 @@ require_file "research/generated_project_board.tex"
 require_file "scripts/check_public_sanitization.sh"
 require_file "scripts/check_index_safe_upload.sh"
 require_file "scripts/check_public_release_guard.py"
+require_file "scripts/check_public_allowlist_visibility.py"
 
 require_contains "cv/academic_cv_public.tex" "\\input{public_cv_template_base}"
 require_contains "cv/public_upload_cv.tex" "\\input{public_cv_template_base}"
@@ -136,6 +137,7 @@ require_absent_in_rendered_public_sources "stem adjacent"
 require_absent_in_rendered_public_sources "mixed or transitional"
 require_absent_in_rendered_public_sources "low stem presence"
 
+python3 scripts/check_public_allowlist_visibility.py
 python3 scripts/check_public_release_guard.py
 bash scripts/check_public_sanitization.sh
 bash scripts/check_index_safe_upload.sh cv/public_upload_cv.tex
