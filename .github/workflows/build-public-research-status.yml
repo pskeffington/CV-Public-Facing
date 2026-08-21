@@ -60,10 +60,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended lmodern
 
-      - name: Run public manifest and release checks
+      - name: Run public manifest, visibility, and release checks
         run: |
           set -euo pipefail
           make public-manifest-check
+          make public-visibility-check
           make safety-surface-check
           make stem-presence-check
           make job-cv-object-check
@@ -79,10 +80,11 @@ jobs:
         run: |
           set -euo pipefail
           make public-manifest-check
+          make public-visibility-check
           make safety-surface-check
           make stem-object-contract
           make stem-report-contract
-          bash scripts/preflight_public_package.sh
+          make preflight
 
       - name: Upload LinkedIn-ready Academic CV
         uses: actions/upload-artifact@v4
