@@ -50,9 +50,11 @@ require_absent_in_rendered_public_sources() {
   match_file="$(mktemp)"
   if grep -In -- "${pattern}" \
     cv/current_projects_public.tex \
+    cv/publication_pipeline_public.tex \
+    cv/one_page_profile_public.tex \
     research/RESEARCH_STATUS.md \
     research/generated_project_board.tex >"${match_file}"; then
-    echo "Rendered public source contains internal-only pattern: ${pattern}" >&2
+    echo "Rendered public source contains disallowed pattern: ${pattern}" >&2
     cat "${match_file}" >&2
     rm -f "${match_file}"
     status=1
@@ -89,44 +91,39 @@ require_contains "cv/academic_cv_public.tex" "Technical Skills and Methods"
 require_contains "cv/public_upload_cv.tex" "Technical Skills and Methods"
 require_contains "cv/one_page_profile_public.tex" "Selected Methods and Technical Skills"
 
-for profile_pattern in \
-  "Publications" \
-  "Under peer review" \
-  "In preparation" \
-  "Dartmouth Scholar"; do
-  require_contains "cv/one_page_profile_public.tex" "${profile_pattern}"
-done
+# Current public package state must use evidence-bounded language.
+require_contains "cv/one_page_profile_public.tex" "CART-TRACE"
+require_contains "cv/one_page_profile_public.tex" "Pre-submission review"
+require_contains "research/RESEARCH_STATUS.md" "Final public scholarly freeze"
+require_contains "research/RESEARCH_STATUS.md" "Pre-submission review"
+require_contains "research/RESEARCH_STATUS.md" "administrative access-gating extension"
+require_contains "cv/publication_pipeline_public.tex" "Pre-submission review"
+require_contains "research/generated_project_board.tex" "Pre-submission review"
 
-# These pointers must match the repository-object titles emitted by
-# scripts/stem_cv_curator.py from data/pipeline_repos.json. Keeping the guard
-# aligned with the generated object layer prevents stale legacy taxonomy strings
-# from blocking otherwise valid public package builds and ensures the principal
-# translational-health anchor cannot silently disappear from generated outputs.
+# Public project pointers should match the current public-only allowlist.
 for project in \
   "Longitudinal CAR T-cell care-trajectory reconstruction" \
   "Life-course data, family economics, and fertility" \
   "Machine-learning publication best practices" \
-  "Machine-learning lab" \
-  "Rural water, wastewater, and infrastructure health risk" \
   "Humanitarian WASH and health-system disruption" \
-  "Haiti Nippes public-health and infrastructure assessment" \
-  "Medical-signal noise reduction" \
+  "Haiti Nippes public-health systems research" \
+  "ECG signal-quality and morphology-preservation benchmarking" \
   "PET noise and radiomics robustness" \
-  "Cancer end-of-life typologies" \
-  "Public-health emergency preparedness and practicum reporting" \
-  "Public-health practicum report" \
-  "Catholic archive and public-history indexing"; do
-  require_contains "cv/current_projects_public.tex" "${project}"
-  require_contains "research/generated_project_board.tex" "${project}"
-  require_contains "research/RESEARCH_STATUS.md" "${project}"
+  "Cancer end-of-life death-place typologies" \
+  "WASH systems, watershed stress, and spatial equity" \
+  "Catholic reliquary archival and public-history research"; do
+  require_contains "data/pipeline_repos.json" "${project}"
 done
 
-for bucket in \
-  "Publications" \
+# Known stale states and private-repository labels must not re-enter rendered sources.
+for pattern in \
   "Under peer review" \
-  "In preparation" \
-  "Developing research projects"; do
-  require_contains "cv/publication_pipeline_public.tex" "${bucket}"
+  "Manuscript under journal review" \
+  "TransHeb" \
+  "Machine-learning lab" \
+  "Public-health emergency preparedness and practicum reporting" \
+  "Public-health practicum report"; do
+  require_absent_in_rendered_public_sources "${pattern}"
 done
 
 require_absent_in_sources "Research Interests and Current Projects"
