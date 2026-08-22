@@ -34,7 +34,7 @@ class ObjectContractResult:
 
 
 class StemObjectContractChecker:
-    """Validate generated objects, release controls, and STEM presence metrics."""
+    """Validate generated objects, release controls, maturity, and STEM presence."""
 
     REQUIRED_SCORE_KEYS = {
         "score",
@@ -53,6 +53,22 @@ class StemObjectContractChecker:
         "stem_adjacent",
         "mixed_or_transitional",
         "low_stem_presence",
+    }
+
+    VALID_MATURITIES = {
+        "submitted",
+        "publication_ready",
+        "active_manuscript",
+        "active_scaffold",
+        "early_stage",
+        "validation_gated",
+        "intake",
+        "synthetic_freeze",
+        "pre_submission",
+        "benchmark_freeze_pending",
+        "pre_analysis",
+        "source_validation",
+        "active_research",
     }
 
     VALID_SCHEMAS = {
@@ -114,6 +130,10 @@ class StemObjectContractChecker:
         release = str(project.get("public_release", "public")).lower()
         if release != "public":
             errors.append(f"Project {project_id} has non-public release state inside public projects: {release}")
+
+        maturity = str(project.get("maturity", "")).strip().lower()
+        if maturity not in self.VALID_MATURITIES:
+            errors.append(f"Project {project_id} has invalid maturity: {maturity or '<missing>'}")
 
         stem_presence = project.get("stem_presence")
         if not isinstance(stem_presence, dict):
