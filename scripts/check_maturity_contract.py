@@ -1,20 +1,11 @@
 #!/usr/bin/env python3
-"""Contract checks for public project maturity labels.
-
-This test imports the curator's maturity classifier and verifies the evidence
-states currently used by data/pipeline_repos.json. It intentionally tests the
-classification boundary rather than rendered prose.
-"""
+"""Contract checks for public project maturity labels."""
 
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-
-from stem_cv_curator import maturity_from_status  # noqa: E402
+from maturity_policy import maturity_from_status
 
 CASES = {
     "Publication ready / final public scholarly freeze / synthetic methodological validation": "synthetic_freeze",
