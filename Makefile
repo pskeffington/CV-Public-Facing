@@ -6,12 +6,12 @@ RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 JOB_OBJECT ?= neutral
 
-.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check public-manifest-check public-visibility-check job-cv-object-check safety-surface-check citation-check doi-normalization-check reference-metadata-parser-check url-policy-check paper-evaluator-check paper-review-check stem-object-contract stem-report-contract preflight sanitize polish-public-cv align-public-positioning public-package job-cv-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check maturity-contract public-manifest-check public-visibility-check job-cv-object-check safety-surface-check citation-check doi-normalization-check reference-metadata-parser-check url-policy-check paper-evaluator-check paper-review-check stem-object-contract stem-report-contract preflight sanitize polish-public-cv align-public-positioning public-package job-cv-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
-stem-cv: public-manifest-check safety-surface-check
-	$(PYTHON) scripts/stem_cv_curator.py
+stem-cv: public-manifest-check safety-surface-check maturity-contract
+	$(PYTHON) scripts/run_stem_cv_curator.py
 
 stem-presence-report: stem-cv safety-surface-check
 	$(PYTHON) scripts/write_stem_presence_report.py
@@ -19,8 +19,12 @@ stem-presence-report: stem-cv safety-surface-check
 living-cv: stem-presence-report safety-surface-check
 
 stem-presence-check:
-	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py scripts/check_doi_normalization.py scripts/check_reference_metadata_parsers.py scripts/check_url_policy.py scripts/stem_paper_evaluator.py scripts/check_stem_paper_evaluator.py scripts/check_stem_paper_evaluator_contract.py scripts/write_stem_paper_review.py scripts/check_stem_paper_review.py scripts/build_job_cv_package.py scripts/check_job_cv_objects.py scripts/public_release_guard.py scripts/check_public_release_guard.py scripts/check_public_manifest_contract.py scripts/check_public_allowlist_visibility.py scripts/polish_public_cv_sections.py scripts/align_public_cv_positioning.py
+	$(PYTHON) -m py_compile scripts/stem_presence.py scripts/stem_cv_curator.py scripts/run_stem_cv_curator.py scripts/maturity_policy.py scripts/check_maturity_contract.py scripts/check_stem_presence.py scripts/check_stem_object_contract.py scripts/write_stem_presence_report.py scripts/check_stem_presence_report.py scripts/stem_citation_verifier.py scripts/check_stem_citation_verifier.py scripts/check_doi_normalization.py scripts/check_reference_metadata_parsers.py scripts/check_url_policy.py scripts/stem_paper_evaluator.py scripts/check_stem_paper_evaluator.py scripts/check_stem_paper_evaluator_contract.py scripts/write_stem_paper_review.py scripts/check_stem_paper_review.py scripts/build_job_cv_package.py scripts/check_job_cv_objects.py scripts/public_release_guard.py scripts/check_public_release_guard.py scripts/check_public_manifest_contract.py scripts/check_public_allowlist_visibility.py scripts/polish_public_cv_sections.py scripts/align_public_cv_positioning.py
 	$(PYTHON) scripts/check_stem_presence.py
+	$(PYTHON) scripts/check_maturity_contract.py
+
+maturity-contract:
+	$(PYTHON) scripts/check_maturity_contract.py
 
 public-manifest-check:
 	$(PYTHON) scripts/check_public_manifest_contract.py
@@ -53,7 +57,7 @@ paper-evaluator-check:
 paper-review-check:
 	$(PYTHON) scripts/check_stem_paper_review.py
 
-stem-object-contract: living-cv stem-presence-check public-manifest-check public-visibility-check job-cv-object-check safety-surface-check citation-check paper-evaluator-check paper-review-check
+stem-object-contract: living-cv stem-presence-check public-manifest-check public-visibility-check job-cv-object-check safety-surface-check citation-check paper-evaluator-check paper-review-check maturity-contract
 	$(PYTHON) scripts/check_stem_object_contract.py
 
 stem-report-contract: stem-object-contract safety-surface-check
