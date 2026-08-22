@@ -72,6 +72,7 @@ require_file "cv/publication_pipeline_public.tex"
 require_file "research/research_status.tex"
 require_file "research/RESEARCH_STATUS.md"
 require_file "research/generated_project_board.tex"
+require_file "data/pipeline_repos.json"
 require_file "scripts/check_public_sanitization.sh"
 require_file "scripts/check_index_safe_upload.sh"
 require_file "scripts/check_public_release_guard.py"
@@ -92,16 +93,18 @@ require_contains "cv/academic_cv_public.tex" "Technical Skills and Methods"
 require_contains "cv/public_upload_cv.tex" "Technical Skills and Methods"
 require_contains "cv/one_page_profile_public.tex" "Selected Methods and Technical Skills"
 
-# Current public package state must use evidence-bounded language.
+# Detailed evidence state belongs in the curated manifest, which is the source
+# of truth consumed by the renderer. Generated surfaces may normalize that
+# state into broader maturity labels and therefore must not be required to
+# preserve every exact status phrase.
+require_contains "data/pipeline_repos.json" "final public scholarly freeze"
+require_contains "data/pipeline_repos.json" "Pre-submission manuscript cleanup / blinded-package review"
+require_contains "data/pipeline_repos.json" "administrative access-gating extension"
 require_contains "cv/one_page_profile_public.tex" "CART-TRACE"
 require_contains "cv/one_page_profile_public.tex" "Pre-submission review"
-require_contains "research/RESEARCH_STATUS.md" "Final public scholarly freeze"
-require_contains "research/RESEARCH_STATUS.md" "Pre-submission review"
-require_contains "research/RESEARCH_STATUS.md" "administrative access-gating extension"
 require_contains "cv/publication_pipeline_public.tex" "Pre-submission review"
-require_contains "research/generated_project_board.tex" "Pre-submission review"
 
-# Public project pointers should match the current public-only allowlist.
+# Generated public objects must still contain the current public-only projects.
 for project in \
   "Longitudinal CAR T-cell care-trajectory reconstruction" \
   "Life-course data, family economics, and fertility" \
@@ -114,6 +117,9 @@ for project in \
   "WASH systems, watershed stress, and spatial equity" \
   "Catholic reliquary archival and public-history research"; do
   require_contains "data/pipeline_repos.json" "${project}"
+  require_contains "cv/current_projects_public.tex" "${project}"
+  require_contains "research/generated_project_board.tex" "${project}"
+  require_contains "research/RESEARCH_STATUS.md" "${project}"
 done
 
 # Known stale states and private-repository labels must not re-enter rendered sources.
