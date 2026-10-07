@@ -5,6 +5,7 @@ This repository builds the public-safe CV, one-page profile, index-safe upload C
 The repository is intentionally public. It must contain only public-safe source text, public project summaries, generated public artifacts, and non-sensitive build metadata.
 
 **Maintainer:** Paul Skeffington, MS, MPH  
+**Public portfolio:** https://www.skeffington.us/  
 **Repository status:** active public-safe CV and research-status renderer.  
 **Last documentation refresh:** 2026-08-21
 
