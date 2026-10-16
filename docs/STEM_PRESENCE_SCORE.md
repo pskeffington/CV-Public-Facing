@@ -42,7 +42,7 @@ Computatio in vocabulario nititur atque consulto perspicua est. Quattuor partes 
 |---|---:|---|
 | Disciplina definita | 35 | scientia, ingeniaria, salus publica, biomedicina, disciplina machinarum, copia datorum, algorithmus |
 | Methodi et mensurae | 30 | methodus, analysis, hypothesis, regressio, validatio, mensura, robur |
-| Reproductibilitas | 20 | codex, repositorium, index, descriptio exemplaris, processus, documenta, probatio |
+| Reproducibilitas | 20 | codex, repositorium, index, descriptio exemplaris, processus, documenta, probatio |
 | Progressus et effectus | 15 | eventus, scriptum submissum, exemplar manuscripti, recognitio collegarum, figura, opus perfectum, terminus |
 
 Poena declinationis usque ad 25 puncta additur ubi documenta publica potissimum memoriam personalem, symbola, sermonem promotionis, coniecturas aut tantum locos vacuos sine probatione exhibent.
