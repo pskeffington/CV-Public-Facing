@@ -6,18 +6,18 @@
 
 ## Propositum
 
-Ad munera publica, consultationes technicas et investigationem applicatam paratus sum, praesertim apud instituta gubernamentalia, municipia, universitates, instituta sanitatis et societates sine quaestu. Operam dare cupio saluti publicae, infrastructurae aquarum et sanitationis, analysi geospatiali, administrationi datorum atque communitatibus vulnerabilibus.
+Ad munera publica, consultationes technicas et investigationem applicatam paratus sum, praesertim apud instituta gubernamentalia, municipia, universitates, instituta sanitatis et societates sine quaestu. Operam dare cupio in rebus ad salutem publicam, aquarum distributionem et sanitationem, analysim geospatialem, administrationem datorum atque tutelam communitatum vulnerabilium pertinentibus.
 
-Non titulos inanes, sed responsabilitatem definitam et effectus comprobabiles quaero. Consilia et decisiones publicas investigatione, analysi et relationibus perspicuis adiuvare studeo.
+Non titulos inanes, sed responsabilitatem definitam et effectus comprobabiles quaero. Consilia publica investigatione, analysi datorum et relationibus perspicuis confirmare studeo.
 
 ## Munera quae quaero
 
 - **Consultor salutis publicae et scientiae datorum** — analysis epidemiologica, informatica sanitatis, exempla statistica et aestimatio programmatum.
-- **Consultor infrastructurae civilis et firmitatis systematum** — aquae distributio, sanitatio, observatio ambitus, praeparatio ad casus urgentes et aestimatio periculorum.
+- **Consultor infrastructurae civilis et firmitatis systematum** — distributio aquarum, sanitatio, observatio ambitus, praeparatio ad casus urgentes et aestimatio periculorum.
 - **Analysta geospatialis et systematum publicorum** — systemata informationis geographicae (GIS), epidemiologia spatialis, descriptio infrastructurae et distributio periculorum.
 - **Director investigationis applicatae et programmatum technicorum** — consilium investigationis, moderatio inceptorum et cooperatio inter instituta.
-- **Consultor renovationis administrationis publicae** — integratio datorum, emendatio processuum, systemata digitalia et relationes ad decisiones informandas.
-- **Consultor investigationis de communitatibus vulnerabilibus** — senes, accessus ad curam sanitatis, familiae vulnerabiles et inaequalitates sanitatis.
+- **Consultor renovationis administrationis publicae** — integratio datorum, emendatio processuum, systemata digitalia et relationes ad consilia publica informanda.
+- **Consultor investigationis de communitatibus vulnerabilibus** — cura senum, aditus ad curationem, familiae vulnerabiles et inaequalitates in valetudine.
 
 ## Instituta et opera praeferenda
 
@@ -39,13 +39,13 @@ Praefero opera quorum fines, potestates, tempora et fructus exspectati clare con
 
 Munera stabilia, consultationes diuturnae, pacta menstrua et opera certis finibus definita mihi conveniunt. Ubi fieri potest, laborem remotum vel partim remotum praefero. Ad conventus publicos, inspectiones locorum, investigationem in situ, institutionem technicam vel casus urgentes adesse possum.
 
-Itinera, pernoctationes, dies in situ peracti, labor extra horas ordinarias, usus instrumentorum propriorum et termini breves in pacto distincte aestimanda sunt.
+Itinera, pernoctationes, dies in locis laboris peracti, labor extra horas ordinarias, usus instrumentorum propriorum et termini breves in pacto separatim aestimanda sunt.
 
 ## Compensatio et pacta
 
 Compensatio magnitudini operis, peritiae necessariae, responsabilitati, auctoritati decernendi et operibus tradendis congruat. Pacta scripta praefero, quibus officia, fines operis, dies traditionis, merces et expensarum restitutio perspicue definiantur.
 
-Consortia diuturna praefero, ubi continuitas institutionalis, integritas investigationis et utilitas publica coniunguntur.
+Societates laboris diuturnas praefero, ubi continuitas institutionalis, integritas investigationis et utilitas publica coniunguntur.
 
 ## Sententia finalis
 
@@ -53,4 +53,4 @@ Consortia diuturna praefero, ubi continuitas institutionalis, integritas investi
 
 ## Gratias ago
 
-Gratias tibi ago quod hanc paginam visitavisti et legisti. Studium tuum atque tempus mihi magni sunt. Si occasio cooperationis ad bonum publicum pertinens tibi nota est, libenter de ea colloquar.
+Gratias tibi ago quod hanc paginam visitasti atque perlegisti. Studium tuum et tempus quod lectioni tribuisti magni aestimo. Si occasio cooperationis ad bonum publicum pertinens tibi nota est, libenter de ea colloquar.
