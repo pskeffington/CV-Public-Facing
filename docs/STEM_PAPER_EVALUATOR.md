@@ -1,7 +1,7 @@
 <!-- lingua: la -->
 # Aestimator scriptorum STEM
 
-Instrumentum `STEM Paper Evaluator` est introitus principalis ad inspiciendum scriptum submissum secundum praesentiam disciplinarum STEM, integritatem citationum et signa publicationum auctoris.
+Instrumentum `STEM Paper Evaluator` est praecipua via ad scripta submissa examinanda secundum congruentiam cum disciplinis STEM, integritatem citationum et indicia publicationum auctoris.
 
 Tres partes componit:
 
@@ -35,7 +35,7 @@ python3 scripts/stem_paper_evaluator.py --pretty --live --block-url-host private
 python3 scripts/stem_paper_evaluator.py --pretty --stem-weight 0.85 --publishing-weight 0.15 paper.md
 ```
 
-Ratio externa fines citationum publicos interrogare et indicia publicationis auctoris petere potest. Auctor per nomen reperitur? Convenientia identitatis prius ab homine recognoscenda est.
+Ratio externa fines citationum publicos interrogare et indicia publicationis auctoris petere potest. Si auctor per nomen tantum reperitur, convenientia identitatis prius ab homine recognoscenda est.
 
 ## Custodia inscriptionum URL
 
@@ -63,7 +63,7 @@ Citationes URL a regula prohibitae in effectu bruto manent, valorem `verificatio
 }
 ```
 
-## Configurationis memoria
+## Registrum configurationis
 
 Quisque effectus aestimatoris rationem qua generatus est retinet:
 
@@ -84,7 +84,7 @@ Quisque effectus aestimatoris rationem qua generatus est retinet:
 }
 ```
 
-In ratione externa `external_services_enabled` etiam `crossref`, `ncbi_pubmed_esummary`, `arxiv_api`, `openalex` et `raw_url_ping` continere potest. Haec memoria inspectionem JSON et Markdown reproducibilem facit.
+In ratione externa `external_services_enabled` etiam `crossref`, `ncbi_pubmed_esummary`, `arxiv_api`, `openalex` et `raw_url_ping` continere potest. Hoc registrum inspectionem JSON et Markdown reproducibilem facit.
 
 ## Pondera computationis
 
@@ -205,7 +205,7 @@ make paper-evaluator-check
 make paper-review-check
 ```
 
-Hae probationes sine nexu currunt. Confirmant scriptum fictum ad similitudinem manuscripti notam compositam credibilem, structuram JSON validam et relationem Markdown cum configuratione, ponderibus et originibus generare.
+Hae probationes sine nexu currunt. Confirmant instrumentum ex scripto ficto ad similitudinem manuscripti notam compositam, structuram JSON validam et relationem Markdown cum configuratione, ponderibus et originibus generare.
 
 ## Fines interpretationis
 
