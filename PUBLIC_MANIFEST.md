@@ -60,7 +60,7 @@ Ne includantur:
 - inscriptiones domicilii, numeri telephonici, epistulae personales, dispositiones situs domestici aut infrastructurae sensibiles;
 - assertiones nondum probatae de publicationibus, stipendiis investigationis, muneribus, praemiis aut certificationibus.
 
-Documenta propria non directoria Latine scribantur; nexus ad fontes superiores et syntaxis machinarum servetur.
+Documenta a nobis conscripta, quae non sunt merae indicationes ad fontes superiores, Latine scribantur; nexus ad fontes et syntaxis machinarum serventur.
 
 ## Renovatio localis
 
