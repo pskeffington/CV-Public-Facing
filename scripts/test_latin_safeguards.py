@@ -40,7 +40,7 @@ class LatinSafeguardTests(unittest.TestCase):
         self.assertEqual(suspicious_english_lines(source), [])
 
     def test_legacy_document_is_reported_not_approved(self) -> None:
-        status, lines = audit("docs/STEM_CITATION_VERIFICATION.md", "# Citation verification\n")
+        status, lines = audit("research/RESEARCH_STATUS.md", "# Status investigationum generatus\n")
         self.assertEqual((status, lines), ("pending", []))
 
     def test_root_readme_only_is_exempt(self) -> None:
