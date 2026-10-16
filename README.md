@@ -1,262 +1,92 @@
-# Public CV Renderer
+# Public CV and Research Report Renderer
 
-This repository builds the public-safe CV, one-page profile, index-safe upload CV, and research-status package for Paul A. Skeffington. It also serves as a cloneable public CV renderer for researchers who want a GitHub-driven, source-ledgered CV package.
+**Paul A. Skeffington, MS, MPH** · [Public portfolio](https://www.skeffington.us/)
 
-The repository is intentionally public. It must contain only public-safe source text, public project summaries, generated public artifacts, and non-sensitive build metadata.
+This repository produces a **public-safe academic CV, concise professional profile, index-safe CV, and research-status report** from reviewed public evidence. It is a document renderer and release pipeline, **not** the authoritative archive of underlying research, a private application workspace, or an automated hiring system.
 
-**Maintainer:** Paul Skeffington, MS, MPH  
-**Public portfolio:** https://www.skeffington.us/  
-**Repository status:** active public-safe CV and research-status renderer.  
-**Last documentation refresh:** 2026-10-16
+## Verified public downloads
 
-## Latest Verified Public Downloads
+The links below follow the **latest successful GitHub Release**. Each release includes SHA-256 checksums; unsuccessful builds do not replace the last verified publication.
 
-These links resolve to the latest successful, public-release-checked GitHub Release rather than expiring Actions artifacts.
-
-| Document | PDF |
+| Document | Current PDF |
 |---|---|
-| Academic CV | [Latest academic CV](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_Academic_CV_Public.pdf) |
-| One-page profile | [Latest one-page profile](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_One_Page_Profile_Public.pdf) |
-| Index-safe public CV | [Latest index-safe CV](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Index_Safe_Public_Upload_CV.pdf) |
-| Research-status report | [Latest research report](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_Research_Status_Public.pdf) |
+| Academic CV | [Download](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_Academic_CV_Public.pdf) |
+| One-page professional profile | [Download](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_One_Page_Profile_Public.pdf) |
+| Index-safe public CV | [Download](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Index_Safe_Public_Upload_CV.pdf) |
+| Research-status report | [Download](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_Research_Status_Public.pdf) |
 
-[Browse versioned releases and SHA-256 checksums](https://github.com/pskeffington/CV-Public-Facing/releases). Releases are published only after the verified build and public-safety checks succeed; the repository's `main` branch retains the source code and document templates.
+[View versioned releases](https://github.com/pskeffington/CV-Public-Facing/releases) · [View build history](https://github.com/pskeffington/CV-Public-Facing/actions/workflows/build-public-research-status.yml)
 
-## Public-Interest Research Boundary
+## Public professional and research materials
 
-This repository is maintained for public-interest research, scholarly documentation, reproducible professional presentation, and public-safe portfolio evidence. It supports transparent CV generation, verified public project summaries, source-ledgered claims, and human-reviewed career or scholarship materials.
+- [Public academic and research summary](Dartmouth_CV.md)
+- [Public and civic service positioning — Latin](hire/FOR_HIRE_LATIN.md)
+- [Public research project register](data/pipeline_repos.json)
+- [Publication and research status sources](research/)
+- [Current CV and profile templates](cv/)
 
-It does not publish private job packets, private source records, restricted project-family names, secrets, credentials, private paths, sensitive implementation details, private review scores, or automated hiring decisions. Outputs are intended to support documentation, quality review, and public scholarly presentation.
+The research portfolio emphasizes translational health data science, public-health systems, longitudinal data, biomedical methods, environmental health, and reproducible analysis. **CART-TRACE** is a principal synthetic-first translational-health research example; its descriptive methodological results are not clinical decision support. Research maturity and release eligibility follow the evidence and scope limits in the public manifest, not the appearance of a project on GitHub.
 
-## Current Research Status
-
-The current public portfolio is centered on translational health data science, longitudinal clinical data, biomedical signal and imaging methods, public-health systems research, reproducible analytics, and source-bounded evidence translation.
-
-**CART-TRACE is the principal public translational-health data-science anchor.** Its public capstone package has reached final scholarly freeze after synthetic-first development of deterministic 30-day post-infusion hospital care-trajectory reconstruction, utilization metrics, provenance-preserving transformations, explicit missingness behavior, reproducibility controls, and computational validation against controlled synthetic truth. The project remains retrospective and descriptive and does not function as clinical decision support.
-
-CART-TRACE also contains a separate synthetic administrative access-gating research extension. That extension is tracked as a developing methods object and is not promoted here as evidence of clinical eligibility determination, payer authorization, financial clearance, treatment readiness, or institutional workflow validation.
-
-Current work in this repository emphasizes public-safe rendering, source-bounded claims, transparent limitations, and human-reviewed outputs. The renderer does not promote a public CV claim unless the corresponding project is explicitly allowlisted and passes public-release controls.
-
-### Current Stage
-
-- Stage: Active public renderer / professional evidence surface
-- Evidence status: Public project summaries and source-bounded CV claims are maintained through the public allowlist and release controls
-- Primary translational-health evidence source: `pskeffington/CART-TRACE`
-- CART-TRACE evidence state: frozen synthetic capstone package approved for public portfolio use; access-gating extension remains a candidate research-method object
-- Data status: Public-safe source text, public project summaries, generated artifacts, and non-sensitive build metadata only
-- Primary limitation: Requires continued release review as portfolio projects mature and authenticated cross-repository validation is completed upstream
-
-### Recent Progress
-
-- Reconciled CART-TRACE from thesis-scaffold language to its final frozen synthetic capstone evidence state
-- Preserved separation between the frozen capstone and the newer synthetic administrative access-gating extension
-- Reframed the public portfolio around longitudinal clinical data, translational health data science, reproducible evidence, biomedical methods, and public-health systems analysis
-- Removed the legacy NAVSEA public job object and its GitHub Actions selector to keep the public renderer research- and civilian-facing
-- Public research entries remain source-ledgered and bounded by upstream evidence state
-- NLSY79 status remains under peer review with reproducible model and sample-audit language
-- McDowell rural water/wastewater work remains a completed applied public-health project with final oral/media delivery tracked separately
-- Humanitarian WASH work remains separated from rural infrastructure work so methods and application claims do not collapse into one evidence object
-- Public-release boundaries remain enforced; internal valuation and scoring do not render into public CV outputs
-
-### Next Actions
-
-- Rebuild the neutral public package from the reconciled CART-TRACE evidence sources
-- Review rendered PDFs for translational-health positioning, claim status, and layout consistency
-- Keep `data/pipeline_repos.json` synchronized with mature public project evidence
-- Add release-review receipts where appropriate
-- Replace older distribution copies with date-stamped exports from the reconciled build
-
-## Lingua Latina
-
-Locally authored non-feeder documents are governed by [Latin safeguards](docs/LATIN_SAFEGUARDS.md). Source-only pointers and upstream citations remain unchanged; software syntax, metadata keys and public README navigation remain functional. Locally authored Markdown documents are now translated and guarded by a Latin declaration plus a baseline English-prose check. The generated research-status narrative, LaTeX CV sources, JSON narrative fields, and generator templates still require source-level Latin migration; they are **not** yet certified as Latin. See the [Latin migration status](docs/STATUS_CONVERSIONIS_LATINAE.md) for the remaining scope.
-
-## Repository Governance
-
-The [Imperium Protocol](docs/IMPERIUM_PROTOCOL.md) governs public-safe evidence, provenance, review, and release controls across CV sources, project summaries, job objects, code, generated outputs, and workflows. It does **not** turn CVs into person-ranking or automated hiring decisions. The basic README remains a navigation document; link-only references pointing upstream remain pointers to their authoritative sources rather than locally scored content.
-
-Run the baseline check with `python3 scripts/check_imperium_protocol.py`. Existing public-release, visibility, and validation checks remain mandatory. Protocol compliance also requires human review.
-
-## Current Operating Model
-
-`CV-Public-Facing` is the public renderer in the broader CV and application ecosystem.
+## How the renderer works
 
 ```text
-validated public research evidence
-  -> public-safe CV/status rendering
-  -> public portfolio surfaces
-  -> application/job package alignment
+approved public project sources
+  -> allowlist and provenance checks
+  -> public-safe CV/research objects
+  -> LaTeX and Markdown render inputs
+  -> four PDF documents
+  -> verified GitHub Release
 ```
 
-The public project register is an allowlist by default. The renderer reads `data/pipeline_repos.json`, applies public-release checks, generates LaTeX/Markdown source objects, and compiles PDFs. Recursive public repository intake is disabled unless explicitly reviewed and enabled.
+The source allowlist is `data/pipeline_repos.json`. Only explicitly admitted, publicly verifiable sources may feed published claims. Private applications, sensitive records, unsupported assertions, and private research data must not enter this repository. Recursive repository intake is disabled unless separately reviewed.
 
-Internal scoring remains a build-review aid only. It does not belong in final public PDFs. The public research-status report ends with a skill-scan appendix that summarizes market-ready skill demonstrations and separates developing skills into a training-stage section.
+The `main` branch retains **source code, policies, templates, and curated public source records**. Generated PDFs are published as GitHub Release assets rather than committed to `main`. Actions artifacts are temporary build receipts. Some generated text sources remain tracked as historical snapshots; edit their source manifests or generators instead of treating those snapshots as authoritative.
 
-## Build Outputs
+## Repository map
 
-Generated PDF paths:
+| Path | Purpose |
+|---|---|
+| `cv/` | Academic CV, profile, and public-upload LaTeX templates |
+| `research/` | Research report sources, project board, and source-ledger pointers |
+| `data/` | Curated public project allowlist and public-safe job render objects |
+| `scripts/` | Evidence, release-safety, generation, and validation tools |
+| `.github/workflows/` | Verified build and publication workflow |
+| `docs/` | Governance, research/reporting methods, operating guides |
+| `hire/` | Public civic-service positioning |
+| `documents/` | Local PDF build destination; PDFs are delivered via Releases |
 
-```text
-documents/Paul_A_Skeffington_Academic_CV_Public.pdf
-documents/Paul_A_Skeffington_One_Page_Profile_Public.pdf
-documents/Index_Safe_Public_Upload_CV.pdf
-documents/Paul_A_Skeffington_Research_Status_Public.pdf
-```
+## Build and validate
 
-The skill-scan appendix source is:
-
-```text
-cv/skill_scan_report_public.tex
-```
-
-It is included at the bottom of:
-
-```text
-research/research_status.tex
-```
-
-Selected job-package outputs are written under:
-
-```text
-dist/job_cv_packages/<selected-job>/
-```
-
-## Main Commands
-
-Build the neutral public package:
-
-```bash
-make public-package
-```
-
-Build a selected public-safe job package:
-
-```bash
-make job-cv-package JOB_OBJECT="neutral"
-make job-cv-package JOB_OBJECT="harvard-chan-director-data-analytics"
-make job-cv-package JOB_OBJECT="cdc-foundation-data-modernization-senior-advisor"
-```
-
-Run the main contract checks:
+Requires Python, GNU Make, and a LaTeX distribution with `latexmk`. Some source-verification checks require public GitHub access.
 
 ```bash
 make public-manifest-check
+make public-visibility-check
 make safety-surface-check
-make stem-object-contract
-make stem-report-contract
+make public-package
 ```
 
-## GitHub Actions
-
-The main workflow is:
-
-```text
-.github/workflows/build-public-research-status.yml
-```
-
-It supports manual `workflow_dispatch` with a `job_object` dropdown. The dropdown builds the public CV package, then wraps the selected public-safe job object in a brief, manifest, and artifact bundle.
-
-Current job objects are controlled by:
-
-```text
-data/job_cv_objects.json
-```
-
-Current selectable objects include:
-
-```text
-neutral
-harvard-chan-director-data-analytics
-indeed-data-scientist-iii
-rockland-trust-data-architect
-valo-health-staff-data-scientist
-unh-adjunct-homeland-security
-cdc-foundation-data-modernization-senior-advisor
-```
-
-The CDC Foundation object is titled `CDC Foundation - Data Modernization Senior Advisor` and is scoped to public-safe public health informatics, data modernization, technical assistance, workforce upskilling, data governance, and reproducible analytics framing.
-
-## Public-Release Boundaries
-
-This repository should not contain private job packets, private source records, restricted project-family names, secrets, credentials, private paths, or sensitive implementation details.
-
-Public outputs may include only projects that satisfy all of the following:
-
-- the project is present in the public allowlist;
-- the release state is public;
-- the project is not matched by the release-control hash registry;
-- generated rendered sources pass the public-release guard;
-- generated object contracts confirm no non-public project entered the public project list.
-
-Internal scores and review metrics may remain in generated object JSON or internal ledgers, but they should not render into public PDFs. Public skill evidence should be presented only as a skill-scan appendix with mature skills listed as market-ready and developing skills listed as training-stage.
-
-## Start Here
-
-Read the public release roadmap:
-
-```text
-docs/PUBLIC_RELEASE_ROADMAP.md
-```
-
-Read the Actions guide:
-
-```text
-docs/LIVING_CV_ACTIONS.md
-```
-
-Read the first-test guide:
-
-```text
-docs/FIRST_TEST_JOB_CV_ACTION.md
-```
-
-Read the object schema:
-
-```text
-docs/STEM_CV_OBJECT_SCHEMA.md
-```
-
-Read the CV/Portfolio synchronization status:
-
-```text
-docs/CV_PORTFOLIO_SYNC_STATUS.md
-```
-
-## Clone and Run for Another Public Profile
+Build a public-safe, role-specific package (without importing private application documents):
 
 ```bash
-git clone https://github.com/pskeffington/CV-Public-Facing.git public-cv-renderer
-cd public-cv-renderer
-STEM_CV_OWNER=<your-github-user> make public-package
-ls documents/
+make job-cv-package JOB_OBJECT="neutral"
 ```
 
-The filenames are configured for this profile by default and can be renamed in the Makefile for another user.
+The [GitHub Actions workflow](.github/workflows/build-public-research-status.yml) builds, checks, and publishes the public package after successful verification. The separate publication job validates the expected PDFs and their checksums before creating a versioned release.
 
-## Object Engine
+## Editorial and branch governance
 
-The main object-generation entry point is:
+The root README is an English-language navigation page. Other authored, non-pointer documents use Latin under the [Latin safeguards](docs/LATIN_SAFEGUARDS.md). Generated LaTeX, JSON narrative fields, and report templates are still subject to the [recorded Latin migration scope](docs/STATUS_CONVERSIONIS_LATINAE.md); a language marker or automated scan is not scholarly certification.
 
-```bash
-make stem-cv
-```
+- [Imperium public-evidence and release protocol](docs/IMPERIUM_PROTOCOL.md)
+- [Branch and repository-scope policy](docs/REGIMEN_RAMORUM.md)
+- [Contributing instructions](CONTRIBUTING.md)
+- [Public manifest and output contract](PUBLIC_MANIFEST.md)
+- [Public release roadmap](docs/PUBLIC_RELEASE_ROADMAP.md)
+- [Build and Actions operating guide](docs/LIVING_CV_ACTIONS.md)
 
-That runs:
+Use short-lived, purpose-named branches and reviewed pull requests. The `main` branch is the release source of record; application drafts belong in a private applications repository, not in public feature branches. The repository does not certify degrees, employment, publication, clinical efficacy, or institutional adoption merely by rendering a claim.
 
-```bash
-python3 scripts/stem_cv_curator.py
-```
+## Reuse
 
-The curator:
-
-1. reads the public allowlist manifest;
-2. fetches public README/status surfaces for allowed projects;
-3. classifies public projects into CV sections;
-4. creates repository, surface, project, and claim objects;
-5. keeps internal scoring available for review contracts;
-6. writes public LaTeX/Markdown render inputs without internal score labels;
-7. writes release-control ledgers using non-sensitive identifiers.
-
-## Development Notes
-
-The repo has no Python package manager file at this time. Build and validation are Makefile-driven. Generated public PDFs are workflow artifacts and are not pushed back to `main` by the workflow.
+This is a reproducible starting point for a GitHub-driven public CV. It contains profile-specific filenames, evidence boundaries, and LaTeX layouts; another researcher must review and replace those settings and project claims before publishing under a different identity.
