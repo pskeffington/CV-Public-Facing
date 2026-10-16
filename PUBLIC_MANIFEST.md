@@ -42,7 +42,7 @@ Instrumentum primum res curriculi vitae ex `data/pipeline_repos.json` et ex font
 
 Ratio publica documenta repositorii tantum legit. Fasciculos PDF generat et sub nomine `public-cv-package` inter effectus laboris servat. Fontes generatos etiam in fasciculo `public-render-sources` colligit, ut post quamque generationem inspici possint.
 
-Concurrencia coercetur; mutationes ordinariae actoris `github-actions[bot]` praetermittuntur, ne repetitio infinita generationis oriatur. Praecepta `workflow_dispatch`, `repository_dispatch` et mutationes ordinariae fontium servantur.
+Concursus exsecutionum coercetur; mutationes ordinariae actoris `github-actions[bot]` praetermittuntur, ne repetitio infinita generationis oriatur. Praecepta `workflow_dispatch`, `repository_dispatch` et mutationes ordinariae fontium servantur.
 
 ## Nuntii e repositoriis fontium
 
@@ -60,7 +60,7 @@ Ne includantur:
 - inscriptiones domicilii, numeri telephonici, epistulae personales, dispositiones situs domestici aut infrastructurae sensibiles;
 - assertiones nondum probatae de publicationibus, stipendiis investigationis, muneribus, praemiis aut certificationibus.
 
-Documenta propria non directoria Latine scribantur; nexus ad fontes superiores et syntax machinarum serventur.
+Documenta propria non directoria Latine scribantur; nexus ad fontes superiores et syntaxis machinarum servetur.
 
 ## Renovatio localis
 
