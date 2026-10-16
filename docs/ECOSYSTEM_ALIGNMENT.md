@@ -1,16 +1,17 @@
-# CV-Public-Facing Ecosystem Alignment
+<!-- lingua: la -->
+# Concordia instrumenti CV-Public-Facing cum reliquo systemate
 
-Author: Paul Skeffington, MS, MPH  
-Status: public-facing alignment note  
-Last updated: 2026-05-26
+**Auctor:** Paul Skeffington, MS, MPH  
+**Status:** nota publica de concordia  
+**Novissime renovata:** 2026-05-26
 
-## Purpose
+## Propositum
 
-This note aligns `CV-Public-Facing` with the broader Portfolio, private CV, ML Role Matcher, and audit-tooling ecosystem.
+Haec nota `CV-Public-Facing` cum repositoriis Portfolio, CV privato, instrumento `ML Role Matcher` et instrumentis recognitionis connectit.
 
-This repository remains the public-safe renderer. It should turn approved repository surfaces, claim objects, and status objects into public CV/status outputs without inventing unsupported claims.
+Hoc repositorium instrumentum effectuum publicorum manet. Fontes repositoriorum approbatos, res assertionum et res statuum in curriculum vitae et relationes publicas convertat, sine novis assertionibus carentibus probatione.
 
-## Ecosystem Position
+## Situs in systemate
 
 ```text
 private CV claim controls
@@ -20,7 +21,7 @@ private CV claim controls
   -> ML Role Matcher role-match / audit-chain artifacts
 ```
 
-## Source of Truth Boundaries
+## Fines fontium principalium
 
 ```text
 Private claim control: pskeffington/CV
@@ -29,11 +30,11 @@ Portfolio proof packet hub: pskeffington/Portfolio
 Audit-specific controls: pskeffington/authentication-audit-compiler
 ```
 
-This repo should not become the sole source of truth for private claims. It should render public-safe objects from approved inputs.
+Hoc repositorium fons solus assertionum privatarum ne fiat; res publice tutas tantum ex fontibus admissis reddat.
 
-## Shared Object Vocabulary
+## Vocabularium rerum commune
 
-The existing STEM CV objects should remain compatible with the Portfolio/ML Role Matcher vocabulary:
+Res STEM curriculi vitae cum vocabulario instrumentorum Portfolio et `ML Role Matcher` convenientiam servent:
 
 ```text
 RepositoryObject
@@ -46,7 +47,7 @@ OutputObject
 DriftScoreObject
 ```
 
-Recommended additions for ecosystem fluidity:
+Campi addendi ad convenientiam meliorem:
 
 ```text
 source_ids
@@ -58,69 +59,59 @@ generator_version
 use_boundary
 ```
 
-## Public-Safe Claim Rule
+## Lex assertionum publice tutarum
 
-No public-facing sentence should be generated unless it can point to at least one of:
+Nulla sententia publica generetur, nisi saltem uni ex his testimoniis referri potest:
 
-```text
-public repository surface
-approved claim ledger entry
-public-safe source extract
-generated project/status object
-fixture-only label clearly declared
-```
+- documento publico repositorii;
+- inscriptioni assertionis recognitae in registro;
+- excerpto publico tuto;
+- obiecto operis vel status generato;
+- titulo exemplaris ficti expresse ita declarato.
 
-## Integration With ML Role Matcher
+## Coniunctio cum ML Role Matcher
 
-ML Role Matcher produces role-match and audit-chain artifacts in `pskeffington/Portfolio/tools/ml_role_matcher`.
+`ML Role Matcher` res convenientiae munerum et catenae inspectionis in `pskeffington/Portfolio/tools/ml_role_matcher` producit.
 
-CV-Public-Facing can consume public-safe summaries from those artifacts only when they are clearly bounded as:
+`CV-Public-Facing` summaria publice tuta earum rerum tantum adhibeat si aperte definiuntur ut:
 
-```text
-portfolio evidence
-role-matching fixture
-public-safe technical project summary
-not autonomous hiring output
-```
+- testimonia indicis operum;
+- exempla ad comparationem munerum;
+- summaria technica publica tuta;
+- non iudicia autonoma de conductione personarum.
 
-## Integration With Authentication Audit Compiler
+## Coniunctio cum Authentication Audit Compiler
 
-Authentication-audit outputs should enter this public-facing repo only as generalized, public-safe professional claims.
+Effectus examinationum authenticationis tantum in assertiones professionales generales publice tutas converti possunt.
 
-Do not render:
+Ne publicentur:
 
-```text
-live findings
-sensitive authentication details
-credentials
-private logs
-exploit paths
-restricted infrastructure identifiers
-```
+- inventa systematum in usu;
+- particularia authenticationis sensitiva;
+- claves secretae;
+- registra privata;
+- viae ad vulnerabilitates exploatandas;
+- identificatores infrastructurae restrictae.
 
-## Drift Controls
+## Custodiae contra declinationem
 
-The public CV/status engine should continue to flag drift when:
+Instrumentum publicum indicet si:
 
-```text
-repository surface lacks structured status
-claim lacks source
-claim exceeds public-safe evidence
-project status is stale
-paper/citation signal is unverified
-private detail appears in public output
-```
+- documentum repositorii statum structum non continet;
+- assertio fonte caret;
+- assertio testimonia publica superat;
+- status operis vetustus est;
+- signum scripti vel citationis non verificatum est;
+- particularia privata in documento publico apparent.
 
-## Immediate Alignment Tasks
+## Opera proxime agenda
 
-```text
-1. Add optional source_ids and claim_ids to generated public objects where practical.
-2. Map Portfolio flagship tracks to ProjectObject records.
-3. Treat ML Role Matcher outputs as evidence artifacts, not hiring decisions.
-4. Add authentication-audit-compiler as an audit tooling project only after public-safe summary exists.
-5. Preserve public/private boundaries from the private CV repo.
-```
+1. Campi `source_ids` et `claim_ids` ubi convenit rebus generatis addantur.
+2. Opera principalia Portfolio cum rebus `ProjectObject` conectantur.
+3. Effectus `ML Role Matcher` pro testimoniis, non iudiciis de conductione, habeantur.
+4. `authentication-audit-compiler` tantum post scriptum publice tutum inter opera instrumentorum inspectionis addatur.
+5. Fines inter privatum et publicum e CV privato serventur.
 
-## Use Boundary
+## Limes usus
 
-This repository generates public-safe CV, profile, and research-status outputs. It should not publish private source material or treat role-matching fixture scores as hiring decisions.
+Hoc repositorium curriculi vitae, descriptionum professionis et relationum investigationis effectus publice tutos efficit. Fontes privatos non divulget nec notas exemplorum comparationis munerum tamquam iudicia de conductione adhibeat.
