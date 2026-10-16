@@ -7,7 +7,7 @@ The repository is intentionally public. It must contain only public-safe source 
 **Maintainer:** Paul Skeffington, MS, MPH  
 **Public portfolio:** https://www.skeffington.us/  
 **Repository status:** active public-safe CV and research-status renderer.  
-**Last documentation refresh:** 2026-08-21
+**Last documentation refresh:** 2026-10-16
 
 ## Public-Interest Research Boundary
 
@@ -53,6 +53,12 @@ Current work in this repository emphasizes public-safe rendering, source-bounded
 - Keep `data/pipeline_repos.json` synchronized with mature public project evidence
 - Add release-review receipts where appropriate
 - Replace older distribution copies with date-stamped exports from the reconciled build
+
+## Repository Governance
+
+The [Imperium Protocol](docs/IMPERIUM_PROTOCOL.md) governs public-safe evidence, provenance, review, and release controls across CV sources, project summaries, job objects, code, generated outputs, and workflows. It does **not** turn CVs into person-ranking or automated hiring decisions. The basic README remains a navigation document; link-only references pointing upstream remain pointers to their authoritative sources rather than locally scored content.
+
+Run the baseline check with `python3 scripts/check_imperium_protocol.py`. Existing public-release, visibility, and validation checks remain mandatory. Protocol compliance also requires human review.
 
 ## Current Operating Model
 
