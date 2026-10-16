@@ -21,6 +21,10 @@
 
 ## Transitus et examinatio
 
-Instrumentum `scripts/check_latin_safeguards.py` documenta nova Markdown non directa coercet, et documenta vetera nondum translata recenset. Signum `<!-- lingua: la -->` adhibetur tantum post translationem veram; signum ipsum translationem non probat. Ratio antiqua non statim rumpatur: res veteres per partes transferantur, servatis testibus compilationis atque integritate citationum.
+Instrumentum `scripts/check_latin_safeguards.py` documenta nova Markdown non directa coercet, et documenta vetera nondum translata recenset. Signum `<!-- lingua: la -->` tantum post translationem veram adhibeatur. Instrumentum verba Anglica manifesto retenta quaerit, sed ipsum signum neque probationes vocabularii qualitatem Latinitatis per se confirmant. Documenta priora quae nondum translata sunt aperte enumerantur nec pro conformibus habentur. Ratio antiqua non statim rumpatur: res veteres per partes transferantur, servatis testibus compilationis atque integritate citationum.
 
 **Exceptio:** `README.md` fundamentale, nexus ad fontes superiores, et textus machinis necessarii.
+
+## Examen et transitus residuus
+
+Exsequenda sunt `python3 scripts/test_latin_safeguards.py` et `python3 scripts/check_latin_safeguards.py`. Regulae nunc documenta Markdown scripta examinant; fontes LaTeX, campi narrationis JSON, commentarii codicis et textus ab instrumentis generatus adhuc translationem accuratam in fontibus suis requirunt. Quae restant in relatione probationis aperte indicentur. Exceptio nexuum ad fontes superiores manet, etiam si tituli citationum Anglice servantur.
