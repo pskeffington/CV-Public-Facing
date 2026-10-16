@@ -1,11 +1,11 @@
 <!-- lingua: la -->
-# Tabula comparativa litterarum et instrumentorum ad aestimationem STEM
+# Tabula comparativa studiorum et instrumentorum ad aestimationem STEM
 
-Haec tabula rationem localem de declinatione STEM, verificatione citationum et aestimatione fasciculi scientifici cum instrumentis academicis propinquis comparat.
+Haec tabula rationem localem, quae congruentiam cum disciplinis STEM, citationes et fasciculos scientificos aestimat, cum instrumentis academicis similibus comparat.
 
 ## Ambitus
 
-Instrumentum locale neque indices bibliographicos neque recognitionem collegarum neque detectionem plagii neque bases datorum integritatis scientificae substituere vult. Munus angustius est: rem examinabilem, reproducibilem et tuto exscribendam ad inspectionem initialem curriculi STEM publici et scriptorum submissorum praebere.
+Instrumentum locale neque indices bibliographicos neque recognitionem collegarum neque detectionem plagii neque bases datorum integritatis scientificae substituere vult. Munus angustius est: rationem examinabilem, reproducibilem et ad exportationem publicam tutam praebere, qua curricula vitae STEM publica et scripta submissa primum inspiciantur.
 
 ## Tabula comparativa
 
@@ -17,7 +17,7 @@ Instrumentum locale neque indices bibliographicos neque recognitionem collegarum
 | PubMed / NCBI E-utilities | Identificatores et metadata biomedica cum PMID et PMCID | Convenit ad scripta biomedica verificanda | Praecipue biomedicinae et scientiis vitae, non omnibus STEM, inservit | Verificatio PMID |
 | OpenCitations / COCI | Rete citationum DOI ad DOI et metadata aperta | Convenit ad relationes citationum apertas examinandas | Comprehensio pendet ex fontibus apertis et identificatoribus | Fons futurus citationum apertarum |
 | Systemata contextus citationum similia scite | Distinguunt citationes sustinentes, contradicentes vel memorantes | Affinia aestimationi qualitatis relationum citationum | Saepe proprietaria; ratio localis sensum citationum nondum classificat | Modulus facultativus futurus |
-| Signa integritatis similia Retraction Watch / Crossmark | Status retractationis, correctionis et renovationis | Complementum ad litteras corruptas vel correctas indicandas | Interpretationem prudentem et API proprias requirit | Custodia futura integritatis |
+| Signa integritatis similia Retraction Watch / Crossmark | Status retractationis, correctionis et renovationis | Auxilium ad scripta retractata vel correcta indicanda | Interpretationem prudentem et API proprias requirit | Custodia futura integritatis |
 | Evaluator localis STEM CV Curator | Mensura STEM sine nexu, extractio citationum, verificatio facultativa, nota composita | Ratio perspicua et deterministica | Recognitionem collegarum non substituit; identitas auctoris et numeri citationum examinandi sunt | Custodia testimoniorum CV et scriptorum |
 
 ## Instrumenta et status
@@ -27,7 +27,7 @@ Instrumentum locale neque indices bibliographicos neque recognitionem collegarum
 | Aestimatio textus STEM | Instituta | `scripts/stem_presence.py` | Vocabularia disciplinarum configurabilia |
 | Tabula STEM indicis operum | Instituta | `scripts/write_stem_presence_report.py` | Historia mutationum inter exsecutiones |
 | Extractio DOI | Instituta | `scripts/stem_citation_verifier.py` | Probationes normalizationis signorum DOI |
-| Metadata DOI externa | Instituta, facultativa | Crossref | Dies et finis fontis in effectu serviendi |
+| Metadata DOI externa | Instituta, facultativa | Crossref | Diem interrogationis et finem fontis in effectu servare |
 | Extractio PMID | Instituta | `scripts/stem_citation_verifier.py` | Amplificatio metadata NCBI |
 | Extractio arXiv | Instituta | `scripts/stem_citation_verifier.py` | Amplificatio metadata arXiv |
 | Extractio URL et responsio finis | Instituta, facultativa | Interrogatio finis publici | Regulae permissionis et vetiti URL |
@@ -43,7 +43,7 @@ Instrumentum locale neque indices bibliographicos neque recognitionem collegarum
 
 Instrumentum localiter et sine nexu externo operari debet in CI et generationibus CV publicis. Verificatio externa tantum expresse petatur, quoniam servitia citationum numerum interrogationum restringere, responsa mutare aut plures auctores similes indicare possunt.
 
-Proxima melioramenta utilia sunt campi originis fontium, monita de dubia identitate auctoris et probatio JSON pro effectu composito evaluatoris.
+Proxima emendanda sunt indicia originis fontium, monita de identitate auctoris incerta et probatio structurae JSON pro effectu composito aestimatoris.
 
 ## Fontes et nexus servati
 
