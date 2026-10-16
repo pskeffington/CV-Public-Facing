@@ -8,7 +8,7 @@ Ante mutationem:
 - Structuram repositorii serva, nisi ratio mutationis aperte probata est.
 - Claves occultas, indicia privata, documenta domestica et effectus temporarios ne publices.
 - Fontes primarios a documentis generatis distingue.
-- Documenta propria non directoria Latine compone; indicia et nexus ad fontes superiores integra maneant.
-- Nomina variabilium, claves JSON, mandata, citationes et syntax necessariam ne converte.
+- Documenta a nobis conscripta, quae non sunt merae indicationes ad fontes superiores, Latine compone; indicia fontium et nexus integri maneant.
+- Nomina variabilium, claves JSON, mandata exsecutabilia, citationes et syntaxin necessariam ne mutes.
 
-Mutationibus codicis vel documentorum factis, probationes pertinentes exsequere; probationes non peractas clare indica. Mutationes maiores cum causa et effectu exspectato describantur.
+Mutationibus codicis vel documentorum factis, probationes pertinentes exsequere; probationes non peractas clare indica. Mutationes maiores ita describantur ut causa earum et effectus exspectatus pateant.
