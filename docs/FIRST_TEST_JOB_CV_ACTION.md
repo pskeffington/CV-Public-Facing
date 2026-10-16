@@ -1,70 +1,73 @@
-# First Test - Job CV Package Action
+<!-- lingua: la -->
+# Prima probatio — ratio fasciculi curriculi vitae pro munere selecto
 
-## Purpose
+## Propositum
 
-This note prepares the first manual test of the public-facing job CV package workflow.
+Haec nota primam probationem manualem rationis publicae fasciculi curriculi vitae praeparat.
 
-The workflow builds the neutral public CV package and then creates a selected public-safe job package from the dropdown job object. It does not pull private job packets or private evidence.
+Ratio fasciculum publicum neutrum generat; deinde ex re muneris selecta fasciculum publice tutum efficit. Fasciculos candidaturarum privatos nec testimonia privata importat.
 
-## Workflow
+## Ratio GitHub Actions
 
 ```text
 .github/workflows/build-public-research-status.yml
 ```
 
-Displayed name:
+Nomen in GitHub monstratum:
 
 ```text
 Build Public CV Package
 ```
 
-## First test target
+## Res primae probationis
 
-Use the neutral object first:
+Primum rem neutram elige:
 
 ```text
 neutral
 ```
 
-Then test the Harvard Chan object:
+Deinde rem Harvard Chan experire:
 
 ```text
 harvard-chan-director-data-analytics
 ```
 
-## Manual test steps
+## Gradus probationis manualis
 
-1. Open the repository on GitHub.
-2. Go to `Actions`.
-3. Select `Build Public CV Package`.
-4. Click `Run workflow`.
-5. Choose `neutral` from the `Public-safe job object to package` dropdown.
-6. Run the workflow from `main`.
-7. Confirm the workflow completes.
-8. Download artifacts.
-9. Repeat with `harvard-chan-director-data-analytics`.
+1. Repositorium in GitHub aperi.
+2. Ad `Actions` transi.
+3. `Build Public CV Package` elige.
+4. `Run workflow` preme.
+5. In indice `Public-safe job object to package` valorem `neutral` selige.
+6. Rationem in ramo `main` exsequere.
+7. Confirma exsecutionem sine errore absolutam esse.
+8. Effectus depone et inspice.
+9. Itera cum `harvard-chan-director-data-analytics`.
 
-## Expected artifacts
+## Fasciculi exspectati
 
-For the neutral test:
+Pro probatione neutra, secundum nomina rationis hodiernae:
 
 ```text
+linkedin-academic-cv-neutral
 public-cv-package-neutral
 selected-job-cv-package-neutral
-generated-living-cv-sources-neutral
+public-render-sources-neutral
 ```
 
-For the Harvard Chan test:
+Pro probatione Harvard Chan:
 
 ```text
+linkedin-academic-cv-harvard-chan-director-data-analytics
 public-cv-package-harvard-chan-director-data-analytics
 selected-job-cv-package-harvard-chan-director-data-analytics
-generated-living-cv-sources-harvard-chan-director-data-analytics
+public-render-sources-harvard-chan-director-data-analytics
 ```
 
-## Expected selected package contents
+## Contenta fasciculi muneris selecti
 
-The selected job package artifact should include:
+Fasciculus muneris selecti haec continere debet:
 
 ```text
 dist/job_cv_packages/<selected-job>/Paul_A_Skeffington_Academic_CV_Public.pdf
@@ -75,33 +78,33 @@ dist/job_cv_packages/<selected-job>/PUBLIC_SAFE_JOB_BRIEF.md
 dist/job_cv_packages/<selected-job>/manifest.json
 ```
 
-## Preflight checks now enforced
+## Examina ante generationem
 
-The workflow runs:
+Ratio exsequitur:
 
 ```bash
 make job-cv-package JOB_OBJECT="<selected>"
 ```
 
-That target runs the normal public package build and validates:
+Hoc praeceptum fasciculum publicum ordinarium generat et confirmat:
 
-- job object registry exists;
-- selected job object exists;
-- every job object has required fields;
-- dropdown options match registry keys;
-- first dropdown option matches the default job object;
-- public package PDFs exist before selected packaging.
+- registrum rerum munerum exstare;
+- rem electam in registro exstare;
+- omnem rem campis necessariis instructam esse;
+- electiones in indice demisso clavibus registri respondere;
+- primam electionem valore praedefinito convenire;
+- documenta PDF publica ante compositionem fasciculi muneris exstare.
 
-## Pass condition
+## Condicio probationis prosperae
 
-A first test passes when:
+Prima probatio succedit si:
 
-- the workflow completes without error;
-- all three artifacts are present;
-- `selected-job-cv-package-*` includes `PUBLIC_SAFE_JOB_BRIEF.md` and `manifest.json`;
-- no private job packet text appears in the public artifact;
-- PDF outputs match the neutral public package unless a later tailored LaTeX variant is intentionally added.
+- ratio sine errore finitur;
+- quattuor genera effectuum supersunt;
+- `selected-job-cv-package-*` continet `PUBLIC_SAFE_JOB_BRIEF.md` et `manifest.json`;
+- nullus textus candidaturae privatae in effectu publico reperitur;
+- effectus PDF fasciculo neutro respondent, nisi forma LaTeX ad munus accommodata postea consulto addatur.
 
-## Boundary
+## Limes
 
-This workflow packages public-safe outputs for a selected job object. It is not yet a full tailored-LaTeX renderer. The current test validates safe selection, package creation, artifact naming, manifest creation, and role-facing public-safe brief generation.
+Haec ratio documenta publica pro re muneris selecta colligit. Nondum est instrumentum plene accommodans LaTeX singulis muneribus. Probatio praesentis gradus electionem tutam, compositionem fasciculi, nomina effectuum, indicem JSON et relationem publice tutam de munere examinat.
