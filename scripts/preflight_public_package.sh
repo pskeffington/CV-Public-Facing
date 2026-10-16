@@ -52,8 +52,11 @@ require_absent_in_rendered_public_sources() {
     cv/current_projects_public.tex \
     cv/publication_pipeline_public.tex \
     cv/one_page_profile_public.tex \
+    cv/academic_cv_public.tex \
+    cv/public_upload_cv.tex \
     research/RESEARCH_STATUS.md \
-    research/generated_project_board.tex >"${match_file}"; then
+    research/generated_project_board.tex \
+    research/research_status.tex >"${match_file}"; then
     echo "Rendered public source contains disallowed pattern: ${pattern}" >&2
     cat "${match_file}" >&2
     rm -f "${match_file}"
