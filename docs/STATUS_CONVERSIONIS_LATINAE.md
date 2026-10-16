@@ -10,7 +10,7 @@ Documenta Markdown manu conscripta in radice, in directorio `docs/` et in direct
 
 `research/living_source_ledger.md` est index directorius ad fontes superiores; ne pro narratione nova habeatur.
 
-Examen automat `scripts/check_latin_safeguards.py` requirit signum `<!-- lingua: la -->` et sententias manifesto Anglicas, post signum positum, detegere conatur. Probationes unitatis in `scripts/test_latin_safeguards.py` sunt. Signum et index vocabularii linguam per se non certificant; recognitio humana adhuc necessaria est.
+Examen automaticum `scripts/check_latin_safeguards.py` requirit signum `<!-- lingua: la -->` et sententias manifesto Anglicas, post signum positum, detegere conatur. Probationes unitatis in `scripts/test_latin_safeguards.py` sunt. Signum et index vocabularii linguam per se non certificant; recognitio humana adhuc necessaria est.
 
 ## Opera restantia — non pro conformibus habenda
 
@@ -28,7 +28,7 @@ Hi loci gradum transitionis indicant; non probatur omnes iam Latine redditos ess
 
 - `README.md` principale, ad navigationem simplicem.
 - Fasciculi qui tantum ad fontes superiores ducunt, et citationes vel inscriptiones fontium.
-- Claves JSON, nomina variabilium, voci determinativae systematis, DOI, URL, mandata, citationes integrae, syntax LaTeX et nomina institutionum.
+- Claves JSON, nomina variabilium, voces ad rationem systematis pertinentes, DOI, URL, mandata, citationes integrae, syntaxis LaTeX et nomina institutionum.
 
 ## Custodia prior publicationem
 
