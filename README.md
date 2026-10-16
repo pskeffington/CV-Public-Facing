@@ -54,6 +54,10 @@ Current work in this repository emphasizes public-safe rendering, source-bounded
 - Add release-review receipts where appropriate
 - Replace older distribution copies with date-stamped exports from the reconciled build
 
+## Lingua Latina
+
+Locally authored non-feeder documents are governed by [Latin safeguards](docs/LATIN_SAFEGUARDS.md). Source-only pointers and upstream citations remain unchanged; software syntax, metadata keys and public README navigation remain functional. New locally authored Markdown documents require Latin-language declaration and validation. Legacy English documents are inventoried for staged translation rather than inaccurately represented as converted.
+
 ## Repository Governance
 
 The [Imperium Protocol](docs/IMPERIUM_PROTOCOL.md) governs public-safe evidence, provenance, review, and release controls across CV sources, project summaries, job objects, code, generated outputs, and workflows. It does **not** turn CVs into person-ranking or automated hiring decisions. The basic README remains a navigation document; link-only references pointing upstream remain pointers to their authoritative sources rather than locally scored content.
