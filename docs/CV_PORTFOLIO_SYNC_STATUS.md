@@ -1,60 +1,61 @@
-# CV / Portfolio Synchronization Status
+<!-- lingua: la -->
+# Status concordiae inter curriculum vitae et indicem operum
 
-**Review date:** 2026-08-06  
-**Scope:** private CV workspace, public CV renderer, Portfolio evidence index, and Google Drive distribution copies
+**Dies recognitionis:** 2026-08-06  
+**Ambitus:** repositorium privatum curriculi vitae, instrumentum publicum, index testimoniorum Portfolio et exemplaria in Google Drive distribuenda.
 
-## Source-of-truth hierarchy
+## Ordo fontium auctoritate praestantium
 
-1. `pskeffington/CV` is the private claim-controlled master for CV and resume content.
-2. `pskeffington/Portfolio` is the cross-repository project and evidence index. Project status should be promoted into CV prose only after the supporting repository evidence is reviewable and the claim boundary is clear.
-3. `pskeffington/CV-Public-Facing` is the public-safe renderer. It should receive only claims and project summaries cleared for public release.
-4. Google Drive is a distribution and coordination layer for rendered or review copies. Drive copies should be regenerated from the reconciled GitHub sources rather than edited as independent masters.
+1. `pskeffington/CV` est fons principalis privatus cuius assertiones de curriculo vitae et descriptione professionali reguntur.
+2. `pskeffington/Portfolio` est index operum et testimoniorum inter repositoria. Status operis in narrationem curriculi vitae non promoveatur, nisi testimonia repositorii sustinentis recognosci possunt et fines assertionis clari sunt.
+3. `pskeffington/CV-Public-Facing` est instrumentum publicationis tutum. Tantum assertiones et summaria operum ad divulgationem approbata recipiat.
+4. Google Drive est locus distributionis et coordinationis exemplarium generatarum vel recognoscendarum. Exemplaria ibi posita ex fontibus GitHub concordatis iterum generentur, non quasi fontes principales separatim emendentur.
 
-## Current reconciliation finding
+## Inventum reconciliationis huius temporis
 
-The Portfolio repository advanced materially after the July 3 documentation refresh. On July 21-22, it added and expanded the portfolio valuation-manifest standard, cross-repository manifest validation, deterministic validation tests, registry reconciliation, exception handling, and Phase 1 validation/data-integrity status documentation.
+Repositorium Portfolio post renovationem documentorum die 3 Iulii egregie progressum est. Diebus 21–22 Iulii normam indicis valoris operum ampliavit, validationem inter repositoria, probationes deterministicas, reconciliationem registri, exceptionum tractationem atque relationes primae partis de integritate datorum addidit.
 
-Those changes strengthen the evidence-governance layer but do not, by themselves, create new CV claims. They support stronger language around reproducible evidence controls, cross-repository validation, source-to-claim governance, deterministic checks, and portfolio-level reconciliation.
+Haec mutationes ordinem probationum confirmant, sed per se novas assertiones curriculi vitae non efficiunt. Sustinent sermonem accuratiorem de custodiis probationis reproducibilis, validatione inter repositoria, gubernatione nexus inter fontem et assertionem, probationibus deterministis et reconciliatione universi indicis.
 
-## CV promotion rule
+## Lex promovendi assertiones ad curriculum vitae
 
-A portfolio item may enter the master CV when its description can be stated as:
+Res in indice Portfolio in curriculum principale recipi potest cum ordine sequenti describitur:
 
-**Problem -> Method -> Deliverable -> Intended use**
+**Quaestio → Methodus → Opus traditum → Usus propositus**
 
-and when the status language is supported by repository evidence.
+Praeterea statum ab indiciis repositorii confirmatum habeat.
 
-Use conservative stage terms such as:
+Termini statuum cauti adhibeantur, velut:
 
-- active
-- developing
-- in preparation
-- under review
-- validated internally
-- external validation pending
+- activum;
+- in evolutione;
+- in apparatu;
+- sub recognitione;
+- interne validatum;
+- validationem externam exspectans.
 
-Avoid converting internal valuation, readiness, scoring, or architecture metadata into claims of market value, production readiness, institutional adoption, clinical effectiveness, or external validation.
+Aestimatio interna valoris, promptitudo, nota numerica vel metadata structurae non transferantur in assertiones de pretio mercatus, usu productionis, adoptione institutionali, efficacia clinica aut validatione externa.
 
-## Public-export rule
+## Lex exportationis publicae
 
-The public renderer should contain only public-safe project names, methods, outputs, and status statements. Private paths, restricted evidence, private job materials, internal valuation ranges, implementation-sensitive details, and unsupported impact claims remain outside the public CV.
+Instrumentum publicum tantum nomina, methodos, effectus et status operum publice tutos contineat. Viae privatae, testimonia restricta, fasciculi munerum privati, intervalla valorum interna, particularia exsecutionis sensibilia et assertiones de effectu nondum probatae a curriculo publico absint.
 
-## Google Drive synchronization
+## Concordia exemplarium in Google Drive
 
-The currently located Drive CV artifacts predate the July 21-22 portfolio reconciliation work. They should be treated as historical distribution copies until rebuilt from the reconciled GitHub sources.
+Exemplaria curriculi vitae in Drive tempore recognitionis inventa ante laborem reconciliationis dierum 21–22 Iulii composita erant. Pro exemplaribus distributionis historicis habenda sunt, donec ex fontibus GitHub concordatis iterum generentur.
 
-Next distribution cycle:
+Proximus cursus distributionis:
 
-1. reconcile private CV claims against Portfolio evidence;
-2. update the public-safe project register and CV source;
-3. build the master and public CV artifacts;
-4. review rendered PDFs for claim and layout consistency;
-5. replace or supersede the corresponding Google Drive copies with date-stamped exports.
+1. assertiones curriculi privati cum testimoniis Portfolio concordare;
+2. indicem operum publice tutorum et fontes curriculi renovare;
+3. formas curriculi principales et publicas generare;
+4. documenta PDF inspectare ob constantiam assertionum et compositionis paginarum;
+5. exemplaria Google Drive correspondentes novis exportationibus diem indicantibus substituere vel obsoleta declarare.
 
-## Immediate documentation priorities
+## Opera documentaria statim agenda
 
-- refresh repository README status language where it still reflects the July 3 state;
-- review the master CV research/project section against the current Portfolio evidence index;
-- review the public CV project register for items whose status has matured or changed;
-- keep the NLSY79, WASH/rural infrastructure, biomedical methods, and evidence-governance lines distinct enough to remain credible while presenting one coherent research identity;
-- keep public-facing language scholarly, civic-facing, research-oriented, non-operational, and explicit about limitations.
+- sermonem status in `README` renovare, ubi adhuc statum diei 3 Iulii repraesentat;
+- partem investigationum et operum in curriculo principali cum indice testimoniorum Portfolio conferre;
+- indicem operum in curriculo publico recensere ubi status maturuit aut mutatus est;
+- argumenta NLSY79, WASH et infrastructurae ruralis, methodorum biomedicarum atque gubernationis probationum distincta tenere, una tamen persona scientifica perspicua servata;
+- sermonem publicum academicum, civibus utilem, ad investigationem spectantem, non operativum atque limitum conscientem retinere.
