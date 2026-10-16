@@ -100,7 +100,7 @@ require_contains "cv/one_page_profile_public.tex" "Selected Methods and Technica
 require_contains "data/pipeline_repos.json" "final public scholarly freeze"
 require_contains "data/pipeline_repos.json" "administrative access-gating extension"
 require_contains "cv/one_page_profile_public.tex" "CART-TRACE"
-require_contains "cv/one_page_profile_public.tex" "Pre-submission review"
+require_contains "cv/one_page_profile_public.tex" "Pre-submission manuscript review"
 require_contains "cv/publication_pipeline_public.tex" "Pre-submission review"
 
 # Generated public objects must still contain the current public-only projects.
