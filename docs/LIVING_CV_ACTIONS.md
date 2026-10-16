@@ -1,7 +1,7 @@
 <!-- lingua: la -->
 # Praecepta rationis curriculi vitae viventis
 
-Hoc repositorium destinatur ad generationem publicam curriculi vitae viventis. Repositoria singulorum operum fontes principales statuum suorum publicorum manent. Instrumentum publicum indice permisso `data/pipeline_repos.json` utitur, permissiones divulgationis examinat, tabulam operum iterum generat et documenta PDF componit.
+Hoc repositorium destinatur ad curriculum vitae publicum continenter renovandum. Repositoria singulorum operum fontes principales statuum suorum publicorum manent. Instrumentum publicum indice fontium admissorum `data/pipeline_repos.json` utitur, condiciones divulgationis examinat, tabulam operum iterum generat et documenta PDF componit.
 
 ## Structura
 
@@ -14,7 +14,7 @@ public allowlist update
   -> workflow artifacts
 ```
 
-Compositio manualis fasciculi muneris eadem via publica tuta utitur:
+Fasciculus ad munus manu delectum eadem via publice tuta componitur:
 
 ```text
 manual workflow_dispatch
@@ -37,13 +37,13 @@ Pro unoquoque opere publico index clavem stabilem, nomen repositorii, titulum pu
 
 Instrumentum generans per praedefinitionem tantum fontes ex indice publice admisso recipit. Lectio recursiva non permittitur, nisi `allow_recursive_intake` post recognitionem consulto admittitur. Hoc consilio status repositorii maturior novas assertiones in curriculo publico sponte non creat.
 
-Index selector munerum manualis hoc fasciculo regitur:
+Index ad munera manu seligenda hoc fasciculo regitur:
 
 ```text
 data/job_cv_objects.json
 ```
 
-Res munerum sunt indicia tantum ad praesentandum publice tuta. Fasciculos candidaturarum privatos, testimonia privata nec assertiones de muneribus non probatas importare non debent.
+Res de muneribus sola indicia ad publicum tuto exhibenda continent. Fasciculos candidaturarum privatos, testimonia privata nec assertiones de muneribus non probatas importare non debent.
 
 ## Res generatae
 
@@ -158,7 +158,7 @@ Systema circuitus infinitos his praeceptis vitat:
 - instrumentum publicum fasciculos generat;
 - ratio publica effectus ad se ipsam non committit;
 - mutationes actoris `github-actions[bot]` ordinariae praetermittuntur;
-- concurrentia generationes duplicatas adhuc agentes tollit;
+- moderatio exsecutionum simultanearum generationes duplicatas cohibet;
 - lectio recursiva sine recognitione expresse facta vetatur.
 
 ## Additio novi repositorii operis
@@ -169,7 +169,7 @@ Systema circuitus infinitos his praeceptis vitat:
 4. `make safety-surface-check` exsequere.
 5. `make public-package` exsequere.
 6. Documenta PDF et registra fontium inspice.
-7. Nuntium mutationis publicae tantum si renovatio assidua necessaria est adde.
+7. Nuntium de mutatione publica adde tantum si renovatio assidua necessaria est.
 8. Rationem publicam semel manualiter exsequere, ut res nova in fontibus generatis appareat.
 
 ## Additio novae rei muneris
