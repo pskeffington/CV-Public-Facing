@@ -1,12 +1,14 @@
-# Contributing
+<!-- lingua: la -->
+# De contributionibus
 
-This repository is maintained as a working project. Contributions should be small, focused, and easy to review.
+Hoc repositorium ad curriculum vitae publicum et investigationes verificabiles pertinet. Mutationes parvae, definitae et facile recognoscendae sint.
 
-Before making changes:
+Ante mutationem:
+- Lege `README.md` et `docs/IMPERIUM_PROTOCOL.md` atque `docs/LATIN_SAFEGUARDS.md`.
+- Structuram repositorii serva, nisi ratio mutationis aperte probata est.
+- Claves occultas, indicia privata, documenta domestica et effectus temporarios ne publices.
+- Fontes primarios a documentis generatis distingue.
+- Documenta propria non directoria Latine compone; indicia et nexus ad fontes superiores integra maneant.
+- Nomina variabilium, claves JSON, mandata, citationes et syntax necessariam ne converte.
 
-- Read the README and existing project notes.
-- Preserve the current repository structure unless a change is clearly needed.
-- Do not commit secrets, credentials, private data, local exports, or generated build artifacts.
-- Keep source files and generated outputs separate when possible.
-
-For code or document changes, run the relevant local checks when available and mention any checks that could not be run. For larger changes, open an issue or pull request with a short summary of the motivation and expected impact.
+Mutationibus codicis vel documentorum factis, probationes pertinentes exsequere; probationes non peractas clare indica. Mutationes maiores cum causa et effectu exspectato describantur.
