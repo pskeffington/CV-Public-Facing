@@ -1,0 +1,86 @@
+name: Retire reviewed obsolete public CV branches
+
+# One-time, exact-head branch retirement. This file is removed after verification.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/retire-legacy-branches.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  retire-reviewed-refs:
+    if: ${{ github.repository == 'pskeffington/CV-Public-Facing' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Preserve superseded work and remove exact obsolete refs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          retire() {
+            local branch="$1"
+            local expected="$2"
+            local archive_slug="$3"
+            local current
+            local open_refs
+
+            case "$branch" in
+              main|seo-entity-alignment-2026-10-07)
+                echo "Protected from retirement: $branch" >&2
+                return 1
+                ;;
+            esac
+
+            current="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/$branch" --jq '.object.sha')"
+            if [[ "$current" != "$expected" ]]; then
+              echo "Branch changed since review: $branch" >&2
+              return 1
+            fi
+
+            open_refs="$(gh api "repos/$GITHUB_REPOSITORY/pulls?state=open&per_page=100" --jq '.[].head.ref')"
+            if grep -Fxq "$branch" <<< "$open_refs"; then
+              echo "Open pull request protects branch: $branch" >&2
+              return 1
+            fi
+
+            if [[ "$archive_slug" != "private-backup" ]]; then
+              local tag="refs/tags/archive/2026-10-16/$archive_slug"
+              gh api -X POST "repos/$GITHUB_REPOSITORY/git/refs" \
+                -f ref="$tag" -f sha="$expected" >/dev/null
+              echo "Preserved history as $tag"
+            fi
+
+            current="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/$branch" --jq '.object.sha')"
+            [[ "$current" == "$expected" ]] || {
+              echo "Ref changed during retirement: $branch" >&2
+              return 1
+            }
+
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/$branch" >/dev/null
+            echo "Retired reviewed branch: $branch"
+          }
+
+          # Original documentation/CV changes are preserved by archive tags.
+          retire 'agent/public-docs-refresh-2026-08-17' \
+            '789c8438614ba12313f4e8ab21cbce0dcb0be224' \
+            'public-docs-refresh'
+          retire 'fix/cdc-foundation-job-object-title' \
+            '0673b62a96100fdedc9136863c19a6d81efc2085' \
+            'cdc-foundation-title'
+          retire 'fix/cdc-foundation-job-object-title-main' \
+            'ac3ac00846c782b937ca119c054c251454dff6ca' \
+            'cdc-foundation-title-main'
+
+          # Both unique application documents were verified in the private
+          # Applications-Jobs repository before this public ref was retired.
+          # Do not create a public archive tag for the application branch.
+          retire 'plymouth-human-services' \
+            'cdd41470856687cf33ea50ccabc208520dca7d38' \
+            'private-backup'
