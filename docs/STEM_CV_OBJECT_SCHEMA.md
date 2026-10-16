@@ -1,7 +1,7 @@
 <!-- lingua: la -->
 # Schema rerum STEM in curriculo vitae
 
-Hic describitur structura rerum ab instrumento publico curatorio CV generatarum et regula maturitatis quae eas circumdat.
+Hoc documentum structuram rerum a curatore curriculi vitae publico generatarum et regulas maturitatis eis applicandas describit.
 
 ## Fasciculus effectus
 
@@ -9,7 +9,7 @@ Hic describitur structura rerum ab instrumento publico curatorio CV generatarum 
 data/stem_cv_objects.json
 ```
 
-Hic fasciculus est effectus temporarius generationis, non fons principalis versionibus conservatus. `scripts/run_stem_cv_curator.py` eum ante probationem structurae iterum generat. Git eum ignorat, ne exemplaria antiqua fortuito in historiam committantur. Status operum diuturnus in `data/pipeline_repos.json` et fontibus publicis ibi indicatis servandus est.
+Hic fasciculus est effectus temporarius generationis, non fons principalis in historia versionum conservandus. `scripts/run_stem_cv_curator.py` eum ante probationem structurae iterum generat. Git eum ignorat, ne exemplaria antiqua fortuito in historiam committantur. Status operum diuturnus in `data/pipeline_repos.json` et fontibus publicis ibi indicatis servandus est.
 
 ## Structura summa
 
@@ -26,7 +26,7 @@ Hic fasciculus est effectus temporarius generationis, non fons principalis versi
 }
 ```
 
-Instrumentum separatum `scripts/stem_presence.py` metricam `stem_presence` ad scripta, `README`, relationes status et excerpta publica examinanda adhiberi potest.
+Instrumentum separatum `scripts/stem_presence.py` mensuram `stem_presence` ex scriptis, documentis `README`, relationibus de statu et excerptis publicis computare potest.
 
 ## Res Run
 
@@ -82,7 +82,7 @@ Instrumentum separatum `scripts/stem_presence.py` metricam `stem_presence` ad sc
 }
 ```
 
-**Usus:** testimonia repositorii in rem curriculo vitae aptam convertit, status maturitatis investigationis tamen limitatus manet.
+**Usus:** testimonia repositorii in rem curriculo vitae aptam convertit, servatis tamen finibus maturitatis investigationis.
 
 ## ClaimObject
 
@@ -108,7 +108,7 @@ Probatio structurae vocabula sequentia admittit. Valores graduum probationis a `
 | `validation_gated` | Fortiores assertiones verificationem requirunt; propter convenientiam veterem retinetur |
 | `intake` | Repositorium nuper repertum quod curam et recognitionem requirit |
 
-Valor ignotus vel deest? Probatio rerum generatarum tum deficit.
+Si valor ignotus est aut deest, probatio rerum generatarum deficit.
 
 ## Classes praesentiae STEM
 
