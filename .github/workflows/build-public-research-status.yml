@@ -31,6 +31,7 @@ on:
       - 'Makefile'
       - 'README.md'
       - 'PUBLIC_MANIFEST.md'
+      - 'docs/IMPERIUM_PROTOCOL.md'
       - '.github/workflows/build-public-research-status.yml'
 
 permissions:
@@ -63,6 +64,7 @@ jobs:
       - name: Run public manifest, visibility, and release checks
         run: |
           set -euo pipefail
+          python3 scripts/check_imperium_protocol.py
           make public-manifest-check
           make public-visibility-check
           make safety-surface-check
