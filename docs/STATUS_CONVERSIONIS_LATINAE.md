@@ -12,6 +12,19 @@ Documenta Markdown manu conscripta in radice, in directorio `docs/` et in direct
 
 Examen automaticum `scripts/check_latin_safeguards.py` requirit signum `<!-- lingua: la -->` et sententias manifesto Anglicas, post signum positum, detegere conatur. Probationes unitatis in `scripts/test_latin_safeguards.py` sunt. Signum et index vocabularii linguam per se non certificant; recognitio humana adhuc necessaria est.
 
+## Altera recognitio grammaticae — 2026-10-16
+
+Documenta Latina ab auctore conscripta iterum lecta sunt, et locutiones selectae ratione grammaticae, perspicuitatis atque constantiae vocabulorum emendatae sunt. Recognitio haec praecipue attigit:
+
+- curriculum vitae brevius (`Dartmouth_CV.md`) et regulas conferendi (`CONTRIBUTING.md`);
+- documenta de concordia systematum, fontibus curriculi vitae et custodia editionis publicae;
+- praecepta exsecutionis fasciculorum, indicem rerum et descriptiones instrumentorum STEM;
+- notam de munere UNH et normam vocabularii Latini.
+
+Praecipue correcti sunt casus nominum, concordia verborum, structura sententiarum et vocabula technica male translata. Voces quae sunt partes codicis, nomina optionum, inscriptiones viarum, claves JSON et citationes e fontibus non mutatae sunt.
+
+Normae repositorii `trans-latin` ad mutationes observandas et consuetudinem recensionis comparandam consuluntur. Quia illae normae imprimis ad transcriptionem testium historicorum pertinent, **non** habentur pro instrumento automatico quod Latinitatem recentem perfecte probet. Haec recognitio editorialis certificationem philologicam externam non constituit.
+
 ## Opera restantia — non pro conformibus habenda
 
 | Genus | Fontes | Ratio emendandi |
