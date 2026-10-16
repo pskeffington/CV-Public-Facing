@@ -1,0 +1,38 @@
+name: Public scope and Latin safeguards
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - 'CONTRIBUTING.md'
+      - '.gitignore'
+      - '.github/workflows/public-scope-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-public-scope:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fontes publicos accipere
+        uses: actions/checkout@v4
+
+      - name: Python constituere
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Ambitum et linguam probare
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/test_repository_scope.py
+          python3 scripts/check_repository_scope.py
+          python3 scripts/check_imperium_protocol.py
+          python3 scripts/test_latin_safeguards.py
+          python3 scripts/check_latin_safeguards.py
+          python3 scripts/check_job_cv_objects.py
