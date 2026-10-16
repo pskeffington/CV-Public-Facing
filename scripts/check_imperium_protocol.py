@@ -10,13 +10,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 EXCLUDED = {"README.md"}
 # These are prohibited *uses* in public artifacts, not mere mentions in policy docs.
 FORBIDDEN = (
-    re.compile(r"(?i)\\b(?:social[_ -]?credit|imperium[_ -]?score|historical[_ -]?rank)[_ -]?(?:for[_ -]?)?(?:hiring|eligibility|employment|admission|promotion|compensation)\\b"),
-    re.compile(r"(?i)\\b(?:automated|algorithmic)\\s+(?:employment|hiring|eligibility)\\s+(?:decision|approval|rejection)\\b"),
+    re.compile(r"(?i)\b(?:social[_ -]?credit|imperium[_ -]?score|historical[_ -]?rank)[_ -]?(?:for[_ -]?)?(?:hiring|eligibility|employment|admission|promotion|compensation)\b"),
+    re.compile(r"(?i)\b(?:automated|algorithmic)\s+(?:employment|hiring|eligibility)\s+(?:decision|approval|rejection)\b"),
 )
 EXTENSIONS = {".md", ".tex", ".json", ".yml", ".yaml", ".py", ".sh"}
 IGNORED_PREFIXES = (".git/", "documents/", "dist/")
 def main() -> int:
-    paths = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, check=True, capture_output=True).stdout.decode().split("\\0")
+    paths = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, check=True, capture_output=True).stdout.decode().split("\0")
     problems = []
     in_scope = 0
     for name in paths:
