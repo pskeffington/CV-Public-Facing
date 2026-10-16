@@ -98,7 +98,7 @@ Probatio structurae vocabula sequentia admittit. Valores graduum probationis a `
 | `pre_submission` | Scriptum ante submissionem emendatur, citationes et tabulae conferuntur, vel fasciculus caecus recognoscitur |
 | `benchmark_freeze_pending` | Via probationis exsecutabilis exstat, sed comparatio nondum definitive comprobata |
 | `pre_analysis` | Protocollum vel exemplar ante analysim empiricam validatam exstat |
-| `source_validation` | Fontes et variabiles examinantur, vel reproductibilitas praeparatur |
+| `source_validation` | Fontes et variabiles examinantur, vel reproducibilitas praeparatur |
 | `active_research` | Investigatio activa finibus definitis, sed statu maturitatis specialiore carens |
 | `submitted` | Scriptum submissum vel sub recognitione; propter convenientiam veterem retinetur |
 | `publication_ready` | Res ad editionem parata; propter convenientiam veterem retinetur |
