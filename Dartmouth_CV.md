@@ -7,10 +7,10 @@ paulskeffington@gmail.com | GitHub: pskeffington
 ## Education
 
 **Geisel School of Medicine, Dartmouth College**  
-Master of Science in Health Data Science, incoming Fall 2026 class
+Master of Science in Health Data Science, graduate study, Fall 2026–2028
 
 **Southern New Hampshire University**  
-Master of Public Health, Global Health Concentration — degree requirements completed; conferral pending
+Master of Public Health, Global Health Concentration — degree requirements completed; conferred October 2026
 
 **Southern New Hampshire University**  
 Master of Science, Applied Economics, December 2025
