@@ -9,6 +9,7 @@ exemplaribus manu scriptis in locum indicis probati substituit.
 from __future__ import annotations
 
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
 CV_PROJECTS_PATH = ROOT / "cv" / "current_projects_public.tex"
@@ -31,7 +32,7 @@ def main() -> int:
     if r"\cvrole{" not in source:
         raise SystemExit("Generated public CV has no evidenced project entries.")
 
-    polished = source.replace(DEFAULT_LIST, POLISHED_LIST)
+    polished = re.sub(re.escape(DEFAULT_LIST) + r"(?!\[)", lambda _: POLISHED_LIST, source)
     CV_PROJECTS_PATH.write_text(polished, encoding="utf-8")
     print("Polished evidence-filtered public CV sections without replacing project claims.")
     return 0
