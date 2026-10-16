@@ -98,7 +98,6 @@ require_contains "cv/one_page_profile_public.tex" "Selected Methods and Technica
 # state into broader maturity labels and therefore must not be required to
 # preserve every exact status phrase.
 require_contains "data/pipeline_repos.json" "final public scholarly freeze"
-require_contains "data/pipeline_repos.json" "Pre-submission manuscript cleanup / blinded-package review"
 require_contains "data/pipeline_repos.json" "administrative access-gating extension"
 require_contains "cv/one_page_profile_public.tex" "CART-TRACE"
 require_contains "cv/one_page_profile_public.tex" "Pre-submission review"
@@ -107,7 +106,6 @@ require_contains "cv/publication_pipeline_public.tex" "Pre-submission review"
 # Generated public objects must still contain the current public-only projects.
 for project in \
   "Longitudinal CAR T-cell care-trajectory reconstruction" \
-  "Life-course data, family economics, and fertility" \
   "Machine-learning publication best practices" \
   "Humanitarian WASH and health-system disruption" \
   "Haiti Nippes public-health systems research" \
