@@ -50,3 +50,7 @@ Consortia diuturna praefero, ubi continuitas institutionalis, integritas investi
 ## Sententia finalis
 
 **Scientia non ad ornatum, sed ad utilitatem publicam adhibenda est.** Opus quaero quod ratione firmetur, effectu metiatur et communitatibus prosit.
+
+## Gratias ago
+
+Gratias tibi ago quod hanc paginam visitavisti et legisti. Studium tuum atque tempus mihi magni sunt. Si occasio cooperationis ad bonum publicum pertinens tibi nota est, libenter de ea colloquar.
