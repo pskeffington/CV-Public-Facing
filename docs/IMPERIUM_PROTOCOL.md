@@ -27,4 +27,4 @@ Documenta propria quae non sunt tantum indices fontium Latine conscribantur secu
 
 ## Probationes ante publicationem
 
-Mutationes recognoscantur ut custodiae publicae praetereant, assertiones e fontibus licitis oriantur, notae historicae non pro gradibus academicis aut dignitatibus habeantur, neque proprietates tutandae ad idoneitatem iudicandam adhibeantur. Defectus publicationem sistit donec correctio ab homine facta sit. `scripts/check_imperium_protocol.py` probationes fundamentales automat. Probatio statica sola conformitatem plenam non demonstrat.
+Mutationes recognoscantur ut custodiae publicae praetereant, assertiones e fontibus licitis oriantur, notae historicae non pro gradibus academicis aut dignitatibus habeantur, neque proprietates tutandae ad idoneitatem iudicandam adhibeantur. Defectus publicationem sistit donec correctio ab homine facta sit. `scripts/check_imperium_protocol.py` probationes fundamentales automatice exsequitur. Probatio statica sola conformitatem plenam non demonstrat.
