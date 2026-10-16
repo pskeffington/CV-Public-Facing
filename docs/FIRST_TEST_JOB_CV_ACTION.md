@@ -3,9 +3,9 @@
 
 ## Propositum
 
-Haec nota primam probationem manualem rationis publicae fasciculi curriculi vitae praeparat.
+Haec nota primam probationem manualem rationis qua fasciculus curriculi vitae publicus conficitur describit.
 
-Ratio fasciculum publicum neutrum generat; deinde ex re muneris selecta fasciculum publice tutum efficit. Fasciculos candidaturarum privatos nec testimonia privata importat.
+Ratio primum fasciculum publicum neutrum generat, deinde fasciculum ad munus delectum et publice tutum conficit. Neque fasciculos candidaturarum privatos neque testimonia privata importat.
 
 ## Ratio GitHub Actions
 
@@ -13,7 +13,7 @@ Ratio fasciculum publicum neutrum generat; deinde ex re muneris selecta fascicul
 .github/workflows/build-public-research-status.yml
 ```
 
-Nomen in GitHub monstratum:
+Nomen in GitHub exhibitum:
 
 ```text
 Build Public CV Package
@@ -92,7 +92,7 @@ Hoc praeceptum fasciculum publicum ordinarium generat et confirmat:
 - rem electam in registro exstare;
 - omnem rem campis necessariis instructam esse;
 - electiones in indice demisso clavibus registri respondere;
-- primam electionem valore praedefinito convenire;
+- primam electionem valori praedefinito congruere;
 - documenta PDF publica ante compositionem fasciculi muneris exstare.
 
 ## Condicio probationis prosperae
@@ -100,11 +100,11 @@ Hoc praeceptum fasciculum publicum ordinarium generat et confirmat:
 Prima probatio succedit si:
 
 - ratio sine errore finitur;
-- quattuor genera effectuum supersunt;
+- quattuor genera effectuum adsunt;
 - `selected-job-cv-package-*` continet `PUBLIC_SAFE_JOB_BRIEF.md` et `manifest.json`;
 - nullus textus candidaturae privatae in effectu publico reperitur;
 - effectus PDF fasciculo neutro respondent, nisi forma LaTeX ad munus accommodata postea consulto addatur.
 
 ## Limes
 
-Haec ratio documenta publica pro re muneris selecta colligit. Nondum est instrumentum plene accommodans LaTeX singulis muneribus. Probatio praesentis gradus electionem tutam, compositionem fasciculi, nomina effectuum, indicem JSON et relationem publice tutam de munere examinat.
+Haec ratio documenta publica pro re muneris selecta colligit. Haec ratio nondum fontes LaTeX ad singula munera plene accommodat. Probatio praesentis gradus electionem tutam, compositionem fasciculi, nomina effectuum, indicem JSON et relationem publice tutam de munere examinat.
