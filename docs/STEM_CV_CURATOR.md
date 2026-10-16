@@ -81,7 +81,7 @@ Curator repositoria secundum nomina et textus `README` vel status in partes CV S
 
 | Pars | Indicia communia |
 |---|---|
-| Instrumenta discendi machinarii et investigationis reproductibilis | `ml`, `machine learning`, `model-card`, `benchmark`, `classifier`, `regression`, `neural` |
+| Instrumenta discendi machinarii et investigationis reproducibilis | `ml`, `machine learning`, `model-card`, `benchmark`, `classifier`, `regression`, `neural` |
 | Salus publica, infrastructura et res ad ambitum pertinentes | `health`, `WASH`, `water`, `practicum`, `emergency`, `preparedness` |
 | Data biomedica et methodi signorum imaginumque | `ECG`, `PET`, `radiomics`, `cancer`, `signal`, `imaging`, `clinical` |
 | Methodi computationales et examen securitatis | `cipher`, `topology`, `identity`, `abuse`, `safety`, `risk`, `evaluation` |
