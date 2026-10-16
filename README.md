@@ -9,6 +9,19 @@ The repository is intentionally public. It must contain only public-safe source 
 **Repository status:** active public-safe CV and research-status renderer.  
 **Last documentation refresh:** 2026-10-16
 
+## Latest Verified Public Downloads
+
+These links resolve to the latest successful, public-release-checked GitHub Release rather than expiring Actions artifacts.
+
+| Document | PDF |
+|---|---|
+| Academic CV | [Latest academic CV](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_Academic_CV_Public.pdf) |
+| One-page profile | [Latest one-page profile](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_One_Page_Profile_Public.pdf) |
+| Index-safe public CV | [Latest index-safe CV](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Index_Safe_Public_Upload_CV.pdf) |
+| Research-status report | [Latest research report](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_Research_Status_Public.pdf) |
+
+[Browse versioned releases and SHA-256 checksums](https://github.com/pskeffington/CV-Public-Facing/releases). Releases are published only after the verified build and public-safety checks succeed; the repository's `main` branch retains the source code and document templates.
+
 ## Public-Interest Research Boundary
 
 This repository is maintained for public-interest research, scholarly documentation, reproducible professional presentation, and public-safe portfolio evidence. It supports transparent CV generation, verified public project summaries, source-ledgered claims, and human-reviewed career or scholarship materials.
