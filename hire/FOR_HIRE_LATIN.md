@@ -1,3 +1,4 @@
+<!-- lingua: la -->
 # Ad Opera Publica et Civica Paratus
 
 ## Nomen publicum
