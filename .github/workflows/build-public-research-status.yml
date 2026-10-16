@@ -123,3 +123,70 @@ jobs:
             research/generated_project_board.tex
             research/living_source_ledger.md
           if-no-files-found: error
+
+  # Separate publication authority from the read-only compilation job.
+  publish-verified-pdfs:
+    name: Publicare documenta PDF probata
+    needs: build-public-package
+    if: ${{ github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.job_object == 'neutral') }}
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+
+    steps:
+      - name: Accipere fasciculum publicum probatum
+        uses: actions/download-artifact@v4
+        with:
+          name: public-cv-package-${{ inputs.job_object || 'neutral' }}
+          path: release-assets
+
+      - name: Documenta et summas cryptographicas comprobare
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected=(
+            "Paul_A_Skeffington_Academic_CV_Public.pdf"
+            "Paul_A_Skeffington_One_Page_Profile_Public.pdf"
+            "Index_Safe_Public_Upload_CV.pdf"
+            "Paul_A_Skeffington_Research_Status_Public.pdf"
+          )
+          count="$(find release-assets -maxdepth 1 -type f -name '*.pdf' | wc -l)"
+          [[ "$count" -eq "${#expected[@]}" ]] || { echo "Quattuor documenta PDF necessaria sunt."; exit 1; }
+          for filename in "${expected[@]}"; do
+            path="release-assets/$filename"
+            [[ -s "$path" ]] || { echo "Fasciculus deest aut vacuus est: $filename"; exit 1; }
+            [[ "$(head -c 5 "$path")" == "%PDF-" ]] || { echo "Initium PDF invalidum: $filename"; exit 1; }
+            tail -c 2048 "$path" | grep -aq '%%EOF' || { echo "Finis PDF invalidus: $filename"; exit 1; }
+          done
+          (
+            cd release-assets
+            sha256sum "${expected[@]}" > SHA256SUMS
+          )
+          {
+            echo "# Documenta publica probata"
+            echo
+            echo "Quattuor documenta PDF ex fontibus publice admissis generata et per custodias editionis publicae examinata sunt."
+            echo
+            echo "- Commit: ${GITHUB_SHA}"
+            echo "- GitHub Actions: https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            echo "- Tentamen: ${GITHUB_RUN_ATTEMPT}"
+            echo "- Integritas: SHA256SUMS"
+            echo
+            echo "Documenta ad usum publicum destinantur; nulla assertio extra testimonia fontium recipienda est."
+          } > release-assets/RELEASE_NOTES.md
+
+      - name: Editionem GitHub perpetuam creare
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="public-cv-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          gh release create "$tag" \
+            release-assets/*.pdf release-assets/SHA256SUMS \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Curriculum vitae et relationes investigationum - $(date -u +%Y-%m-%d)" \
+            --notes-file release-assets/RELEASE_NOTES.md \
+            --latest
