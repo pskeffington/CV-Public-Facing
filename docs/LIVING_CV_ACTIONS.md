@@ -117,7 +117,7 @@ unh-adjunct-homeland-security
 cdc-foundation-data-modernization-senior-advisor
 ```
 
-Res CDC Foundation sub titulo publico `CDC Foundation - Data Modernization Senior Advisor` redditur. Argumenta sanitatis informaticae, renovationis datorum, instructionis operariorum, gubernationis datorum, auxilii technici et analyticae reproductibilis spectat, non verba candidaturae privata neque assertiones de auctoritate aut munere sine probatione.
+Res CDC Foundation sub titulo publico `CDC Foundation - Data Modernization Senior Advisor` redditur. Argumenta sanitatis informaticae, renovationis datorum, instructionis operariorum, gubernationis datorum, auxilii technici et analyticae reproducibilis spectat, non verba candidaturae privata neque assertiones de auctoritate aut munere sine probatione.
 
 Effectus pro munere electo nominantur:
 
