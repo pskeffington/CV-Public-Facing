@@ -3,7 +3,7 @@
 
 ## Nomen publicum
 
-**Paulus A. Skeffington, M.S.**  
+**Paulus A. Skeffington, M.S., MPH**  
 **Episcopus fieri nolo.**
 
 ## Propositum
