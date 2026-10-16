@@ -1,41 +1,40 @@
-# STEM Citation Verification
+<!-- lingua: la -->
+# Verificatio citationum STEM
 
-The STEM citation verifier adds source-integrity and publishing-signal checks to the STEM drift package.
+Instrumentum verificationis citationum STEM probationes integritatis fontium et signa publicationis scientificae rationi STEM addit.
 
-It is designed to answer two separate questions:
+Duas quaestiones distinctas examinat:
 
-1. Does the submitted paper or project surface contain verifiable citation identifiers?
-2. Does the submitter have an independently observable publishing/citation footprint?
+1. Utrum scriptum vel documentum operis submissum identificatores citationum verificabiles habeat.
+2. Utrum auctor scriptorum vestigia publicationis et citationum extra hunc fasciculum observabilia habeat.
 
-The verifier is conservative by default. Offline mode extracts identifiers and assigns only identifier-based publishing-signal scores. Live mode is explicit and uses public scholarly endpoints.
+Instrumentum consulto cautum est. Ratio sine nexu externo identificatores extrahit et notas tantum ex ipsis identificatoribus computat. Ratio cum nexu externo expresse petitur atque fontes academicos publicos adit.
 
-## Script
+## Instrumentum
 
 ```text
 scripts/stem_citation_verifier.py
 ```
 
-## Citation extraction
+## Extractio citationum
 
-The extractor recognizes:
-
-| Type | Example |
+| Genus | Exemplum |
 |---|---|
 | DOI | `10.1038/nature12373` |
 | arXiv | `arXiv:2101.00001` |
 | PMID | `PMID: 23803847` |
 | URL | `https://example.org/reproducibility-manifest` |
 
-## Offline use
+## Ratio sine nexu externo
 
 ```bash
 python3 scripts/stem_citation_verifier.py --pretty paper.md
 cat paper.txt | python3 scripts/stem_citation_verifier.py --pretty
 ```
 
-Offline mode returns extracted references and conservative publishing-signal scores but does not mark references as live-verified.
+Haec ratio citationes inventas et notas cautas de signis publicationis reddit, sed fontes non quasi directe verificatos notat.
 
-## Live use
+## Ratio cum nexu externo
 
 ```bash
 python3 scripts/stem_citation_verifier.py --pretty --live paper.md
@@ -46,30 +45,30 @@ python3 scripts/stem_citation_verifier.py --pretty --live --allow-url-host examp
 python3 scripts/stem_citation_verifier.py --pretty --live --block-url-host private.example paper.md
 ```
 
-Live mode can query:
+Fontes publici exquiri possunt:
 
-| Signal | Source |
+| Signum | Fons |
 |---|---|
-| DOI metadata and cited-by count | Crossref |
-| PMID metadata | NCBI PubMed ESummary |
-| arXiv metadata | arXiv API Atom feed |
-| URL endpoint reachability | public endpoint ping, optionally controlled by URL policy |
-| Submitter author profile | OpenAlex |
+| Metadata DOI et numerus citationum | Crossref |
+| Metadata PMID | NCBI PubMed ESummary |
+| Metadata arXiv | arXiv API Atom |
+| Responsio inscriptionis URL | Admissio ad finem publicum, secundum regulas URL |
+| Vestigia publicationum auctoris | OpenAlex |
 
-## Raw URL policy controls
+## Custodia inscriptionum URL
 
-Raw URL pings can be constrained without disabling DOI, PMID, arXiv, or OpenAlex checks:
+Probatio inscriptionum URL separatim coerceri potest, dum examina DOI, PMID, arXiv et OpenAlex servantur:
 
 ```bash
 python3 scripts/stem_citation_verifier.py --live --allow-url-host example.org paper.md
 python3 scripts/stem_citation_verifier.py --live --block-url-host private.example paper.md
 ```
 
-`--allow-url-host` restricts raw URL live pings to the listed host or its subdomains. `--block-url-host` prevents pings to the listed host or its subdomains. Both flags are repeatable. If both are supplied, the blocklist takes precedence. Policy-blocked raw URL references remain in the output but have `verified: false`, `verification_mode: live_policy_blocked`, and a `url_policy_blocked` signal.
+`--allow-url-host` probationes directas ad dominia enumerata eorumque subdominia restringit. `--block-url-host` interrogationes ad illa dominia prohibet. Utraque optio iterari potest; cum ambae ponuntur, vetitum praevalet. Citationes URL a regula prohibitae in effectu manent, sed `verified: false`, `verification_mode: live_policy_blocked` et signum `url_policy_blocked` accipiunt.
 
-## Per-reference provenance
+## Origo cuiusque citationis
 
-Every extracted reference now carries audit provenance:
+Quaeque citatio extracta haec indicia inspectionis servat:
 
 ```json
 {
@@ -81,11 +80,11 @@ Every extracted reference now carries audit provenance:
 }
 ```
 
-Live DOI checks use `source: crossref` and store the Crossref endpoint. Live PMID checks use `source: ncbi_pubmed_esummary`, store the NCBI ESummary endpoint, and populate the `metadata` object when PubMed returns a record. Live arXiv checks use `source: arxiv_api`, store the arXiv API endpoint, and populate the same `metadata` field when arXiv returns an entry. Offline checks still record `checked_at`, but keep `endpoint` and `metadata` as `null` and `verification_mode` as `offline`.
+Pro DOI cum nexu externo `source: crossref` atque finis Crossref servantur. Pro PMID `source: ncbi_pubmed_esummary` et finis NCBI ESummary servantur, et `metadata` implentur si index PubMed repertus est. Pro arXiv `source: arxiv_api` et finis arXiv servantur, atque `metadata` ex fonte impleri possunt. In ratione sine nexu dies `checked_at` manet, sed `endpoint` et `metadata` sunt `null`, et `verification_mode` est `offline`.
 
-## PubMed metadata
+## Metadata PubMed
 
-Live PMID checks can add:
+Examinatio PMID cum nexu haec addere potest:
 
 ```json
 {
@@ -101,11 +100,11 @@ Live PMID checks can add:
 }
 ```
 
-This enrichment is live-only and depends on NCBI ESummary responses.
+Haec amplificatio nexum externum et responsa NCBI ESummary requirit.
 
-## arXiv metadata
+## Metadata arXiv
 
-Live arXiv checks can add:
+Examinatio arXiv cum nexu haec addere potest:
 
 ```json
 {
@@ -123,11 +122,11 @@ Live arXiv checks can add:
 }
 ```
 
-This enrichment is live-only and depends on the arXiv API Atom feed.
+Haec amplificatio responsa arXiv API Atom requirit.
 
-## Author citation profile
+## Index citationum auctoris
 
-When `--author` or `--orcid` is supplied, live mode attempts to return:
+Si `--author` vel `--orcid` adhibetur, ratio cum nexu haec referre conatur:
 
 ```json
 {
@@ -147,25 +146,25 @@ When `--author` or `--orcid` is supplied, live mode attempts to return:
 }
 ```
 
-This author-level score is a publishing-signal indicator. It should not be treated as a measure of scientific truth, paper validity, or authorship identity unless the match is reviewed.
+Haec nota indicium publicationis tantum est; neque veritatem scientificam neque validitatem scripti neque identitatem auctoris confirmat sine recognitione convenientiae.
 
-## Publishing-signal bands
+## Classes signorum publicationis
 
-| Band | Meaning |
+| Classis | Interpretatio |
 |---|---|
-| `strong_publishing_signal` | Verified scholarly identifier and/or substantial citation signal. |
-| `moderate_publishing_signal` | Verifiable identifier or moderate citation signal. |
-| `weak_or_unverified_signal` | Identifier found but live verification is absent or weak. |
-| `low_publishing_signal` | Minimal citation evidence. |
+| `strong_publishing_signal` | Identifier academicus verificatus vel argumenta citationum multa |
+| `moderate_publishing_signal` | Identifier verificabilis vel signa citationum mediocria |
+| `weak_or_unverified_signal` | Identifier repertus, sed verificatio externa deest aut tenuis est |
+| `low_publishing_signal` | Pauca testimonia citationum |
 
-## Local check
+## Probatio localis
 
 ```bash
 make citation-check
 ```
 
-The check is offline-safe. It verifies that DOI, arXiv, PMID, and URL extraction work, that every reference carries provenance and metadata fields, that raw URL policy controls behave as expected, and that offline author-profile output remains explicitly unverified.
+Probatio sine nexu externo tuto currit. Extractionem DOI, arXiv, PMID et URL, conservationem originis et camporum metadata, regulas admissionis URL et statum explicitum `unverified` indiciorum auctoris examinat.
 
-## Integration with STEM drift
+## Coniunctio cum aestimatione STEM
 
-The citation layer is intended to complement the STEM presence score. A strong STEM presence score indicates that the paper surface contains methods, data, validation, reproducibility, and progress signals. Citation verification adds evidence about whether references and submitter publishing signals are externally checkable.
+Verificatio citationum mensuram praesentiae STEM complet. Nota alta praesentiae STEM significat scriptum signa methodorum, datorum, validationis, reproductionis et progressus exhibere. Verificatio citationum addit testimonia de fontibus et de signis publicationis quae extra scriptum examinari possunt.
