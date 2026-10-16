@@ -40,7 +40,7 @@ Instrumentum primum res curriculi vitae ex `data/pipeline_repos.json` et ex font
 
 ## Operatio GitHub Actions
 
-Ratio publica documenta repositorii tantum legit. Fasciculos PDF generat et sub nomine `public-cv-package` inter effectus laboris servat. Fontes generatos etiam in fasciculo `generated-living-cv-sources` colligit, ut post quamque generationem inspici possint.
+Ratio publica documenta repositorii tantum legit. Fasciculos PDF generat et sub nomine `public-cv-package` inter effectus laboris servat. Fontes generatos etiam in fasciculo `public-render-sources` colligit, ut post quamque generationem inspici possint.
 
 Concurrencia coercetur; mutationes ordinariae actoris `github-actions[bot]` praetermittuntur, ne repetitio infinita generationis oriatur. Praecepta `workflow_dispatch`, `repository_dispatch` et mutationes ordinariae fontium servantur.
 
