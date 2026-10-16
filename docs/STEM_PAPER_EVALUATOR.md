@@ -1,29 +1,30 @@
-# STEM Paper Evaluator
+<!-- lingua: la -->
+# Aestimator scriptorum STEM
 
-The STEM paper evaluator is the package-level entry point for reviewing a submitted paper surface against STEM drift, citation integrity, and submitter publishing signals.
+Instrumentum `STEM Paper Evaluator` est introitus principalis ad inspiciendum scriptum submissum secundum praesentiam disciplinarum STEM, integritatem citationum et signa publicationum auctoris.
 
-It combines three layers:
+Tres partes componit:
 
-1. STEM presence and drift scoring from `scripts/stem_presence.py`.
-2. Citation extraction and optional live verification from `scripts/stem_citation_verifier.py`.
-3. A composite paper-package score that summarizes the submitted surface in one auditable JSON object.
+1. Praesentiam STEM et declinationem per `scripts/stem_presence.py`.
+2. Extractionem citationum et verificationem externam facultativam per `scripts/stem_citation_verifier.py`.
+3. Notam compositam totius fasciculi scripti, in una re JSON examinabili.
 
-## Script
+## Instrumentum
 
 ```text
 scripts/stem_paper_evaluator.py
 ```
 
-## Offline use
+## Usus sine nexu externo
 
 ```bash
 python3 scripts/stem_paper_evaluator.py --pretty paper.md
 cat paper.txt | python3 scripts/stem_paper_evaluator.py --pretty
 ```
 
-Offline mode is deterministic and safe for CI. It extracts citation identifiers, scores STEM presence, and returns a composite score without querying external services.
+Haec ratio deterministica et ad CI apta est. Identificatores citationum extrahit, praesentiam STEM metitur et notam compositam reddit, sine interrogationibus servitiorum externorum.
 
-## Live use
+## Usus cum nexu externo
 
 ```bash
 python3 scripts/stem_paper_evaluator.py --pretty --live --author "Jane Researcher" paper.md
@@ -34,22 +35,22 @@ python3 scripts/stem_paper_evaluator.py --pretty --live --block-url-host private
 python3 scripts/stem_paper_evaluator.py --pretty --stem-weight 0.85 --publishing-weight 0.15 paper.md
 ```
 
-Live mode can ping public citation endpoints and query author-level publishing signals. Author matching should be reviewed before being treated as identity-confirmed.
+Ratio externa fines citationum publicos interrogare et indicia publicationis auctoris petere potest. Auctor per nomen reperitur? Convenientia identitatis prius ab homine recognoscenda est.
 
-## Raw URL policy controls
+## Custodia inscriptionum URL
 
-Raw URL pings can be constrained during one-command paper review without disabling DOI, PMID, arXiv, or OpenAlex checks:
+Interrogationes URL cohiberi possunt sine intermissione examinandi DOI, PMID, arXiv et OpenAlex:
 
 ```bash
 python3 scripts/stem_paper_evaluator.py --pretty --live --allow-url-host example.org paper.md
 python3 scripts/write_stem_paper_review.py --live --allow-url-host example.org --out review.md paper.md
 ```
 
-`--allow-url-host` restricts raw URL live pings to the listed host or its subdomains. `--block-url-host` prevents raw URL pings to the listed host or its subdomains. Both flags are repeatable. If both are supplied, the blocklist takes precedence.
+Optio `--allow-url-host` interrogationes ad dominia enumerata et subdominia eorum restringit. `--block-url-host` ea vetat. Utraque optio iterari potest; regula vetiti, si ambae adsunt, praevalet.
 
-Policy-blocked raw URL references remain in the raw citation payload, receive `verification_mode: live_policy_blocked`, and increment `policy_blocked_reference_count` in the publishing summary.
+Citationes URL a regula prohibitae in effectu bruto manent, valorem `verification_mode: live_policy_blocked` accipiunt atque `policy_blocked_reference_count` in summario augent.
 
-## Output object
+## Res effectus
 
 ```json
 {
@@ -62,9 +63,9 @@ Policy-blocked raw URL references remain in the raw citation payload, receive `v
 }
 ```
 
-## Review configuration
+## Configurationis memoria
 
-Every evaluator output records the settings that produced the review:
+Quisque effectus aestimatoris rationem qua generatus est retinet:
 
 ```json
 {
@@ -83,27 +84,27 @@ Every evaluator output records the settings that produced the review:
 }
 ```
 
-In live mode, `external_services_enabled` can also include `crossref`, `ncbi_pubmed_esummary`, `arxiv_api`, `openalex`, and `raw_url_ping`. This block is intended to make JSON and Markdown reviews reproducible and auditable.
+In ratione externa `external_services_enabled` etiam `crossref`, `ncbi_pubmed_esummary`, `arxiv_api`, `openalex` et `raw_url_ping` continere potest. Haec memoria inspectionem JSON et Markdown reproducibilem facit.
 
-## Scoring weights
+## Pondera computationis
 
-The default composite score uses a STEM-heavy weighting:
+Nota composita per praedefinitionem praesentiam STEM maiori pondere aestimat:
 
 ```text
 composite_score = STEM presence * 0.75 + publishing_signal * 0.25
 publishing_signal = average_reference_score * 0.65 + author_signal_score * 0.35
 ```
 
-The top-level composite weights can be adjusted for sensitivity review:
+Pondera summa ad examen sensibilitatis mutari possunt:
 
 ```bash
 python3 scripts/stem_paper_evaluator.py --pretty --stem-weight 0.85 --publishing-weight 0.15 paper.md
 python3 scripts/write_stem_paper_review.py --stem-weight 0.85 --publishing-weight 0.15 --out review.md paper.md
 ```
 
-Input weights are normalized before scoring, and the normalized values are recorded in `review_configuration`. Reference-vs-author publishing weights are currently fixed at 0.65 and 0.35.
+Pondera accepta ante computationem normalizantur et in `review_configuration` servantur. Pondera inter citationes et auctorem nunc fixa sunt ad 0.65 et 0.35.
 
-## Composite score fields
+## Campi notae compositae
 
 ```json
 {
@@ -121,20 +122,20 @@ Input weights are normalized before scoring, and the normalized values are recor
 }
 ```
 
-The composite score weights STEM presence more heavily than citation context. Current default weighting is 75% STEM presence and 25% publishing signal.
+Pondus STEM 75 ex centum, signorum publicationis 25 ex centum est in ratione praedefinita. Contextus citationum non est mensura absoluta veritatis scientificae.
 
-## Bands
+## Classes
 
-| Band | Meaning |
+| Classis | Interpretatio |
 |---|---|
-| `strong_stem_paper_package` | Strong STEM surface with supporting citation/publishing context. |
-| `credible_stem_paper_package` | Credible STEM signal with usable but possibly incomplete citation context. |
-| `mixed_or_underverified_package` | Some STEM evidence but weak documentation, weak citation context, or incomplete verification. |
-| `high_drift_or_low_evidence_package` | High drift or insufficient evidence for public STEM claims. |
+| `strong_stem_paper_package` | Argumenta STEM firma cum citationibus et signis publicationis fulcientibus |
+| `credible_stem_paper_package` | Argumenta STEM credibilia, quamvis testimonia citationum aliqua deesse possint |
+| `mixed_or_underverified_package` | Argumenta STEM partialia, documenta tenuia vel verificatio imperfecta |
+| `high_drift_or_low_evidence_package` | Magna declinatio aut parum testimoniorum ad assertiones STEM publicas |
 
-## Publishing summary
+## Summarium publicationis
 
-The evaluator includes:
+Evaluator continet:
 
 ```json
 {
@@ -157,23 +158,23 @@ The evaluator includes:
 }
 ```
 
-Offline mode should usually have `verified_reference_count` equal to zero because it does not ping external services.
+Sine interrogationibus externis valor `verified_reference_count` plerumque nullus est; ratio externa non currit.
 
-## Review flags
+## Signa admonitionis
 
-| Flag | Meaning |
+| Signum | Interpretatio |
 |---|---|
-| `high_stem_drift` | The STEM drift score is high enough to require closer review. |
-| `no_references_extracted` | No DOI, arXiv, PMID, or URL references were extracted. |
-| `references_not_live_verified` | References were extracted but not live-verified. This is expected in offline CI. |
-| `reference_url_policy_blocked` | At least one raw URL reference was blocked by allowlist/blocklist policy. |
-| `author_identity_ambiguous` | A live author-name lookup returned multiple candidates or an ambiguity warning. |
-| `no_verified_author_signal` | No live author citation signal is available or the author signal score is zero. |
-| `author_match_unconfirmed` | Author identity remains unconfirmed because the match is offline, missing, errored, or unavailable. |
+| `high_stem_drift` | Declinatio STEM satis magna est ut accuratior inspectio requiratur |
+| `no_references_extracted` | Nulla citatio DOI, arXiv, PMID aut URL reperta |
+| `references_not_live_verified` | Citationes repertae sunt, sed non externis fontibus verificatae; hoc in CI sine nexu exspectatur |
+| `reference_url_policy_blocked` | Una vel plures inscriptiones URL a regula permissionis aut vetiti inhibitae |
+| `author_identity_ambiguous` | Investigatio nominis auctoris plures candidatos aut dubitationem rettulit |
+| `no_verified_author_signal` | Nulla nota citationum auctoris externe verificata adest aut nota est nulla |
+| `author_match_unconfirmed` | Identitas auctoris nondum confirmata, quia conventio abest, errat vel sine nexu est |
 
-## Markdown review output
+## Relatio Markdown
 
-The Markdown writer uses the same evaluator and can render the configuration, scores, flags, provenance, and extracted-reference table:
+Instrumentum relationis eodem evaluatore utitur et configurationem, notas, signa, originem probationum atque tabulam citationum reddit:
 
 ```bash
 python3 scripts/write_stem_paper_review.py --title "Submitted manuscript" --out review.md paper.md
@@ -181,31 +182,31 @@ python3 scripts/write_stem_paper_review.py --live --allow-url-host example.org -
 python3 scripts/write_stem_paper_review.py --stem-weight 0.85 --publishing-weight 0.15 --out review.md paper.md
 ```
 
-## Provenance and ambiguity fields
+## Origo et dubia identitas
 
-`source_provenance` records where the evaluator's publishing signal came from. Offline entries use `reference:identifier_extractor:offline`. Live DOI checks may identify Crossref-derived evidence, live PMID checks can identify NCBI PubMed ESummary, live arXiv checks can identify the arXiv API, and policy-blocked raw URL references use `live_policy_blocked`.
+`source_provenance` fontes signorum publicationis servat. Sine nexu `reference:identifier_extractor:offline` adhibetur. Verificatio externa DOI ad Crossref, PMID ad NCBI PubMed ESummary, arXiv ad API arXiv referri potest. Citationes URL a regula prohibitae `live_policy_blocked` portant.
 
-`author_candidate_count`, `author_ambiguity_warning`, and `author_match_confidence` summarize OpenAlex author disambiguation. Name-based lookup can return several plausible candidates. ORCID-based lookup is preferred when available.
+Campi `author_candidate_count`, `author_ambiguity_warning` et `author_match_confidence` dubitationem de identitate auctoris ex OpenAlex declarant. Investigatio per nomen plures personas similes reperire potest. Ubi praesto est, ORCID praeferatur.
 
-## Related systems matrix
+## Tabula systematum propinquorum
 
-The evaluator is benchmarked conceptually against related scholarly metadata and citation systems in:
+Instrumentum cum systematibus litterarum et citationum comparatur in:
 
 ```text
 docs/STEM_EVALUATOR_LIT_REVIEW_MATRIX.md
 ```
 
-That matrix documents adjacent capabilities from Crossref, OpenAlex, Semantic Scholar, PubMed / NCBI E-utilities, OpenCitations, scite-style citation-context systems, and retraction/integrity-signal systems. It also lists package gaps and next polish targets.
+Tabula facultates Crossref, OpenAlex, Semantic Scholar, PubMed/NCBI E-utilities, OpenCitations, systematum contextus citationum similium scite et systematum retractationis vel integritatis exponit. Lacunas instrumenti et melioramenta futura etiam indicat.
 
-## Local check
+## Probationes locales
 
 ```bash
 make paper-evaluator-check
 make paper-review-check
 ```
 
-These checks are offline-safe and verify that a manuscript-like fixture produces a credible composite paper-package score, a valid evaluator output contract, and a Markdown review containing the configuration, weights, and provenance sections.
+Hae probationes sine nexu currunt. Confirmant scriptum fictum ad similitudinem manuscripti notam compositam credibilem, structuram JSON validam et relationem Markdown cum configuratione, ponderibus et originibus generare.
 
-## Interpretation
+## Fines interpretationis
 
-Use this evaluator as a review triage object. It is not a peer-review substitute, plagiarism detector, authorship validator, or truth model. It is a structured way to identify whether a submitted paper package is close to core STEM progress and whether its citations and submitter publishing signals are externally checkable.
+Evaluator est auxilium prioritatum recensionis, non substitutum recognitionis academicae, inspector plagii, certificator auctoritatis vel index veritatis. Structura adiuvat ad intellegendum num fasciculus scientiam STEM demonstrat et num citationes ac signa publicationis auctoris externe verificari possunt.
