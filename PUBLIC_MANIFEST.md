@@ -1,65 +1,68 @@
-# Public CV and Research Manifest
+<!-- lingua: la -->
+# Index publicus curriculi vitae et investigationum
 
-Status: visitor-facing public repository with a rebuildable, living public CV package.
+**Status:** repositorium publicum lectoribus apertum; fasciculus curriculi vitae publici ex fontibus iterum generari potest.
 
-## Public source files
+## Fontes publici
 
-| File | Purpose |
+| Fasciculus | Usus |
 |---|---|
-| `cv/academic_cv_public.tex` | Public-safe Academic CV LaTeX source |
-| `cv/one_page_profile_public.tex` | Public-safe One-Page Profile LaTeX source |
-| `cv/public_upload_cv.tex` | Index-safe CV variant for upload contexts requiring reduced personal identifiers |
-| `cv/current_projects_public.tex` | Generated current-project register used by public CV outputs |
-| `cv/publication_pipeline_public.tex` | Shared publication-status register used by public CV outputs |
-| `data/pipeline_repos.json` | Living CV manifest listing pipeline repositories and public status surfaces |
-| `research/RESEARCH_STATUS.md` | Generated public-readable research storyboard, project status board, and major-needs register |
-| `research/generated_project_board.tex` | Generated printable project board source used by the research-status PDF |
-| `research/living_source_ledger.md` | Generated ledger of README/status files checked by the living CV generator |
-| `research/research_status.tex` | Public-safe printable LaTeX source for the research-status PDF |
-| `scripts/update_living_cv.py` | Manifest-driven generator that pulls public README/status surfaces from pipeline repositories |
-| `.github/workflows/build-public-research-status.yml` | Public GitHub Actions workflow that builds the full public CV package and accepts living-CV dispatch events |
-| `Makefile` | Local public build targets for visitors |
+| `cv/academic_cv_public.tex` | Fons LaTeX curriculi vitae academici publici |
+| `cv/one_page_profile_public.tex` | Fons LaTeX brevis descriptionis unius paginae |
+| `cv/public_upload_cv.tex` | Forma ad indicem apta, paucioribus indiciis personalibus |
+| `cv/current_projects_public.tex` | Index operum praesentium generatus |
+| `cv/publication_pipeline_public.tex` | Index communis statuum publicationis |
+| `data/pipeline_repos.json` | Index repositoriorum et statuum publicorum |
+| `research/RESEARCH_STATUS.md` | Relatio generata de statu investigationum et necessitatibus maioribus |
+| `research/generated_project_board.tex` | Fons LaTeX tabulae operum generatae |
+| `research/living_source_ledger.md` | Registrum fontium `README` et statuum inspectorum |
+| `research/research_status.tex` | Fons LaTeX relationis publicae de investigationibus |
+| `scripts/update_living_cv.py` | Instrumentum quod fontes publicos e repositoriis indicatis legit |
+| `.github/workflows/build-public-research-status.yml` | Ratio GitHub Actions ad fasciculum publicum generandum et nuntios recipiendos |
+| `Makefile` | Praecepta generationis localis |
 
-## Generated / expected files
+## Effectus exspectati
 
-| File | Purpose | Source status |
+| Fasciculus | Usus | Status fontis |
 |---|---|---|
-| `documents/Paul_A_Skeffington_Academic_CV_Public.pdf` | Public academic CV | Buildable directly in this public repository |
-| `documents/Paul_A_Skeffington_One_Page_Profile_Public.pdf` | Public one-page professional profile | Buildable directly in this public repository |
-| `documents/Index_Safe_Public_Upload_CV.pdf` | Identifier-reduced upload CV | Buildable directly in this public repository |
-| `documents/Paul_A_Skeffington_Research_Status_Public.pdf` | Printable public research-status report | Buildable directly in this public repository |
+| `documents/Paul_A_Skeffington_Academic_CV_Public.pdf` | Curriculum vitae academicum publicum | In hoc repositorio generari potest |
+| `documents/Paul_A_Skeffington_One_Page_Profile_Public.pdf` | Descriptio professionalis unius paginae | In hoc repositorio generari potest |
+| `documents/Index_Safe_Public_Upload_CV.pdf` | Curriculum cum paucioribus indiciis personalibus | In hoc repositorio generari potest |
+| `documents/Paul_A_Skeffington_Research_Status_Public.pdf` | Relatio imprimenda de statu investigationum | In hoc repositorio generari potest |
 
-## Public build command
+## Praeceptum generationis
 
 ```bash
 make public-package
 ```
 
-The build first regenerates living CV objects from `data/pipeline_repos.json` and the current public README/status files in the listed repositories.
+Instrumentum primum res curriculi vitae ex `data/pipeline_repos.json` et ex fontibus `README` vel statuum in repositoriis indicatis iterum generat.
 
-## Public workflow behavior
+## Operatio GitHub Actions
 
-The public GitHub Actions workflow is read-only for repository contents. It builds public PDFs and uploads them as the `public-cv-package` artifact. It also uploads `generated-living-cv-sources` so the regenerated public project objects can be inspected after each dispatch/build.
+Ratio publica documenta repositorii tantum legit. Fasciculos PDF generat et sub nomine `public-cv-package` inter effectus laboris servat. Fontes generatos etiam in fasciculo `generated-living-cv-sources` colligit, ut post quamque generationem inspici possint.
 
-The workflow uses a concurrency group and skips ordinary `github-actions[bot]` push events. This prevents recursive public-build loops while preserving manual `workflow_dispatch`, `repository_dispatch`, and normal source-edit builds.
+Concurrencia coercetur; mutationes ordinariae actoris `github-actions[bot]` praetermittuntur, ne repetitio infinita generationis oriatur. Praecepta `workflow_dispatch`, `repository_dispatch` et mutationes ordinariae fontium servantur.
 
-## Source-repo notification behavior
+## Nuntii e repositoriis fontium
 
-Pipeline repositories can include `.github/workflows/notify-living-cv.yml`. On README/status/docs changes, that workflow sends a `repository_dispatch` event named `living-cv-source-updated` to this repository when the source repo has a configured `LIVING_CV_DISPATCH_TOKEN` secret.
+Repositoria fontium continere possunt `.github/workflows/notify-living-cv.yml`. Mutatis `README`, statu vel documentis, haec ratio nuntium `repository_dispatch`, generis `living-cv-source-updated`, mittit, si secretum `LIVING_CV_DISPATCH_TOKEN` rite constitutum est.
 
-## Public-safe rule
+## Lex tutelae publicae
 
-This repository may contain public-facing Markdown, public-safe LaTeX, repository metadata, generated public CV objects, and compiled public artifacts.
+In hoc repositorio licent documenta Markdown publica, LaTeX purgatum, metadata repositorii, res curriculi generatae atque documenta PDF publica.
 
-Do not commit:
+Ne includantur:
 
-- private LaTeX source files
-- private claim ledgers
-- private source extracts
-- addresses, phone numbers, personal email accounts, home-site details, operational site layouts, or sensitive infrastructure details
-- unverified publication, grant, appointment, award, or certification claims
+- fontes LaTeX privati;
+- registra assertionum privata;
+- excerpta fontium privatorum;
+- inscriptiones domicilii, numeri telephonici, epistulae personales, dispositiones situs domestici aut infrastructurae sensibiles;
+- assertiones nondum probatae de publicationibus, stipendiis investigationis, muneribus, praemiis aut certificationibus.
 
-## Pull command
+Documenta propria non directoria Latine scribantur; nexus ad fontes superiores et syntax machinarum serventur.
+
+## Renovatio localis
 
 ```bash
 git pull --ff-only
