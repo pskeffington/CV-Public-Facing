@@ -3,7 +3,7 @@
 
 ## Propositum
 
-Hic ordo describit quomodo instrumentum publicum curriculi vitae effectus publicos cum repositoriis fontium concordet, simul vetans res restrictas in curriculum vitae, descriptiones breves, relationes investigationum, registra fontium et fasciculos munerum selectorum ingredi.
+Hic ordo describit quomodo instrumentum publicum curriculi vitae effectus suos cum repositoriis fontium concordet, ita tamen ut res restrictae in curriculum vitae, descriptiones breves, relationes investigationum, registra fontium et fasciculos munerum selectorum non inserantur.
 
 ## Lex praesens
 
@@ -20,7 +20,7 @@ data/pipeline_repos.json
 
 Lectio recursiva repositoriorum publicorum non exercetur, nisi `allow_recursive_intake` post recognitionem ad `true` mutatur. Ita repositoria nuper reperta non statim inter opera in curriculo vitae publico apparent.
 
-## Praecepta de permissione divulgandi
+## Condiciones divulgationis
 
 Effectus publici tantum res includant quae omnes condiciones sequentes implent:
 
@@ -32,7 +32,7 @@ Effectus publici tantum res includant quae omnes condiciones sequentes implent:
 
 De rebus restrictis tantum hashes aut alia indicia non sensitiva serventur. Nomina operum restrictorum, repositoriorum privatorum vel familiarum operum sensibilium in documentis publicis non scribantur.
 
-## Ratio emendandae synchronizationis
+## Ordo operum ad concordiam renovandam
 
 ### Pars I — perfecta
 
@@ -50,12 +50,12 @@ De rebus restrictis tantum hashes aut alia indicia non sensitiva serventur. Nomi
 - Documenta PDF generata inspicere, ne res restrictae pateant.
 - Confirmare fasciculos munerum selectorum indicia restricta non continere.
 - Confirmare `blocked_release_ledger.md` tantum praefixa hash non sensitiva referre.
-- Confirmare JSON publicum schema `stem-cv-curator/v0.3` servare.
+- Confirmare fasciculum JSON publicum ad schema `stem-cv-curator/v0.3` pertinere.
 
 ### Pars III — sequens
 
 - Examen indicis addere quod deficit si lectio recursiva sine signo recognitionis divulgationis permittitur.
-- Inspectorem effectuum generatarum ad `cv/current_projects_public.tex`, `research/RESEARCH_STATUS.md`, `research/generated_project_board.tex` et `research/living_source_ledger.md` post generationem curatoris addere.
+- Inspectorem effectuum generatorum ad `cv/current_projects_public.tex`, `research/RESEARCH_STATUS.md`, `research/generated_project_board.tex` et `research/living_source_ledger.md` post generationem curatoris addere.
 - Indicem inspectionis effectuum publicorum fasciculis munerum addere.
 - Rationem promovere qua novum opus post recognitionem in indicem publicum admittitur.
 
@@ -78,7 +78,7 @@ make job-cv-package JOB_OBJECT="neutral"
 make job-cv-package JOB_OBJECT="harvard-chan-director-data-analytics"
 ```
 
-Index selector GitHub Actions viam `make job-cv-package` exercet.
+Index selectoris GitHub Actions praeceptum `make job-cv-package` exsequitur.
 
 ## Index recognitionis novi effectus
 
