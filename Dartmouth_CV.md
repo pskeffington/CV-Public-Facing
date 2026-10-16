@@ -10,7 +10,7 @@ paulskeffington@gmail.com | GitHub: pskeffington
 Master of Science in Health Data Science, graduate study, Fall 2026–2028
 
 **Southern New Hampshire University**  
-Master of Public Health, Global Health Concentration — degree requirements completed; conferred October 2026
+Master of Public Health, Global Health Concentration — conferred October 2026
 
 **Southern New Hampshire University**  
 Master of Science, Applied Economics, December 2025
