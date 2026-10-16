@@ -1,67 +1,52 @@
 <!-- lingua: la -->
-# Ad Opera Publica et Civica Paratus
-
-## Nomen publicum
+# Ad Munera Publica et Civica Paratus
 
 **Paulus A. Skeffington, M.S., MPH**  
-**Episcopus fieri nolo.**
+*Salus publica · Scientia datorum · Infrastructura · Administratio civilis*
 
 ## Propositum
 
-Ad opera publica, civilia, academica, valetudinaria, municipalia, ecclesialia, non lucrativa, et communitatibus utilia paratus sum. Praecipue quaero munera quibus data, infrastructura aquarum, salus publica, senes, aegroti, familiae vulnerabiles, administratio civilis, et investigatio applicata in melius ordinantur.
+Ad munera publica, consultationes technicas et investigationem applicatam paratus sum, praesertim apud instituta gubernamentalia, municipia, universitates, instituta sanitatis et societates sine quaestu. Operam dare cupio saluti publicae, infrastructurae aquarum et sanitationis, analysi geospatiali, administrationi datorum atque communitatibus vulnerabilibus.
 
-Non quaero dignitatem inanem neque titulos sine opere. Quaero opus grave, mensurabile, et utile: ubi quaestiones publicae clare definiuntur, data ordinantur, relationes scribuntur, consilia fiunt, et communitates melius serviuntur.
+Non titulos inanes, sed responsabilitatem definitam et effectus comprobabiles quaero. Consilia et decisiones publicas investigatione, analysi et relationibus perspicuis adiuvare studeo.
 
-## Munera apta
+## Munera quae quaero
 
-- Consultor Datorum Salutis Publicae et Infrastructurae
-- Analysta Geospatiali et Salutis Publicae
-- Dux Programmatum Civilium et Technicorum
-- Consultor Modernizationis Civicae et Administrativae
-- Analysta Epidemiologicus Computationis
-- Investigator Applicatus in Valetudine Publica, Aqua, et Communitatibus Vulnerabilibus
-- Architectus Systematum Monitorii Publici
-- Consultor Investigationis, Documentorum, et Relationum Publicarum
+- **Consultor salutis publicae et scientiae datorum** — analysis epidemiologica, informatica sanitatis, exempla statistica et aestimatio programmatum.
+- **Consultor infrastructurae civilis et firmitatis systematum** — aquae distributio, sanitatio, observatio ambitus, praeparatio ad casus urgentes et aestimatio periculorum.
+- **Analysta geospatialis et systematum publicorum** — systemata informationis geographicae (GIS), epidemiologia spatialis, descriptio infrastructurae et distributio periculorum.
+- **Director investigationis applicatae et programmatum technicorum** — consilium investigationis, moderatio inceptorum et cooperatio inter instituta.
+- **Consultor renovationis administrationis publicae** — integratio datorum, emendatio processuum, systemata digitalia et relationes ad decisiones informandas.
+- **Consultor investigationis de communitatibus vulnerabilibus** — senes, accessus ad curam sanitatis, familiae vulnerabiles et inaequalitates sanitatis.
 
-## Opera praeferenda
+## Instituta et opera praeferenda
 
-Praeferuntur opera in re publica, administratione municipali, valetudine publica, cura senum, aqua et sanitatione, praeparatione ad casus urgentes, disciplina geospatiali, disciplina datorum, institutionibus academicis, societatibus non lucrativis, et consiliis civicis.
+Praefero munera apud administrationes municipales, comitatuum, civitatum et foederales; instituta salutis publicae; universitates; valetudinaria; auctoritates aquarum et ambitus; officia ad casus urgentes parata; atque societates sine quaestu. Munera in sectoribus privatis quoque accipere possum, si utilitas publica, scientifica vel humanitaria aperte demonstratur.
 
-Opera privata accipi possunt, si finis socialis, scientificus, humanitarius, publicus, vel infrastructuralis clare definitur.
+## Responsabilitas et opera tradenda
 
-## Gradus muneris
+Munera quaero quae iudicium technicum independens, coordinationem institutionalem et responsabilitatem veram requirunt. Inter opera apta sunt:
 
-Opera aptissima sunt ea quae iudicium senioris gradus requirunt: consilium programmaticum, analysim datorum, relationes publicas, aestimationem infrastructurae, coordinationem inter institutiones, interpretationem indiciorum, et traditionem operis quod a ducibus publicis, academicis, aut civicis defendi potest.
+- quaestiones investigationis et rationes analyticas definire;
+- data colligere, ordinare, examinare et recte interpretari;
+- programmata publica et pericula infrastructurae aestimare;
+- relationes technicas et commendationes comprobabiles conscribere;
+- inventa administratoribus, consiliis publicis et communitatibus explanare.
 
-Munera levia, incerta, aut sine auctoritate decernendi minus apta sunt. Munera maioris ponderis, retinacula diuturna, consilia publica, et opera cum effectu communitario praeferuntur.
+Praefero opera quorum fines, potestates, tempora et fructus exspectati clare constituuntur. Munera mere titularia vel sine facultate operandi minus idonea sunt.
 
-## Limites laboris
+## Condiciones laboris
 
-Compensatio et forma operis secundum pondus muneris, amplitudinem responsabilitatis, gradum itineris, locum laboris, dies extra domum actos, necessitatem praesentiae corporis, expensas directas, auctoritatem professionalem, et valorem publicum definienda sunt.
+Munera stabilia, consultationes diuturnae, pacta menstrua et opera certis finibus definita mihi conveniunt. Ubi fieri potest, laborem remotum vel partim remotum praefero. Ad conventus publicos, inspectiones locorum, investigationem in situ, institutionem technicam vel casus urgentes adesse possum.
 
-Opera remota aut hybrida praeferuntur, ubi fieri potest. Praesentia corporis peti potest pro conventibus publicis, inspectionibus situs, disciplina locali, consultatione infrastructurae, collectione datorum, aut opere urgente; talis praesentia singulis diebus extra domum separatim aestimanda est.
+Itinera, pernoctationes, dies in situ peracti, labor extra horas ordinarias, usus instrumentorum propriorum et termini breves in pacto distincte aestimanda sunt.
 
-## Signa pretium moventia
+## Compensatio et pacta
 
-Pretium augetur ubi opus requirit:
+Compensatio magnitudini operis, peritiae necessariae, responsabilitati, auctoritati decernendi et operibus tradendis congruat. Pacta scripta praefero, quibus officia, fines operis, dies traditionis, merces et expensarum restitutio perspicue definiantur.
 
-- iter inter civitates aut regiones;
-- pernoctationem extra domum;
-- diem plenum in situ alieno;
-- laborem vespertinum, nocturnum, aut festum;
-- accessum ad loca remota, difficilia, aut infrastructura carentia;
-- instrumenta propria, sensoria, computatoria, vel communicationis;
-- responsabilitatem publicam, scientificam, aut administrativam;
-- celerem traditionem sub termino brevi;
-- scripturam publicam, testimonium, relationem formalem, aut documentum ad institutionem gubernamentalem;
-- repraesentationem coram ducibus, consiliis, fundatoribus, aut communitate publica.
-
-## Forma compensationis praeferenda
-
-Praefero structuram sobrietate, claritate, et firmitate definitam: stipendium stabile, pactum scriptum, fines operis clari, tempora traditionis mensurabilia, expensae itineris separatae, et spatium ad investigationem, publicationem, atque iudicium technicum honestum.
-
-Munera diuturna, retinacula civica, pacta per mensem, et opera cum effectu publico mensurabili praeferuntur operibus brevibus sine continuitate. Pacta quae scientiam, responsabilitatem, praesentiam publicam, et auctoritatem professionalem requirunt debent gradum compensationis congruentem continere.
+Consortia diuturna praefero, ubi continuitas institutionalis, integritas investigationis et utilitas publica coniunguntur.
 
 ## Sententia finalis
 
-Scientia non ad ornatum, sed ad servitium ordinanda est. In operibus publicis et civicis quaero rem utilem, mensurabilem, defensibilem, et communitati redditam.
+**Scientia non ad ornatum, sed ad utilitatem publicam adhibenda est.** Opus quaero quod ratione firmetur, effectu metiatur et communitatibus prosit.
