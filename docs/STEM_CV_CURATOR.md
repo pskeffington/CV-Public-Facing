@@ -1,7 +1,7 @@
 <!-- lingua: la -->
 # Curator curriculi vitae STEM
 
-`STEM CV Curator` est instrumentum rerum quod fasciculum curriculi vitae viventis sustinet. Investigator disciplinarum mathematicarum, scientiae datorum biomedicorum, salutis publicae vel ceterarum STEM repositorium exscribere potest, rationem GitHub propriam indicare, atque res curriculi vitae publice tutas ex repositoriis activis generare.
+`STEM CV Curator` est instrumentum ad res curriculi vitae ordinandas, quo fasciculus publicus continenter renovari potest. Investigator disciplinarum mathematicarum, scientiae datorum biomedicorum, salutis publicae vel ceterarum STEM repositorium exscribere potest, rationem GitHub propriam indicare, atque res curriculi vitae publice tutas ex repositoriis activis generare.
 
 ## Exemplar exscribendi et exsequendi
 
@@ -13,7 +13,7 @@ STEM_CV_OWNER=<your-github-user> make public-package
 
 Instrumentum repositoria publica activa domini GitHub constituti inspicit, fontes `README` et status legit, res ordinatas CV creat, fontes LaTeX reddit et fasciculum PDF publicum componit.
 
-## Configurationis ratio
+## Configuratio
 
 Dominus praedefinitus hic servatur:
 
@@ -37,7 +37,7 @@ Nulla indicia privata ex tali inspectione in effectum publicum promoveantur.
 
 ## Fontes recepti
 
-Curator superficies status communes examinat:
+Curator documenta communia statum operum describentia examinat:
 
 ```text
 README.md
@@ -61,7 +61,7 @@ research/living_source_ledger.md
 research/living_repo_scan.md
 ```
 
-Compositor LaTeX et PDF fontes `.tex` generatos deinde consumit.
+Compositor ex fontibus LaTeX generatis documenta PDF deinde conficit.
 
 ## Ordo rerum
 
@@ -82,7 +82,7 @@ Curator repositoria secundum nomina et textus `README` vel status in partes CV S
 | Pars | Indicia communia |
 |---|---|
 | Instrumenta discendi machinarii et investigationis reproductibilis | `ml`, `machine learning`, `model-card`, `benchmark`, `classifier`, `regression`, `neural` |
-| Salus publica, infrastructura et res environmentales | `health`, `WASH`, `water`, `practicum`, `emergency`, `preparedness` |
+| Salus publica, infrastructura et res ad ambitum pertinentes | `health`, `WASH`, `water`, `practicum`, `emergency`, `preparedness` |
 | Data biomedica et methodi signorum imaginumque | `ECG`, `PET`, `radiomics`, `cancer`, `signal`, `imaging`, `clinical` |
 | Methodi computationales et examen securitatis | `cipher`, `topology`, `identity`, `abuse`, `safety`, `risk`, `evaluation` |
 | Index archivi et historiae publicae | `archive`, `Bonaventure`, `Hebrew`, `reliquary`, `transcription` |
@@ -97,7 +97,7 @@ Curator cautus est:
 - Repositoria reperta ut res ingressus notantur, donec recognita sint.
 - Res ingressus generatae non pro publicationibus, muneribus, praemiis aut certificationibus habeantur.
 
-## Promotio repositorii repertī
+## Promotio repositorii reperti
 
 In `data/pipeline_repos.json` inscriptionem curatoriam adde:
 
