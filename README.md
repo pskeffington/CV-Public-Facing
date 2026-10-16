@@ -56,7 +56,7 @@ Current work in this repository emphasizes public-safe rendering, source-bounded
 
 ## Lingua Latina
 
-Locally authored non-feeder documents are governed by [Latin safeguards](docs/LATIN_SAFEGUARDS.md). Source-only pointers and upstream citations remain unchanged; software syntax, metadata keys and public README navigation remain functional. New locally authored Markdown documents require Latin-language declaration and validation. Legacy English documents are inventoried for staged translation rather than inaccurately represented as converted.
+Locally authored non-feeder documents are governed by [Latin safeguards](docs/LATIN_SAFEGUARDS.md). Source-only pointers and upstream citations remain unchanged; software syntax, metadata keys and public README navigation remain functional. Locally authored Markdown documents are now translated and guarded by a Latin declaration plus a baseline English-prose check. The generated research-status narrative, LaTeX CV sources, JSON narrative fields, and generator templates still require source-level Latin migration; they are **not** yet certified as Latin. See the [Latin migration status](docs/STATUS_CONVERSIONIS_LATINAE.md) for the remaining scope.
 
 ## Repository Governance
 
