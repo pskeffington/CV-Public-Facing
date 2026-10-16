@@ -1,8 +1,9 @@
-# Living CV Actions Guide
+<!-- lingua: la -->
+# Praecepta rationis curriculi vitae viventis
 
-This repository is the public build target for a living CV system. Project repositories remain the source of truth for their public status surfaces. The public CV repository uses the allowlist in `data/pipeline_repos.json`, applies release-control checks, regenerates the public project board, and compiles PDFs.
+Hoc repositorium destinatur ad generationem publicam curriculi vitae viventis. Repositoria singulorum operum fontes principales statuum suorum publicorum manent. Instrumentum publicum indice permisso `data/pipeline_repos.json` utitur, permissiones divulgationis examinat, tabulam operum iterum generat et documenta PDF componit.
 
-## Architecture
+## Structura
 
 ```text
 public allowlist update
@@ -13,7 +14,7 @@ public allowlist update
   -> workflow artifacts
 ```
 
-Manual job-object packaging uses the same public-safe build path:
+Compositio manualis fasciculi muneris eadem via publica tuta utitur:
 
 ```text
 manual workflow_dispatch
@@ -24,29 +25,29 @@ manual workflow_dispatch
   -> workflow artifacts
 ```
 
-## Source of truth
+## Fons principalis
 
-The living CV project inventory is controlled by:
+Index operum vivus hoc fasciculo regitur:
 
 ```text
 data/pipeline_repos.json
 ```
 
-For each public project, the manifest records a stable key, repository name, public title, status bucket, public-safe summary, near-term needs, release state, and source files to inspect.
+Pro unoquoque opere publico index clavem stabilem, nomen repositorii, titulum publicum, classem status, summarium publice tutum, necessitates proximas, statum divulgationis et nomina fontium inspiciendorum servat.
 
-The generator treats the manifest as a public allowlist by default. Recursive public intake is disabled unless `allow_recursive_intake` is deliberately enabled after review. The manifest remains intentionally conservative: source repositories can mature without automatically creating public CV claims.
+Instrumentum generans per praedefinitionem tantum fontes ex indice publice admisso recipit. Lectio recursiva non permittitur, nisi `allow_recursive_intake` post recognitionem consulto admittitur. Hoc consilio status repositorii maturior novas assertiones in curriculo publico sponte non creat.
 
-The manual job-package dropdown is controlled by:
+Index selector munerum manualis hoc fasciculo regitur:
 
 ```text
 data/job_cv_objects.json
 ```
 
-Those job objects are public-safe rendering hints only. They do not import private application packets, private source records, or unsupported role claims.
+Res munerum sunt indicia tantum ad praesentandum publice tuta. Fasciculos candidaturarum privatos, testimonia privata nec assertiones de muneribus non probatas importare non debent.
 
-## Generated objects
+## Res generatae
 
-The generator writes:
+Instrumentum creat:
 
 ```text
 cv/current_projects_public.tex
@@ -58,7 +59,7 @@ research/blocked_release_ledger.md
 data/stem_cv_objects.json
 ```
 
-The selected job-package builder writes:
+Compositor fasciculorum munerum creat:
 
 ```text
 dist/job_cv_packages/<selected-job>/PUBLIC_SAFE_JOB_BRIEF.md
@@ -66,17 +67,17 @@ dist/job_cv_packages/<selected-job>/manifest.json
 dist/job_cv_packages/<selected-job>/*.pdf
 ```
 
-Generated files are build objects. Edit `data/pipeline_repos.json`, `data/job_cv_objects.json`, or upstream public README/status files instead of hand-editing generated outputs.
+Hi effectus sunt res generationis. `data/pipeline_repos.json`, `data/job_cv_objects.json` aut fontes publicos superiores emenda potius quam effectus generatos manu mutare.
 
-## Public build commands
+## Praecepta generationis publicae
 
-Neutral public package:
+Fasciculus publicus neuter:
 
 ```bash
 make public-package
 ```
 
-Selected public-safe job package:
+Fasciculus muneris electi:
 
 ```bash
 make job-cv-package JOB_OBJECT="neutral"
@@ -84,7 +85,7 @@ make job-cv-package JOB_OBJECT="harvard-chan-director-data-analytics"
 make job-cv-package JOB_OBJECT="cdc-foundation-data-modernization-senior-advisor"
 ```
 
-Release-control and object-contract checks:
+Probationes tutelae et structurae:
 
 ```bash
 make safety-surface-check
@@ -92,99 +93,96 @@ make stem-object-contract
 make stem-report-contract
 ```
 
-The Makefile runs the living CV generator before preflight and LaTeX compilation. The job-package target also validates the job object registry and workflow dropdown contract.
+`Makefile` prius res curriculi vitae generat, deinde inspectionem et compilationem LaTeX exsequitur. Praeceptum muneris etiam registrum rerum munerum et correspondentiam indicis selectoris examinat.
 
-## Public workflow
-
-The public workflow is:
+## Ratio publica GitHub Actions
 
 ```text
 .github/workflows/build-public-research-status.yml
 ```
 
-It runs on manual `workflow_dispatch` with a `job_object` dropdown, repository dispatch from approved public surfaces, and direct source edits inside this repository.
+Ratio per `workflow_dispatch` manuale cum indice `job_object`, per nuntios `repository_dispatch` e fontibus approbatis et per mutationes fontium huius repositorii incipit.
 
-The workflow is read-only for repository contents. It builds PDFs and uploads artifacts. It does not push generated files back to `main`, which prevents recursive build loops.
+Hic processus repositorium solum legit; documenta PDF fabricat et effectus in GitHub Actions servat. Res generatas ad ramum `main` non mittit, ne circuitus generationis repetatur.
 
-Manual dropdown options currently include:
+Electiones manuales hodiernae:
 
 ```text
 neutral
 harvard-chan-director-data-analytics
 indeed-data-scientist-iii
 rockland-trust-data-architect
-navsea-sstm-data-science
 valo-health-staff-data-scientist
+unh-adjunct-homeland-security
 cdc-foundation-data-modernization-senior-advisor
 ```
 
-The CDC Foundation object renders under the public-safe title `CDC Foundation - Data Modernization Senior Advisor`. It is intended for public health informatics, data modernization, workforce upskilling, data governance, technical assistance, and reproducible analytics framing, while excluding private packet language and unsupported employment or authority claims.
+Res CDC Foundation sub titulo publico `CDC Foundation - Data Modernization Senior Advisor` redditur. Argumenta sanitatis informaticae, renovationis datorum, instructionis operariorum, gubernationis datorum, auxilii technici et analyticae reproductibilis spectat, non verba candidaturae privata neque assertiones de auctoritate aut munere sine probatione.
 
-Artifacts are named by selected object:
+Effectus pro munere electo nominantur:
 
 ```text
+linkedin-academic-cv-<job_object>
 public-cv-package-<job_object>
 selected-job-cv-package-<job_object>
-generated-living-cv-sources-<job_object>
+public-render-sources-<job_object>
 ```
 
-## First manual test
+## Prima probatio manualis
 
-Use this test order:
+1. Rationem `Build Public CV Package` cum `job_object=neutral` exsequere.
+2. Confirma quattuor genera effectuum exstare.
+3. Confirma `selected-job-cv-package-neutral` `PUBLIC_SAFE_JOB_BRIEF.md` et `manifest.json` continere.
+4. Itera cum `job_object=harvard-chan-director-data-analytics`.
+5. Confirma fasciculum electum relationem publice tutam Harvard Chan servare nec textum privatum revelare.
+6. Itera cum `job_object=cdc-foundation-data-modernization-senior-advisor`.
+7. Confirma titulum publicum CDC Foundation congruere nec verba fasciculi privati apparere.
 
-1. Run `Build Public CV Package` with `job_object=neutral`.
-2. Confirm the three expected artifacts are present.
-3. Confirm `selected-job-cv-package-neutral` contains `PUBLIC_SAFE_JOB_BRIEF.md` and `manifest.json`.
-4. Run again with `job_object=harvard-chan-director-data-analytics`.
-5. Confirm the selected package uses the Harvard Chan public-safe brief and does not expose private job packet content.
-6. Run again with `job_object=cdc-foundation-data-modernization-senior-advisor`.
-7. Confirm the selected package uses the CDC Foundation public-safe title and does not expose private application packet language.
-
-The detailed first-test note lives at:
+Praecepta probationis pleniora:
 
 ```text
 docs/FIRST_TEST_JOB_CV_ACTION.md
 ```
 
-The public release roadmap lives at:
+Ordo editionis publicae:
 
 ```text
 docs/PUBLIC_RELEASE_ROADMAP.md
 ```
 
-## Recursion control
+## Custodia repetitionis
 
-The system avoids recursive loops by following these rules:
+Systema circuitus infinitos his praeceptis vitat:
 
-- Source repos notify the public CV repo.
-- The public CV repo builds artifacts.
-- The public CV workflow does not commit generated files back to itself.
-- Ordinary `github-actions[bot]` push events are skipped.
-- Concurrency cancels duplicate in-progress public builds.
-- Recursive intake remains disabled unless reviewed and intentionally enabled.
+- repositoria fontium instrumentum publicum certiorem faciunt;
+- instrumentum publicum fasciculos generat;
+- ratio publica effectus ad se ipsam non committit;
+- mutationes actoris `github-actions[bot]` ordinariae praetermittuntur;
+- concurrentia generationes duplicatas adhuc agentes tollit;
+- lectio recursiva sine recognitione expresse facta vetatur.
 
-## Adding a new project repository
+## Additio novi repositorii operis
 
-1. Add the project to `data/pipeline_repos.json`.
-2. Confirm the project has a public-safe README or status file.
-3. Set or confirm `public_release` is `public`.
-4. Run `make safety-surface-check`.
-5. Run `make public-package`.
-6. Inspect generated PDFs and source ledgers.
-7. Add public update notification only if ongoing refresh is needed.
-8. Run the public CV workflow manually once to confirm the new project appears in the generated source artifact.
+1. Rem in `data/pipeline_repos.json` insere.
+2. Confirma `README` vel statum publice tutum adesse.
+3. Confirma `public_release` ad `public` pertinere.
+4. `make safety-surface-check` exsequere.
+5. `make public-package` exsequere.
+6. Documenta PDF et registra fontium inspice.
+7. Nuntium mutationis publicae tantum si renovatio assidua necessaria est adde.
+8. Rationem publicam semel manualiter exsequere, ut res nova in fontibus generatis appareat.
 
-## Adding a new job object
+## Additio novae rei muneris
 
-1. Add the new key to `data/job_cv_objects.json`.
-2. Use only public-safe rendering hints.
-3. Add the same key to the workflow dropdown options.
-4. Run `make job-cv-object-check`.
-5. Run the manual workflow with the new object.
+1. Clavem novam in `data/job_cv_objects.json` insere.
+2. Tantum indicia publica tuta adhibe.
+3. Eandem clavem in indice selectoris GitHub Actions adde.
+4. `make job-cv-object-check` exsequere.
+5. Rationem manualem cum nova re exsequere.
 
-## Local check
+## Probatio localis
 
-From a local clone of this repository:
+In exemplari locali repositorii:
 
 ```bash
 python3 scripts/stem_cv_curator.py
@@ -194,7 +192,7 @@ make job-cv-package JOB_OBJECT="neutral"
 make job-cv-package JOB_OBJECT="cdc-foundation-data-modernization-senior-advisor"
 ```
 
-Inspect:
+Haec inspice:
 
 ```text
 research/living_source_ledger.md
