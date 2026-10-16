@@ -11,15 +11,15 @@
 3. `pskeffington/CV-Public-Facing` est instrumentum publicationis tutum. Tantum assertiones et summaria operum ad divulgationem approbata recipiat.
 4. Google Drive est locus distributionis et coordinationis exemplarium generatarum vel recognoscendarum. Exemplaria ibi posita ex fontibus GitHub concordatis iterum generentur, non quasi fontes principales separatim emendentur.
 
-## Inventum reconciliationis huius temporis
+## Quae ex hac comparatione apparuerunt
 
-Repositorium Portfolio post renovationem documentorum die 3 Iulii egregie progressum est. Diebus 21–22 Iulii normam indicis valoris operum ampliavit, validationem inter repositoria, probationes deterministicas, reconciliationem registri, exceptionum tractationem atque relationes primae partis de integritate datorum addidit.
+Repositorium Portfolio post renovationem documentorum die 3 Iulii progressum est. Diebus 21–22 Iulii normam indicis valoris operum ampliavit, validationem inter repositoria, probationes deterministicas, reconciliationem registri, exceptionum tractationem atque relationes primae partis de integritate datorum addidit.
 
-Haec mutationes ordinem probationum confirmant, sed per se novas assertiones curriculi vitae non efficiunt. Sustinent sermonem accuratiorem de custodiis probationis reproducibilis, validatione inter repositoria, gubernatione nexus inter fontem et assertionem, probationibus deterministis et reconciliatione universi indicis.
+Hae mutationes ordinem probationum confirmant, sed per se novas assertiones curriculi vitae non efficiunt. Sustinent sermonem accuratiorem de custodiis probationis reproducibilis, validatione inter repositoria, gubernatione nexus inter fontem et assertionem, probationibus deterministis et reconciliatione universi indicis.
 
-## Lex promovendi assertiones ad curriculum vitae
+## Lex de assertionibus in curriculum vitae recipiendis
 
-Res in indice Portfolio in curriculum principale recipi potest cum ordine sequenti describitur:
+Res in indice Portfolio in curriculum vitae principale recipi potest, si secundum hunc ordinem describitur:
 
 **Quaestio → Methodus → Opus traditum → Usus propositus**
 
@@ -50,7 +50,7 @@ Proximus cursus distributionis:
 2. indicem operum publice tutorum et fontes curriculi renovare;
 3. formas curriculi principales et publicas generare;
 4. documenta PDF inspectare ob constantiam assertionum et compositionis paginarum;
-5. exemplaria Google Drive correspondentes novis exportationibus diem indicantibus substituere vel obsoleta declarare.
+5. exemplaria in Google Drive novis fasciculis, die editionis notatis, substituere vel obsoleta declarare.
 
 ## Opera documentaria statim agenda
 
@@ -58,4 +58,4 @@ Proximus cursus distributionis:
 - partem investigationum et operum in curriculo principali cum indice testimoniorum Portfolio conferre;
 - indicem operum in curriculo publico recensere ubi status maturuit aut mutatus est;
 - argumenta NLSY79, WASH et infrastructurae ruralis, methodorum biomedicarum atque gubernationis probationum distincta tenere, una tamen persona scientifica perspicua servata;
-- sermonem publicum academicum, civibus utilem, ad investigationem spectantem, non operativum atque limitum conscientem retinere.
+- sermonem publicum academicum, communitatibus utilem, in investigatione fundatum atque finium suorum conscium servare.
