@@ -7,13 +7,13 @@
 
 ## Propositum
 
-Hoc documentum instrumentum `CV-Public-Facing` cum systemate latiore Auth Eco concordat, prout hic describitur:
+Hoc documentum concordiam inter instrumentum `CV-Public-Facing` et systema amplius Auth Eco explicat, secundum rationem hic descriptam:
 
 ```text
 Portfolio/docs/ECOSYSTEM_ALIGNMENT.md
 ```
 
-`CV-Public-Facing` res publice tutas reddit. Ex repositoriis publicis, assertionibus recognitis et exceptionibus curatis sumat, neque novas assertiones sine probatione fingat neque testimonia privata revelet.
+`CV-Public-Facing` res publice tutas reddit. Ex fontibus publice admissis et assertionibus recognitis tantum sumat; novas assertiones sine testimoniis ne gignat neque indicia privata patefaciat.
 
 ## Munus in systemate
 
@@ -47,7 +47,7 @@ public repository surface
   -> rendered CV/status output
 ```
 
-Ubi testimonia privata CV pertinent, tantum sententiae publice tutae huc transferri possunt.
+Cum testimonia curriculi vitae privati ad rem pertinent, tantum sententiae ad divulgationem idoneae huc transferri possunt.
 
 ## Campi necessarii ad convenientiam
 
@@ -79,16 +79,16 @@ fixture_only
 
 Fontes vel notae privatae, restrictae aut occultatae in repositorio CV privato vel in documentis recensionis localibus maneant.
 
-## Leges declinationis
+## Custodiae contra discrepantias
 
 Hoc instrumentum notet aut vitet:
 
 - assertionem publicam CV quae neque fonte publico neque re assertionis publice tutae sustentatur;
 - statum repositorii vetustiorem quam relatio publica generata;
-- statum manuscripti plus quam testimonia permittunt celebratum;
-- exemplar probationis preliminare quasi experimentum comparativum validatum descriptum;
+- statum manuscripti qui maiorem maturitatem quam testimonia permittunt indicat;
+- exemplar probationis initiale perperam pro experimento comparativo comprobato habitum;
 - verba fontium privatorum in effectum publicum translata;
-- mensuram convenientiae muneris pro iudicio autonomo eligendi habitam.
+- mensuram convenientiae muneris pro iudicio autonomo de conductione adhibitam.
 
 ## Nexus exsecutionis praesentes
 
@@ -109,9 +109,9 @@ scripts/stem_paper_evaluator.py
 1. Campum `public_safety_boundary` rebus publicis generatis addere ubi deest.
 2. Dies mutationum `README` repositoriorum fontium in relationibus publicis servare.
 3. Identificatores assertionum addere cum summa publica operis ad assertiones ex registro CV privato refertur.
-4. Sermonem `README` et status cum indice testimoniorum Portfolio concordare.
+4. Sermonem documentorum `README` et relationum de statu cum indice testimoniorum Portfolio concordare.
 5. Probationem structuralem camporum necessariorum Auth Eco instituere.
 
 ## Declaratio limitum
 
-Hoc repositorium tantum ad effectus publicos destinatur. Exportationes candidaturarum privatae, relationes servitii, imagines schermatum, tabulae operativae, PDF fontium privatorum, claves occultae, dispositiones systematum sensibiles et identificatores technici privati non recipiantur.
+Hoc repositorium tantum ad effectus publicos destinatur. Exportationes candidaturarum privatae, relationes servitii, imagines e tegumentis computatoriis captas, tabulae operativae, PDF fontium privatorum, claves occultae, dispositiones systematum sensibiles et identificatores technici privati non recipiantur.
