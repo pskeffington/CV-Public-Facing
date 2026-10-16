@@ -1,12 +1,13 @@
-# Public Release Roadmap
+<!-- lingua: la -->
+# Ordo operum ad editionem publicam
 
-## Purpose
+## Propositum
 
-This roadmap defines how the public CV renderer keeps public outputs synchronized with source repositories while keeping restricted material out of public CV, profile, research-status, source-ledger, and selected-job package artifacts.
+Hic ordo describit quomodo instrumentum publicum curriculi vitae effectus publicos cum repositoriis fontium concordet, simul vetans res restrictas in curriculum vitae, descriptiones breves, relationes investigationum, registra fontium et fasciculos munerum selectorum ingredi.
 
-## Current policy
+## Lex praesens
 
-The public renderer now uses a public allowlist model by default.
+Instrumentum publicum indice fontium admissorum utitur, nisi aliter expresse decernitur.
 
 ```text
 data/pipeline_repos.json
@@ -17,50 +18,50 @@ data/pipeline_repos.json
   -> public PDFs and selected job packages
 ```
 
-Recursive public repository intake is disabled unless `allow_recursive_intake` is set to `true` after review. This keeps newly discovered public repositories from automatically appearing in public CV outputs.
+Lectio recursiva repositoriorum publicorum non exercetur, nisi `allow_recursive_intake` post recognitionem ad `true` mutatur. Ita repositoria nuper reperta non statim inter opera in curriculo vitae publico apparent.
 
-## Release-control rules
+## Praecepta de permissione divulgandi
 
-Public outputs may include only entries that satisfy all of the following:
+Effectus publici tantum res includant quae omnes condiciones sequentes implent:
 
-- the repository appears in the public allowlist;
-- the entry has `public_release` set to `public` or omitted;
-- the entry is not matched by the release-control hash registry;
-- the rendered text passes the public release guard;
-- the generated object contract confirms no non-public project object reached the public project list.
+- repositorium in indice publice admisso invenitur;
+- valor `public_release` est `public` vel abest;
+- res a registro hash ad cohibendam divulgationem non impeditur;
+- textus effectus custodiam publicae editionis superat;
+- examen structurale confirmat nullam rem privatam in indicem operum publicorum pervenisse.
 
-Restricted entries must be handled by hash or other non-sensitive identifiers only. Do not store restricted project names, private project names, or sensitive project-family labels in public documentation.
+De rebus restrictis tantum hashes aut alia indicia non sensitiva serventur. Nomina operum restrictorum, repositoriorum privatorum vel familiarum operum sensibilium in documentis publicis non scribantur.
 
-## Synchronization repair plan
+## Ratio emendandae synchronizationis
 
-### Phase 1 - Complete
+### Pars I — perfecta
 
-- Add public-safe job-object dropdown packaging.
-- Add selected-job package artifact generation.
-- Add job-object registry validation.
-- Add hashed public release guard.
-- Add public allowlist metadata to `data/pipeline_repos.json`.
-- Disable recursive intake by default.
-- Filter restricted records before scoring, ledgers, object JSON, research status, and PDF sources.
+- Selectio per indicem demissum rerum munerum publice tutarum instituta.
+- Generatio fasciculorum pro munere electo instituta.
+- Validatio registri rerum munerum addita.
+- Custodia editionis publicae per hashes addita.
+- Metadata indicis publici admissorum in `data/pipeline_repos.json` addita.
+- Lectio recursiva per praedefinitionem inhibita.
+- Res restrictae ante aestimationes, registra, JSON, relationes et fontes PDF excluduntur.
 
-### Phase 2 - Active
+### Pars II — in progressu
 
-- Regenerate public CV outputs after release-control filtering.
-- Inspect generated PDFs for restricted-material leakage.
-- Confirm selected-job package artifacts do not contain restricted reporting.
-- Confirm `blocked_release_ledger.md` reports only non-sensitive hash-prefix records.
-- Confirm the public object JSON uses schema `stem-cv-curator/v0.3`.
+- Effectus publicos post exclusionem rerum restrictarum iterum generare.
+- Documenta PDF generata inspicere, ne res restrictae pateant.
+- Confirmare fasciculos munerum selectorum indicia restricta non continere.
+- Confirmare `blocked_release_ledger.md` tantum praefixa hash non sensitiva referre.
+- Confirmare JSON publicum schema `stem-cv-curator/v0.3` servare.
 
-### Phase 3 - Next
+### Pars III — sequens
 
-- Add a manifest contract check that fails if recursive intake is enabled without an explicit release-review flag.
-- Add a generated-output scanner over `cv/current_projects_public.tex`, `research/RESEARCH_STATUS.md`, `research/generated_project_board.tex`, and `research/living_source_ledger.md` after curator generation.
-- Add a public artifact review checklist to selected job packages.
-- Add a process for promoting a new public project from intake to allowlist after review.
+- Examen indicis addere quod deficit si lectio recursiva sine signo recognitionis divulgationis permittitur.
+- Inspectorem effectuum generatarum ad `cv/current_projects_public.tex`, `research/RESEARCH_STATUS.md`, `research/generated_project_board.tex` et `research/living_source_ledger.md` post generationem curatoris addere.
+- Indicem inspectionis effectuum publicorum fasciculis munerum addere.
+- Rationem promovere qua novum opus post recognitionem in indicem publicum admittitur.
 
-## New output update path
+## Via renovandi effectus
 
-After changes to public project status or job-object packaging, run:
+Post mutationes status operum publicorum aut fasciculorum munerum exsequere:
 
 ```bash
 make safety-surface-check
@@ -70,31 +71,29 @@ make stem-report-contract
 make public-package
 ```
 
-For selected job packages, run:
+Pro fasciculis munerum selectorum:
 
 ```bash
 make job-cv-package JOB_OBJECT="neutral"
 make job-cv-package JOB_OBJECT="harvard-chan-director-data-analytics"
 ```
 
-The GitHub Actions dropdown performs the selected-job package path through `make job-cv-package`.
+Index selector GitHub Actions viam `make job-cv-package` exercet.
 
-## Review checklist for new output
+## Index recognitionis novi effectus
 
-A new public output passes review when:
+Novus effectus publicus probatur cum:
 
-- the public CV PDFs are generated;
-- the one-page profile remains concise and public-safe;
-- the index-safe CV does not expose contact details;
-- no restricted project-family names or adjacent descriptions appear;
-- public methods avoid restricted wording;
-- the research-status package contains only public allowlist projects;
-- selected-job package briefs remain role-facing and public-safe;
-- blocked records appear only as non-sensitive hash-prefix ledger entries.
+- documenta PDF curriculi publici generata sunt;
+- descriptio unius paginae brevis et publice tuta manet;
+- forma ad indicem apta indicia contactus non exponit;
+- nomina familiarum operum restrictarum nec descriptiones vicinae apparent;
+- methodi publicae verba restricta vitant;
+- relatio investigationum tantum opera in indice publico admissa continet;
+- relationes munerum selectorum ad munera pertinent et publice tutae sunt;
+- res vetitae tantum praefixis hash non sensitivis in registro referuntur.
 
-## Documentation surfaces
-
-The following files should stay synchronized:
+## Documenta concordanda
 
 ```text
 docs/LIVING_CV_ACTIONS.md
@@ -107,6 +106,6 @@ scripts/public_release_guard.py
 scripts/check_public_release_guard.py
 ```
 
-## Boundary
+## Limes publicus
 
-This repository is public. It should not contain private job packets, sensitive project names, restricted project-family labels, secrets, private paths, or private-source evidence. When in doubt, keep the material out of the public renderer and preserve it only in the private source repository or private application package.
+Hoc repositorium publicum est. Fasciculos candidaturarum privatos, nomina operum sensibilium, titulos familiarum restrictarum, secreta, vias privatas et testimonia fontium privatorum non recipiat. In dubio, res e instrumento publico excludatur et tantum in fonte privato vel fasciculo candidaturae privato servetur.
