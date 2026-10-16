@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Custodia Latina: Latin prose gate with explicit upstream-feeder exceptions.
+"""Custodia Latina: examen narrationis Latinae, exceptis fontibus directoriis.
 
-Checks committed authored Markdown. Legacy content is inventoried, not silently
-declared compliant. Executable code, JSON schemas, LaTeX syntax and generated
-research text require separate source-level migration.
+Documenta Markdown in historiam relata examinantur. Reliquiae generationis
+Anglicae aperte enumerantur. Codex, schemata JSON, syntax LaTeX et narrationes
+generatae propriam conversionem in fontibus exspectant.
 """
 from __future__ import annotations
 
@@ -17,15 +17,8 @@ MARK = "<!-- lingua: la -->"
 ROOT_EXEMPT = {"README.md"}
 FEEDER_PATHS = {"research/living_source_ledger.md"}
 SKIP_PREFIXES = (".github/", "dist/", "documents/")
-# Existing prose and generated research status pending manual/source translation.
-LEGACY_AUTHORED = {
-    "docs/LIVING_CV_ACTIONS.md",
-    "docs/STEM_CITATION_VERIFICATION.md",
-    "docs/STEM_CV_CURATOR.md",
-    "docs/STEM_EVALUATOR_LIT_REVIEW_MATRIX.md",
-    "docs/STEM_PAPER_EVALUATOR.md",
-    "research/RESEARCH_STATUS.md",
-}
+# Relatio a curatore generata: nondum Latine a fonte generationis redditur.
+LEGACY_GENERATED = {"research/RESEARCH_STATUS.md"}
 ENGLISH_WORDS = re.compile(
     r"\b(?:the|and|this|that|these|those|with|without|from|which|"
     r"should|must|would|could|have|has|were|was|are|into|when|"
@@ -46,7 +39,7 @@ LINK_DESTINATION = re.compile(r"\]\((?:https?://)[^)]+\)")
 
 
 def is_pointer_only(content: str) -> bool:
-    """Do not exempt mixed source pointers and local analysis."""
+    """Nexus soli excipiuntur; interpretatio propria non excipitur."""
     lines = [
         s.strip()
         for s in content.splitlines()
@@ -57,7 +50,7 @@ def is_pointer_only(content: str) -> bool:
 
 
 def suspicious_english_lines(content: str) -> list[int]:
-    """Flag clear English prose; lexical heuristics never prove good Latin."""
+    """Anglica manifesta reperit; index vocabularii Latinitatem non probat."""
     flagged: list[int] = []
     fenced = False
     for number, raw in enumerate(content.splitlines(), 1):
@@ -66,7 +59,7 @@ def suspicious_english_lines(content: str) -> list[int]:
             fenced = not fenced
             continue
         if fenced or not line or line.startswith(("<!--", ">", "<", "%")):
-            continue  # comments, quoted sources, HTML, or LaTeX
+            continue  # commentarii, citationes integrae, HTML vel LaTeX
         candidate = INLINE_CODE.sub("", LINK_DESTINATION.sub("", line))
         words = re.findall(r"[A-Za-z]{2,}", candidate)
         if len(words) < 6:
@@ -79,13 +72,13 @@ def suspicious_english_lines(content: str) -> list[int]:
 
 
 def audit(name: str, content: str) -> tuple[str, list[int]]:
-    """Return status: exempt, feeder, pending, compliant, or violation."""
+    """Statum custodiae reddit; transitus incompletus non probatur."""
     if name in ROOT_EXEMPT:
         return "exempt", []
     if name in FEEDER_PATHS or is_pointer_only(content):
         return "feeder", []
     if MARK not in content[:256]:
-        if name in LEGACY_AUTHORED:
+        if name in LEGACY_GENERATED:
             return "pending", []
         return "violation", []
     bad = suspicious_english_lines(content)
@@ -114,7 +107,7 @@ def main() -> int:
         if status == "pending":
             pending.append(name)
         if status == "violation":
-            detail = ", ".join(map(str, lines[:10])) if lines else "missing Latin declaration"
+            detail = ", ".join(map(str, lines[:10])) if lines else "signum linguae Latinae deest"
             violations.append(f"{name}: {detail}")
     for item in violations:
         print(f"Violatio linguae Latinae: {item}", file=sys.stderr)
