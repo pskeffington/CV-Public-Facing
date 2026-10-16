@@ -7,7 +7,7 @@
 
 - Documenta investigationis, interpretationes, descriptiones operum, relationes, aestimationes et commentarii ad publicum destinati Latine scribantur.
 - Documenta quae solum ad fontes superiores ducunt (*feeder*, indices citationum, nexus immutabiles) servantur sine mutatione.
-- Codex exsecutabilis, claves JSON, nomina variabilium, schema, URL, DOI, tituli proprii, citationes verbatim, mandata terminalia et syntax LaTeX non vertantur; ne officia vel compilationes corrumpantur.
+- Codex exsecutabilis, claves JSON, nomina variabilium, schema, URL, DOI, tituli proprii, citationes verbatim, mandata terminalia et syntaxis LaTeX non vertantur; ne officia vel compilationes corrumpantur.
 - Summaria e fontibus externis desumpta, si propria sunt, Latine reddantur, dum verba fontium in citationibus integra manent.
 - Documenta generata ex exemplaribus idem praeceptum sequantur; translatio in fonte generationis potius quam in effectu fiat.
 
@@ -21,7 +21,7 @@
 
 ## Transitus et examinatio
 
-Instrumentum `scripts/check_latin_safeguards.py` documenta nova Markdown non directa coercet, et documenta vetera nondum translata recenset. Signum `<!-- lingua: la -->` tantum post translationem veram adhibeatur. Instrumentum verba Anglica manifesto retenta quaerit, sed ipsum signum neque probationes vocabularii qualitatem Latinitatis per se confirmant. Documenta priora quae nondum translata sunt aperte enumerantur nec pro conformibus habentur. Ratio antiqua non statim rumpatur: res veteres per partes transferantur, servatis testibus compilationis atque integritate citationum.
+Instrumentum `scripts/check_latin_safeguards.py` documenta nova Markdown, quae non sunt mera indicia ad fontes ducentia, examinat, et documenta vetera nondum translata recenset. Signum `<!-- lingua: la -->` tantum post translationem re vera absolutam adhibeatur. Instrumentum verba Anglica manifesto retenta quaerit, sed ipsum signum neque probationes vocabularii qualitatem Latinitatis per se confirmant. Documenta priora quae nondum translata sunt aperte enumerantur nec pro conformibus habentur. Ratio antiqua non statim rumpatur: res veteres per partes transferantur, servatis testibus compilationis atque integritate citationum.
 
 **Exceptio:** `README.md` fundamentale, nexus ad fontes superiores, et textus machinis necessarii.
 
