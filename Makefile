@@ -6,7 +6,7 @@ RESEARCH_DIR = research
 DOCUMENTS_DIR = documents
 JOB_OBJECT ?= neutral
 
-.PHONY: all stem-cv living-cv stem-presence-report stem-presence-check maturity-contract public-manifest-check public-visibility-check job-cv-object-check safety-surface-check citation-check doi-normalization-check reference-metadata-parser-check url-policy-check paper-evaluator-check paper-review-check stem-object-contract stem-report-contract preflight sanitize polish-public-cv align-public-positioning public-package job-cv-package academic-cv one-page-profile public-upload-cv research-status clean
+.PHONY: repository-scope-check all stem-cv living-cv stem-presence-report stem-presence-check maturity-contract public-manifest-check public-visibility-check job-cv-object-check safety-surface-check citation-check doi-normalization-check reference-metadata-parser-check url-policy-check paper-evaluator-check paper-review-check stem-object-contract stem-report-contract preflight sanitize polish-public-cv align-public-positioning public-package job-cv-package academic-cv one-page-profile public-upload-cv research-status clean
 
 all: public-package
 
@@ -35,7 +35,11 @@ public-visibility-check: public-manifest-check
 job-cv-object-check:
 	$(PYTHON) scripts/check_job_cv_objects.py
 
-safety-surface-check:
+repository-scope-check:
+	$(PYTHON) scripts/test_repository_scope.py
+	$(PYTHON) scripts/check_repository_scope.py
+
+safety-surface-check: repository-scope-check
 	$(PYTHON) scripts/check_public_release_guard.py
 
 doi-normalization-check:
