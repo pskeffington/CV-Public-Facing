@@ -23,7 +23,7 @@
 
 ## Custodia linguae Latinae
 
-Documenta propria quae non sunt tantum indices fontium Latine conscribantur secundum [Normam linguae Latinae](LATIN_SAFEGUARDS.md). Verba citationum, nomina propria, syntax programmatica et clavis datorum immutata maneant.
+Documenta propria quae non sunt tantum indices fontium Latine conscribantur secundum [Normam linguae Latinae](LATIN_SAFEGUARDS.md). Verba citationum, nomina propria, syntaxis programmatica et claves datorum immutatae maneant.
 
 ## Probationes ante publicationem
 
