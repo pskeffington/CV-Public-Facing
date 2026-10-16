@@ -7,7 +7,7 @@ Haec nota fines publicationis tutae pro re muneris `UNH Adjunct Faculty, Homelan
 
 ## Limes fontium
 
-Fasciculus privatus candidaturae in `pskeffington/Applications-Jobs` manet. Hoc repositorium publicum textum privatum fasciculi, notas occultas, particularia operationum sensibilium vel assertiones sine probatione non importet.
+Fasciculus privatus candidaturae in `pskeffington/Applications-Jobs` manet. Hoc repositorium publicum textum privatum fasciculi, notas occultas, indicia operativa quae divulgari non licet vel assertiones sine probatione non importet.
 
 ## Res muneris publice tuta
 
@@ -24,7 +24,7 @@ Instrumentum publicum haec potissimum ostendere potest:
 - administrationem rerum urgentium et continuationem operum;
 - scientiam infrastructurae technicae;
 - systemata salutis publicae et firmitatis communitatum;
-- disciplinam indicum fontium et finium assertionum;
+- curam indicum fontium et finium assertionum;
 - iudicium iuridicum atque ethicum;
 - praeparationem ad docendum.
 
@@ -33,7 +33,7 @@ Instrumentum publicum haec potissimum ostendere potest:
 Instrumentum publicum excludat:
 
 - sermonem fasciculi candidaturae privati;
-- particularia operativa sensitiva;
+- indicia operativa quae divulgari non licet;
 - assertiones de potestate accessus ad secreta, nisi probatae sint;
 - assertiones de auctoritate foederali praesenti, nisi probatae sint;
 - nomina systematum, locorum aut methodorum collectionis sensibilia;
@@ -41,4 +41,4 @@ Instrumentum publicum excludat:
 
 ## Nota recognitionis
 
-Haec res publica tantum indicium est de modo praesentandi. Fasciculus privatus `Applications-Jobs` manet fons candidaturae principalis; repositorium privatum CV manet fons assertionum verificate probatarum.
+Haec res publica tantum indicium est de modo praesentandi. Fasciculus privatus `Applications-Jobs` manet fons candidaturae principalis; repositorium privatum CV manet fons assertionum comprobatarum.
