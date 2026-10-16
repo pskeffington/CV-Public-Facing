@@ -1,25 +1,30 @@
-# Imperium Protocol — Public CV Governance
+<!-- lingua: la -->
+# Protocolum Imperii — regimen curriculi vitae publici
 
-**Scope:** All tracked and generated CV repository artifacts, including CV sources, research status, data manifests, scripts, workflow outputs, job objects, and downloadable packages. The root `README.md` is a plain-language visitor entrypoint, not an Imperium-scored artifact. Files whose sole function is to point upstream to source evidence are source references, not newly evaluated evidence; preserve their links and authority.
+**Ambitus:** Omnia documenta repositorii, tam manu scripta quam generata, quae ad curriculum vitae, opera investigationis, indices datorum, rationes exsecutionis, fasciculos candidaturae et exemplaria publica pertinent. `README.md` radicis lectoribus est introductio, non res aestimationi Imperii subiecta. Fasciculi qui tantum ad fontes superiores ducunt testimonia externa indicant; neque fontes ipsi neque auctoritas eorum mutentur.
 
-**Source of governance:** [imperium-aeterna governance](https://github.com/pskeffington/imperium-aeterna/blob/main/docs/governance.md). This document restates safe, public-facing boundaries only; the private repository is not a runtime dependency.
+**Fons regiminis:** [Regulae imperium-aeterna](https://github.com/pskeffington/imperium-aeterna/blob/main/docs/governance.md). Hic tantum fines tutelae publice enuntiabiles exhibentur; repositorium privatum ad exsecutionem non requiritur.
 
-## Mandatory rules
+## Praecepta necessaria
 
-1. **Evidence before assertion.** Attribute each substantive claim to an auditable public source, retain its maturity/release state, and never upgrade an unverified or developing claim to an awarded credential, publication, appointment, or production deployment.
-2. **Provenance and versioning.** Derived objects retain their source repository/path, source type, evidence confidence, method or generator version, and review status when those attributes exist. Unresolved claims remain unresolved.
-3. **Human review.** Scores, classifications, role-fit assessments, and generated language are provisional aids for editorial review; they cannot make employment, admission, promotion, compensation, eligibility, military readiness, or other consequential person-level decisions.
-4. **Protected attributes.** Do not use religion, ancestry, ethnicity, race, sex, gender identity, disability, age, political belief, property, wealth, or private belief to rate, rank, exclude, or recommend an individual.
-5. **No modern status by historical analogy.** Historical rank, vocation, precedence, or title models are research representations, not credentials, institutional authority, merit determinations, or present-day hiring criteria.
-6. **Public-release gate.** Maintain the existing allowlist, sanitization, claim validation, and private/public separation. Never import operational or personal data from a private governance repository into this public one.
-7. **No automatic score publication.** Internal evidence scores and assessment metadata may inform private review but must not appear as definitive ratings in public CVs or downloadable artifacts.
+1. **Probatio ante assertionem.** Quaeque affirmatio substantialis ad fontem publicum recognoscibilem referatur. Status maturitatis et licentiae divulgandi serventur. Res nondum comprobata vel in progressu nec gradus academicus concessus nec editio scientifica nec munus obtentum nec opus in usu probato nuncupetur.
+2. **Origo et versiones.** Res derivatae, ubi haec indicia adsunt, viam fontis, genus fontis, fiduciam testimonii, versionem methodi vel instrumenti et statum recognitionis retineant. Assertiones incertae incertae maneant.
+3. **Recognitio humana.** Notae numericae, classificationes, aestimationes convenientiae munerum atque formulae generatae sunt auxilia recognitionis, non instrumenta decernendi de admissione, conductione, promotione, mercede, idoneitate militari vel aliis rebus gravibus hominum.
+4. **Proprietates tutandae.** Religio, genus familiae, origo gentis, natio, sexus, identitas generis, vitium corporis, aetas, opinio politica, possessio, divitiae et fides privata non adhibeantur ad hominem ordinandum, reiciendum aut commendandum.
+5. **Nulla dignitas hodierna ex similitudine historica.** Gradus, munera, dignitates et ordines historici tantum exempla investigationis sunt; non sunt testimonia honoris, potestatis institutionalis, meriti aut aptitudinis hodiernae.
+6. **Custodia editionis publicae.** Index fontium publice admissorum, purgatio indiciorum privatorum, examinatio assertionum et separatio inter privatum et publicum maneant. Indicia personalia vel operativa e repositorio privato in publicum ne transferantur.
+7. **Notae numericae non divulgandae.** Aestimationes internas licet ad recognitionem privatam adhibere; in curriculis publicis nec in documentis distribuendis quasi iudicia certa edantur.
 
-## Explicit exceptions
+## Exceptiones definitae
 
-- `README.md`: visitor-facing orientation and navigation; it links here but carries no Imperium scoring or source-object metadata requirement.
-- **Upstream pointers:** link-only source references, citation indexes, and immutable pointers retain their external provenance without being rewritten, decorated, or treated as local scored content. If a file mixes upstream pointers with locally authored conclusions, the authored portion remains in scope.
-- Generated PDFs and LaTeX outputs: governance attaches to the upstream generation and validation workflow; do not stamp these files with intrusive metadata or break their rendering.
+- `README.md` radicis: introductio et index viarum lectoris; neque aestimationem Imperii neque notas fontis proprias requirit.
+- **Nexus ad fontes superiores:** fasciculi qui solum nexus continent, indices citationum et indicia fontium immutabilia non transferantur in narrationem propriam nec in classificationes novas. Si fasciculus nexus et interpretationem propriam simul continet, interpretatio sub protocollo manet.
+- PDF et fontes LaTeX generati: custodia in fonte generationis et in probationibus applicetur, non per additionem notarum quae structuram visualem vel compilationem corrumpunt.
 
-## Required release checks
+## Custodia linguae Latinae
 
-For any changed in-scope artifact, verify that public release guards pass; claims correspond to released sources; historical or model-derived ratings are not presented as credentials; and protected traits are not used for suitability scoring. A failure blocks publication pending human correction. See `scripts/check_imperium_protocol.py` for automated baseline checks. Static checks are a defense-in-depth gate, not proof of compliance.
+Documenta propria quae non sunt tantum indices fontium Latine conscribantur secundum [Normam linguae Latinae](LATIN_SAFEGUARDS.md). Verba citationum, nomina propria, syntax programmatica et clavis datorum immutata maneant.
+
+## Probationes ante publicationem
+
+Mutationes recognoscantur ut custodiae publicae praetereant, assertiones e fontibus licitis oriantur, notae historicae non pro gradibus academicis aut dignitatibus habeantur, neque proprietates tutandae ad idoneitatem iudicandam adhibeantur. Defectus publicationem sistit donec correctio ab homine facta sit. `scripts/check_imperium_protocol.py` probationes fundamentales automat. Probatio statica sola conformitatem plenam non demonstrat.
