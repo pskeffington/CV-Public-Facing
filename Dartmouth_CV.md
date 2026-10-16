@@ -1,62 +1,63 @@
+<!-- lingua: la -->
 # Paul A. Skeffington, MS, MPH
 
-Health Policy | Health Services Research | Health Data Science | Rural and Global Health | Applied Economics
+Consilia sanitatis | Investigatio ministeriorum sanitatis | Scientia datorum sanitatis | Salus ruralis et mundialis | Oeconomia applicata
 
 paulskeffington@gmail.com | GitHub: pskeffington
 
-## Education
+## Institutio academica
 
 **Geisel School of Medicine, Dartmouth College**  
-Master of Science in Health Data Science, graduate study, Fall 2026–2028
+Studia graduata ad gradum Magistri Scientiarum in scientia datorum sanitatis, autumnus 2026–2028
 
 **Southern New Hampshire University**  
-Master of Public Health, Global Health Concentration — conferred October 2026
+Magister Salutis Publicae, studia sanitatis mundialis — gradus concessus mense Octobri 2026
 
 **Southern New Hampshire University**  
-Master of Science, Applied Economics, December 2025
+Magister Scientiarum, oeconomia applicata, Decembri 2025
 
 **Southern New Hampshire University**  
-Bachelor of Arts, Mathematics, June 2019
+Baccalaureus Artium, mathematica, Iunio 2019
 
 **Southern New Hampshire University**  
-Bachelor of Science, Information Technology, January 2018
+Baccalaureus Scientiarum, technologia informationis, Ianuario 2018
 
-## Honors and Awards
+## Honores et praemia
 
 **Dartmouth Scholar, Geisel School of Medicine, Dartmouth College**  
-Selected from the entering class for dedication to improving health outcomes.
+E coetu discentium novorum electus ob studium ad meliores eventus sanitatis promovendum.
 
-## Research Interests
+## Argumenta investigationis
 
-Health policy; health services research; rural health; global health; maternal and child health; reproductive and life-course health; cancer outcomes; applied economics; health data science.
+Consilia sanitatis; investigatio ministeriorum sanitatis; salus regionum ruralium; salus mundialis; salus matrum et puerorum; salus reproductiva et per cursum vitae; eventus morborum carcinomatosorum; oeconomia applicata; scientia datorum sanitatis.
 
-## Publications and Manuscripts
+## Publicationes et scripta
 
-**Pre-submission review**  
-Skeffington, P. A. Family economics, financial literacy, and fertility outcomes using NLSY79 data.
+**Sub recognitione ante submissionem**  
+Skeffington, P. A. Oeconomia familiarum, eruditio nummaria et eventus fertilitatis e datis NLSY79.
 
-**In preparation**  
-Skeffington, P. A. Humanitarian WASH, displacement, and health-system disruption.
+**In apparatu**  
+Skeffington, P. A. Aqua, salubritas et munditia humanitaria (WASH), migratio coacta et perturbatio systematum sanitatis.
 
-**Completed applied public-health work; scholarly extension optional**  
-Skeffington, P. A. Rural water, wastewater, and infrastructure health needs.
+**Opus publicae valetudinis applicatae confectum; extensio academica facultativa**  
+Skeffington, P. A. Aqua, aquae residuae et necessitates sanitatis infrastructurae ruralis.
 
-## Selected Research
+## Investigationes selectae
 
-**CART-TRACE — final public synthetic scholarly freeze**  
-Synthetic-first longitudinal CAR T-cell care-trajectory reconstruction using treatment-relative episodes, deterministic care-state intervals, provenance-preserving transformations, explicit missingness behavior, and reproducibility controls. A separate administrative access-gating extension remains developing methods research and is not a clinical eligibility or payer-authorization system.
+**CART-TRACE — fasciculus academicus syntheticus publicus definitive stabilitus**  
+Reconstructio longitudinalis itineris curae post curationem cellularum CAR T, principiis syntheticis primum adhibitis: intervalla temporis ad curationem relata, status curae deterministici, transformationes originem datorum servantes, ratio manifesta datorum absentium et custodiae reproductionis. Extensio separata de condicionibus accessus administrativi adhuc in methodis investigandis versatur; nec systema idoneitatis clinicae nec auctorizationis solutionis est.
 
-## Professional Experience
+## Experientia professionalis
 
 **American Red Cross, Boston Regional Operations**  
-Regional Disaster Dispatcher, 2020-2022
+Dispensator regionalis in calamitatibus, 2020–2022
 
 **Massachusetts Department of Correction**  
-Correction Officer I, 2013-2019
+Custos correctionis I, 2013–2019
 
-**United States military service**  
-Analytical support, 2007-2013
+**Servitium militare Civitatum Foederatarum**  
+Auxilium analyticorum, 2007–2013
 
-## Skills
+## Facultates
 
-Health services research; longitudinal analysis; outcomes modeling; applied economics; epidemiologic study design; R; Python; LaTeX; GIS; reproducible manuscript preparation.
+Investigatio ministeriorum sanitatis; analysis longitudinalis; modelatio eventuum; oeconomia applicata; consilium studiorum epidemiologicorum; R; Python; LaTeX; GIS; praeparatio scriptorum scientificorum iterum producibilium.
