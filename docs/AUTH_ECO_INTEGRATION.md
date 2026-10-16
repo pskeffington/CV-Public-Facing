@@ -1,20 +1,21 @@
-# Auth Eco Integration
+<!-- lingua: la -->
+# Coniunctio systematis Auth Eco
 
-Author: Paul Skeffington, MS, MPH  
-Status: public-renderer integration note  
-Last updated: 2026-05-26
+**Auctor:** Paul Skeffington, MS, MPH  
+**Status:** nota de coniunctione instrumenti publici  
+**Novissime renovata:** 2026-05-26
 
-## Purpose
+## Propositum
 
-This document aligns `CV-Public-Facing` with the broader Auth Eco ecosystem defined in:
+Hoc documentum instrumentum `CV-Public-Facing` cum systemate latiore Auth Eco concordat, prout hic describitur:
 
 ```text
 Portfolio/docs/ECOSYSTEM_ALIGNMENT.md
 ```
 
-`CV-Public-Facing` is the public-safe renderer. It should consume public repository surfaces, public-safe claim objects, and curated overrides without inventing unsupported claims or leaking private-source evidence.
+`CV-Public-Facing` res publice tutas reddit. Ex repositoriis publicis, assertionibus recognitis et exceptionibus curatis sumat, neque novas assertiones sine probatione fingat neque testimonia privata revelet.
 
-## Ecosystem Role
+## Munus in systemate
 
 ```text
 CV private claim controls
@@ -23,7 +24,7 @@ CV private claim controls
   -> role-matching and audit-chain artifacts
 ```
 
-This repository owns the public rendering layer:
+Hoc repositorium partem effectuum publicorum administrat:
 
 ```text
 public CV
@@ -34,7 +35,7 @@ repository scan
 public-safe source ledger
 ```
 
-## Shared Object Flow
+## Ordo rerum communium
 
 ```text
 public repository surface
@@ -46,9 +47,9 @@ public repository surface
   -> rendered CV/status output
 ```
 
-Where private CV evidence is relevant, only public-safe claim wording should cross into this repository.
+Ubi testimonia privata CV pertinent, tantum sententiae publice tutae huc transferri possunt.
 
-## Required Fields for Compatible Objects
+## Campi necessarii ad convenientiam
 
 ```text
 object_id
@@ -66,9 +67,9 @@ use_boundary
 public_safety_boundary
 ```
 
-## Public-Safety Boundaries
+## Fines tutelae publicae
 
-Allowed output boundaries:
+Valores effectuum permissorum:
 
 ```text
 public
@@ -76,22 +77,20 @@ public_safe_summary
 fixture_only
 ```
 
-Inputs or notes that are private, restricted, or redacted should remain in the private CV workspace or in local-only review artifacts.
+Fontes vel notae privatae, restrictae aut occultatae in repositorio CV privato vel in documentis recensionis localibus maneant.
 
-## Drift Rules
+## Leges declinationis
 
-This repository should flag or avoid:
+Hoc instrumentum notet aut vitet:
 
-```text
-public CV claim not present in a public repo surface or public-safe claim object
-repository status older than the rendered public status page
-manuscript status overstated
-benchmark scaffold described as validated comparison
-private source language copied into public output
-role-match output treated as autonomous selection evidence
-```
+- assertionem publicam CV quae neque fonte publico neque re assertionis publice tutae sustentatur;
+- statum repositorii vetustiorem quam relatio publica generata;
+- statum manuscripti plus quam testimonia permittunt celebratum;
+- exemplar probationis preliminare quasi experimentum comparativum validatum descriptum;
+- verba fontium privatorum in effectum publicum translata;
+- mensuram convenientiae muneris pro iudicio autonomo eligendi habitam.
 
-## Current Integration Points
+## Nexus exsecutionis praesentes
 
 ```text
 data/stem_cv_objects.json
@@ -105,16 +104,14 @@ scripts/stem_presence.py
 scripts/stem_paper_evaluator.py
 ```
 
-## Next Alignment Tasks
+## Opera coniunctionis sequentia
 
-```text
-1. Add explicit `public_safety_boundary` fields to generated public objects where missing.
-2. Track source repository README modified dates in public status outputs.
-3. Add claim IDs when a public project summary maps to private CV claim-ledger claims.
-4. Keep README/status language synchronized with Portfolio's cross-repository evidence index.
-5. Add a contract test for Auth Eco required fields.
-```
+1. Campum `public_safety_boundary` rebus publicis generatis addere ubi deest.
+2. Dies mutationum `README` repositoriorum fontium in relationibus publicis servare.
+3. Identificatores assertionum addere cum summa publica operis ad assertiones ex registro CV privato refertur.
+4. Sermonem `README` et status cum indice testimoniorum Portfolio concordare.
+5. Probationem structuralem camporum necessariorum Auth Eco instituere.
 
-## Boundary Statement
+## Declaratio limitum
 
-This repository is public-facing. It should not receive or expose private application exports, service records, screenshots, dashboards, source PDFs, credentials, sensitive system layouts, or private technical identifiers.
+Hoc repositorium tantum ad effectus publicos destinatur. Exportationes candidaturarum privatae, relationes servitii, imagines schermatum, tabulae operativae, PDF fontium privatorum, claves occultae, dispositiones systematum sensibiles et identificatores technici privati non recipiantur.
