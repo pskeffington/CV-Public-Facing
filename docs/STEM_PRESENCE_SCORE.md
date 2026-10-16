@@ -31,7 +31,7 @@ Valor `score` inter 0 et 100 praesentiam STEM aestimat; `drift_score` ex `100 - 
 |---|---:|---|
 | `core_stem` | 75–100 | Argumenta firma disciplinae, methodorum, reproductionis et progressus concreti |
 | `stem_adjacent` | 55–74 | Connexio clara cum STEM, sed una vel plures probationes methodi vel progressus desunt |
-| `mixed_or_transitional` | 35–54 | Quaedam indicia STEM apparent; narratio tamen rudis vel adhuc in aditu esse potest |
+| `mixed_or_transitional` | 35–54 | Quaedam indicia STEM apparent; narratio tamen rudis vel adhuc in primo evolutionis gradu esse potest |
 | `low_stem_presence` | 0–34 | Pauca indicia publica progressus STEM vel magna declinatio a testimoniis |
 
 ## Ratio computationis
@@ -40,10 +40,10 @@ Computatio in vocabulario nititur atque consulto perspicua est. Quattuor partes 
 
 | Pars | Pondus | Exempla notionum |
 |---|---:|---|
-| Disciplina definita | 35 | scientia, ingeniaria, salus publica, biomedicina, discendi machinarium, copia datorum, algorithmus |
+| Disciplina definita | 35 | scientia, ingeniaria, salus publica, biomedicina, disciplina machinarum, copia datorum, algorithmus |
 | Methodi et mensurae | 30 | methodus, analysis, hypothesis, regressio, validatio, mensura, robur |
 | Reproductibilitas | 20 | codex, repositorium, index, descriptio exemplaris, processus, documenta, probatio |
-| Progressus et effectus | 15 | eventus, scriptum submissum, exemplar manuscriptum, recognitio collegarum, figura, opus perfectum, terminus |
+| Progressus et effectus | 15 | eventus, scriptum submissum, exemplar manuscripti, recognitio collegarum, figura, opus perfectum, terminus |
 
 Poena declinationis usque ad 25 puncta additur ubi documenta publica potissimum memoriam personalem, symbola, sermonem promotionis, coniecturas aut tantum locos vacuos sine probatione exhibent.
 
@@ -85,7 +85,7 @@ make stem-object-contract
 make stem-report-contract
 ```
 
-Probationes structurales confirmant res generatas mensuras `stem_presence` validas continere, et tabulam Markdown cum JSON obiectuum congruere.
+Probationes structurales confirmant res generatas mensuras `stem_presence` validas continere et tabulam Markdown cum rebus JSON congruere.
 
 ## Interpretatio et limites
 
