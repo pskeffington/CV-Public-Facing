@@ -1,43 +1,44 @@
-# Public-Safe Job Sync - UNH Adjunct Homeland Security
+<!-- lingua: la -->
+# Concordia publica fasciculi muneris — UNH, disciplina securitatis patriae
 
-## Purpose
+## Propositum
 
-This note documents the public-safe rendering boundary for the UNH Adjunct Faculty, Homeland Security job object.
+Haec nota fines publicationis tutae pro re muneris `UNH Adjunct Faculty, Homeland Security` definit.
 
-## Source boundary
+## Limes fontium
 
-The private application packet remains in `pskeffington/Applications-Jobs`. This public repository should not import private job-packet text, private source notes, sensitive operational details, or unsupported claims.
+Fasciculus privatus candidaturae in `pskeffington/Applications-Jobs` manet. Hoc repositorium publicum textum privatum fasciculi, notas occultas, particularia operationum sensibilium vel assertiones sine probatione non importet.
 
-## Public-safe job object
+## Res muneris publice tuta
 
-- Job object key: `unh-adjunct-homeland-security`
-- Output slug: `unh_adjunct_homeland_security`
-- Role family: homeland security, cybersecurity, and public/private risk instruction.
+- Clavis rei: `unh-adjunct-homeland-security`
+- Nomen effectus: `unh_adjunct_homeland_security`
+- Familia munerum: securitas patriae, securitas informatica, institutio de periculis publicis et privatis.
 
-## Public-safe emphasis
+## Argumenta permissa
 
-The public renderer may emphasize:
+Instrumentum publicum haec potissimum ostendere potest:
 
-- cybersecurity and information assurance foundations;
-- public/private risk management;
-- emergency management and continuity;
-- technical infrastructure literacy;
-- public-health and community resilience systems;
-- source-ledger and claim-boundary discipline;
-- legal and ethical judgment;
-- teaching readiness.
+- fundamenta securitatis informaticae et tutelae informationis;
+- moderationem periculorum in rebus publicis et privatis;
+- administrationem rerum urgentium et continuationem operum;
+- scientiam infrastructurae technicae;
+- systemata salutis publicae et firmitatis communitatum;
+- disciplinam indicum fontium et finium assertionum;
+- iudicium iuridicum atque ethicum;
+- praeparationem ad docendum.
 
-## Exclusions
+## Res excludendae
 
-The public renderer must exclude:
+Instrumentum publicum excludat:
 
-- private job packet language;
-- sensitive operational details;
-- active clearance claims unless verified;
-- current federal authority unless verified;
-- specific sensitive systems, locations, or collection methods;
-- unsupported classroom-of-record teaching claims.
+- sermonem fasciculi candidaturae privati;
+- particularia operativa sensitiva;
+- assertiones de potestate accessus ad secreta, nisi probatae sint;
+- assertiones de auctoritate foederali praesenti, nisi probatae sint;
+- nomina systematum, locorum aut methodorum collectionis sensibilia;
+- assertiones de munere docentis principali sine testimonio.
 
-## Review note
+## Nota recognitionis
 
-This public-safe object is a rendering hint only. The private Applications-Jobs package remains the application source of truth, and the private CV repository remains the source of verified claim controls.
+Haec res publica tantum indicium est de modo praesentandi. Fasciculus privatus `Applications-Jobs` manet fons candidaturae principalis; repositorium privatum CV manet fons assertionum verificate probatarum.
