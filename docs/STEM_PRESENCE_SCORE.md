@@ -1,12 +1,13 @@
-# STEM Presence Score
+<!-- lingua: la -->
+# Nota praesentiae disciplinarum STEM
 
-The STEM Presence Score is a deterministic, auditable metric for estimating how closely a paper, project, repository, or CV object remains aligned with core STEM progress.
+Nota `STEM Presence Score` est mensura deterministica et examinabilis quae aestimat quantum scriptum, opus, repositorium aut res curriculi vitae cum progressu scientiae, technologiae, ingeniariae et mathematicae (STEM) congruat.
 
-The score is designed for public-facing portfolio curation. It does not judge scientific truth, peer-review quality, or impact. It measures whether the available public surface contains concrete STEM signals such as domain specificity, methods, reproducibility, validation, measurement, and output progress.
+Haec nota ad ordinanda testimonia publici indicis operum destinatur. Veritatem scientificam, qualitatem recognitionis academicorum aut effectum socialem non iudicat. Solum indicat utrum documentum publicum argumenta STEM concreta praebeat: disciplinam definitam, methodos, reproductionem, validationem, mensuras atque effectus traditos.
 
-## Output fields
+## Campi effectuum
 
-Each scored object receives a `stem_presence` object:
+Quaeque res aestimata obiectum `stem_presence` accipit:
 
 ```json
 {
@@ -22,61 +23,61 @@ Each scored object receives a `stem_presence` object:
 }
 ```
 
-`score` is a 0-100 estimate of STEM presence. `drift_score` is `100 - score` and represents drift from core STEM progress.
+Valor `score` inter 0 et 100 praesentiam STEM aestimat; `drift_score` ex `100 - score` computatur et declinationem a progressu disciplinarum indicat.
 
-## Bands
+## Classes
 
-| Band | Score range | Meaning |
+| Classis | Intervallum | Interpretatio |
 |---|---:|---|
-| `core_stem` | 75-100 | Strong evidence of STEM domain, methods, reproducibility, and concrete progress. |
-| `stem_adjacent` | 55-74 | Clear STEM connection but missing one or more strong method/reproducibility/progress signals. |
-| `mixed_or_transitional` | 35-54 | Some STEM language appears, but the surface may still be narrative, intake-stage, or underdeveloped. |
-| `low_stem_presence` | 0-34 | Little public evidence of STEM progress or substantial drift language. |
+| `core_stem` | 75–100 | Argumenta firma disciplinae, methodorum, reproductionis et progressus concreti |
+| `stem_adjacent` | 55–74 | Connexio clara cum STEM, sed una vel plures probationes methodi vel progressus desunt |
+| `mixed_or_transitional` | 35–54 | Quaedam indicia STEM apparent; narratio tamen rudis vel adhuc in aditu esse potest |
+| `low_stem_presence` | 0–34 | Pauca indicia publica progressus STEM vel magna declinatio a testimoniis |
 
-## Scoring model
+## Ratio computationis
 
-The scorer is vocabulary based and intentionally transparent. It gives weighted credit for four dimensions:
+Computatio in vocabulario nititur atque consulto perspicua est. Quattuor partes ponderantur:
 
-| Dimension | Weight | Examples |
+| Pars | Pondus | Exempla notionum |
 |---|---:|---|
-| Domain specificity | 35 | science, engineering, public health, biomedical, machine learning, dataset, algorithm |
-| Methods and measurement | 30 | method, analysis, hypothesis, regression, validation, metric, robustness |
-| Reproducibility | 20 | code, repository, manifest, model card, workflow, documentation, test |
-| Progress/output | 15 | result, submitted, manuscript, peer review, figure, implemented, milestone |
+| Disciplina definita | 35 | scientia, ingeniaria, salus publica, biomedicina, discendi machinarium, copia datorum, algorithmus |
+| Methodi et mensurae | 30 | methodus, analysis, hypothesis, regressio, validatio, mensura, robur |
+| Reproductibilitas | 20 | codex, repositorium, index, descriptio exemplaris, processus, documenta, probatio |
+| Progressus et effectus | 15 | eventus, scriptum submissum, exemplar manuscriptum, recognitio collegarum, figura, opus perfectum, terminus |
 
-A drift penalty of up to 25 points is applied when the public surface is dominated by non-evidence-bearing terms such as personal memoir, symbolic/esoteric framing, promotional language, speculative framing, or portfolio-only placeholders.
+Poena declinationis usque ad 25 puncta additur ubi documenta publica potissimum memoriam personalem, symbola, sermonem promotionis, coniecturas aut tantum locos vacuos sine probatione exhibent.
 
-## Integration points
+## Instrumenta coniuncta
 
-The metric is implemented in:
+Mensura in hoc codice exstat:
 
 ```text
 scripts/stem_presence.py
 ```
 
-It can score a paper or extracted public surface directly:
+Scriptum vel documentum publicum separatim examinari potest:
 
 ```bash
 python3 scripts/stem_presence.py --pretty paper.md
 cat paper.txt | python3 scripts/stem_presence.py --pretty
 ```
 
-The living CV pipeline integrates the scorer through:
+Ratio curriculi vitae his instrumentis utitur:
 
 ```text
 scripts/stem_cv_curator.py
 scripts/write_stem_presence_report.py
 ```
 
-The generated dashboard is:
+Relatio generata:
 
 ```text
 research/stem_presence_report.md
 ```
 
-## Local checks
+## Probationes locales
 
-Use these Make targets from the repository root:
+In radice repositorii exsequere:
 
 ```bash
 make stem-presence-check
@@ -84,8 +85,8 @@ make stem-object-contract
 make stem-report-contract
 ```
 
-The contract checks confirm that generated project objects contain valid `stem_presence` metrics and that the Markdown dashboard matches the generated object JSON.
+Probationes structurales confirmant res generatas mensuras `stem_presence` validas continere, et tabulam Markdown cum JSON obiectuum congruere.
 
-## Interpretation
+## Interpretatio et limites
 
-Use the score as a triage signal. A low score usually means that the public README/status surface needs more methods, data, validation, or reproducibility detail. A high score means the public-facing project description is more likely to support credible STEM CV claims.
+Haec mensura signum ad prioritatem recognitionis constituendam est, non iudicium personae. Nota humilis saepe significat documentum `README` vel statum publicum plura de methodis, datis, validatione aut reproductione requirere. Nota alta significat narrationem publicam argumentis technicis ad curriculum vitae STEM facilius fulciri posse. Nulla nota scientiae veritatem vel aptitudinem hominis per se probat.
