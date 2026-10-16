@@ -1,14 +1,14 @@
 <!-- lingua: la -->
 # Verificatio citationum STEM
 
-Instrumentum verificationis citationum STEM probationes integritatis fontium et signa publicationis scientificae rationi STEM addit.
+Instrumentum verificationis citationum STEM indicia integritatis fontium et signa publicationis scientificae rationi aestimationis STEM addit.
 
 Duas quaestiones distinctas examinat:
 
 1. Utrum scriptum vel documentum operis submissum identificatores citationum verificabiles habeat.
 2. Utrum auctor scriptorum vestigia publicationis et citationum extra hunc fasciculum observabilia habeat.
 
-Instrumentum consulto cautum est. Ratio sine nexu externo identificatores extrahit et notas tantum ex ipsis identificatoribus computat. Ratio cum nexu externo expresse petitur atque fontes academicos publicos adit.
+Instrumentum consulto cautum est. Ratio sine nexu externo identificatores extrahit et notas tantum ex ipsis identificatoribus computat. Ratio quae fontes externos adit tantum rogatu expresso exsequitur.
 
 ## Instrumentum
 
@@ -16,7 +16,7 @@ Instrumentum consulto cautum est. Ratio sine nexu externo identificatores extrah
 scripts/stem_citation_verifier.py
 ```
 
-## Extractio citationum
+## Extractio identificatorum citationum
 
 | Genus | Exemplum |
 |---|---|
@@ -45,7 +45,7 @@ python3 scripts/stem_citation_verifier.py --pretty --live --allow-url-host examp
 python3 scripts/stem_citation_verifier.py --pretty --live --block-url-host private.example paper.md
 ```
 
-Fontes publici exquiri possunt:
+Fontes publici interrogari possunt:
 
 | Signum | Fons |
 |---|---|
@@ -68,7 +68,7 @@ python3 scripts/stem_citation_verifier.py --live --block-url-host private.exampl
 
 ## Origo cuiusque citationis
 
-Quaeque citatio extracta haec indicia inspectionis servat:
+Quaeque citatio reperta haec indicia inspectionis servat:
 
 ```json
 {
@@ -152,9 +152,9 @@ Haec nota indicium publicationis tantum est; neque veritatem scientificam neque 
 
 | Classis | Interpretatio |
 |---|---|
-| `strong_publishing_signal` | Identifier academicus verificatus vel argumenta citationum multa |
-| `moderate_publishing_signal` | Identifier verificabilis vel signa citationum mediocria |
-| `weak_or_unverified_signal` | Identifier repertus, sed verificatio externa deest aut tenuis est |
+| `strong_publishing_signal` | Identificator academicus verificatus vel argumenta citationum multa |
+| `moderate_publishing_signal` | Identificator verificabilis vel signa citationum mediocria |
+| `weak_or_unverified_signal` | Identificator repertus, sed verificatio externa deest aut tenuis est |
 | `low_publishing_signal` | Pauca testimonia citationum |
 
 ## Probatio localis
@@ -163,7 +163,7 @@ Haec nota indicium publicationis tantum est; neque veritatem scientificam neque 
 make citation-check
 ```
 
-Probatio sine nexu externo tuto currit. Extractionem DOI, arXiv, PMID et URL, conservationem originis et camporum metadata, regulas admissionis URL et statum explicitum `unverified` indiciorum auctoris examinat.
+Probatio sine nexu externo tuto exsequitur. Extractionem DOI, arXiv, PMID et URL, conservationem originis et camporum metadata, regulas admissionis URL et statum explicitum `unverified` indiciorum auctoris examinat.
 
 ## Coniunctio cum aestimatione STEM
 
