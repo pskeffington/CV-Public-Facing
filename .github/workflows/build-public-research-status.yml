@@ -1,6 +1,18 @@
 name: Build Public CV Package
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cv/**'
+      - 'research/**'
+      - 'data/**'
+      - 'scripts/**'
+      - 'docs/**'
+      - 'Makefile'
+      - 'README.md'
+      - 'PUBLIC_MANIFEST.md'
+      - '.github/workflows/build-public-research-status.yml'
   workflow_dispatch:
     inputs:
       job_object:
@@ -44,7 +56,7 @@ concurrency:
 jobs:
   build-public-package:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch' || github.actor != 'github-actions[bot]' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       GH_TOKEN: ${{ github.token }}
 
@@ -61,7 +73,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended lmodern
+          sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended lmodern poppler-utils
 
       - name: Run public manifest, visibility, and release checks
         run: |
@@ -81,6 +93,24 @@ jobs:
         run: |
           set -euo pipefail
           make job-cv-package JOB_OBJECT="$JOB_OBJECT"
+
+      - name: Check full public profile content is preserved
+        run: |
+          set -euo pipefail
+          profile="documents/Paul_A_Skeffington_One_Page_Profile_Public.pdf"
+          test -s "$profile"
+          pages="$(pdfinfo "$profile" | awk '/^Pages:/ {print $2}')"
+          test "$pages" -ge 1 || exit 1
+          echo "Public profile pages: $pages; retain experience rather than truncate to one page"
+          pdftotext -layout "$profile" /tmp/public-profile.txt
+          for phrase in "IT Business Ownership" "Independent Research Experience" "Research" "N0 Mercy Mods" "Arch Notebook" "Selected Methods and Technical Skills"; do
+            grep -Fq "$phrase" /tmp/public-profile.txt || { echo "Public profile lost content: $phrase"; exit 1; }
+          done
+          if grep -Fq "CART-TRACE" /tmp/public-profile.txt; then
+            echo "Stale flagship CART-TRACE must not appear in curated public profile"
+            exit 1
+          fi
+          echo "PUBLIC PROFILE CONTENT RETENTION PASS"
 
       - name: Re-run final public checks
         run: |
@@ -130,7 +160,7 @@ jobs:
   publish-verified-pdfs:
     name: Publicare documenta PDF probata
     needs: build-public-package
-    if: ${{ github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.job_object == 'neutral') }}
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.job_object == 'neutral') }}
     runs-on: ubuntu-latest
     permissions:
       actions: read

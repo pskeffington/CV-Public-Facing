@@ -1,11 +1,14 @@
 {
-  "generated_on_note": "Generated CV objects are rebuilt from the public allowlist below plus optional recursive public-repository scanning only when explicitly enabled. Public-release filtering is enforced before generated outputs are written.",
+  "generated_on_note": "November 2026: retired CART-TRACE from current public CV intake; historical source repository preserved separately.",
   "scan": {
     "owner": "pskeffington",
     "include_public_repos": true,
     "include_private_repos": false,
     "allow_recursive_intake": false,
-    "exclude_repos": ["CV-Public-Facing", "CV"],
+    "exclude_repos": [
+      "CV-Public-Facing",
+      "CV"
+    ],
     "blocked_repo_hashes": [
       "61bf1598863c4f9fadf23990885511f2cb02f503a8f53774a6aa2de41d7db608",
       "76c4bfe8a912b35346d0674a3b328bbaadf2e152b8c487cee5ed32d0a32a1a0a",
@@ -35,18 +38,6 @@
   },
   "repos": [
     {
-      "key": "cart-trace",
-      "repo": "pskeffington/CART-TRACE",
-      "title": "Longitudinal CAR T-cell care-trajectory reconstruction",
-      "status": "Publication ready / final public scholarly freeze / synthetic methodological validation",
-      "summary": "Synthetic-first translational health data science framework for reproducibly reconstructing 30-day post-infusion hospital level-of-care trajectories, utilization measures, provenance, missingness, and uncertainty following CAR T-cell therapy.",
-      "needs": "Preserve the frozen public capstone package. Keep the administrative access-gating extension separately labeled as developing synthetic methods research and do not promote it as clinical eligibility, payer authorization, or treatment-readiness capability.",
-      "cv_section": "biomedical_data",
-      "priority": 0,
-      "public_release": "public",
-      "source_files": ["README.md", "THESIS.md", "ROADMAP.md", "docs/scholarly/final_public_scholarly_freeze.md"]
-    },
-    {
       "key": "machine-learning-best-practices",
       "repo": "pskeffington/Best-Practices-Git",
       "title": "Machine-learning publication best practices",
@@ -55,7 +46,9 @@
       "needs": "Expand review-gate templates, source-registry examples, citation-verification notes, and lightweight structure checks.",
       "cv_section": "methods",
       "public_release": "public",
-      "source_files": ["README.md"]
+      "source_files": [
+        "README.md"
+      ]
     },
     {
       "key": "gaza-wash",
@@ -66,7 +59,10 @@
       "needs": "Maintain dated source manifests, explicit limitations, and separation of indexed inputs from interpretive claims.",
       "cv_section": "current",
       "public_release": "public",
-      "source_files": ["README.md", "docs/data_inventory.md"]
+      "source_files": [
+        "README.md",
+        "docs/data_inventory.md"
+      ]
     },
     {
       "key": "haiti-nippes",
@@ -77,7 +73,9 @@
       "needs": "Continue source verification, uncertainty documentation, and public-safe methods development without operational field claims.",
       "cv_section": "current",
       "public_release": "public",
-      "source_files": ["README.md"]
+      "source_files": [
+        "README.md"
+      ]
     },
     {
       "key": "ecg-denoising",
@@ -89,7 +87,11 @@
       "cv_section": "biomedical_data",
       "priority": 20,
       "public_release": "public",
-      "source_files": ["README.md", "docs/BENCHMARK_FREEZE_PROTOCOL.md", "scripts/run_nstdb_real_benchmark.py"]
+      "source_files": [
+        "README.md",
+        "docs/BENCHMARK_FREEZE_PROTOCOL.md",
+        "scripts/run_nstdb_real_benchmark.py"
+      ]
     },
     {
       "key": "pet-radiomics",
@@ -100,7 +102,11 @@
       "needs": "Finalize public dataset selection and perturbation protocol; keep robustness-performance and clinical claims gated on validated analysis.",
       "cv_section": "methods",
       "public_release": "public",
-      "source_files": ["README.md", "docs/analysis_plan.md", "docs/data_sources.md"]
+      "source_files": [
+        "README.md",
+        "docs/analysis_plan.md",
+        "docs/data_sources.md"
+      ]
     },
     {
       "key": "cancer-eol",
@@ -111,7 +117,9 @@
       "needs": "Create auditable source manifests, county-year construction protocol, place-of-death variable map, suppression review, and reproducibility checks before manuscript-weight findings.",
       "cv_section": "methods",
       "public_release": "public",
-      "source_files": ["README.md"]
+      "source_files": [
+        "README.md"
+      ]
     },
     {
       "key": "wash-systems",
@@ -122,7 +130,9 @@
       "needs": "Continue source verification, reproducible indicator development, and clear separation between research observations and operational infrastructure decisions.",
       "cv_section": "current",
       "public_release": "public",
-      "source_files": ["README.md"]
+      "source_files": [
+        "README.md"
+      ]
     },
     {
       "key": "st-bonaventure-archive",
@@ -133,7 +143,25 @@
       "needs": "Continue documentary provenance review and keep visible-label transcription distinct from relic identity, authenticity, or ecclesiastical determination.",
       "cv_section": "archive",
       "public_release": "public",
-      "source_files": ["README.md"]
+      "source_files": [
+        "README.md"
+      ]
+    },
+    {
+      "key": "arch-notebook",
+      "repo": "pskeffington/arch_notebook",
+      "title": "Arch Notebook: Rust desktop relationship analysis",
+      "status": "Instrumentum operans; facultates novae adhuc excoluntur",
+      "summary": "Instrumentum computatrale Rust ad nexus inter res explorandos: diagrammata relationum, capturas SQLite tantum legendas, comparationes mutationum, notas cum fontibus coniunctas, et exportationes CSV/TSV atque GraphML.",
+      "needs": "Examinentur exempla reproductibilia, ratio compilationis, aditus publicus et limitationes ante novam editionem CV; nulla certificatio vel receptio mercatoria asseratur.",
+      "cv_section": "methods",
+      "priority": 30,
+      "public_release": "public",
+      "source_files": [
+        "README.md",
+        "Cargo.toml",
+        "sample_connections.sql"
+      ]
     }
   ]
 }

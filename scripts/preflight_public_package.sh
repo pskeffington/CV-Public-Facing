@@ -100,15 +100,19 @@ require_contains "cv/one_page_profile_public.tex" "Selected Methods and Technica
 # of truth consumed by the renderer. Generated surfaces may normalize that
 # state into broader maturity labels and therefore must not be required to
 # preserve every exact status phrase.
-require_contains "data/pipeline_repos.json" "final public scholarly freeze"
-require_contains "data/pipeline_repos.json" "administrative access-gating extension"
-require_contains "cv/one_page_profile_public.tex" "CART-TRACE"
+# Current flagship intake excludes retired CART-TRACE; archived source remains in GitHub history.
+require_contains "data/pipeline_repos.json" "Arch Notebook: Rust desktop relationship analysis"
+require_contains "cv/one_page_profile_public.tex" "Arch Notebook"
+# CART-TRACE remains a historical research record, but must not re-enter current selections.
+if grep -Fq "CART-TRACE" data/pipeline_repos.json cv/one_page_profile_public.tex cv/current_projects_public.tex research/generated_project_board.tex; then
+  echo "Stale CART-TRACE found in a current selected-project surface" >&2
+  status=1
+fi
 require_contains "cv/one_page_profile_public.tex" "Pre-submission manuscript review"
 require_contains "cv/publication_pipeline_public.tex" "Pre-submission review"
 
 # Generated public objects must still contain the current public-only projects.
 for project in \
-  "Longitudinal CAR T-cell care-trajectory reconstruction" \
   "Machine-learning publication best practices" \
   "Humanitarian WASH and health-system disruption" \
   "Haiti Nippes public-health systems research" \

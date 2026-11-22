@@ -109,3 +109,23 @@ scripts/check_public_release_guard.py
 ## Limes publicus
 
 Hoc repositorium publicum est. Fasciculos candidaturarum privatos, nomina operum sensibilium, titulos familiarum restrictarum, secreta, vias privatas et testimonia fontium privatorum non recipiat. In dubio, res e instrumento publico excludatur et tantum in fonte privato vel fasciculo candidaturae privato servetur.
+
+## Recognitio nova — 2026-11-22
+
+- Repositorium publicum `pskeffington/arch_notebook` indicibus fontium admissorum additum est; documentum `README.md` et codex Rust ac SQLite probationem facultatum describunt.
+- Novae descriptiones Rust et SQL tantum ad facultates in fonte publico inspectas referuntur. Facultates futuras vel iudicium externum de fructu non affirmant.
+- Relationes privatae, experimenta localia nondum comprobata, atque condiciones instrumentorum adhuc imperfectorum ab hoc instrumento publico excluduntur.
+- **Status: recognitio pendet.** Exsecutiones `make safety-surface-check`, `make stem-cv`, `make public-package`, examen PDF et inspectio Latinitatis ante editionem necessariae sunt.
+- Nullus fasciculus PDF nec nova editio publica hac sola mutatione comprobata est.
+
+## Comprobatio paginarum et propositi productionis — 2026-11-22
+
+- Prima compilatio fasciculi publici in ramo recognitionis perfecta est; officium divulgationis documentorum a probatione `pull_request` recte exclusum est.
+- Inspectio visiva ostendit exemplar `One_Page_Profile_Public.pdf`, quamquam unius paginae nomine inscriptum, **duas paginas** continuisse. Hic defectus typographicus ab probationibus fontium antea non detectus est.
+- Fons `cv/one_page_profile_public.tex` ad brevem expositionem operum publicorum, scientiae Rust et SQLite, educationis ac peritiae professionalis redactum est; indicia privatorum operum non sunt inclusa.
+- Novus gradus in `.github/workflows/build-public-research-status.yml` post compilationem requirit **unam** paginam PDF; si duae vel plures paginae reperiuntur, exsecutio deficit.
+- **Status: probatione pendet.** Nova compilatio et inspectio visiva requiruntur. Editio publica, tag et translatio ad situm publicum nondum permissae sunt.
+
+## Corrigenda: opera antiqua, textus professionales — 2026-11-22
+
+CART-TRACE e indice operum nunc selectarum remotum est. Repositorium historicum manet, sed in nova editione curriculi vitae tamquam opus praecipuum non proponitur. Arch Notebook in eius locum ponitur. Exemplar publicum ad priorem descriptionem experientiae laboris, administrationis societatis et investigationis revocatum est; finis unius paginae **non** deletionem munerum legitimorum efficere debet. Custodia novissima integritatem textus experientiae in PDF potius quam numerum paginarum examinat. Compilatio novi fasciculi et recognitio imaginum adhuc necessariae sunt.

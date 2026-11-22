@@ -59,3 +59,11 @@ Proximus cursus distributionis:
 - indicem operum in curriculo publico recensere ubi status maturuit aut mutatus est;
 - argumenta NLSY79, WASH et infrastructurae ruralis, methodorum biomedicarum atque gubernationis probationum distincta tenere, una tamen persona scientifica perspicua servata;
 - sermonem publicum academicum, communitatibus utilem, in investigatione fundatum atque finium suorum conscium servare.
+
+## Concordia probationum — 2026-11-22
+
+- Repositorium publicum Arch Notebook, cuius codex Rust et descriptiones SQLite legi possunt, in indice fontium admissorum nunc continetur.
+- Facultates in documento publico descriptae ab officiis privatis et experimentis nondum verificatis separantur.
+- Fontes LaTeX de artibus programmatoriis renovati sunt; transitus totius sermonis ad Latinitatem adhuc examinatur.
+- Status editionis: **sub recognitione**. Comprobationes indicis, custodiae publicae, compilationis PDF atque inspectio visiva nondum peractae sunt.
+- Editio publica et distributio documentorum ex hoc ramo sine approbatione fieri non debent.
