@@ -125,3 +125,7 @@ Hoc repositorium publicum est. Fasciculos candidaturarum privatos, nomina operum
 - Fons `cv/one_page_profile_public.tex` ad brevem expositionem operum publicorum, scientiae Rust et SQLite, educationis ac peritiae professionalis redactum est; indicia privatorum operum non sunt inclusa.
 - Novus gradus in `.github/workflows/build-public-research-status.yml` post compilationem requirit **unam** paginam PDF; si duae vel plures paginae reperiuntur, exsecutio deficit.
 - **Status: probatione pendet.** Nova compilatio et inspectio visiva requiruntur. Editio publica, tag et translatio ad situm publicum nondum permissae sunt.
+
+## Corrigenda: opera antiqua, textus professionales — 2026-11-22
+
+CART-TRACE e indice operum nunc selectarum remotum est. Repositorium historicum manet, sed in nova editione curriculi vitae tamquam opus praecipuum non proponitur. Arch Notebook in eius locum ponitur. Exemplar publicum ad priorem descriptionem experientiae laboris, administrationis societatis et investigationis revocatum est; finis unius paginae **non** deletionem munerum legitimorum efficere debet. Custodia novissima integritatem textus experientiae in PDF potius quam numerum paginarum examinat. Compilatio novi fasciculi et recognitio imaginum adhuc necessariae sunt.
