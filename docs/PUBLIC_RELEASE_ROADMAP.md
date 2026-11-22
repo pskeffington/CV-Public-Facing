@@ -117,3 +117,11 @@ Hoc repositorium publicum est. Fasciculos candidaturarum privatos, nomina operum
 - Relationes privatae, experimenta localia nondum comprobata, atque condiciones instrumentorum adhuc imperfectorum ab hoc instrumento publico excluduntur.
 - **Status: recognitio pendet.** Exsecutiones `make safety-surface-check`, `make stem-cv`, `make public-package`, examen PDF et inspectio Latinitatis ante editionem necessariae sunt.
 - Nullus fasciculus PDF nec nova editio publica hac sola mutatione comprobata est.
+
+## Comprobatio paginarum et propositi productionis — 2026-11-22
+
+- Prima compilatio fasciculi publici in ramo recognitionis perfecta est; officium divulgationis documentorum a probatione `pull_request` recte exclusum est.
+- Inspectio visiva ostendit exemplar `One_Page_Profile_Public.pdf`, quamquam unius paginae nomine inscriptum, **duas paginas** continuisse. Hic defectus typographicus ab probationibus fontium antea non detectus est.
+- Fons `cv/one_page_profile_public.tex` ad brevem expositionem operum publicorum, scientiae Rust et SQLite, educationis ac peritiae professionalis redactum est; indicia privatorum operum non sunt inclusa.
+- Novus gradus in `.github/workflows/build-public-research-status.yml` post compilationem requirit **unam** paginam PDF; si duae vel plures paginae reperiuntur, exsecutio deficit.
+- **Status: probatione pendet.** Nova compilatio et inspectio visiva requiruntur. Editio publica, tag et translatio ad situm publicum nondum permissae sunt.
