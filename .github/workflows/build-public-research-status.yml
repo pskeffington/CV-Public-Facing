@@ -1,6 +1,18 @@
 name: Build Public CV Package
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cv/**'
+      - 'research/**'
+      - 'data/**'
+      - 'scripts/**'
+      - 'docs/**'
+      - 'Makefile'
+      - 'README.md'
+      - 'PUBLIC_MANIFEST.md'
+      - '.github/workflows/build-public-research-status.yml'
   workflow_dispatch:
     inputs:
       job_object:
@@ -44,7 +56,7 @@ concurrency:
 jobs:
   build-public-package:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch' || github.actor != 'github-actions[bot]' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       GH_TOKEN: ${{ github.token }}
 
@@ -130,7 +142,7 @@ jobs:
   publish-verified-pdfs:
     name: Publicare documenta PDF probata
     needs: build-public-package
-    if: ${{ github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.job_object == 'neutral') }}
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.job_object == 'neutral') }}
     runs-on: ubuntu-latest
     permissions:
       actions: read
