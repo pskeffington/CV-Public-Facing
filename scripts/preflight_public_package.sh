@@ -103,7 +103,11 @@ require_contains "cv/one_page_profile_public.tex" "Selected Methods and Technica
 # Current flagship intake excludes retired CART-TRACE; archived source remains in GitHub history.
 require_contains "data/pipeline_repos.json" "Arch Notebook: Rust desktop relationship analysis"
 require_contains "cv/one_page_profile_public.tex" "Arch Notebook"
-require_absent_in_sources "CART-TRACE"
+# CART-TRACE remains a historical research record, but must not re-enter current selections.
+if grep -Fq "CART-TRACE" data/pipeline_repos.json cv/one_page_profile_public.tex cv/current_projects_public.tex research/generated_project_board.tex; then
+  echo "Stale CART-TRACE found in a current selected-project surface" >&2
+  status=1
+fi
 require_contains "cv/one_page_profile_public.tex" "Pre-submission manuscript review"
 require_contains "cv/publication_pipeline_public.tex" "Pre-submission review"
 
