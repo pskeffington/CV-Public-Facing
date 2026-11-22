@@ -109,3 +109,11 @@ scripts/check_public_release_guard.py
 ## Limes publicus
 
 Hoc repositorium publicum est. Fasciculos candidaturarum privatos, nomina operum sensibilium, titulos familiarum restrictarum, secreta, vias privatas et testimonia fontium privatorum non recipiat. In dubio, res e instrumento publico excludatur et tantum in fonte privato vel fasciculo candidaturae privato servetur.
+
+## Recognitio nova — 2026-11-22
+
+- Repositorium publicum `pskeffington/arch_notebook` indicibus fontium admissorum additum est; documentum `README.md` et codex Rust ac SQLite probationem facultatum describunt.
+- Novae descriptiones Rust et SQL tantum ad facultates in fonte publico inspectas referuntur. Facultates futuras vel iudicium externum de fructu non affirmant.
+- Relationes privatae, experimenta localia nondum comprobata, atque condiciones instrumentorum adhuc imperfectorum ab hoc instrumento publico excluduntur.
+- **Status: recognitio pendet.** Exsecutiones `make safety-surface-check`, `make stem-cv`, `make public-package`, examen PDF et inspectio Latinitatis ante editionem necessariae sunt.
+- Nullus fasciculus PDF nec nova editio publica hac sola mutatione comprobata est.
