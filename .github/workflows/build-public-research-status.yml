@@ -28,6 +28,16 @@ on:
           - valo-health-staff-data-scientist
           - unh-adjunct-homeland-security
           - cdc-foundation-data-modernization-senior-advisor
+      publish_verified_pdfs:
+        description: 'Publish reviewed neutral PDFs for an explicitly approved main commit'
+        required: true
+        default: false
+        type: boolean
+      release_commit:
+        description: 'Full approved main commit SHA; required only when publishing'
+        required: false
+        default: ''
+        type: string
   repository_dispatch:
     types:
       - living-cv-source-updated
@@ -63,6 +73,18 @@ jobs:
     steps:
       - name: Check out public repository
         uses: actions/checkout@v4
+
+      - name: Validate explicit publication request
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_verified_pdfs }}
+        env:
+          RELEASE_COMMIT: ${{ inputs.release_commit }}
+          JOB_OBJECT: ${{ inputs.job_object }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_REF" == "refs/heads/main" ]] || { echo "Publication requires main."; exit 1; }
+          [[ "$JOB_OBJECT" == "neutral" ]] || { echo "Publication requires the neutral package."; exit 1; }
+          [[ "$RELEASE_COMMIT" =~ ^[0-9a-f]{40}$ && "$RELEASE_COMMIT" == "$GITHUB_SHA" ]] || { echo "Publication requires the approved full commit SHA."; exit 1; }
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -119,11 +141,14 @@ jobs:
           make public-manifest-check
           make public-visibility-check
           make safety-surface-check
-          make stem-object-contract
-          make stem-report-contract
-          make preflight
+          # Inspect the sources that produced the PDFs. Do not regenerate them
+          # after rendering and then upload different render-source evidence.
+          python3 scripts/check_stem_object_contract.py
+          python3 scripts/check_stem_presence_report.py
+          bash scripts/preflight_public_package.sh
 
       - name: Upload LinkedIn-ready Academic CV
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.job_object == 'neutral' && inputs.publish_verified_pdfs && inputs.release_commit == github.sha }}
         uses: actions/upload-artifact@v4
         with:
           name: linkedin-academic-cv-${{ inputs.job_object || 'neutral' }}
@@ -131,6 +156,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload full public CV package artifact
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.job_object == 'neutral' && inputs.publish_verified_pdfs && inputs.release_commit == github.sha }}
         uses: actions/upload-artifact@v4
         with:
           name: public-cv-package-${{ inputs.job_object || 'neutral' }}
@@ -138,6 +164,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload selected job CV package artifact
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.job_object == 'neutral' && inputs.publish_verified_pdfs && inputs.release_commit == github.sha }}
         uses: actions/upload-artifact@v4
         with:
           name: selected-job-cv-package-${{ inputs.job_object || 'neutral' }}
@@ -160,7 +187,7 @@ jobs:
   publish-verified-pdfs:
     name: Publicare documenta PDF probata
     needs: build-public-package
-    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.job_object == 'neutral') }}
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.job_object == 'neutral' && inputs.publish_verified_pdfs && inputs.release_commit == github.sha }}
     runs-on: ubuntu-latest
     permissions:
       actions: read

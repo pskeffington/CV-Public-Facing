@@ -11,7 +11,8 @@ public allowlist update
   -> release-control checks
   -> make public-package
   -> public-safe CV, profile, upload CV, and research-status PDFs
-  -> workflow artifacts
+  -> validation logs and public render sources
+  -> PDF artifacts only after explicit publication approval
 ```
 
 Fasciculus ad munus manu delectum eadem via publice tuta componitur:
@@ -22,7 +23,7 @@ manual workflow_dispatch
   -> make job-cv-package JOB_OBJECT=<selected>
   -> public package PDFs
   -> selected job package brief and manifest
-  -> workflow artifacts
+  -> local inspection or explicitly authorized neutral publication
 ```
 
 ## Fons principalis
@@ -103,7 +104,9 @@ make stem-report-contract
 
 Ratio per `workflow_dispatch` manuale cum indice `job_object`, per nuntios `repository_dispatch` e fontibus approbatis et per mutationes fontium huius repositorii incipit.
 
-Hic processus repositorium solum legit; documenta PDF fabricat et effectus in GitHub Actions servat. Res generatas ad ramum `main` non mittit, ne circuitus generationis repetatur.
+Hic processus repositorium solum legit et documenta PDF fabricat. Probationes ordinariae solum registra probationum et fontes publicos generatos servant; neque documenta PDF neque fasciculi munerum publicantur. Res generatas ad ramum `main` non mittit, ne circuitus generationis repetatur.
+
+Divulgatio separata requirit `workflow_dispatch` in `main`, `job_object=neutral`, `publish_verified_pdfs=true` et `release_commit` aequalem pleno commit exsecutionis. Valor consensus per praedefinitionem falsus est. Rami recognitionis, mutationes ordinariae et nuntii fontium documenta PDF sponte non publicant.
 
 Electiones manuales hodiernae:
 
@@ -119,7 +122,7 @@ cdc-foundation-data-modernization-senior-advisor
 
 Res CDC Foundation sub titulo publico `CDC Foundation - Data Modernization Senior Advisor` redditur. Argumenta sanitatis informaticae, renovationis datorum, instructionis operariorum, gubernationis datorum, auxilii technici et analyticae reproducibilis spectat, non verba candidaturae privata neque assertiones de auctoritate aut munere sine probatione.
 
-Effectus pro munere electo nominantur:
+Effectus post licentiam divulgandi fasciculum neutrum nominantur:
 
 ```text
 linkedin-academic-cv-<job_object>
@@ -130,13 +133,12 @@ public-render-sources-<job_object>
 
 ## Prima probatio manualis
 
-1. Rationem `Build Public CV Package` cum `job_object=neutral` exsequere.
-2. Confirma quattuor genera effectuum exstare.
-3. Confirma `selected-job-cv-package-neutral` `PUBLIC_SAFE_JOB_BRIEF.md` et `manifest.json` continere.
-4. Itera cum `job_object=harvard-chan-director-data-analytics`.
-5. Confirma fasciculum electum relationem publice tutam Harvard Chan servare nec textum privatum revelare.
-6. Itera cum `job_object=cdc-foundation-data-modernization-senior-advisor`.
-7. Confirma titulum publicum CDC Foundation congruere nec verba fasciculi privati apparere.
+1. Rationem `Build Public CV Package` cum `job_object=neutral`, `publish_verified_pdfs=false` et `release_commit` vacuo exsequere.
+2. Confirma compilationem, retentionem experientiae et custodias fontium superatas esse.
+3. Confirma gradus documentorum PDF mittendorum atque officium editionis praetermissos esse.
+4. Fontes in `public-render-sources-neutral` inspice; imagines omnium paginarum PDF in exemplari locali recognosce.
+5. Fasciculos aliorum munerum localiter per `make job-cv-package` compone; registrum, relationem publice tutam et documenta inspice.
+6. Tantum post recognitionem et licentiam certi commit fasciculum neutrum per consensum manualem divulga.
 
 Praecepta probationis pleniora:
 

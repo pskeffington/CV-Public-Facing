@@ -103,9 +103,9 @@ require_contains "cv/one_page_profile_public.tex" "Selected Methods and Technica
 # Current flagship intake excludes retired CART-TRACE; archived source remains in GitHub history.
 require_contains "data/pipeline_repos.json" "Arch Notebook: Rust desktop relationship analysis"
 require_contains "cv/one_page_profile_public.tex" "Arch Notebook"
-# CART-TRACE remains a historical research record, but must not re-enter current selections.
-if grep -Fq "CART-TRACE" data/pipeline_repos.json cv/one_page_profile_public.tex cv/current_projects_public.tex research/generated_project_board.tex; then
-  echo "Stale CART-TRACE found in a current selected-project surface" >&2
+# Historical manifest notes are not current selections. Parse the actual repo
+# records and check every generated selection against that same allowlist.
+if ! python3 scripts/check_current_project_alignment.py; then
   status=1
 fi
 require_contains "cv/one_page_profile_public.tex" "Pre-submission manuscript review"
@@ -120,7 +120,8 @@ for project in \
   "PET noise and radiomics robustness" \
   "Cancer end-of-life death-place typologies" \
   "WASH systems, watershed stress, and spatial equity" \
-  "Catholic reliquary archival and public-history research"; do
+  "Catholic reliquary archival and public-history research" \
+  "Arch Notebook: Rust desktop relationship analysis"; do
   require_contains "data/pipeline_repos.json" "${project}"
   require_contains "cv/current_projects_public.tex" "${project}"
   require_contains "research/generated_project_board.tex" "${project}"

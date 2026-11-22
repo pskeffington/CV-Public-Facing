@@ -46,6 +46,9 @@ def maturity_from_status(status: str, curated: bool) -> str:
     if "early" in lower:
         return "early_stage"
 
+    if "instrumentum operans" in lower:
+        return "active_research"
+
     if "active" in lower:
         return "active_research"
 

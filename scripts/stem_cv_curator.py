@@ -475,14 +475,9 @@ def cv_status(project: ProjectObject) -> str:
 
 
 def atop_summary(project: ProjectObject) -> str:
-    verb = "Developed" if project.maturity in {"early_stage", "active_scaffold"} else "Advanced"
-    if project.cv_section == "public_health":
-        verb = "Organized"
-    if project.cv_section == "archive_history":
-        verb = "Structured"
-    if project.cv_section == "intake":
-        verb = "Scoped"
-    return f"{verb} {project.public_summary[0].lower() + project.public_summary[1:]} to support {project.near_term_needs[0].lower() + project.near_term_needs[1:]}"
+    # Curated summaries are already complete claims. Do not prepend an invented
+    # accomplishment or join mixed-language sentences to future work.
+    return project.public_summary
 
 
 def write_current_projects(projects: list[ProjectObject]) -> None:
@@ -522,7 +517,7 @@ def write_research_status(projects: list[ProjectObject]) -> None:
         lines += [f"### {SECTION_LABELS[section]}", ""]
         for p in entries:
             marker = " _(recursive-scan intake)_" if not p.curated else ""
-            lines += [f"#### {p.title} - {p.maturity.replace('_', ' ')}{marker}", "", f"**Current output:** {p.public_summary}  ", f"**Near-term needs:** {p.near_term_needs}", ""]
+            lines += [f"#### {p.title} - {p.maturity.replace('_', ' ')}{marker}", "", f"**Current output:** {p.public_summary}", "", f"**Near-term needs:** {p.near_term_needs}", ""]
     lines += ["## Immediate major needs", "", "- Keep public repository intake disabled unless a public-release review approves recursive discovery.", "- Promote discovered intake repositories into curated manifest entries only after public-release review.", "- Keep ML project claims tied to source manifests, model cards, benchmark targets, validation gates, and public-safe results boundaries.", "- Keep restricted project families out of all public CV, source-ledger, and research-status outputs.", ""]
     RESEARCH_STATUS_MD_PATH.write_text("\n".join(lines), encoding="utf-8")
 
@@ -548,7 +543,7 @@ def write_ledgers(projects: list[ProjectObject], blocked_records: list[BlockedPr
 
 
 def write_objects(projects: list[ProjectObject], claims: list[ClaimObject], blocked_records: list[BlockedProjectRecord]) -> None:
-    payload = {"schema": "stem-cv-curator/v0.3", "run": {"run_time": now_utc(), "trigger": TRIGGER, "scanned_repositories": len(projects), "active_project_objects": len(projects), "blocked_release_records": len(blocked_records)}, "repositories": [asdict(p.repository) for p in projects], "projects": [asdict(p) for p in projects], "blocked_release_records": [asdict(record) for record in blocked_records], "claims": [asdict(c) for c in claims], "sections": [{"section_id": s, "title": SECTION_LABELS[s], "projects": [p.project_id for p in projects if p.cv_section == s]} for s in SECTION_ORDER if any(p.cv_section == s for p in projects)], "render_targets": [{"target_id": "academic_cv_public", "output_type": "academic_cv", "included_sections": SECTION_ORDER}, {"target_id": "one_page_profile_public", "output_type": "one_page_profile", "included_sections": ["machine_learning", "public_health", "biomedical_data", "methods"], "max_pages": 1}, {"target_id": "research_status_public", "output_type": "research_status", "included_sections": SECTION_ORDER}]}
+    payload = {"schema": "stem-cv-curator/v0.3", "run": {"run_time": now_utc(), "trigger": TRIGGER, "scanned_repositories": len(projects), "active_project_objects": len(projects), "blocked_release_records": len(blocked_records)}, "repositories": [asdict(p.repository) for p in projects], "projects": [asdict(p) for p in projects], "blocked_release_records": [asdict(record) for record in blocked_records], "claims": [asdict(c) for c in claims], "sections": [{"section_id": s, "title": SECTION_LABELS[s], "projects": [p.project_id for p in projects if p.cv_section == s]} for s in SECTION_ORDER if any(p.cv_section == s for p in projects)], "render_targets": [{"target_id": "academic_cv_public", "output_type": "academic_cv", "included_sections": SECTION_ORDER}, {"target_id": "one_page_profile_public", "output_type": "one_page_profile", "included_sections": ["machine_learning", "public_health", "biomedical_data", "methods"], "content_retention_required": True}, {"target_id": "research_status_public", "output_type": "research_status", "included_sections": SECTION_ORDER}]}
     OBJECTS_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 

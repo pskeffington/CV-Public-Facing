@@ -44,8 +44,15 @@ Skeffington, P. A. Aqua, aquae residuae et necessitates sanitatis infrastructura
 
 ## Investigationes selectae
 
+**Arch Notebook — instrumentum Rust et SQLite ad nexus rerum explorandos**
+Diagrammata relationum, capturas SQLite tantum legendas, comparationes mutationum, notas cum fontibus coniunctas et exportationes CSV/TSV atque GraphML praebet. Instrumentum operatur; facultates novae adhuc excoluntur. Fons publicus: [arch_notebook](https://github.com/pskeffington/arch_notebook). Nulla certificatio vel receptio mercatoria asseritur.
+
+## Investigationes historicae
+
 **CART-TRACE — fasciculus academicus syntheticus publicus definitive stabilitus**  
 Reconstructio longitudinalis itineris curae post infusionem cellularum CAR T, primum in datis syntheticis elaborata: intervalla temporis ad curationem relata, status curae deterministici, transformationes originem datorum servantes, ratio manifesta datorum absentium et custodiae reproductionis. Extensio separata de condicionibus accessus administrativi adhuc in methodis investigandis versatur; neque ad idoneitatem clinicam neque ad approbationem solutionum pecuniariarum decernendam adhibetur.
+
+Hoc opus historicum servatur; in indicem operum nunc selectorum non recipitur.
 
 ## Experientia professionalis
 
