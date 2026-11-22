@@ -1,5 +1,5 @@
 {
-  "generated_on_note": "Generated CV objects are rebuilt from the public allowlist below plus optional recursive public-repository scanning only when explicitly enabled. Public-release filtering is enforced before generated outputs are written.",
+  "generated_on_note": "November 2026: retired CART-TRACE from current public CV intake; historical source repository preserved separately.",
   "scan": {
     "owner": "pskeffington",
     "include_public_repos": true,
@@ -37,23 +37,6 @@
     "default_section": "intake"
   },
   "repos": [
-    {
-      "key": "cart-trace",
-      "repo": "pskeffington/CART-TRACE",
-      "title": "Longitudinal CAR T-cell care-trajectory reconstruction",
-      "status": "Publication ready / final public scholarly freeze / synthetic methodological validation",
-      "summary": "Synthetic-first translational health data science framework for reproducibly reconstructing 30-day post-infusion hospital level-of-care trajectories, utilization measures, provenance, missingness, and uncertainty following CAR T-cell therapy.",
-      "needs": "Preserve the frozen public capstone package. Keep the administrative access-gating extension separately labeled as developing synthetic methods research and do not promote it as clinical eligibility, payer authorization, or treatment-readiness capability.",
-      "cv_section": "biomedical_data",
-      "priority": 0,
-      "public_release": "public",
-      "source_files": [
-        "README.md",
-        "THESIS.md",
-        "ROADMAP.md",
-        "docs/scholarly/final_public_scholarly_freeze.md"
-      ]
-    },
     {
       "key": "machine-learning-best-practices",
       "repo": "pskeffington/Best-Practices-Git",
