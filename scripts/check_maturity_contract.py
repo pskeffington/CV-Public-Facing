@@ -16,6 +16,7 @@ CASES = {
     "Active source-bounded regional public-health research": "active_research",
     "Active environmental-health and spatial-equity research": "active_research",
     "Active archival, provenance, and public-history research": "active_research",
+    "Instrumentum operans; facultates novae adhuc excoluntur": "active_research",
 }
 
 

@@ -160,7 +160,7 @@
       "source_files": [
         "README.md",
         "Cargo.toml",
-        "sample_connections.sql"
+        "archive/research.databases/sample_connections.sql"
       ]
     }
   ]

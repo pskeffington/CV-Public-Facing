@@ -8,7 +8,7 @@
 | Fasciculus | Usus |
 |---|---|
 | `cv/academic_cv_public.tex` | Fons LaTeX curriculi vitae academici publici |
-| `cv/one_page_profile_public.tex` | Fons LaTeX brevis descriptionis unius paginae |
+| `cv/one_page_profile_public.tex` | Fons LaTeX descriptionis professionalis, experientia integra servata |
 | `cv/public_upload_cv.tex` | Forma ad indicem apta, paucioribus indiciis personalibus |
 | `cv/current_projects_public.tex` | Index operum praesentium generatus |
 | `cv/publication_pipeline_public.tex` | Index communis statuum publicationis |
@@ -26,7 +26,7 @@
 | Fasciculus | Usus | Status fontis |
 |---|---|---|
 | `documents/Paul_A_Skeffington_Academic_CV_Public.pdf` | Curriculum vitae academicum publicum | In hoc repositorio generari potest |
-| `documents/Paul_A_Skeffington_One_Page_Profile_Public.pdf` | Descriptio professionalis unius paginae | In hoc repositorio generari potest |
+| `documents/Paul_A_Skeffington_One_Page_Profile_Public.pdf` | Descriptio professionalis; nomen pristinum servatur sine limite unius paginae | In hoc repositorio generari potest |
 | `documents/Index_Safe_Public_Upload_CV.pdf` | Curriculum cum paucioribus indiciis personalibus | In hoc repositorio generari potest |
 | `documents/Paul_A_Skeffington_Research_Status_Public.pdf` | Relatio imprimenda de statu investigationum | In hoc repositorio generari potest |
 
@@ -40,7 +40,9 @@ Instrumentum primum res curriculi vitae ex `data/pipeline_repos.json` et ex font
 
 ## Operatio GitHub Actions
 
-Ratio publica documenta repositorii tantum legit. Fasciculos PDF generat et sub nomine `public-cv-package` inter effectus laboris servat. Fontes generatos etiam in fasciculo `public-render-sources` colligit, ut post quamque generationem inspici possint.
+Ratio probationis documenta repositorii tantum legit et fasciculos PDF componit. In petitionibus coniungendi atque mutationibus ordinariis neque documenta PDF neque fasciculi munerum ad effectus publicos mittuntur. Fontes generatos in fasciculo `public-render-sources` colligit, ut post generationem inspici possint.
+
+Divulgatio requirit exsecutionem manualem in `main`, rem `job_object=neutral`, consensum `publish_verified_pdfs=true` et valorem `release_commit` cum pleno commit exsecutionis congruentem. Solum haec exsecutio separatim probata documenta PDF et fasciculos munerum servat ac editionem GitHub cum summis SHA-256 creat. Compilatio prospera sola licentiam publicandi non constituit.
 
 Concursus exsecutionum coercetur; mutationes ordinariae actoris `github-actions[bot]` praetermittuntur, ne repetitio infinita generationis oriatur. Praecepta `workflow_dispatch`, `repository_dispatch` et mutationes ordinariae fontium servantur.
 

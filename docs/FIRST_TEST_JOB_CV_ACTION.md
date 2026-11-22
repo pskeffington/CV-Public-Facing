@@ -40,34 +40,28 @@ harvard-chan-director-data-analytics
 3. `Build Public CV Package` elige.
 4. `Run workflow` preme.
 5. In indice `Public-safe job object to package` valorem `neutral` selige.
-6. Rationem in ramo `main` exsequere.
+6. `publish_verified_pdfs=false` et `release_commit` vacuum serva; haec est probatio, non editio.
 7. Confirma exsecutionem sine errore absolutam esse.
-8. Effectus depone et inspice.
+8. Registra et fontes publicos generatos inspice; confirma documenta PDF et fasciculos munerum non missos esse.
 9. Itera cum `harvard-chan-director-data-analytics`.
 
 ## Fasciculi exspectati
 
-Pro probatione neutra, secundum nomina rationis hodiernae:
+Pro probatione neutra, praeter registra exsecutionis, tantum fontes generati servantur:
 
 ```text
-linkedin-academic-cv-neutral
-public-cv-package-neutral
-selected-job-cv-package-neutral
 public-render-sources-neutral
 ```
 
 Pro probatione Harvard Chan:
 
 ```text
-linkedin-academic-cv-harvard-chan-director-data-analytics
-public-cv-package-harvard-chan-director-data-analytics
-selected-job-cv-package-harvard-chan-director-data-analytics
 public-render-sources-harvard-chan-director-data-analytics
 ```
 
 ## Contenta fasciculi muneris selecti
 
-Fasciculus muneris selecti haec continere debet:
+Fasciculus muneris selecti localiter compositus haec continere debet. Effectus PDF ad GitHub tantum post licentiam separatam mittuntur, per exsecutionem manualem in `main` cum `job_object=neutral`, `publish_verified_pdfs=true` et `release_commit` pleno atque congruente:
 
 ```text
 dist/job_cv_packages/<selected-job>/Paul_A_Skeffington_Academic_CV_Public.pdf
@@ -100,8 +94,8 @@ Hoc praeceptum fasciculum publicum ordinarium generat et confirmat:
 Prima probatio succedit si:
 
 - ratio sine errore finitur;
-- quattuor genera effectuum adsunt;
-- `selected-job-cv-package-*` continet `PUBLIC_SAFE_JOB_BRIEF.md` et `manifest.json`;
+- fontes generati adsunt, documenta PDF autem in probatione ordinaria non publicantur;
+- fasciculus localis continet `PUBLIC_SAFE_JOB_BRIEF.md` et `manifest.json`;
 - nullus textus candidaturae privatae in effectu publico reperitur;
 - effectus PDF fasciculo neutro respondent, nisi forma LaTeX ad munus accommodata postea consulto addatur.
 

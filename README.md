@@ -11,7 +11,7 @@ The links below follow the **latest successful GitHub Release**. Each release in
 | Document | Current PDF |
 |---|---|
 | Academic CV | [Download](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_Academic_CV_Public.pdf) |
-| One-page professional profile | [Download](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_One_Page_Profile_Public.pdf) |
+| Professional profile | [Download](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_One_Page_Profile_Public.pdf) |
 | Index-safe public CV | [Download](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Index_Safe_Public_Upload_CV.pdf) |
 | Research-status report | [Download](https://github.com/pskeffington/CV-Public-Facing/releases/latest/download/Paul_A_Skeffington_Research_Status_Public.pdf) |
 
@@ -25,7 +25,9 @@ The links below follow the **latest successful GitHub Release**. Each release in
 - [Publication and research status sources](research/)
 - [Current CV and profile templates](cv/)
 
-The research portfolio emphasizes translational health data science, public-health systems, longitudinal data, biomedical methods, environmental health, and reproducible analysis. **CART-TRACE** is a principal synthetic-first translational-health research example; its descriptive methodological results are not clinical decision support. Research maturity and release eligibility follow the evidence and scope limits in the public manifest, not the appearance of a project on GitHub.
+The current research and engineering selection emphasizes public-health systems, longitudinal data, biomedical methods, environmental health, reproducible analysis, and **[Arch Notebook](https://github.com/pskeffington/arch_notebook)**, a Rust and SQLite desktop relationship-analysis project. Research maturity and release eligibility follow the evidence and scope limits in the public manifest. CART-TRACE remains a historical research record and is excluded from current project selections.
+
+The profile retains business ownership, independent research, education, and technical skills. Its legacy `One_Page_Profile` filename is a stable download name; it does not impose a one-page limit or justify removing professional experience.
 
 ## How the renderer works
 
@@ -72,7 +74,7 @@ Build a public-safe, role-specific package (without importing private applicatio
 make job-cv-package JOB_OBJECT="neutral"
 ```
 
-The [GitHub Actions workflow](.github/workflows/build-public-research-status.yml) builds, checks, and publishes the public package after successful verification. The separate publication job validates the expected PDFs and their checksums before creating a versioned release.
+The [GitHub Actions workflow](.github/workflows/build-public-research-status.yml) builds and checks the public package for pull requests and main-branch changes. PDF and selected-job package uploads remain disabled during these validation runs. Publication requires a separate manual run on `main`, the neutral package, explicit `publish_verified_pdfs` opt-in, and a `release_commit` matching the full commit SHA being built. Only that authorized run uploads PDF artifacts and creates a versioned release after verification and checksum checks.
 
 ## Editorial and branch governance
 

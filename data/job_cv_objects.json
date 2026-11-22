@@ -8,7 +8,7 @@
       "output_slug": "neutral",
       "role_family": "general public-facing CV",
       "profile_emphasis": "Public-health, applied-economics, health-data-science, reproducible research, and public-service trajectory.",
-      "public_safe_focus": ["academic CV", "one-page profile", "index-safe public upload CV", "research status"],
+      "public_safe_focus": ["academic CV", "professional profile", "index-safe public upload CV", "research status"],
       "tailoring_notes": "Use the standard public package without role-specific reframing.",
       "exclusions": ["private source text", "private job packet language", "sensitive operational details", "unverified claims"]
     },

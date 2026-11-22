@@ -229,7 +229,7 @@ def write_status_md(projects: list[Project]) -> None:
         [
             "## Completed / print-ready objects",
             "",
-            "- Public CV package with academic CV, one-page profile, index-safe CV, and research-status outputs.",
+            "- Public CV package with academic CV, professional profile, index-safe CV, and research-status outputs.",
             "- Gaza WASH presentation object suitable for conversion into a reproducible methods note.",
             "- McDowell GIS and stakeholder materials, pending official-source validation.",
             "",
